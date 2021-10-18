@@ -30,32 +30,43 @@ namespace scapegoat.DataAccess
             if (user == null) return null;
             return user;
         }
-        public dynamic RemoveUser(Guid Id, User user)
+        public void AddUser(User newUser)
         {
             using var db = new SqlConnection(_connectionString);
-            var sql = @"update Users
-                        Set FirstName = 'Deleted',
-                            LastName = 'Deleted',
-                            CustomerTier = Null,
-                            UserType = Null,
-                            CreatedAt = Null,
-                        output inserted.*
-                        Where id = @id";
 
-            var removedUser = db.QuerySingleOrDefault(sql, user);
+            var sql = @"insert into Users(UserType,CustomerTier,FirstName,LastName,CreatedAt)
+                        output inserted.Id
+                        values (@Type,@Tier,@FirstName,@LastName,@CreatedAt)";
 
-            return removedUser;
+            var id = db.ExecuteScalar<Guid>(sql, newUser);
+            newUser.Id = id;
+            //var date = db.Query<User>(sql, new { })
         }
-        //User MapFromReader(SqlDataReader reader)
-        //{
-        //    var user = new User();
-        //    user.FirstName = reader["FirstName"].ToString();
-        //    user.LastName = reader["LastName"].ToString();
-        //    user.Type = (UserType)reader["UserType"];
-        //    user.Tier = (CustomerTier)reader["CustomerTier"];
-        //    user.CreatedDate = (DateTime)reader[name: "CreatedAt"];
-        //    user.Id = reader["Id"].ToString();
-        //    return user;
-        //}
+        public void RemoveUser(Guid Id)
+        {
+            using var db = new SqlConnection(_connectionString);
+            var sql = @"UPDATE Users
+                        SET
+                        UserType = Null,
+                        CustomerTier = Null,
+                        FirstName = Null,
+                        LastName = Null,
+                        CreatedAt = @CreatedAt
+                        WHERE Id = @Id";
+            var RemovedUser = GetSingleUserById(Id);
+
+            db.Execute(sql, RemovedUser);
+        }
+        User MapFromReader(SqlDataReader reader)
+        {
+            var user = new User();
+            user.FirstName = reader["FirstName"].ToString();
+            user.LastName = reader["LastName"].ToString();
+            user.Type = (UserType)reader["UserType"];
+            user.Tier = (CustomerTier)reader["CustomerTier"];
+            user.CreatedAt = (DateTime)reader[name: "CreatedAt"];
+            user.Id = new Guid();
+            return user;
+        }
     }
 }

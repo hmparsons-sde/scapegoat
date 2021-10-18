@@ -10,7 +10,7 @@ namespace scapegoat.Models
         public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedAt { get; set; }
         public UserType Type { get; set; }
         public CustomerTier Tier { get; set; }
     }
@@ -26,6 +26,7 @@ namespace scapegoat.Models
         Individual,
         SmallBusiness,
         MediumBusiness,
-        Enterprise
+        Enterprise,
+        DeletedUser
     }
 }

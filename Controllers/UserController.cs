@@ -32,26 +32,34 @@ namespace scapegoat.Controllers
 
             if (user == null)
             {
-                return NotFound($"No bird with the id {Id} was found.");
+                return NotFound($"No user with the id {Id} was found.");
             }
 
             return Ok(user);
         }
 
-        [HttpPut("{id}")]
-        public IActionResult UpdateUser(Guid Id, User user)
+        [HttpPost]
+        public IActionResult AddUserToDB(User newUser)
         {
-            var userToUpdate = _repo.GetSingleUserById(Id);
-
-            if (userToUpdate == null)
+            if (string.IsNullOrEmpty(newUser.FirstName) || string.IsNullOrEmpty(newUser.LastName))
             {
-                return NotFound($"Could not find user with the id {Id} for updating");
+                return BadRequest("First and last name are required fields");
             }
 
-            var removedUser = _repo.RemoveUser(Id, user);
+            _repo.AddUser(newUser);
 
-            return Ok(removedUser);
-
+            return Created($"/api/Users/{newUser.Id}", newUser);
         }
+
+        // Soft delete user
+        [HttpDelete("{Id}")]
+        public IActionResult SoftDeleteUser(Guid Id)
+        {
+
+            _repo.RemoveUser(Id);
+
+            return Ok();
+        }
+
     }
 }
