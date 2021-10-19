@@ -30,8 +30,8 @@ https://github.com/hmparsons-sde/scapegoat/projects/1
 - As an authenticated user, I can view the following: product categories, all products sold by a single seller, details of individual products, my user profile, and my shopping cart.
 - As an authenticated customer, I can view my completed orders, order history, and the product details within each order.
 - As an authenticated customer, I can add products to and delete products from my cart.
-- As an authenticated customer, I can place orders and choose different payment types for completing that purchase.
-- As an authenticated seller, I can view all orders that contain my products, all of my past sales, and my seller dashboard.
+- As an authenticated customer, I can place orders and choose different payment types for completing tUser purchase.
+- As an authenticated seller, I can view all orders tUser contain my products, all of my past sales, and my seller dashboard.
 
 ## Technologies Used
 - C#
