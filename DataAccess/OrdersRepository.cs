@@ -34,7 +34,7 @@ namespace scapegoat.DataAccess
 
             var sqlString = @"select * from Orders where Id = @id";
 
-            var order = db.QueryFirstOrDefault<Order>(sqlString, new { id = id } );
+            var order = db.QueryFirstOrDefault<Order>(sqlString, new { id = id });
 
             if (order == null) return null;
 
@@ -51,5 +51,37 @@ namespace scapegoat.DataAccess
 
             return orders;
         }
+
+        internal void Add(Order newOrder)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"insert into Orders(UserId, Status, CreatedAt, TotalCost, PaymentId)
+                                    output inserted.Id
+                                    values(@UserId, @Status, @CreatedAt, @TotalCost, @PaymentId)";
+
+            var id = db.ExecuteScalar<Guid>(sql, newOrder);
+            newOrder.Id = id;
+        }
+
+        internal Order Update(Guid id, Order order)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"update Orders Set
+                                        UserId = @UserId, 
+                                        Status = @Status,
+                                        CreatedAt = @CreatedAt,
+                                        TotalCost = @TotalCost,
+                                        PaymentId = @PaymentId
+                                     output inserted.*
+                                     Where id = @id";
+
+            order.Id = id;
+            var updatedOrder = db.QuerySingleOrDefault<Order>(sql, order);
+            return updatedOrder;
+
+        }
+
     }
 }

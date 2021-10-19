@@ -29,6 +29,7 @@ namespace scapegoat
         {
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddTransient<OrdersRepository>();
+            services.AddTransient<OrderItemsRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using scapegoat.DataAccess;
+using scapegoat.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,27 @@ namespace scapegoat.Controllers
         public IActionResult GetOrderByUserId(Guid UserId)
         {
             return Ok(_repo.GetByUserId(UserId));
+        }
+
+        [HttpPost]
+        public IActionResult AddOrder(Order newOrder)
+        {
+            _repo.Add(newOrder);
+            return Created($"/api/orders/{newOrder.Id}", newOrder);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateOrder(Guid id, Order order)
+        {
+            var orderToUpdate = _repo.GetById(id);
+
+            if (orderToUpdate == null)
+            {
+                return NotFound($"Could not find order with id {id} for updating");
+            }
+
+            var updatedOrder = _repo.Update(id, order);
+            return Ok(updatedOrder);
         }
     }
 }
