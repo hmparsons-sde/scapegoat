@@ -26,16 +26,24 @@ namespace scapegoat.DataAccess
             return paymentTypes;
         }
 
-        public PaymentType GetByMethod(Guid id)
-        {
-            //create connection 
+        internal PaymentType GetById(Guid id)
+        { 
             using var db = new SqlConnection(_connectionString);
-            var sqlString = @"select * from PaymentTypes where PaymentMethod = @PaymentMethod";
+            var sqlString = @"select * from PaymentTypes where Id = @id";
+            var paymentType = db.QueryFirstOrDefault<PaymentType>(sqlString, new { id = id });
+            if (paymentType == null) return null;
+            return paymentType;
+        }
 
+        internal IEnumerable<PaymentType> GetPaymentByUserId(Guid userId)
+        {
+            using var db = new SqlConnection(_connectionString);
 
-            var paymentType = db.Query<PaymentType>(sqlString, new { id = id });
+            var sqlString = @"select * from PaymentTypes where UserId = @UserId";
 
-            return (PaymentType)paymentType;
+            var paymentType = db.Query<PaymentType>(sqlString, new { UserId = userId });
+
+            return paymentType;
         }
     }
 }

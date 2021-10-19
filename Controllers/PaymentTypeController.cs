@@ -24,8 +24,8 @@ namespace scapegoat.Controllers
             return Ok(_repo.GetAll());
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetPaymentTypeById(Guid id)
+        [HttpGet("/singlePayment/{id}")]
+        public IActionResult GetSinglePaymentById(Guid id)
         {
             var paymentType = _repo.GetById(id);
 
@@ -37,10 +37,10 @@ namespace scapegoat.Controllers
             return Ok(paymentType);
         }
 
-        [HttpGet("paymentMethods/{paymentMethods}")]
-        public IEnumerable<PaymentType> GetPaymentByMethod(PaymentMethod paymentMethod)
+        [HttpGet("userPaymentMethods/{UserId}")]
+        public IActionResult GetPaymentByUserId(Guid UserId)
         {
-            return _repo.GetByMethod(paymentMethod);
+            return Ok(_repo.GetPaymentByUserId(UserId));
         }
     }
 }
