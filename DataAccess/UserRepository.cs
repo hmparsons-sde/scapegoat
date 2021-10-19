@@ -40,33 +40,45 @@ namespace scapegoat.DataAccess
 
             var id = db.ExecuteScalar<Guid>(sql, newUser);
             newUser.Id = id;
-            //var date = db.Query<User>(sql, new { })
         }
-        public void RemoveUser(Guid Id)
+        internal User SoftRemoveUser(Guid Id, User user)
         {
             using var db = new SqlConnection(_connectionString);
+
             var sql = @"UPDATE Users
                         SET
-                        UserType = Null,
-                        CustomerTier = Null,
-                        FirstName = Null,
-                        LastName = Null,
+                        UserType = 2,
+                        CustomerTier = 4,
+                        FirstName = @FirstName,
+                        LastName = @LastName,
                         CreatedAt = @CreatedAt
                         WHERE Id = @Id";
-            var RemovedUser = GetSingleUserById(Id);
+            user.Id = Id;
+            var softRemovedUser = db.QueryFirstOrDefault(sql, user);
 
-            db.Execute(sql, RemovedUser);
+            return softRemovedUser;
         }
-        User MapFromReader(SqlDataReader reader)
+
+        internal void HardDeleteUser(Guid Id)
         {
-            var user = new User();
-            user.FirstName = reader["FirstName"].ToString();
-            user.LastName = reader["LastName"].ToString();
-            user.Type = (UserType)reader["UserType"];
-            user.Tier = (CustomerTier)reader["CustomerTier"];
-            user.CreatedAt = (DateTime)reader[name: "CreatedAt"];
-            user.Id = new Guid();
-            return user;
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"Delete
+                        From Users 
+                        Where Id = @Id";
+
+            db.Execute(sql, new { Id });
         }
-    }
+            //User MapFromReader(SqlDataReader reader)
+            //{
+            //    var user = new User();
+            //    user.FirstName = reader["FirstName"].ToString();
+            //    user.LastName = reader["LastName"].ToString();
+            //    user.Type = (UserType)reader["UserType"];
+            //    user.Tier = (CustomerTier)reader["CustomerTier"];
+            //    user.CreatedAt = (DateTime)reader[name: "CreatedAt"];
+            //    user.Id = new Guid();
+            //    return user;
+            //}
+        }
 }

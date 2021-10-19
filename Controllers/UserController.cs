@@ -51,15 +51,28 @@ namespace scapegoat.Controllers
             return Created($"/api/Users/{newUser.Id}", newUser);
         }
 
-        // Soft delete user
-        [HttpDelete("{Id}")]
-        public IActionResult SoftDeleteUser(Guid Id)
+        [HttpPut("{Id}")]
+        public IActionResult SoftDeleteUser(Guid Id, User user)
         {
+            var userToUpdate = _repo.GetSingleUserById(Id);
 
-            _repo.RemoveUser(Id);
+            if (userToUpdate == null)
+            {
+                return NotFound($"Could not find user with the id {Id} for updating");
+            }
+
+            var updatedUser = _repo.SoftRemoveUser(Id, user);
+
+            return Ok(updatedUser);
+
+        }
+
+        [HttpDelete("{Id}")]
+        public IActionResult HardDelete(Guid Id)
+        {
+            _repo.HardDeleteUser(Id);
 
             return Ok();
         }
-
     }
 }

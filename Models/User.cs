@@ -18,7 +18,8 @@ namespace scapegoat.Models
     public enum UserType
     {
         Buyer,
-        Seller
+        Seller,
+        DeletedUser
     }
 
     public enum CustomerTier
