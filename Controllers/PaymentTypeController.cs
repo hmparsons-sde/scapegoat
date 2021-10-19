@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace scapegoat.Controllers
 {
-    [Route("api/paymentTypes")]
+    [Route("api/PaymentType")]
     [ApiController]
     public class PaymentTypeController : ControllerBase
     {
@@ -27,7 +27,7 @@ namespace scapegoat.Controllers
         [HttpGet("/singlePayment/{id}")]
         public IActionResult GetSinglePaymentById(Guid id)
         {
-            var paymentType = _repo.GetById(id);
+            var paymentType = _repo.GetPaymentById(id);
 
             if (paymentType == null)
             {

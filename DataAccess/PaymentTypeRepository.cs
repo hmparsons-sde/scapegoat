@@ -11,7 +11,7 @@ namespace scapegoat.DataAccess
 {
     public class PaymentTypeRepository
     {
-        string _connectionString;
+        readonly string _connectionString;
         public PaymentTypeRepository(IConfiguration config)
         {
             _connectionString = config.GetConnectionString("Scapegoat");
@@ -19,30 +19,35 @@ namespace scapegoat.DataAccess
         internal IEnumerable<PaymentType> GetAll()
         {
             using var db = new SqlConnection(_connectionString);
-            var sqlString = @"select * from PaymentTypes";
-
-            var paymentTypes = db.Query<PaymentType>(sqlString);
-
+            var paymentTypes = db.Query<PaymentType>(@"select * from PaymentType");
             return paymentTypes;
         }
 
-        internal PaymentType GetById(Guid id)
+        internal PaymentType GetPaymentById(Guid id)
         { 
             using var db = new SqlConnection(_connectionString);
-            var sqlString = @"select * from PaymentTypes where Id = @id";
-            var paymentType = db.QueryFirstOrDefault<PaymentType>(sqlString, new { id = id });
-            if (paymentType == null) return null;
-            return paymentType;
+            var singlePayment = @"select * from PaymentType where Id = @id";
+            var foundPayment = db.QueryFirstOrDefault<PaymentType>(singlePayment, new { id = id });
+            if (foundPayment == null) return null;
+            return foundPayment;
         }
 
         internal IEnumerable<PaymentType> GetPaymentByUserId(Guid userId)
         {
             using var db = new SqlConnection(_connectionString);
 
-            var sqlString = @"select * from PaymentTypes where UserId = @UserId";
+            var sqlString = @"select * from PaymentType where UserId = @UserId";
 
-            var paymentType = db.Query<PaymentType>(sqlString, new { UserId = userId });
+            var userPayments = db.Query<PaymentType>(sqlString, new { UserId = userId });
 
+            return userPayments;
+        }
+        PaymentType MapFromReader(SqlDataReader reader)
+        {
+            var paymentType = new PaymentType();
+            paymentType.PaymentMethod = (PaymentMethod)reader["LastName"];
+            paymentType.AccountNumber = (int)reader["AccountNumber"];
+            paymentType.UserId = new Guid();
             return paymentType;
         }
     }
