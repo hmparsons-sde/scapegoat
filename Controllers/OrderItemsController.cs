@@ -19,10 +19,28 @@ namespace scapegoat.Controllers
             _repo = repo;
         }
 
-        [HttpGet]
-        public IActionResult GetAllOrderItems()
+        //[HttpGet]
+        //public IActionResult GetAllOrderItems()
+        //{
+        //    return Ok(_repo.GetAll());
+        //}
+
+        [HttpGet("/productid/{id}")]
+        public IActionResult GetSingleOrderItemByProductId(Guid id)
         {
-            return Ok(_repo.GetAll());
+            return Ok(_repo.GetByProductId(id));
+        }
+
+        [HttpGet("/orderid/{id}")]
+        public IActionResult GetSingleOrderItemByOrderId(Guid id)
+        {
+            return Ok(_repo.GetByOrderId(id));
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetSingleOrderItemById(Guid id)
+        {
+            return Ok(_repo.GetById(id));
         }
     }
 }
