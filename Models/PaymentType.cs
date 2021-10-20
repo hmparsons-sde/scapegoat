@@ -10,7 +10,7 @@ namespace scapegoat.Models
         public Guid Id { get; set; }
 
         public PaymentMethod PaymentMethod { get; set; }
-        public int AccountNumber { get; set; }
+        public string AccountNumber { get; set; }
         public Guid UserId { get; set; }
     }
 
