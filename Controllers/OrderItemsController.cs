@@ -42,5 +42,9 @@ namespace scapegoat.Controllers
         {
             return Ok(_repo.GetById(id));
         }
+
+        //TODO: add Post route
+        //TODO: add Update route
+        //TODO: add Delete route
     }
 }

@@ -76,6 +76,8 @@ namespace scapegoat.DataAccess
             return orderItem;
         }
 
-
+           //TODO: update all get methods to get actual data off other tables
+           //TODO: add update methods (when we update a user, e.g. other tables should update too)
+           //TODO: add delete method (how does this relate to other tables?)
     }
 }

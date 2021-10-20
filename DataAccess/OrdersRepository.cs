@@ -83,5 +83,8 @@ namespace scapegoat.DataAccess
 
         }
 
+        //TODO: update all methods to get any needed data off other tables
+        //TODO: add delete method
+
     }
 }

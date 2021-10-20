@@ -56,5 +56,7 @@ namespace scapegoat.Controllers
             var updatedOrder = _repo.Update(id, order);
             return Ok(updatedOrder);
         }
+
+        //TODO: add delete route
     }
 }
