@@ -23,7 +23,27 @@ namespace scapegoat
 
             return products;
         }
-        
+
+        internal object GetSingleProductById(Guid ProductId)
+        {
+            using var db = new SqlConnection(_connectionString);
+            var singleProduct = @"SELECT * FROM Products where ProductId = @ProductId";
+            var product = db.QuerySingleOrDefault<Product>(singleProduct, new { ProductId = ProductId});
+            if (product == null) return null;
+            return product;
+        }
+
+        internal void AddProduct(Product product)
+        {
+            using var db = new SqlConnection(_connectionString);
+            var sql = @"INSERT INTO Products(ProductType, Description, Price, Size, CreatedAt)
+                        output inserted.ProductId
+                        values (@ProductType, @Description, @Price, @Size, @CreatedAt)";
+
+            var id = db.ExecuteScalar<Guid>(sql, product);
+            product.ProductId = id;
+        }
+
         Product MapFromReader(SqlDataReader reader)
         {
             var product = new Product();
