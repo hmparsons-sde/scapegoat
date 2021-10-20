@@ -90,21 +90,21 @@ namespace scapegoat.DataAccess
             newPayment.Id = id;
         }
 
-        //internal PaymentType Update(Guid id, PaymentType paymentType)
-        //{
-        //    using var db = new SqlConnection(_connectionString);
+        internal PaymentType Update(Guid id, PaymentType paymentType)
+        {
+            using var db = new SqlConnection(_connectionString);
 
-        //    var sql = @"update PaymentType 
-        //                Set PaymentMethod = @paymentMethod,
-        //                    AccpuntNumber = @accountNumber,
-        //                output inserted.*
-        //                Where id = @id";
+            var sql = @"update PaymentType 
+                        Set PaymentMethod = @paymentMethod,
+                            AccpuntNumber = @accountNumber,
+                        output inserted.*
+                        Where id = @id";
 
-        //    paymentType.Id = id;
-        //    var updatedPayment = db.QuerySingleOrDefault<PaymentType>(sql, paymentType);
+            paymentType.Id = id;
+            var updatedPayment = db.QuerySingleOrDefault<PaymentType>(sql, paymentType);
 
-        //    return updatedPayment;
-        //}
+            return updatedPayment;
+        }
 
         internal void Remove(Guid id)
         {
