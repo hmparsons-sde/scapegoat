@@ -11,8 +11,8 @@ namespace scapegoat.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime CreatedAt { get; set; }
-        public UserType Type { get; set; }
-        public CustomerTier Tier { get; set; }
+        public UserType UserType { get; set; }
+        public CustomerTier CustomerTier { get; set; }
     }
 
     public enum UserType

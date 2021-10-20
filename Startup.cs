@@ -26,9 +26,13 @@ namespace scapegoat
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IConfiguration>(Configuration);
-            services.AddTransient<PaymentTypeRepository>();
-            services.AddTransient<ProductRepository>();
+            services.AddTransient<OrdersRepository>();
+            services.AddTransient<OrderItemsRepository>();
             services.AddTransient<UserRepository>();
+            services.AddTransient<ProductRepository>();
+            services.AddTransient<PaymentTypeRepository>();
+            services.AddTransient<UserRepository>();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
