@@ -28,13 +28,11 @@ namespace scapegoat
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IConfiguration>(Configuration);
-<<<<<<< HEAD
 
             services.AddTransient<ProductRepository>();
 
-=======
             services.AddTransient<UserRepository>();
->>>>>>> 2018256d7ecc3d4272ca88e02ce423faa7ce93fb
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
