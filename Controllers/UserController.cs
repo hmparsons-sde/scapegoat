@@ -74,5 +74,15 @@ namespace scapegoat.Controllers
 
             return Ok();
         }
+
+        // TO DO:
+        // Get Users by Type
+        [HttpGet("types/{userType}")]
+        public IEnumerable<User> GetUserByType(UserType userType)
+        {
+            return UserRepository.GetUserByTypeFromDB(userType);
+        }
+        // Get Users by Tier
+        // Get User order history
     }
 }

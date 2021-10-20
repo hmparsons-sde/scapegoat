@@ -11,12 +11,13 @@ namespace scapegoat.DataAccess
 {
     public class UserRepository
     {
+        static List<User> _users = new List<User>();
         readonly string _connectionString;
         public UserRepository(IConfiguration config)
         {
             _connectionString = config.GetConnectionString("Scapegoat");
         }
-        public IEnumerable<User> GetAll()
+        internal IEnumerable<User> GetAll()
         {
             using var db = new SqlConnection(_connectionString);
             var users = db.Query<User>(@"select * from Users");
@@ -36,7 +37,7 @@ namespace scapegoat.DataAccess
 
             var sql = @"insert into Users(UserType,CustomerTier,FirstName,LastName,CreatedAt)
                         output inserted.Id
-                        values (@Type,@Tier,@FirstName,@LastName,@CreatedAt)";
+                        values (@UserType,@CustomerTier,@FirstName,@LastName,@CreatedAt)";
 
             var id = db.ExecuteScalar<Guid>(sql, newUser);
             newUser.Id = id;
@@ -69,16 +70,28 @@ namespace scapegoat.DataAccess
 
             db.Execute(sql, new { Id });
         }
-            //User MapFromReader(SqlDataReader reader)
-            //{
-            //    var user = new User();
-            //    user.FirstName = reader["FirstName"].ToString();
-            //    user.LastName = reader["LastName"].ToString();
-            //    user.Type = (UserType)reader["UserType"];
-            //    user.Tier = (CustomerTier)reader["CustomerTier"];
-            //    user.CreatedAt = (DateTime)reader[name: "CreatedAt"];
-            //    user.Id = new Guid();
-            //    return user;
-            //}
+
+        // TO DO:
+        // Get Users by Type
+        internal static IEnumerable<User> GetUserByTypeFromDB(UserType userType)
+        {
+            //using var db = new SqlConnection(_connectionString);
+            //var sql =@"Select * from Users where UserType = @userType";
+            //var uType = db.QueryFirstOrDefault<User>(sql, new { UserType = userType });
+            //return uType;
+            return _users.Where(user => user.UserType == userType);
         }
+        // Get Users by Tier
+        // Get User order history
+        //User MapFromReader(SqlDataReader reader)
+        //{
+        //    var user = new User();
+        //    user.FirstName = reader["FirstName"].ToString();
+        //    user.LastName = reader["LastName"].ToString();
+        //    user.Type = (UserType)reader["UserType"];
+        //    user.Tier = (CustomerTier)reader["CustomerTier"];
+        //    user.CreatedAt = (DateTime)reader[name: "CreatedAt"];
+        //    user.Id = reader.GetGuid(0);
+        //    return user;
+    }
 }
