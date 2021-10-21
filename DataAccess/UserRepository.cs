@@ -73,25 +73,13 @@ namespace scapegoat.DataAccess
 
         // TO DO:
         // Get Users by Type
-        internal static IEnumerable<User> GetUserByTypeFromDB(UserType userType)
+       internal List<User> GetUserByTypeFromDB(UserType userType)
         {
-            //using var db = new SqlConnection(_connectionString);
-            //var sql =@"Select * from Users where UserType = @userType";
-            //var uType = db.QueryFirstOrDefault<User>(sql, new { UserType = userType });
-            //return uType;
-            return _users.Where(user => user.UserType == userType);
+            using var db = new SqlConnection(_connectionString);
+            var uSql = db.Query<User>("Select * from Users where UserType = @userType", new { userType }).ToList();
+            return uSql;
         }
         // Get Users by Tier
         // Get User order history
-        //User MapFromReader(SqlDataReader reader)
-        //{
-        //    var user = new User();
-        //    user.FirstName = reader["FirstName"].ToString();
-        //    user.LastName = reader["LastName"].ToString();
-        //    user.Type = (UserType)reader["UserType"];
-        //    user.Tier = (CustomerTier)reader["CustomerTier"];
-        //    user.CreatedAt = (DateTime)reader[name: "CreatedAt"];
-        //    user.Id = reader.GetGuid(0);
-        //    return user;
     }
 }
