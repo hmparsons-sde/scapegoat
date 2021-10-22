@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using scapegoat.Models;
 
@@ -12,6 +9,7 @@ namespace scapegoat.Controllers
     public class ProductController : ControllerBase
     {
         ProductRepository _repo;
+
         public ProductController(ProductRepository repo)
         {
             _repo = repo;
@@ -36,7 +34,7 @@ namespace scapegoat.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddProductToDb(Product product)
+        public IActionResult AddProduct(Product product)
         {
             if (string.IsNullOrEmpty(product.Description))
             {
@@ -46,6 +44,14 @@ namespace scapegoat.Controllers
             _repo.AddProduct(product);
 
             return Created($"/api/Products/{product.ProductId}", product);
+        }
+
+        [HttpDelete("{Id}")]
+        public IActionResult DeleteProduct(Guid Id)
+        {
+            _repo.RemoveProduct(Id);
+
+            return Ok();
         }
     }
 }

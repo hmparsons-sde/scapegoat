@@ -36,12 +36,20 @@ namespace scapegoat
         internal void AddProduct(Product product)
         {
             using var db = new SqlConnection(_connectionString);
-            var sql = @"INSERT INTO Products(ProductType, Description, Price, Size, CreatedAt)
+            var sql = @"INSERT INTO Products(ProductType, Description, MerchantId, Price, Size, CreatedAt)
                         output inserted.ProductId
-                        values (@ProductType, @Description, @Price, @Size, @CreatedAt)";
+                        values (@ProductType, @Description, @MerchantId, @Price, @Size, @CreatedAt)";
 
             var id = db.ExecuteScalar<Guid>(sql, product);
             product.ProductId = id;
+        }
+
+        internal void RemoveProduct(Guid Id)
+        {
+            using var db = new SqlConnection(_connectionString);
+            var sql = @"DELETE FROM Products WHERE ProductId = @Id";
+
+            db.Execute(sql, new { Id });
         }
 
         Product MapFromReader(SqlDataReader reader)
