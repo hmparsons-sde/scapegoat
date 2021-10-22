@@ -88,6 +88,11 @@ namespace scapegoat.Controllers
         {
             return _repo.GetUserByTierFromDB(customerTier);
         }
+        [HttpGet("search/{FirstName}")]
+        public List<User> GetUserByFirstName(string FirstName)
+        {
+            return _repo.GetUserByNameFromDB(FirstName);
+        }
         //[HttpGet("orders/{Id}")]
         //public IActionResult GetUserOrderHistory(Guid userId)
         //{

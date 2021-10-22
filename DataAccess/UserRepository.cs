@@ -73,7 +73,7 @@ namespace scapegoat.DataAccess
 
         // TO DO:
         // Get Users by Type
-       internal List<User> GetUserByTypeFromDB(UserType userType)
+        internal List<User> GetUserByTypeFromDB(UserType userType)
         {
             using var db = new SqlConnection(_connectionString);
             var uSql = db.Query<User>("Select * from Users where UserType = @userType", new { userType }).ToList();
@@ -86,14 +86,21 @@ namespace scapegoat.DataAccess
             var tSql = db.Query<User>("Select * from Users where CustomerTier = @customerTier", new { customerTier }).ToList();
             return tSql;
         }
+        //Get Users by Name
+        internal List<User> GetUserByNameFromDB(string FirstName)
+        {
+            using var db = new SqlConnection(_connectionString);
+            var unSql = db.Query<User>("Select * from Users where FirstName = @FirstName", new { FirstName }).ToList();
+            return unSql;
+        }
         // Get User order history
         //public List<Order> GetOrdersByUserId(Guid userId)
         //{
         //    var uoSql = @"Select *
         //                From Users u
-	       //                 Join Orders o
-	       //                 ON o.Id = u.id
-	       //                 Where UserId = @userId ";
+        //                 Join Orders o
+        //                 ON o.Id = u.id
+        //                 Where UserId = @userId ";
 
         //    using var db = new SqlConnection(_connectionString);
 
