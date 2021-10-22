@@ -75,14 +75,12 @@ namespace scapegoat.Controllers
             return Ok();
         }
 
-        // TO DO:
-        // Get Users by Type
         [HttpGet("types/{userType}")]
         public List<User> GetUserByType(UserType userType)
         {
             return _repo.GetUserByTypeFromDB(userType);
         }
-        // Get Users by Tier
+
         [HttpGet("tiers/{customerTier}")]
         public List<User> GetUserByTier(CustomerTier customerTier)
         {
