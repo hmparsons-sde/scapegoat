@@ -14,9 +14,11 @@ namespace scapegoat.Controllers
     public class UserController : ControllerBase
     {
         UserRepository _repo;
-        public UserController(UserRepository repo)
+        OrdersRepository _oRepo;
+        public UserController(UserRepository repo, OrdersRepository oRepo)
         {
             _repo = repo;
+            _oRepo = oRepo;
         }
 
         [HttpGet]
@@ -86,6 +88,10 @@ namespace scapegoat.Controllers
         {
             return _repo.GetUserByTierFromDB(customerTier);
         }
-        // Get User order history
+        //[HttpGet("orders/{Id}")]
+        //public IActionResult GetUserOrderHistory(Guid userId)
+        //{
+        //    return (IActionResult)_repo.GetOrdersByUserId(userId);
+        //}
     }
 }
