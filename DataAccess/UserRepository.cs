@@ -80,6 +80,12 @@ namespace scapegoat.DataAccess
             return uSql;
         }
         // Get Users by Tier
+        internal List<User> GetUserByTierFromDB(CustomerTier customerTier)
+        {
+            using var db = new SqlConnection(_connectionString);
+            var tSql = db.Query<User>("Select * from Users where CustomerTier = @customerTier", new { customerTier }).ToList();
+            return tSql;
+        }
         // Get User order history
     }
 }

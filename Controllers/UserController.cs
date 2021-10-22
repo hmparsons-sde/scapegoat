@@ -83,6 +83,11 @@ namespace scapegoat.Controllers
             return _repo.GetUserByTypeFromDB(userType);
         }
         // Get Users by Tier
+        [HttpGet("tiers/{customerTier}")]
+        public List<User> GetUserByTier(CustomerTier customerTier)
+        {
+            return _repo.GetUserByTierFromDB(customerTier);
+        }
         // Get User order history
     }
 }
