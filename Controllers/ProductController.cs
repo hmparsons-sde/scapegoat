@@ -21,13 +21,14 @@ namespace scapegoat.Controllers
             return Ok(_repo.GetAll());
         }
 
-        [HttpGet("{ProductId}")]
-        public IActionResult GetProductById(Guid ProductId)
+        [HttpGet("{Id}")]
+        public IActionResult GetProductById(Guid Id)
         {
-            var product = _repo.GetSingleProductById(ProductId);
+            var product = _repo.GetSingleProductById(Id);
+
             if (product == null)
             {
-                return NotFound($"No product with {ProductId} was found.");
+                return NotFound($"No product with {Id} was found.");
             }
 
             return Ok(product);
@@ -52,6 +53,22 @@ namespace scapegoat.Controllers
             _repo.RemoveProduct(Id);
 
             return Ok();
+        }
+
+        [HttpPut("{Id}")]
+        public IActionResult UpdateProduct(Guid Id, Product product)
+        {
+            var productToUpdate = _repo.GetSingleProductById(Id);
+
+
+            if (productToUpdate == null)
+            {
+                return NotFound($"Could not find product with the id {Id} for updating");
+            }
+
+            var updatedProduct = _repo.UpdateProduct(Id, product);
+
+            return Ok(updatedProduct);
         }
     }
 }
