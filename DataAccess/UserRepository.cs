@@ -11,12 +11,13 @@ namespace scapegoat.DataAccess
 {
     public class UserRepository
     {
+        static List<User> _users = new List<User>();
         readonly string _connectionString;
         public UserRepository(IConfiguration config)
         {
             _connectionString = config.GetConnectionString("Scapegoat");
         }
-        public IEnumerable<User> GetAll()
+        internal IEnumerable<User> GetAll()
         {
             using var db = new SqlConnection(_connectionString);
             var users = db.Query<User>(@"select * from Users");
@@ -36,7 +37,7 @@ namespace scapegoat.DataAccess
 
             var sql = @"insert into Users(UserType,CustomerTier,FirstName,LastName,CreatedAt)
                         output inserted.Id
-                        values (@Type,@Tier,@FirstName,@LastName,@CreatedAt)";
+                        values (@UserType,@CustomerTier,@FirstName,@LastName,@CreatedAt)";
 
             var id = db.ExecuteScalar<Guid>(sql, newUser);
             newUser.Id = id;
@@ -69,16 +70,43 @@ namespace scapegoat.DataAccess
 
             db.Execute(sql, new { Id });
         }
-            //User MapFromReader(SqlDataReader reader)
-            //{
-            //    var user = new User();
-            //    user.FirstName = reader["FirstName"].ToString();
-            //    user.LastName = reader["LastName"].ToString();
-            //    user.Type = (UserType)reader["UserType"];
-            //    user.Tier = (CustomerTier)reader["CustomerTier"];
-            //    user.CreatedAt = (DateTime)reader[name: "CreatedAt"];
-            //    user.Id = new Guid();
-            //    return user;
-            //}
+
+        // TO DO:
+        // Get Users by Type
+        internal List<User> GetUserByTypeFromDB(UserType userType)
+        {
+            using var db = new SqlConnection(_connectionString);
+            var uSql = db.Query<User>("Select * from Users where UserType = @userType", new { userType }).ToList();
+            return uSql;
         }
+        // Get Users by Tier
+        internal List<User> GetUserByTierFromDB(CustomerTier customerTier)
+        {
+            using var db = new SqlConnection(_connectionString);
+            var tSql = db.Query<User>("Select * from Users where CustomerTier = @customerTier", new { customerTier }).ToList();
+            return tSql;
+        }
+        //Get Users by Name
+        internal List<User> GetUserByNameFromDB(string FirstName)
+        {
+            using var db = new SqlConnection(_connectionString);
+            var unSql = db.Query<User>("Select * from Users where FirstName = @FirstName", new { FirstName }).ToList();
+            return unSql;
+        }
+        // Get User order history
+        public List<User> GetOrdersByUserId(Guid userId)
+        {
+            var uoSql = @"Select *
+                        From Users u
+                         Join Orders o
+                         ON o.Id = u.id
+                         Where UserId = @userId ";
+
+            using var db = new SqlConnection(_connectionString);
+
+            var uOrder = db.Query<User>(uoSql, new { UserId = @userId }).ToList();
+
+            return uOrder;
+        }
+    }
 }

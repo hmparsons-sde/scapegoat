@@ -43,23 +43,23 @@ namespace scapegoat.DataAccess
             return userPayments;
         }
 
-        internal PaymentType Get(Guid id)
-        {
-            //create a connection
-            using var db = new SqlConnection(_connectionString);
+        //internal PaymentType Get(Guid id)
+        //{
+        //    //create a connection
+        //    using var db = new SqlConnection(_connectionString);
 
-            var sql = @"select *
-                        from PaymentType p
-	                        join Users u 
-		                        on u.Id = p.UserId
-                        where p.id = @id";
+        //    var sql = @"select *
+        //                from PaymentType p
+	       //                 join Users u 
+		      //                  on u.Id = p.UserId
+        //                where p.id = @id";
 
-            //multi-mapping doesn't work for any other kind of dapper call,
-            //so we take the collection and turn it into one item ourselves
-            var payments = db.Query<PaymentType, Users>(sql, MapFromReader, new { id }, splitOn: "Id");
+        //    //multi-mapping doesn't work for any other kind of dapper call,
+        //    //so we take the collection and turn it into one item ourselves
+        //    var payments = db.QueryAsync<PaymentType, User>(sql, MapFromReader, new { id }, splitOn: "Id");
 
-            return payments.FirstOrDefault();
-        }
+        //    return payments.FirstOrDefault();
+        //}
 
         internal void AddPaymentMethod(PaymentType newPayment)
         {

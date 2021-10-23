@@ -14,9 +14,11 @@ namespace scapegoat.Controllers
     public class UserController : ControllerBase
     {
         UserRepository _repo;
-        public UserController(UserRepository repo)
+        OrdersRepository _oRepo;
+        public UserController(UserRepository repo, OrdersRepository oRepo)
         {
             _repo = repo;
+            _oRepo = oRepo;
         }
 
         [HttpGet]
@@ -73,6 +75,28 @@ namespace scapegoat.Controllers
             _repo.HardDeleteUser(Id);
 
             return Ok();
+        }
+
+        [HttpGet("types/{userType}")]
+        public List<User> GetUserByType(UserType userType)
+        {
+            return _repo.GetUserByTypeFromDB(userType);
+        }
+
+        [HttpGet("tiers/{customerTier}")]
+        public List<User> GetUserByTier(CustomerTier customerTier)
+        {
+            return _repo.GetUserByTierFromDB(customerTier);
+        }
+        [HttpGet("search/{FirstName}")]
+        public List<User> GetUserByFirstName(string FirstName)
+        {
+            return _repo.GetUserByNameFromDB(FirstName);
+        }
+        [HttpGet("orderhistory/{Id}")]
+        public List<User> GetUserOrderHistory(Guid userId)
+        {
+            return _repo.GetOrdersByUserId(userId);
         }
     }
 }
