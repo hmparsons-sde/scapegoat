@@ -94,19 +94,19 @@ namespace scapegoat.DataAccess
             return unSql;
         }
         // Get User order history
-        //public List<Order> GetOrdersByUserId(Guid userId)
-        //{
-        //    var uoSql = @"Select *
-        //                From Users u
-        //                 Join Orders o
-        //                 ON o.Id = u.id
-        //                 Where UserId = @userId ";
+        public List<User> GetOrdersByUserId(Guid userId)
+        {
+            var uoSql = @"Select *
+                        From Users u
+                         Join Orders o
+                         ON o.Id = u.id
+                         Where UserId = @userId ";
 
-        //    using var db = new SqlConnection(_connectionString);
+            using var db = new SqlConnection(_connectionString);
 
-        //    var uOrder = db.Query<Order>(uoSql, new { UserId = @userId }).ToList();
+            var uOrder = db.Query<User>(uoSql, new { UserId = @userId }).ToList();
 
-        //    return uOrder;
-        //}
+            return uOrder;
+        }
     }
 }

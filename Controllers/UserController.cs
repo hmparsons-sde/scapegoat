@@ -93,10 +93,10 @@ namespace scapegoat.Controllers
         {
             return _repo.GetUserByNameFromDB(FirstName);
         }
-        //[HttpGet("orders/{Id}")]
-        //public IActionResult GetUserOrderHistory(Guid userId)
-        //{
-        //    return (IActionResult)_repo.GetOrdersByUserId(userId);
-        //}
+        [HttpGet("orderhistory/{Id}")]
+        public List<User> GetUserOrderHistory(Guid userId)
+        {
+            return _repo.GetOrdersByUserId(userId);
+        }
     }
 }
