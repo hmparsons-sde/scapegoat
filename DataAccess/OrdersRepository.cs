@@ -17,37 +17,72 @@ namespace scapegoat.DataAccess
             _connectionString = config.GetConnectionString("Scapegoat");
         }
 
-        internal IEnumerable<Order> GetAll()
+        internal IEnumerable<OrderJoin> GetAll()
         {
             using var db = new SqlConnection(_connectionString);
 
-            var sqlString = @"select * from Orders";
+            var sqlString = @"select *
+                                from orders o
+                                join users u
+                                on o.UserId = u.Id
+                                join paymentType pt
+                                on pt.Id = o.PaymentId";
 
-            var orders = db.Query<Order>(sqlString);
+            var orders = db.Query<OrderJoin, User, PaymentType, OrderJoin>(sqlString, Map, splitOn: "id");
+
+            var itemsQuery = @"select * from OrderItems";
+
+            var lineItems = db.Query<OrderItemJoin>(itemsQuery);
+
+            var productQuery = @"select * from Products";
+
+            var itemProducts = db.Query<Product>(productQuery);
+
+            foreach (var order in orders)
+            {
+               order.LineItems = lineItems.Where(li => li.OrderId == order.Id);
+                
+                foreach (var lineItem in lineItems)
+                {
+                    lineItem.Product = itemProducts.Where(ip => ip.ProductId == lineItem.ProductId);
+                }
+            }
 
             return orders;
         }
 
-        internal Order GetById(Guid id)
+        internal OrderJoin GetById(Guid id)
         {
             using var db = new SqlConnection(_connectionString);
 
-            var sqlString = @"select * from Orders where Id = @id";
+            var sqlString = @"select *
+                                from orders o
+                                join users u
+                                on o.UserId = u.Id
+                                join paymentType pt
+                                on pt.Id = o.PaymentId
+                                where o.id = @Id";
 
-            var order = db.QueryFirstOrDefault<Order>(sqlString, new { id = id });
+            var order = db.Query<OrderJoin, User, PaymentType, OrderJoin>(sqlString, Map, new { id }, splitOn: "id");
 
             if (order == null) return null;
 
-            return order;
+            return order.FirstOrDefault();
         }
 
-        internal IEnumerable<Order> GetByUserId(Guid userId)
+        internal IEnumerable<OrderJoin> GetByUserId(Guid userId)
         {
             using var db = new SqlConnection(_connectionString);
 
-            var sqlString = @"select * from Orders where UserId = @UserId";
+            var sqlString = @"select *
+                                from orders o
+                                join users u
+                                on o.UserId = u.Id
+                                join paymentType pt
+                                on pt.Id = o.PaymentId
+                                where o.userId = @userId";
 
-            var orders = db.Query<Order>(sqlString, new { UserId = userId });
+            var orders = db.Query<OrderJoin, User, PaymentType, OrderJoin>(sqlString, Map, new { UserId = userId }, splitOn: "id");
 
             return orders;
         }
@@ -85,6 +120,13 @@ namespace scapegoat.DataAccess
 
         //TODO: update all methods to get any needed data off other tables
         //TODO: add delete method
+
+        OrderJoin Map(OrderJoin order, User user, PaymentType paymentType)
+        {
+            order.User = user;
+            order.Payment = paymentType;
+            return order;
+        }
 
     }
 }
