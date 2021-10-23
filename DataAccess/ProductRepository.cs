@@ -24,11 +24,11 @@ namespace scapegoat
             return products;
         }
 
-        internal object GetSingleProductById(Guid ProductId)
+        internal Product GetSingleProductById(Guid Id)
         {
             using var db = new SqlConnection(_connectionString);
-            var singleProduct = @"SELECT * FROM Products where ProductId = @ProductId";
-            var product = db.QuerySingleOrDefault<Product>(singleProduct, new { ProductId = ProductId});
+            var singleProduct = @"SELECT * FROM Products WHERE ProductId = @Id";
+            var product = db.QuerySingleOrDefault<Product>(singleProduct, new { id = Id});
             if (product == null) return null;
             return product;
         }
@@ -36,12 +36,43 @@ namespace scapegoat
         internal void AddProduct(Product product)
         {
             using var db = new SqlConnection(_connectionString);
-            var sql = @"INSERT INTO Products(ProductType, Description, Price, Size, CreatedAt)
+            var sql = @"INSERT INTO Products(ProductType, Description, MerchantId, Price, Size, CreatedAt)
                         output inserted.ProductId
-                        values (@ProductType, @Description, @Price, @Size, @CreatedAt)";
+                        values (@ProductType, @Description, @MerchantId, @Price, @Size, @CreatedAt)";
 
             var id = db.ExecuteScalar<Guid>(sql, product);
             product.ProductId = id;
+        }
+
+        internal void RemoveProduct(Guid Id)
+        {
+            using var db = new SqlConnection(_connectionString);
+            var sql = @"DELETE FROM Products WHERE ProductId = @Id";
+
+            db.Execute(sql, new { Id });
+        }
+
+
+        internal Product UpdateProduct(Guid Id, Product product)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"UPDATE Products 
+                        SET
+                        ProductType = @ProductType,
+                        Description = @Description, 
+                        MerchantId = @MerchantId,
+                        Price = @Price,
+                        Size = @Size,
+                        CreatedAt = @CreatedAt
+                        OUTPUT INSERTED.*
+                        WHERE ProductId = @ProductId";
+
+            product.ProductId = Id;
+
+            var updatedProduct = db.QuerySingleOrDefault<Product>(sql, product);
+
+            return updatedProduct;
         }
 
         Product MapFromReader(SqlDataReader reader)
