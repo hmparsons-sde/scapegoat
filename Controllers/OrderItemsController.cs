@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using scapegoat.DataAccess;
+using scapegoat.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +20,11 @@ namespace scapegoat.Controllers
             _repo = repo;
         }
 
-        //[HttpGet]
-        //public IActionResult GetAllOrderItems()
-        //{
-        //    return Ok(_repo.GetAll());
-        //}
+        [HttpGet]
+        public IActionResult GetAllOrderItems()
+        {
+            return Ok(_repo.GetAll());
+        }
 
         [HttpGet("/productid/{id}")]
         public IActionResult GetSingleOrderItemByProductId(Guid id)
@@ -43,8 +44,41 @@ namespace scapegoat.Controllers
             return Ok(_repo.GetById(id));
         }
 
-        //TODO: add Post route
-        //TODO: add Update route
+        [HttpPost]
+        public IActionResult CreateOrderItem(OrderItem newOrderItem)
+        {
+            _repo.Add(newOrderItem);
+            return Created($"/api/orderItems/{newOrderItem.Id}", newOrderItem);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateOrderItem(Guid id, OrderItem orderItem)
+        {
+            var orderItemToUpdate = _repo.GetById(id);
+
+            if (orderItemToUpdate == null)
+            {
+                return NotFound($"Could not find order with id {id} for updating");
+            }
+
+            var updatedOrderItem = _repo.Update(id, orderItem);
+            return Ok(updatedOrderItem);
+        }
+
+        [HttpPut("/softDelete/{id}")]
+        public IActionResult SoftDeleteOrderItem(Guid id, OrderItem orderItem)
+        {
+            var orderItemToSoftDelete = _repo.GetById(id);
+
+            if (orderItemToSoftDelete == null)
+            {
+                return NotFound($"Could not find order with id {id} for deleting");
+            }
+
+            var softDeletedOrderItem = _repo.SoftDelete(id, orderItem);
+            return Ok(softDeletedOrderItem);
+        }
+
         //TODO: add Delete route
     }
 }

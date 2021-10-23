@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 
 namespace scapegoat.Models
 {
-    public class OrderItem
+    public class OrderItemJoin
     {
         public Guid Id { get; set; }
         public Guid OrderId { get; set; }
         public Guid ProductId { get; set; }
-        public int Quantity { get; set; }
-        public bool isDeleted { get; set; }
+        public int  Quantity { get; set; }
+
+        public IEnumerable<Product> Product { get; set; }
+
     }
 }

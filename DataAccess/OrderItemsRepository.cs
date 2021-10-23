@@ -17,31 +17,24 @@ namespace scapegoat.DataAccess
             _connectionString = config.GetConnectionString("Scapegoat");
         }
 
-        //internal IEnumerable<OrderItem> GetAll()
-        //{
-        //    using var db = new SqlConnection(_connectionString);
+        internal IEnumerable<OrderItem> GetAll()
+        {
+            using var db = new SqlConnection(_connectionString);
 
-        //    var sqlString = @"select *
-        //                        from OrderItems oi
-        //                        left join Orders o
-        //                        on o.id = oi.OrderId
-        //                        join Products p
-        //                        on oi.ProductId = p.ProductId
-        //                        join users u
-        //                        on o.userId = u.Id
-        //                        join users uu
-        //                        on uu.Id = p.MerchantId";
+            var sqlString = @"select *
+                                from OrderItems
+                                where isDeleted = 0";
 
-        //    var orderItems = db.Query<OrderItem>(sqlString);
+            var orderItems = db.Query<OrderItem>(sqlString);
 
-        //    return orderItems;
-        //}
+            return orderItems;
+        }
 
         internal IEnumerable<OrderItem> GetByProductId(Guid productId)
         {
             using var db = new SqlConnection(_connectionString);
 
-            var sqlString = @"select * from OrderItems where ProductId = @productId";
+            var sqlString = @"select * from OrderItems where ProductId = @productId and isDeleted = 0";
 
             var orderItem = db.Query<OrderItem>(sqlString, new { productId = productId });
 
@@ -54,7 +47,7 @@ namespace scapegoat.DataAccess
         {
             using var db = new SqlConnection(_connectionString);
 
-            var sqlString = @"select * from OrderItems where OrderId = @orderId";
+            var sqlString = @"select * from OrderItems where OrderId = @orderId and isDeleted = 0";
 
             var orderItem = db.Query<OrderItem>(sqlString, new { OrderId = orderId });
 
@@ -63,21 +56,63 @@ namespace scapegoat.DataAccess
             return orderItem;
         }
 
+        internal void Add(OrderItem newOrderItem)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"insert into OrderItems(ProductId, Quantity, OrderId, IsDeleted)
+                                    output inserted.Id
+                                    values(@ProductId, @Quantity, @OrderId, 0)";
+
+            var id = db.ExecuteScalar<Guid>(sql, newOrderItem);
+            newOrderItem.Id = id;
+        }
+
+        internal object SoftDelete(Guid id, OrderItem orderItem)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"update OrderItems Set
+                                        IsDeleted = 1
+                                     output inserted.*
+                                     Where id = @id";
+
+            orderItem.Id = id;
+            var updatedOrderItem = db.QuerySingleOrDefault<OrderItem>(sql, orderItem);
+            return updatedOrderItem;
+        }
+
+        internal OrderItem Update(Guid id, OrderItem orderItem)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"update OrderItems Set
+                                        ProductId = @ProductId, 
+                                        Quantity = @Quantity,
+                                        OrderId = @OrderId
+                                     output inserted.*
+                                     Where id = @id";
+
+            orderItem.Id = id;
+            var updatedOrderItem = db.QuerySingleOrDefault<OrderItem>(sql, orderItem);
+            return updatedOrderItem;
+
+        }
+
         internal OrderItem GetById(Guid id)
         {
             using var db = new SqlConnection(_connectionString);
 
             var sqlString = @"select * from OrderItems where Id = @id";
 
-            var orderItem = db.QueryFirstOrDefault<OrderItem>(sqlString, new { Id = id });
+            var orderItem = db.Query<OrderItem>(sqlString, new { Id = id });
 
             if (orderItem == null) return null;
 
-            return orderItem;
+            return orderItem.FirstOrDefault();
         }
 
-           //TODO: update all get methods to get actual data off other tables
-           //TODO: add update methods (when we update a user, e.g. other tables should update too)
+
            //TODO: add delete method (how does this relate to other tables?)
     }
 }
