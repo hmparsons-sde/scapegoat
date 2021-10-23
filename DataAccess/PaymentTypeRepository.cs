@@ -56,7 +56,7 @@ namespace scapegoat.DataAccess
 
         //    //multi-mapping doesn't work for any other kind of dapper call,
         //    //so we take the collection and turn it into one item ourselves
-        //    var payments = db.Query<PaymentType, Users>(sql, MapFromReader, new { id }, splitOn: "Id");
+        //    var payments = db.QueryAsync<PaymentType, User>(sql, MapFromReader, new { id }, splitOn: "Id");
 
         //    return payments.FirstOrDefault();
         //}

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using scapegoat.Models;
 
@@ -12,6 +9,7 @@ namespace scapegoat.Controllers
     public class ProductController : ControllerBase
     {
         ProductRepository _repo;
+
         public ProductController(ProductRepository repo)
         {
             _repo = repo;
@@ -23,20 +21,21 @@ namespace scapegoat.Controllers
             return Ok(_repo.GetAll());
         }
 
-        [HttpGet("{ProductId}")]
-        public IActionResult GetProductById(Guid ProductId)
+        [HttpGet("{Id}")]
+        public IActionResult GetProductById(Guid Id)
         {
-            var product = _repo.GetSingleProductById(ProductId);
+            var product = _repo.GetSingleProductById(Id);
+
             if (product == null)
             {
-                return NotFound($"No product with {ProductId} was found.");
+                return NotFound($"No product with {Id} was found.");
             }
 
             return Ok(product);
         }
 
         [HttpPost]
-        public IActionResult AddProductToDb(Product product)
+        public IActionResult AddProduct(Product product)
         {
             if (string.IsNullOrEmpty(product.Description))
             {
@@ -46,6 +45,30 @@ namespace scapegoat.Controllers
             _repo.AddProduct(product);
 
             return Created($"/api/Products/{product.ProductId}", product);
+        }
+
+        [HttpDelete("{Id}")]
+        public IActionResult DeleteProduct(Guid Id)
+        {
+            _repo.RemoveProduct(Id);
+
+            return Ok();
+        }
+
+        [HttpPut("{Id}")]
+        public IActionResult UpdateProduct(Guid Id, Product product)
+        {
+            var productToUpdate = _repo.GetSingleProductById(Id);
+
+
+            if (productToUpdate == null)
+            {
+                return NotFound($"Could not find product with the id {Id} for updating");
+            }
+
+            var updatedProduct = _repo.UpdateProduct(Id, product);
+
+            return Ok(updatedProduct);
         }
     }
 }
