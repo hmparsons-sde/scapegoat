@@ -57,6 +57,12 @@ namespace scapegoat.Controllers
             return Ok(updatedOrder);
         }
 
-        //TODO: add delete route
+        [HttpDelete("/hardDeleteOrder/{id}")] 
+        public IActionResult HardDeleteOrder(Guid id)
+        {
+            _repo.Remove(id);
+
+            return Ok();
+        }
     }
 }

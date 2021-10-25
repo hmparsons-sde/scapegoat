@@ -96,7 +96,7 @@ namespace scapegoat.DataAccess
 
             var sql = @"update PaymentType 
                         Set PaymentMethod = @paymentMethod,
-                            AccpuntNumber = @accountNumber,
+                            AccountNumber = @accountNumber
                         output inserted.*
                         Where id = @id";
 
