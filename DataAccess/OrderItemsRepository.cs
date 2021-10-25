@@ -22,8 +22,7 @@ namespace scapegoat.DataAccess
             using var db = new SqlConnection(_connectionString);
 
             var sqlString = @"select *
-                                from OrderItems
-                                where isDeleted = 0";
+                                from OrderItems";
 
             var orderItems = db.Query<OrderItem>(sqlString);
 
@@ -34,7 +33,7 @@ namespace scapegoat.DataAccess
         {
             using var db = new SqlConnection(_connectionString);
 
-            var sqlString = @"select * from OrderItems where ProductId = @productId and isDeleted = 0";
+            var sqlString = @"select * from OrderItems where ProductId = @productId";
 
             var orderItem = db.Query<OrderItem>(sqlString, new { productId = productId });
 
@@ -47,7 +46,7 @@ namespace scapegoat.DataAccess
         {
             using var db = new SqlConnection(_connectionString);
 
-            var sqlString = @"select * from OrderItems where OrderId = @orderId and isDeleted = 0";
+            var sqlString = @"select * from OrderItems where OrderId = @orderId";
 
             var orderItem = db.Query<OrderItem>(sqlString, new { OrderId = orderId });
 
@@ -60,26 +59,21 @@ namespace scapegoat.DataAccess
         {
             using var db = new SqlConnection(_connectionString);
 
-            var sql = @"insert into OrderItems(ProductId, Quantity, OrderId, IsDeleted)
+            var sql = @"insert into OrderItems(ProductId, Quantity, OrderId)
                                     output inserted.Id
-                                    values(@ProductId, @Quantity, @OrderId, 0)";
+                                    values(@ProductId, @Quantity, @OrderId)";
 
             var id = db.ExecuteScalar<Guid>(sql, newOrderItem);
             newOrderItem.Id = id;
         }
 
-        internal object SoftDelete(Guid id, OrderItem orderItem)
+        internal void Remove(Guid id)
         {
             using var db = new SqlConnection(_connectionString);
 
-            var sql = @"update OrderItems Set
-                                        IsDeleted = 1
-                                     output inserted.*
-                                     Where id = @id";
+            var sql = @"Delete From OrderItems Where Id = @id";
 
-            orderItem.Id = id;
-            var updatedOrderItem = db.QuerySingleOrDefault<OrderItem>(sql, orderItem);
-            return updatedOrderItem;
+            db.Execute(sql, new { id });
         }
 
         internal OrderItem Update(Guid id, OrderItem orderItem)
@@ -113,6 +107,5 @@ namespace scapegoat.DataAccess
         }
 
 
-           //TODO: add delete method (how does this relate to other tables?)
     }
 }

@@ -38,6 +38,7 @@ namespace scapegoat.DataAccess
 
             var itemProducts = db.Query<Product>(productQuery);
 
+
             foreach (var order in orders)
             {
                order.LineItems = lineItems.Where(li => li.OrderId == order.Id);
@@ -45,10 +46,25 @@ namespace scapegoat.DataAccess
                 foreach (var lineItem in lineItems)
                 {
                     lineItem.Product = itemProducts.Where(ip => ip.ProductId == lineItem.ProductId);
+
                 }
+              
             }
 
             return orders;
+        }
+
+        internal void Remove(Guid id)
+        {
+            using var db = new SqlConnection(_connectionString);
+            //first delete the order Items from the order
+            var orderItemsQuery = @"Delete From OrderItems Where OrderId = @id";
+
+            db.Execute(orderItemsQuery, new { id });
+            //then delete the order itself
+            var sql = @"Delete From Orders Where Id = @id";
+
+            db.Execute(sql, new { id });
         }
 
         internal OrderJoin GetById(Guid id)
@@ -65,9 +81,49 @@ namespace scapegoat.DataAccess
 
             var order = db.Query<OrderJoin, User, PaymentType, OrderJoin>(sqlString, Map, new { id }, splitOn: "id");
 
-            if (order == null) return null;
+            var firstOrder = order.FirstOrDefault();
 
-            return order.FirstOrDefault();
+            var itemsQuery = @"select * from OrderItems where OrderId = @Id";
+
+            var lineItems = db.Query<OrderItemJoin>(itemsQuery, firstOrder);
+
+            firstOrder.LineItems = lineItems;
+
+            var thisOrderItems = firstOrder.LineItems;
+
+            var runningTotal = 0m;
+
+            foreach (var item in thisOrderItems)
+            {
+                var thisProductTotalCost = 0m;
+                var productQuery = @"select * from Products where ProductId = @ProductId";
+
+                var thisItemId = item.ProductId;
+
+               var itemProduct = db.Query<Product>(productQuery, new {ProductId = thisItemId });
+
+                item.Product = itemProduct;
+
+                var thisProduct = item.Product;
+
+                foreach (var prod in thisProduct) {
+                  thisProductTotalCost = prod.Price * item.Quantity;
+                }
+
+                runningTotal += thisProductTotalCost;
+            }
+
+            firstOrder.TotalCost = runningTotal;
+            var updateTotal = @"update Orders Set
+                                        TotalCost = @TotalCost
+                                     output inserted.*
+                                     Where id = @id";
+
+            var updatedOrder = db.QuerySingleOrDefault<OrderJoin>(updateTotal, firstOrder);
+
+            if (updatedOrder == null) return null;
+
+            return firstOrder;
         }
 
         internal IEnumerable<OrderJoin> GetByUserId(Guid userId)
@@ -84,6 +140,48 @@ namespace scapegoat.DataAccess
 
             var orders = db.Query<OrderJoin, User, PaymentType, OrderJoin>(sqlString, Map, new { UserId = userId }, splitOn: "id");
 
+            foreach (var order in orders)
+            {
+                var itemsQuery = @"select * from OrderItems where OrderId = @Id";
+
+                var lineItems = db.Query<OrderItemJoin>(itemsQuery, order);
+
+                order.LineItems = lineItems;
+
+                var thisOrderItems = order.LineItems;
+
+                var runningTotal = 0m;
+
+                foreach (var item in thisOrderItems)
+                {
+                    var thisProductTotalCost = 0m;
+                    var productQuery = @"select * from Products where ProductId = @ProductId";
+
+                    var thisItemId = item.ProductId;
+
+                    var itemProduct = db.Query<Product>(productQuery, new { ProductId = thisItemId });
+
+                    item.Product = itemProduct;
+
+                    var thisProduct = item.Product;
+
+                    foreach (var prod in thisProduct)
+                    {
+                        thisProductTotalCost = prod.Price * item.Quantity;
+                    }
+
+                    runningTotal += thisProductTotalCost;
+                }
+
+                order.TotalCost = runningTotal;
+                var updateTotal = @"update Orders Set
+                                        TotalCost = @TotalCost
+                                     output inserted.*
+                                     Where id = @id";
+
+                var updatedOrder = db.QuerySingleOrDefault<OrderJoin>(updateTotal, order);
+            }
+
             return orders;
         }
 
@@ -94,6 +192,7 @@ namespace scapegoat.DataAccess
             var sql = @"insert into Orders(UserId, Status, CreatedAt, TotalCost, PaymentId)
                                     output inserted.Id
                                     values(@UserId, @Status, @CreatedAt, @TotalCost, @PaymentId)";
+
 
             var id = db.ExecuteScalar<Guid>(sql, newOrder);
             newOrder.Id = id;

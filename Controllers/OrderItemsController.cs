@@ -65,20 +65,13 @@ namespace scapegoat.Controllers
             return Ok(updatedOrderItem);
         }
 
-        [HttpPut("/softDelete/{id}")]
-        public IActionResult SoftDeleteOrderItem(Guid id, OrderItem orderItem)
+        [HttpDelete("/hardDelete/{id}")]
+        public IActionResult HardDeleteOrderItem(Guid id)
         {
-            var orderItemToSoftDelete = _repo.GetById(id);
+            _repo.Remove(id);
 
-            if (orderItemToSoftDelete == null)
-            {
-                return NotFound($"Could not find order with id {id} for deleting");
-            }
-
-            var softDeletedOrderItem = _repo.SoftDelete(id, orderItem);
-            return Ok(softDeletedOrderItem);
+            return Ok();
         }
 
-        //TODO: add Delete route
     }
 }
