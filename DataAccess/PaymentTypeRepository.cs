@@ -16,10 +16,18 @@ namespace scapegoat.DataAccess
         {
             _connectionString = config.GetConnectionString("Scapegoat");
         }
-        internal IEnumerable<PaymentType> GetAll()
+        internal IEnumerable<PaymentTypeJoin> GetAll()
         {
             using var db = new SqlConnection(_connectionString);
-            var payments = db.Query<PaymentType>(@"select * from PaymentType");
+
+            var sqlString = @"select *
+                                from orders o
+                                join users u
+                                on o.UserId = u.Id
+                                join paymentType pt
+                                on pt.Id = o.PaymentId";
+
+            var payments = db.Query<PaymentTypeJoin, Order, User, PaymentTypeJoin>(sqlString, Map, splitOn: "id");
             return payments;
         }
 
@@ -115,12 +123,19 @@ namespace scapegoat.DataAccess
 
             db.Execute(sql, new { id });
         }
-        PaymentType MapFromReader(SqlDataReader reader)
+        //PaymentType MapFromReader(SqlDataReader reader)
+        //{
+        //    var paymentType = new PaymentType();
+        //    paymentType.PaymentMethod = (PaymentMethod)reader["LastName"];
+        //    paymentType.AccountNumber = reader["AccountNumber"].ToString();
+        //    paymentType.UserId = new Guid();
+        //    return paymentType;
+        //}
+
+        PaymentTypeJoin Map(PaymentTypeJoin paymentType, User user, Order order)
         {
-            var paymentType = new PaymentType();
-            paymentType.PaymentMethod = (PaymentMethod)reader["LastName"];
-            paymentType.AccountNumber = reader["AccountNumber"].ToString();
-            paymentType.UserId = new Guid();
+            paymentType.User = user;
+            paymentType.Order = (IEnumerable<Order>)order;
             return paymentType;
         }
     }
