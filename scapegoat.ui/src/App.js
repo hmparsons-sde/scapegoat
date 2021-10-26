@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from './helpers/Routes';
+import NavBar from './Components/Nav/Navbar';
 // import { getAllProducts } from './helpers/data/productData';
 
 function App() {
@@ -10,10 +11,11 @@ function App() {
   return (
     <div className="App">
       <Router>
-      <Routes
-      products={products}
-      setProducts={setProducts}
-      />
+        <NavBar setProducts={setProducts}/>
+        <Routes
+          products={products}
+          setProducts={setProducts}
+        />
       </Router>
     </div>
   );
