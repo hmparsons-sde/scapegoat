@@ -4,6 +4,7 @@ import Home from '../Views/HomeView';
 import ProductList from '../Components/Products/ProductList';
 // import SingleProduct from '../Components/Products/SingleProduct';
 import SingleProductView from '../Views/ProductViews/SingleProductView';
+import Orders from '../Views/OrderViews/Orders';
 
 export default function Routes({products, setProducts}) {
   return (
@@ -12,6 +13,7 @@ export default function Routes({products, setProducts}) {
         <Route exact path='/' component={Home} />
         <Route exact path='/products' component={() => <ProductList products={products} setProducts={setProducts}/>} />
         <Route exact path='/products/:id' component={SingleProductView}/>
+        <Route exact path='/orders' component={Orders}/>
       </Switch>
     </div>
   )

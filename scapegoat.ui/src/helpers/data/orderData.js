@@ -33,15 +33,61 @@ const updateOrder = (id) => new Promise((resolve, reject) => {
   .catch(error => reject(error));
 });
 
+const deleteOrder = (id) => new Promise((resolve, reject) => {
+  axios.delete(`${config.baseUrl}/harddeleteorder/${id}`)
+  .then(response => resolve(response))
+  .catch(error => reject(error));
+})
+
 // order join data
 
+const getAllOrderItems = () => new Promise((resolve, reject) => {
+  axios.get(`${config.baseUrl}/api/orderitems`)
+      .then(response => resolve(response.data))
+      .catch(error => reject(error));
+});
 
+const getOrderItemsById = (id) => new Promise((resolve, reject) => {
+  axios.get(`${config.baseUrl}/orderid/${id}`)
+      .then(response => resolve(response.data))
+      .catch(error => reject(error));
+});
 
+const getOrderItemsByOrderId = (id) => new Promise((resolve, reject) => {
+  axios.get(`${config.baseUrl}/api/orderitems/${id}`)
+      .then(response => resolve(response.data))
+      .catch(error => reject(error));
+});
+
+const createOrderItem = () => new Promise((resolve, reject) => {
+  axios.post(`${config.baseUrl}/api/orderitems`)
+      .then(response => resolve(response.data))
+      .catch(error => reject(error));
+});
+
+const updateOrderItem = (id) => new Promise((resolve, reject) => {
+  axios.put(`${config.baseUrl}/api/orderitems/${id}`)
+      .then(response => resolve(response.data))
+      .catch(error => reject(error));
+});
+
+const deleteOrderItem = (id) => new Promise((resolve, reject) => {
+  axios.delete(`${config.baseUrl}/harddelete/${id}`)
+      .then(response => resolve(response))
+      .catch(error => reject(error));
+});
 
 export {
   getAllOrders,
   getSingleOrderById,
   getSingleUserOrder,
   createOrder,
-  updateOrder
+  updateOrder,
+  deleteOrder,
+  getAllOrderItems,
+  getOrderItemsById,
+  getOrderItemsByOrderId,
+  createOrderItem,
+  updateOrderItem,
+  deleteOrderItem
 };
