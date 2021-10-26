@@ -9,17 +9,26 @@ import {
 export default function NavBar() {
 
   return (
-  <div className="container-fluid w-100">
-    <Navbar className="justify-content-between" color="faded" light>
+  <div>
+    <Navbar color="faded" light>
       <NavbarBrand href="/">scapegoat*</NavbarBrand>
         <Nav className="m-auto" navbar>
           <NavLink className='nav-link' href='/'>
             Home
           </NavLink>
-          <br/>
+        <br />
         <NavLink className='nav-link' href='/products'>
           Products
         </NavLink>
+        <br />
+        <NavLink className='nav-link' href='/orders'>
+          Orders
+        </NavLink>
+        <br />
+        <NavLink className='nav-link' href='/users'>
+          Users
+        </NavLink>
+        <br />
       </Nav>
     </Navbar>
   </div>
