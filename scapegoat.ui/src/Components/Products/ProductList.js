@@ -1,19 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { getAllProducts } from "../../helpers/data/productData";
-import SingleProduct from "./SingleProduct";
+import React from "react";
+import ProductCard from "./ProductCard";
 
-export default function ProductList() {
-
-  const [products, setProducts] = useState([]);
-  
-  useEffect(() => getAllProducts().then(data => 
-    setProducts(data)), []);
-
-    let SingleProducts = products?.map(product => (<SingleProduct product={product}></SingleProduct>));
-
+export default function ProductList({products, setProducts}) {
     return (
     <div>
-        {SingleProducts}
+      {
+        products 
+        ? products.map((product, i) => (<ProductCard key={i} product={product} products={products} setProducts={setProducts} />))
+        : ''
+      }
     </div>
     )
 }
