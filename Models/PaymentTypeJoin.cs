@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace scapegoat.Models
 {
-    public class PaymentType
+    public class PaymentTypeJoin
     {
         public Guid Id { get; set; }
 
@@ -13,14 +13,7 @@ namespace scapegoat.Models
         public string AccountNumber { get; set; }
         public Guid UserId { get; set; }
         public User User { get; set; }
+        public Order Order { get; set; }
     }
 
-    public enum PaymentMethod
-    {
-        CreditCard,
-        DebitCard,
-        PayPal,
-        BankAccount,
-        CryptoCurrency,
-    }
 }
