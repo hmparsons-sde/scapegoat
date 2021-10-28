@@ -1,27 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import styled from 'styled-components';
+import { deleteOrderItem, getOrderItemsByOrderId } from '../../helpers/data/orderData';
+import CartProducts from './CartProducts';
 
 export default function OrderInfo({ ...order }) {
+  const [orderItems, setOrderItems] = useState([]);
 
-  const cartItems = order.lineItems.map(item => {
-    return item.product.map(product => (
-      <div>
-        <h4>{product.description}</h4>
-        <p>Price: {product.price}</p>
-        <p>Quantity: {item.quantity}</p>
-      </div>
-    ))
-  })
+  useEffect(() => {
+    getOrderItemsByOrderId(order.id).then(setOrderItems);
+  },[order.id]);
+
+  const CartButton = styled.button`
+  width: 7rem;
+  height: 2rem;
+  `;
+console.warn(orderItems)
+  const handleClick = (id) => {
+   deleteOrderItem(id).then(setOrderItems);
+  }
+
+  const cartItems = orderItems?.map(item => (
+    <>
+    <CartProducts {...item}/>
+    <CartButton onClick={() => handleClick(item.id)}>Delete Item</CartButton> 
+    <p>quantity: {item.quantity}</p>
+    </>
+  ))
   return (
     <div>
-      <h2>{order.user.firstName} {order.user.lastName}'s cart</h2>
-      <h3>Cart Items</h3>
       {
       order.lineItems.length > 0 
       ? cartItems
       : "no items in cart"
       }
-      <h3>Total:{order.totalCost}</h3>
-      <p>Order Status: {order.status}</p>
     </div>
   )
 }

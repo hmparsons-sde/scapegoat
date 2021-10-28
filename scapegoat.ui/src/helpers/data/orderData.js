@@ -21,14 +21,14 @@ const getSingleUserOrder = (userId) => new Promise((resolve, reject) => {
   .catch(error => reject(error));
 });
 
-const createOrder = () => new Promise((resolve, reject) => {
-  axios.post(`${config.baseUrl}/api/orders`)
+const createOrder = (order) => new Promise((resolve, reject) => {
+  axios.post(`${config.baseUrl}/api/orders`, order)
   .then(response => resolve(response.data))
   .catch(error => reject(error));
 });
 
-const updateOrder = (id) => new Promise((resolve, reject) => {
-  axios.put(`${config.baseUrl}/api/orders/${id}`)
+const updateOrder = (order) => new Promise((resolve, reject) => {
+  axios.put(`${config.baseUrl}/api/orders/${order.id}`, order)
   .then(response => resolve(response.data))
   .catch(error => reject(error));
 });
@@ -47,26 +47,26 @@ const getAllOrderItems = () => new Promise((resolve, reject) => {
       .catch(error => reject(error));
 });
 
-const getOrderItemsById = (id) => new Promise((resolve, reject) => {
+const getOrderItemsByOrderId = (id) => new Promise((resolve, reject) => {
   axios.get(`${config.baseUrl}/orderid/${id}`)
       .then(response => resolve(response.data))
       .catch(error => reject(error));
 });
 
-const getOrderItemsByOrderId = (id) => new Promise((resolve, reject) => {
+const getOrderItemsById = (id) => new Promise((resolve, reject) => {
   axios.get(`${config.baseUrl}/api/orderitems/${id}`)
       .then(response => resolve(response.data))
       .catch(error => reject(error));
 });
 
-const createOrderItem = () => new Promise((resolve, reject) => {
-  axios.post(`${config.baseUrl}/api/orderitems`)
+const createOrderItem = (orderItem) => new Promise((resolve, reject) => {
+  axios.post(`${config.baseUrl}/api/orderitems`, orderItem)
       .then(response => resolve(response.data))
       .catch(error => reject(error));
 });
 
-const updateOrderItem = (id) => new Promise((resolve, reject) => {
-  axios.put(`${config.baseUrl}/api/orderitems/${id}`)
+const updateOrderItem = (orderItem) => new Promise((resolve, reject) => {
+  axios.put(`${config.baseUrl}/api/orderitems/${orderItem.id}`, orderItem)
       .then(response => resolve(response.data))
       .catch(error => reject(error));
 });

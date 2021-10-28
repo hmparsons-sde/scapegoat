@@ -8,7 +8,7 @@ const getAllProducts = () => new Promise((resolve, reject) => {
 });
 
 const getSingleProduct = (id) => new Promise((resolve, reject) => {
-  axios.get(`${config.baseUrl}/Products/${id}`)
+  axios.get(`${config.baseUrl}/api/Products/${id}`)
     .then(response => resolve(response.data))
     .catch(error => reject(error));
 });
