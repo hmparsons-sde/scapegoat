@@ -16,18 +16,19 @@ namespace scapegoat.DataAccess
         {
             _connectionString = config.GetConnectionString("Scapegoat");
         }
-        internal IEnumerable<PaymentTypeJoin> GetAll()
+        internal IEnumerable<PaymentType> GetAll()
         {
             using var db = new SqlConnection(_connectionString);
 
-            var sqlString = @"select *
-                                from orders o
-                                join users u
-                                on o.UserId = u.Id
-                                join paymentType pt
-                                on pt.Id = o.PaymentId";
+            var payments = db.Query<PaymentType>(@"select * from PaymentType");
+            //var sqlString = @"select *
+            //                    from orders o
+            //                    join users u
+            //                    on o.UserId = u.Id
+            //                    join paymentType pt
+            //                    on pt.Id = o.PaymentId";
 
-            var payments = db.Query<PaymentTypeJoin, Order, User, PaymentTypeJoin>(sqlString, Map, splitOn: "id");
+            //var payments = db.Query<PaymentTypeJoin, Order, User, PaymentTypeJoin>(sqlString, Map, splitOn: "id");
             return payments;
         }
 
@@ -40,34 +41,21 @@ namespace scapegoat.DataAccess
             return foundPayment;
         }
 
-        internal IEnumerable<PaymentType> GetPaymentByUserId(Guid userId)
+        internal IEnumerable<PaymentTypeJoin> GetPaymentByUserId(Guid userId)
         {
             using var db = new SqlConnection(_connectionString);
 
-            var sqlString = @"select * from PaymentType where UserId = @UserId";
+            var sqlString = @"SELECT PaymentType.*, Users.* 
+                    FROM
+                        PaymentType AS PaymentType
+                    INNER JOIN Users as Users
+                        ON PaymentType.UserId = Users.Id where PaymentType.UserId = @UserId";
 
-            var userPayments = db.Query<PaymentType>(sqlString, new { UserId = userId });
+            var userPayments = db.Query<PaymentTypeJoin, User, PaymentTypeJoin>(sqlString, Map, new { userId = userId }, splitOn: "Id");
 
             return userPayments;
         }
 
-        //internal PaymentType Get(Guid id)
-        //{
-        //    //create a connection
-        //    using var db = new SqlConnection(_connectionString);
-
-        //    var sql = @"select *
-        //                from PaymentType p
-	       //                 join Users u 
-		      //                  on u.Id = p.UserId
-        //                where p.id = @id";
-
-        //    //multi-mapping doesn't work for any other kind of dapper call,
-        //    //so we take the collection and turn it into one item ourselves
-        //    var payments = db.QueryAsync<PaymentType, User>(sql, MapFromReader, new { id }, splitOn: "Id");
-
-        //    return payments.FirstOrDefault();
-        //}
 
         internal void AddPaymentMethod(PaymentType newPayment)
         {
@@ -132,10 +120,9 @@ namespace scapegoat.DataAccess
         //    return paymentType;
         //}
 
-        PaymentTypeJoin Map(PaymentTypeJoin paymentType, User user, Order order)
+        PaymentTypeJoin Map(PaymentTypeJoin paymentType, User user)
         {
             paymentType.User = user;
-            paymentType.Order = (IEnumerable<Order>)order;
             return paymentType;
         }
     }
