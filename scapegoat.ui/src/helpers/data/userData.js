@@ -20,4 +20,4 @@ const createNewUser = (userObject) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
-export {getAllUsers, getSingleUser, createNewUser};
+export {getAllUsers, createNewUser, getSingleUser};

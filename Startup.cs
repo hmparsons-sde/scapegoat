@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using scapegoat.DataAccess;
+using System.Text.Json.Serialization;
 
 namespace scapegoat
 {
@@ -33,7 +34,12 @@ namespace scapegoat
             services.AddTransient<PaymentTypeRepository>();
             services.AddTransient<UserRepository>();
 
-            services.AddControllers();
+            services.AddControllers()
+                    .AddJsonOptions(opts =>
+                    {
+                        var enumConverter = new JsonStringEnumConverter();
+                        opts.JsonSerializerOptions.Converters.Add(enumConverter);
+                    });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "scapegoat", Version = "v1" });
