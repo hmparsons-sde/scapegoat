@@ -7,4 +7,17 @@ const getAllUsers = () => new Promise((resolve, reject) => {
       .catch(error => reject(error));
 });
 
-export {getAllUsers};
+const getSingleUser = (id) => new Promise((resolve, reject) => {
+  axios.get(`${config.baseUrl}/api/Users/${id}`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
+
+const createNewUser = (userObject) => new Promise((resolve, reject) => {
+  axios.post(`${config.baseUrl}/api/Users/`, userObject)
+    .then((response) => {
+      resolve(response.data);
+    }).catch((error) => reject(error));
+});
+
+export {getAllUsers, getSingleUser, createNewUser};
