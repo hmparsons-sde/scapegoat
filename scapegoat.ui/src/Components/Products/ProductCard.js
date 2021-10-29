@@ -1,13 +1,27 @@
-import React from "react";
-import { deleteProduct, getAllProducts } from "../../helpers/data/productData";
+import React, { useState } from "react";
+import { Button } from "reactstrap";
+import { deleteProduct } from "../../helpers/data/productData";
+import ProductForm from "./ProductForm";
 
-export default function ProductCard({product, products, setProducts }) {
+export default function ProductCard({
+  productId, 
+  productType, 
+  description, 
+  merchantId, 
+  price,
+  size,
+  createdAt,
+  setProducts
+}) {
+  const [update, setUpdate] = useState(false);
 
   const handleButton = (p) => {
     switch (p) {
       case 'delete': 
-        deleteProduct(product.productId).then(r => console.warn(r));
-        getAllProducts().then(response => setProducts(response));
+        deleteProduct(productId).then(r => setProducts(r));
+      break;
+      case 'update':
+        setUpdate(!update)
       break;
       default:
       break;
@@ -16,12 +30,24 @@ export default function ProductCard({product, products, setProducts }) {
 
   return (
     <div>
-      Product Type: {product.productType} <br/>
-      Description: {product.description} <br/>
-      Id: {product.productId}
-        <button onClick={() => console.warn(product.productId)}>Info</button>
-        <button onClick={() => console.warn(product.productId)}>Update</button>
-        <button onClick={() => handleButton('delete')}>Delete</button>
+      Product Type: {productType} <br/>
+      Description: {description} <br/>
+        <Button onClick={() => console.warn(productId)}>Info</Button>
+        <Button onClick={() => handleButton('update')}>Update</Button>
+        <Button onClick={() => handleButton('delete')}>Delete</Button>
+      {
+        update
+        ? <ProductForm 
+            productId={productId}
+            productType={productType}
+            description={description}
+            merchantId={merchantId}
+            price={price}
+            size={size}
+            createdAt={createdAt}
+          />
+        : ''
+      }
     </div>
   )
 }

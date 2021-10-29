@@ -12,6 +12,7 @@ export default function SingleProductView() {
       setProduct(data);
     });
   }, [id]);
+
   return (
     <div>
       <ProductCard product={product} />
