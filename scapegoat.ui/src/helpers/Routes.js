@@ -5,6 +5,7 @@ import ProductList from '../Components/Products/ProductList';
 // import SingleProduct from '../Components/Products/SingleProduct';
 import SingleProductView from '../Views/ProductViews/SingleProductView';
 import UserList from '../Components/Users/UserList';
+import SingleUserView from '../Views/UserViews/UserView';
 
 export default function Routes({products, setProducts, users, setUsers}) {
   return (
@@ -14,6 +15,7 @@ export default function Routes({products, setProducts, users, setUsers}) {
         <Route exact path='/products' component={() => <ProductList products={products} setProducts={setProducts}/>} />
         <Route exact path='/products/:id' component={SingleProductView}/>
         <Route exact path='/users' component={() => <UserList users={users} setUsers={setUsers}/>} />
+        <Route exact path='/users/:id' component={() => <SingleUserView users={users} setUsers={setUsers}/>} />
       </Switch>
     </div>
   )
