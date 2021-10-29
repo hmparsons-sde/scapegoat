@@ -13,7 +13,7 @@ const SellersContainer = styled.div`
 export default function UserList() {
 
   const [users, setUsers] = useState([]);
-  
+
   useEffect(() => getAllUsers().then(data => 
     setUsers(data)), []);
 
@@ -23,5 +23,5 @@ export default function UserList() {
     <SellersContainer>
         {SingleSeller}
     </SellersContainer>
-    )
+   );
 }
