@@ -20,4 +20,26 @@ const createNewUser = (userObject) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
-export {getAllUsers, createNewUser, getSingleUser};
+const getShopOrderHistory = (id) => new Promise((resolve, reject) => {
+  axios.get(`${config.baseUrl}/api/Users/ShopOrderHistory/${id}`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
+
+const getPurchaseHistory = (id) => new Promise((resolve, reject) => {
+  axios.get(`${config.baseUrl}/api/Users/PurchaseHistory/${id}`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
+
+// const getFilteredSellers = (searchInput) => new Promise((resolve, reject) => {
+//   axios.get(`${config.baseUrl}/seller-search`).then((response) => {
+//     const filteredSellers = response.data.filter((seller) => seller.firstName.toLowerCase().includes(searchInput) || seller.lastName.toLowerCase().includes(searchInput));
+//     resolve(filteredSellers);
+//   })
+//     .catch((error) => reject(error));
+// });
+
+export {
+  getSingleUser, getShopOrderHistory, getPurchaseHistory, createNewUser, getAllUsers
+};;
