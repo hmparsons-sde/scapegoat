@@ -20,13 +20,13 @@ const createNewUser = (userObject) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 const getShopOrderHistory = (id) => new Promise((resolve, reject) => {
-  axios.get(`${config.baseUrl}/ShopOrderHistory/${id}`).then((response) => {
+  axios.get(`${config.baseUrl}/api/ShopOrderHistory/${id}`).then((response) => {
     resolve(response.data);
   }).catch((error) => reject(error));
 });
 
 const getPurchaseHistory = (id) => new Promise((resolve, reject) => {
-  axios.get(`${config.baseUrl}/PurchaseHistory/${id}`).then((response) => {
+  axios.get(`${config.baseUrl}/api/PurchaseHistory/${id}`).then((response) => {
     resolve(response.data);
   }).catch((error) => reject(error));
 });
