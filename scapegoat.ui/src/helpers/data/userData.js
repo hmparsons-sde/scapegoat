@@ -19,15 +19,14 @@ const createNewUser = (userObject) => new Promise((resolve, reject) => {
       resolve(response.data);
     }).catch((error) => reject(error));
 });
-
 const getShopOrderHistory = (id) => new Promise((resolve, reject) => {
-  axios.get(`${config.baseUrl}/api/Users/ShopOrderHistory/${id}`).then((response) => {
+  axios.get(`${config.baseUrl}/api/ShopOrderHistory/${id}`).then((response) => {
     resolve(response.data);
   }).catch((error) => reject(error));
 });
 
 const getPurchaseHistory = (id) => new Promise((resolve, reject) => {
-  axios.get(`${config.baseUrl}/api/Users/PurchaseHistory/${id}`).then((response) => {
+  axios.get(`${config.baseUrl}/api/PurchaseHistory/${id}`).then((response) => {
     resolve(response.data);
   }).catch((error) => reject(error));
 });

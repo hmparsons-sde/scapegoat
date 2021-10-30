@@ -16,6 +16,7 @@ namespace scapegoat.Models
 
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public UserType UserType { get; set; }
+
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public CustomerTier CustomerTier { get; set; }
     }
