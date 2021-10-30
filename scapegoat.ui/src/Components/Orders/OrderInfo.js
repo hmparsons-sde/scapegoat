@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components';
-import { deleteOrderItem, getSingleUserOrder } from '../../helpers/data/orderData';
+import { deleteOrderItem } from '../../helpers/data/orderData';
 import CartProducts from './CartProducts';
+import UpdateCartItem from './UpdateCartItem';
 
-export default function OrderInfo({ setUserOrder, order }) {
-  // const [orderItems, setOrderItems] = useState([]);
+export default function OrderInfo({ setUpdateSwitch, order }) {
 
   const CartButton = styled.button`
   width: 7rem;
@@ -12,8 +12,7 @@ export default function OrderInfo({ setUserOrder, order }) {
   `;
   
   const handleClick = (id) => {
-   deleteOrderItem(id).then(getSingleUserOrder('145beb4f-54a0-41de-8de8-1e6adb3a38f3')
-   .then(setUserOrder));
+   deleteOrderItem(id).then(setUpdateSwitch);
   }
   
   const cartItems = order.lineItems;
@@ -26,6 +25,7 @@ export default function OrderInfo({ setUserOrder, order }) {
         <CartProducts item={item}/>
         <CartButton onClick={() => handleClick(item.id)}>Delete Item</CartButton> 
         <p>quantity: {item.quantity}</p>
+        <UpdateCartItem setUpdateSwitch={setUpdateSwitch} {...item}/>
         </>
       ))
       : <p>no items in cart</p>

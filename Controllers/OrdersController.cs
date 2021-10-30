@@ -40,6 +40,7 @@ namespace scapegoat.Controllers
         public IActionResult GetMerchantOrders(Guid UserId)
         {
             return Ok(_repo.GetAllUserCarts(UserId));
+
         }
 
 
