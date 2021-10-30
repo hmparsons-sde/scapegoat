@@ -19,7 +19,9 @@ namespace scapegoat.DataAccess
         internal IEnumerable<PaymentType> GetAll()
         {
             using var db = new SqlConnection(_connectionString);
+
             var payments = db.Query<PaymentType>(@"select * from PaymentType");
+
             return payments;
         }
 
@@ -32,34 +34,21 @@ namespace scapegoat.DataAccess
             return foundPayment;
         }
 
-        internal IEnumerable<PaymentType> GetPaymentByUserId(Guid userId)
+        internal IEnumerable<PaymentTypeJoin> GetPaymentByUserId(Guid userId)
         {
             using var db = new SqlConnection(_connectionString);
 
-            var sqlString = @"select * from PaymentType where UserId = @UserId";
+            var sqlString = @"SELECT PaymentType.*, Users.* 
+                    FROM
+                        PaymentType AS PaymentType
+                    INNER JOIN Users as Users
+                        ON PaymentType.UserId = Users.Id where PaymentType.UserId = @UserId";
 
-            var userPayments = db.Query<PaymentType>(sqlString, new { UserId = userId });
+            var userPayments = db.Query<PaymentTypeJoin, User, PaymentTypeJoin>(sqlString, Map, new { userId = userId }, splitOn: "Id");
 
             return userPayments;
         }
 
-        //internal PaymentType Get(Guid id)
-        //{
-        //    //create a connection
-        //    using var db = new SqlConnection(_connectionString);
-
-        //    var sql = @"select *
-        //                from PaymentType p
-	       //                 join Users u 
-		      //                  on u.Id = p.UserId
-        //                where p.id = @id";
-
-        //    //multi-mapping doesn't work for any other kind of dapper call,
-        //    //so we take the collection and turn it into one item ourselves
-        //    var payments = db.QueryAsync<PaymentType, User>(sql, MapFromReader, new { id }, splitOn: "Id");
-
-        //    return payments.FirstOrDefault();
-        //}
 
         internal void AddPaymentMethod(PaymentType newPayment)
         {
@@ -68,23 +57,6 @@ namespace scapegoat.DataAccess
             var sql = @"insert into PaymentType(PaymentMethod,AccountNumber,UserId)
                         output inserted.Id
                         values (@PaymentMethod,@AccountNumber,@UserId)";
-
-            //var sql = @"insert into [dbo].[PaymentType]
-            //                ([PaymentMethod]
-            //                ,[AccountNumber]
-            //                ,[UserId])
-            //            Output inserted.Id
-            //            values 
-            //                (@PaymentMethod
-            //                ,@AccountNumber
-            //                ,@UserId)";
-
-            //var parameters = new
-            //{
-            //    PaymentMethod = paymentType.PaymentMethod,
-            //    AccountNumber = paymentType.AccountNumber,
-            //    UserId = paymentType.UserId
-            //};
 
             var id = db.ExecuteScalar<Guid>(sql, newPayment);
             newPayment.Id = id;
@@ -115,12 +87,10 @@ namespace scapegoat.DataAccess
 
             db.Execute(sql, new { id });
         }
-        PaymentType MapFromReader(SqlDataReader reader)
+ 
+        PaymentTypeJoin Map(PaymentTypeJoin paymentType, User user)
         {
-            var paymentType = new PaymentType();
-            paymentType.PaymentMethod = (PaymentMethod)reader["LastName"];
-            paymentType.AccountNumber = reader["AccountNumber"].ToString();
-            paymentType.UserId = new Guid();
+            paymentType.User = user;
             return paymentType;
         }
     }
