@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import SellerCard from '../../Components/Users/Sellers/SellerCard';
 import { getSingleUser} from '../../helpers/data/userData';
 import styled from 'styled-components';
 
@@ -19,7 +18,7 @@ export default function SingleUserView() {
 
   useEffect(() => {
     getSingleUser(id).then(data => setUser(data));
-  }, []);
+  }, [id]);
   return <div><SingleUser user={user}>
       <h4 tag="h4" className='mt-1'>{user.firstName} {user.lastName}</h4>
       <h5>User Type: {user.userType}</h5>
