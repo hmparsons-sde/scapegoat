@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { getSingleProduct } from '../../helpers/data/productData';
-// import styled from 'styled-components';
 
 export default function CartProducts({ item }) {
   const [orderProducts, setOrderProducts] = useState([]);
