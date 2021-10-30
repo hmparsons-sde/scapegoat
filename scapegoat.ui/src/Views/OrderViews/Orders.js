@@ -16,12 +16,11 @@ console.warn(userOrder);
 
   return (
     <div>
-      <h1>My Cart</h1>
       <h2>{userOrder?.user?.firstName} {userOrder?.user?.lastName}'s cart</h2>
+      <p>Order Status: {userOrder?.status}</p>
       <h3>Cart Items</h3>
       <OrderInfo order={userOrder} setUpdateSwitch={setUpdateSwitch}/>
        <h3>Total:$ {userOrder?.totalCost}</h3>
-      <p>Order Status: {userOrder?.status}</p>
     </div>
   )
 }

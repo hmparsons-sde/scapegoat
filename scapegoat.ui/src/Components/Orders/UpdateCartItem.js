@@ -1,5 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import styled from 'styled-components';
 import { updateOrderItem } from '../../helpers/data/orderData';
+
+const CartForm = styled.form`
+margin-top: 1rem;
+`;
+
+const CartButton = styled.button`
+width: 15rem;
+height: 2rem;
+background-color: black;
+color: white;
+cursor: pointer;
+margin: 1rem;
+`;
+
+const CartInput = styled.input`
+width: 2rem;
+margin-left: 1rem;
+text-align: center;
+`;
+
 
 export default function UpdateCartItem({ setUpdateSwitch, ...orderItem }) {
   const [orderItemObj, setOrderItemObj] = useState({
@@ -24,11 +45,12 @@ export default function UpdateCartItem({ setUpdateSwitch, ...orderItem }) {
 
   return (
     <div>
-      <form autoComplete='off' onSubmit={handleSubmit}>
-        <label>Item Quantity</label>
-        <input type='number' name='quantity' value={orderItemObj.quantity} onChange={handleInputChange}></input>
-        <button type='submit'>Submit</button>
-      </form>
+      <CartForm autoComplete='off' onSubmit={handleSubmit}>
+        <label>Item Quantity:</label>
+        <CartInput type='number' name='quantity' value={orderItemObj.quantity} onChange={handleInputChange}></CartInput>
+        <br/>
+        <CartButton type='submit'>Update Quantity</CartButton>
+      </CartForm>
     </div>
   )
 }
