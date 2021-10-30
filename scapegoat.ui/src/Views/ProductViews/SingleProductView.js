@@ -10,7 +10,7 @@ export default function SingleProductView() {
 
   useEffect(() => {
     getSingleProduct(id).then(data => setProduct(data));
-  }, []);
+  }, [id]);
   return <div><SingleProduct product={product}></SingleProduct></div>;
 }
 

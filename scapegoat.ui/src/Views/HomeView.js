@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import scapegoatbanner from '../assets/scapegoatbanner.png'
 
 const LandingPage = styled.div`
   text-align: center;
@@ -8,7 +9,7 @@ const LandingPage = styled.div`
 export default function Home() {
   return (
     <LandingPage>
-      <h1>HI I'M HOME</h1>
+      <img alt='scapegoat logo' src={scapegoatbanner} height="500px" width="1000px"></img>
     </LandingPage>
   );
 }
