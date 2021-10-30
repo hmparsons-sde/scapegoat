@@ -21,6 +21,12 @@ const getSingleUserOrder = (userId) => new Promise((resolve, reject) => {
   .catch(error => reject(error));
 });
 
+const getMerchantOrders = (userId) => new Promise((resolve, reject) => {
+  axios.get(`${config.baseUrl}/merchantorders/${userId}`)
+  .then(response => resolve(response.data))
+  .catch(error => reject(error));
+});
+
 const createOrder = (order) => new Promise((resolve, reject) => {
   axios.post(`${config.baseUrl}/api/orders`, order)
   .then(response => resolve(response.data))
@@ -81,6 +87,7 @@ export {
   getAllOrders,
   getSingleOrderById,
   getSingleUserOrder,
+  getMerchantOrders,
   createOrder,
   updateOrder,
   deleteOrder,

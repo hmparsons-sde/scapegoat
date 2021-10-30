@@ -36,6 +36,13 @@ namespace scapegoat.Controllers
             return Ok(_repo.GetByUserId(UserId));
         }
 
+        [HttpGet("/merchantorders/{UserId}")]
+        public IActionResult GetMerchantOrders(Guid UserId)
+        {
+            return Ok(_repo.GetAllUserCarts(UserId));
+        }
+
+
         [HttpPost]
         public IActionResult AddOrder(Order newOrder)
         {
