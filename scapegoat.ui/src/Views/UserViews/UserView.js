@@ -5,11 +5,19 @@ import { getSingleUser} from '../../helpers/data/userData';
 import styled from 'styled-components';
 
 const SingleUser = styled.div`
-  width: 300px;
-  height: auto;
-  margin: 15px;
-  border-style: solid;
-  box-shadow: 50px;
+  background-size:auto, 100% 100%;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 300;
+  min-height: 100%;
+  overflow-y: scroll;
+  width: 100%;
+  margin: 50px;
+
+  h1, h3 {
+    font-weight: 300;
+    line-height: 1.2;
+  }
 `;
 
 export default function SingleUserView() {
@@ -19,11 +27,15 @@ export default function SingleUserView() {
   useEffect(() => {
     getSingleUser(id).then(data => setUser(data));
   }, [id]);
-  return <div><SingleUser user={user}>
-      <h4 tag="h4" className='mt-1'>{user.firstName} {user.lastName}</h4>
-      <h5>User Type: {user.userType}</h5>
-      <h5>Customer Tier: {user.customerTier}</h5>
-    </SingleUser></div>;
+  return (
+    <div>
+      <SingleUser user={user}>
+        <h1 tag="h1" className='mt-1'>{user.firstName} {user.lastName}</h1>
+        <h3>User Type: {user.userType}</h3>
+        <h3>Customer Tier: {user.customerTier}</h3>
+      </SingleUser>
+    </div>
+  );
 }
 
 SingleUserView.propTypes = {

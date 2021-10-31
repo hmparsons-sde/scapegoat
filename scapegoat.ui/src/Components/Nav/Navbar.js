@@ -49,6 +49,9 @@ export default function NavBar() {
         <li><a className='nav-link' href='/users'>
           Users
         </a></li>
+        <li><a className='nav-link' href='/search'>
+          Search
+        </a></li>
         </ul>
       </StyledNav>
   )

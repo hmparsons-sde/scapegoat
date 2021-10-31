@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import { getAllUsers } from "../../helpers/data/userData";
-import SellerCard from "./Sellers/SellerCard";
+import SellerCard from "../../Components/Users/Sellers/SellerCard";
 
 const SellersContainer = styled.div`
   display: flex;
