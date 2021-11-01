@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-// import shoppingcart from '../../assets/shoppingcart.jpg';
 
 const StyledNav = styled.div`
   ul {
@@ -61,7 +60,6 @@ export default function NavBar() {
         <li><a className='nav-link' href='/search'>
           Search
         </a></li>
-        {/* <li><a className='nav-link' href='/cart'><img src={shoppingcart} alt='shopping cart'></img></a></li> */}
         </ul>
       </StyledNav>
   )

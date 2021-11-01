@@ -4,8 +4,8 @@ import Home from '../Views/HomeView';
 import ProductList from '../Components/Products/ProductList';
 import SingleProductView from '../Views/ProductViews/SingleProductView';
 import Orders from '../Views/OrderViews/Orders';
-import UserList from '../Views/UserViews/UserList';
-import SingleUserView from '../Views/UserViews/UserView';
+import AllUserList from '../Views/AdminViews/AllUserList';
+import CustomerDashboardView from '../Views/UserViews/Dashboards/CustomerDashboardView';
 import CartView from '../Views/CartViews/CartView';
 import OrderView from '../Views/OrderViews/OrderView';
 import SearchResults from '../Views/SearchViews/SearchResults';
@@ -18,8 +18,8 @@ export default function Routes({products, setProducts, users, setUsers}) {
         <Route exact path='/products' component={() => <ProductList products={products} setProducts={setProducts}/>} />
         <Route exact path='/products/:id' component={SingleProductView}/>
         <Route exact path='/orders' component={Orders}/>
-        <Route exact path='/users' component={() => <UserList users={users} setUsers={setUsers}/>} />
-        <Route exact path='/users/:id' component={() => <SingleUserView users={users} setUsers={setUsers}/>} />
+        <Route exact path='/users' component={() => <AllUserList users={users} setUsers={setUsers}/>} />
+        <Route exact path='/users/:id' component={() => <CustomerDashboardView users={users} setUsers={setUsers}/>} />
         <Route exact path='/users/:id/cart' component={CartView}/>
         <Route exact path='/users/:id/order' component={OrderView}/>
         <Route exact path='/search' component={SearchResults}/>

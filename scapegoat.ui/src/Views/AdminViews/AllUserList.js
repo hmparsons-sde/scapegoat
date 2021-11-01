@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { getAllUsers } from "../../helpers/data/userData";
 import SellerCard from "../../Components/Users/Sellers/SellerCard";
 
-const SellersContainer = styled.div`
+const AllUsersContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
@@ -18,7 +18,7 @@ const AdminUserHeader = styled.div`
   }
 `;
 
-export default function UserList() {
+export default function AllUserList() {
 
   const [users, setUsers] = useState([]);
 
@@ -32,9 +32,9 @@ export default function UserList() {
         <AdminUserHeader>
         <h1>All Users</h1>
         </AdminUserHeader>
-        <SellersContainer>
+        <AllUsersContainer>
             {SingleSeller}
-        </SellersContainer>
+        </AllUsersContainer>
       </div>
    );
 }
