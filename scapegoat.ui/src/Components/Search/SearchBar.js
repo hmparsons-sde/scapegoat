@@ -1,33 +1,30 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import React from 'react';
+import styled from 'styled-components';
 
-class SearchInput extends Component {
-  state = {
-    searchInput: ''
+const SearchBarElement = styled.div`
+  input[type=text] {
+    margin-top: 25px;
+    padding: 12px;
+    font-size: 15px;
+    border: solid;
+    background-color: #f3f3f3;
+    align-content: center;
+    width: 50%;
+    border-radius: 25px;
+    border-color: #7f7f7f;
   }
 
-   handleSubmit = (e) => {
-     e.preventDefault();
-     this.props.history.push(`/search/${this.state.searchInput}`);
+  input[type=text]:hover {
+    background: #f1f1f1;
+  }
+`;
 
-     this.setState({
-       searchInput: ''
-     });
-   }
-
-   handleChange = (e) => {
-     this.setState({
-       [e.target.name]: e.target.value,
-     });
-   }
-
-   render() {
+export default function SearchBar() {
      return (
-      <form onSubmit={this.handleSubmit}>
-        <input type='text' name='text' className='search-input' value={this.state.searchInput} placeholder='Search...' onChange={this.handleChange} />
-      </form>
+      <SearchBarElement>
+        <form>
+          <input type='text' name='text' className='search-input' autoComplete='off'/>
+        </form>
+      </SearchBarElement>
      );
    }
-}
-
-export default withRouter(SearchInput);
