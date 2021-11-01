@@ -10,6 +10,14 @@ const SellersContainer = styled.div`
   margin-top: 5%;
 `;
 
+const AdminUserHeader = styled.div`
+  h1 {
+    font-weight: 400;
+    line-height: 1.2;
+    margin-top: 5%;
+  }
+`;
+
 export default function UserList() {
 
   const [users, setUsers] = useState([]);
@@ -20,8 +28,13 @@ export default function UserList() {
     let SingleSeller = users?.map(user => (<SellerCard user={user}></SellerCard>));
 
     return (
-    <SellersContainer>
-        {SingleSeller}
-    </SellersContainer>
+      <div>
+        <AdminUserHeader>
+        <h1>All Users</h1>
+        </AdminUserHeader>
+        <SellersContainer>
+            {SingleSeller}
+        </SellersContainer>
+      </div>
    );
 }
