@@ -24,6 +24,12 @@ const updateUsers = (user) => new Promise((resolve, reject) => {
   .then(response => resolve(response.data))
   .catch(error => reject(error));
 });
+
+const hardDeleteUser = (id) => new Promise((resolve, reject) => {
+  axios.delete(`${config.baseUrl}/api/users/${id}`)
+  .then(response => resolve(response))
+  .catch(error => reject(error));
+})
 // const getShopOrderHistory = (id) => new Promise((resolve, reject) => {
 //   axios.get(`${config.baseUrl}/api/ShopOrderHistory/${id}`).then((response) => {
 //     resolve(response.data);
@@ -45,5 +51,5 @@ const updateUsers = (user) => new Promise((resolve, reject) => {
 // });
 
 export {
-  getSingleUser, createNewUser, getAllUsers, updateUsers
+  getSingleUser, createNewUser, getAllUsers, updateUsers, hardDeleteUser
 };;
