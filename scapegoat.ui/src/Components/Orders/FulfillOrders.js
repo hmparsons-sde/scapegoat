@@ -32,7 +32,7 @@ console.warn(orders)
             <p>Description: {item.product[0].description}</p>
             <p>Price: {item.product[0].price}</p>
             <p>Quantity: {item.quantity}</p>
-            <p>total: {getTotal(item.quantity, item.product[0].price)}</p>
+            <p>total:{getTotal(item.quantity, item.product[0].price)}</p>
           </>
       ))
       }
