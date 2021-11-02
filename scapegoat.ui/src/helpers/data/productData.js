@@ -21,12 +21,13 @@ const deleteProduct = (id) => new Promise((resolve, reject) => {
     .catch(error => reject(error));
 });
 
-const updateProduct = (product) => new Promise((resolve, reject) => {
-  axios.put(`${config.baseUrl}/api/Products/${product.productId}`, product)
-    .then(() => {
-      getAllProducts().then(response => console.wanr(response));
-    })
+const updateProduct = (id, product) => new Promise((resolve, reject) => {
+  axios.put(`${config.baseUrl}/api/Products/${id}`, product)
+  .then(() => {
+    getAllProducts().then(response => resolve(response));
+  })
     .catch(error => reject(error));
 });
+
 
 export { getAllProducts, getSingleProduct, deleteProduct, updateProduct };

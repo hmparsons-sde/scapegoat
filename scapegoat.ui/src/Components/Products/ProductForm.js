@@ -13,13 +13,13 @@ const ProductForm = ({
     setProducts
 }) => {
     const [updatedProduct, setUpdatedProduct] = useState({
-        productId: productId,
-        productType: productType || '',
-        description: description || '',
-        merchantId: merchantId,
-        price: price || '',
-        size: size || '',
-        createdAt: createdAt || ''
+        ProductId: productId,
+        ProductType: productType || '',
+        Description: description || '',
+        MerchantId: merchantId,
+        Price: price || '',
+        Size: size || '',
+        CreatedAt: createdAt || ''
     });
 
     const handleInputChange = (e) => {
@@ -31,7 +31,8 @@ const ProductForm = ({
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        updateProduct(updatedProduct).then(r => console.warn(r));
+        console.warn(updatedProduct);
+        updateProduct(updatedProduct.ProductId, updatedProduct);
     }
     return (
         <Form onSubmit={handleUpdate}>

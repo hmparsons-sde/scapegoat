@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "reactstrap";
-import { deleteProduct } from "../../helpers/data/productData";
+import { deleteProduct, getSingleProduct } from "../../helpers/data/productData";
 import ProductForm from "./ProductForm";
 
 export default function ProductCard({
@@ -23,6 +23,9 @@ export default function ProductCard({
       case 'update':
         setUpdate(!update)
       break;
+      case 'single':
+        getSingleProduct(productId).then(r => console.warn(r));
+      break;
       default:
       break;
     }
@@ -32,7 +35,7 @@ export default function ProductCard({
     <div>
       Product Type: {productType} <br/>
       Description: {description} <br/>
-        <Button onClick={() => console.warn(productId)}>Info</Button>
+        <Button onClick={() => handleButton('single')}>Info</Button>
         <Button onClick={() => handleButton('update')}>Update</Button>
         <Button onClick={() => handleButton('delete')}>Delete</Button>
       {
