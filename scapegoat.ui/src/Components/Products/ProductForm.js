@@ -14,12 +14,12 @@ const ProductForm = ({
 }) => {
     const [updatedProduct, setUpdatedProduct] = useState({
         ProductId: productId,
-        ProductType: productType || '',
-        Description: description || '',
+        ProductType: productType,
+        Description: description,
         MerchantId: merchantId,
-        Price: price || '',
-        Size: size || '',
-        CreatedAt: createdAt || ''
+        Price: price,
+        Size: size,
+        CreatedAt: createdAt
     });
 
     const handleInputChange = (e) => {
@@ -31,8 +31,8 @@ const ProductForm = ({
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        console.warn(updatedProduct);
-        updateProduct(updatedProduct.ProductId, updatedProduct);
+        updateProduct(updatedProduct.ProductId, updatedProduct)
+            .then(r => { setProducts(r) });
     }
     return (
         <Form onSubmit={handleUpdate}>
@@ -48,7 +48,7 @@ const ProductForm = ({
                 </Input>
                 <Label htmlFor='productType'>Product Type : </Label>
                 <Input 
-                    type='text' 
+                    type='number' 
                     id='productType'
                     defaultValue={productType} 
                     name='productType'
