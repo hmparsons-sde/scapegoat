@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
+import styled from 'styled-components';
 import { getAllProducts } from "../../helpers/data/productData";
 import SingleProduct from "./SingleProduct";
+
+const ProductsContainer = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin-top: 5%;
+`;
 
 export default function ProductList() {
 
@@ -13,7 +21,9 @@ export default function ProductList() {
 
     return (
     <div>
+      <ProductsContainer>
         {SingleProducts}
+        </ProductsContainer>
     </div>
     )
 }
