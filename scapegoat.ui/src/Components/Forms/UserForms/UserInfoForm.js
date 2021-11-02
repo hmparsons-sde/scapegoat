@@ -28,7 +28,7 @@ export default function UserInfoForm() {
 
   return (
     <div>
-      <form>
+      <form autoComplete='off'>
         <input
           name='firstName'
           type='text'
@@ -36,6 +36,7 @@ export default function UserInfoForm() {
           value={user.firstName}
           onChange={handleInputChange}
         ></input>
+        <br/>
         <input
           name='lastName'
           type='text'
@@ -43,6 +44,7 @@ export default function UserInfoForm() {
           value={user.lastName}
           onChange={handleInputChange}
         ></input>
+        <br/>
         <input
           name='userType'
           type='text'
@@ -50,6 +52,7 @@ export default function UserInfoForm() {
           value={user.userType}
           onChange={handleInputChange}
         ></input>
+        <br/>
         <input
           name='customerTier'
           type='text'
@@ -57,6 +60,7 @@ export default function UserInfoForm() {
           value={user.customerTier}
           onChange={handleInputChange}
         ></input>
+        <br/>
         <button
           type='submit'
           onClick={handleSubmit}
