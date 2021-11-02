@@ -2,22 +2,27 @@ import axios from "axios";
 import config from "../config";
 
 const getAllUsers = () => new Promise((resolve, reject) => {
-  axios.get(`${config.baseUrl}/api/Users`)
+  axios.get(`${config.baseUrl}/api/users`)
       .then(response => resolve(response.data))
       .catch(error => reject(error));
 });
 
 const getSingleUser = (id) => new Promise((resolve, reject) => {
-  axios.get(`${config.baseUrl}/api/Users/${id}`).then((response) => {
+  axios.get(`${config.baseUrl}/api/users/${id}`).then((response) => {
     resolve(response.data);
   }).catch((error) => reject(error));
 });
 
-const createNewUser = (userObject) => new Promise((resolve, reject) => {
-  axios.post(`${config.baseUrl}/api/Users/`, userObject)
-    .then((response) => {
-      resolve(response.data);
-    }).catch((error) => reject(error));
+const createNewUser = (user) => new Promise((resolve, reject) => {
+  axios.post(`${config.baseUrl}/api/users`, user)
+  .then(response => resolve(response.data))
+  .catch(error => reject(error));
+});
+
+const updateUsers = (user) => new Promise((resolve, reject) => {
+  axios.patch(`${config.baseUrl}/api/users/${user.id}`, user)
+  .then(response => resolve(response.data))
+  .catch(error => reject(error));
 });
 // const getShopOrderHistory = (id) => new Promise((resolve, reject) => {
 //   axios.get(`${config.baseUrl}/api/ShopOrderHistory/${id}`).then((response) => {
@@ -40,5 +45,5 @@ const createNewUser = (userObject) => new Promise((resolve, reject) => {
 // });
 
 export {
-  getSingleUser, createNewUser, getAllUsers
+  getSingleUser, createNewUser, getAllUsers, updateUsers
 };;

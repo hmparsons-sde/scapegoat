@@ -1,6 +1,5 @@
 import React from "react";
 import { useHistory } from "react-router";
-// import { Button } from "reactstrap";
 import styled from 'styled-components';
 
 const SellerIDCard = styled.div`
@@ -45,8 +44,8 @@ const ViewSellerButton = styled.div`
 `;
 
 export default function SellerCard({user}) {
-
   const history = useHistory();
+
   const handleClick = () => {
     history.push(`users/${user.id}`);
   };

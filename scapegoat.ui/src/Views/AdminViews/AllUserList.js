@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import { getAllUsers } from "../../helpers/data/userData";
 import SellerCard from "../../Components/Users/Sellers/SellerCard";
+import UserInfoForm from "../../Components/Forms/UserForms/UserInfoForm";
 
 const AllUsersContainer = styled.div`
   display: flex;
@@ -18,7 +19,14 @@ const AdminUserHeader = styled.div`
   }
 `;
 
-export default function AllUserList() {
+export default function AllUserList({
+  firstName,
+  lastName,
+  id,
+  createdAt,
+  customerTier,
+  userType
+}) {
 
   const [users, setUsers] = useState([]);
 
@@ -32,9 +40,26 @@ export default function AllUserList() {
         <AdminUserHeader>
         <h1>All Users</h1>
         </AdminUserHeader>
+        <UserInfoForm
+            firstName={firstName}
+            lastName={lastName}
+            id={id}
+            createdAt={createdAt}
+            customerTier={customerTier}
+            userType={userType}
+        />
         <AllUsersContainer>
             {SingleSeller}
         </AllUsersContainer>
       </div>
    );
 }
+
+// AllUserList.propTypes = {
+//   firstName: PropTypes.string,
+//   lastName: PropTypes.string,
+//   id: PropTypes.any,
+//   createdAt: PropTypes.any,
+//   customerTier: PropTypes.any,
+//   userType: PropTypes.any
+// }
