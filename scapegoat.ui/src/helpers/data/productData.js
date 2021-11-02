@@ -29,5 +29,13 @@ const updateProduct = (id, product) => new Promise((resolve, reject) => {
     .catch(error => reject(error));
 });
 
+const createProduct = (product) => new Promise((resolve, reject) => {
+  axios.post(`${config.baseUrl}/api/Products`, product)
+    .then(() => {
+      getAllProducts().then(response => resolve(response));
+    })
+      .catch(error => reject(error));
+});
 
-export { getAllProducts, getSingleProduct, deleteProduct, updateProduct };
+
+export { getAllProducts, getSingleProduct, deleteProduct, updateProduct, createProduct };

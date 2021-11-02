@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Form, FormGroup, Input, Label } from "reactstrap"
-import { updateProduct } from '../../helpers/data/productData';
+import { createProduct, updateProduct } from '../../helpers/data/productData';
 
 const ProductForm = ({  
     productId, 
@@ -10,7 +10,11 @@ const ProductForm = ({
     price,
     size,
     createdAt,
-    setProducts
+    setProducts,
+    update,
+    setUpdate,
+    addProduct,
+    setAddProduct
 }) => {
     const [updatedProduct, setUpdatedProduct] = useState({
         ProductId: productId,
@@ -31,8 +35,15 @@ const ProductForm = ({
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        updateProduct(updatedProduct.ProductId, updatedProduct)
-            .then(r => { setProducts(r) });
+        if (productId) {
+            updateProduct(updatedProduct.ProductId, updatedProduct)
+                .then(r => setProducts(r));
+            setUpdate(!update);
+        } else {
+            createProduct(updatedProduct)
+                .then(r => setProducts(r));
+            setAddProduct(!addProduct);
+        }
     }
     return (
         <Form onSubmit={handleUpdate}>
@@ -52,6 +63,33 @@ const ProductForm = ({
                     id='productType'
                     defaultValue={productType} 
                     name='productType'
+                    onChange={handleInputChange}
+                >
+                </Input>
+                <Label htmlFor='productType'>Merchant Id : </Label>
+                <Input 
+                    type='text'
+                    id='merchantId' 
+                    defaultValue={merchantId} 
+                    name='merchantId'
+                    onChange={handleInputChange}
+                >
+                </Input>
+                <Label htmlFor='productType'>Price : </Label>
+                <Input 
+                    type='text'
+                    id='price' 
+                    defaultValue={price} 
+                    name='price'
+                    onChange={handleInputChange}
+                >
+                </Input>
+                <Label htmlFor='productType'>Size : </Label>
+                <Input 
+                    type='text'
+                    id='size' 
+                    defaultValue={size} 
+                    name='size'
                     onChange={handleInputChange}
                 >
                 </Input>

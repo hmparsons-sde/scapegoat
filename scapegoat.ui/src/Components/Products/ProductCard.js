@@ -48,6 +48,9 @@ export default function ProductCard({
             price={price}
             size={size}
             createdAt={createdAt}
+            setProducts={setProducts}
+            update={update}
+            setUpdate={setUpdate}
           />
         : ''
       }
