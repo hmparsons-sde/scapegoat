@@ -1,29 +1,15 @@
-import React, { useEffect, useState } from "react";
-import styled from 'styled-components';
-import { getAllProducts } from "../../helpers/data/productData";
-import SingleProduct from "./SingleProduct";
+import React from "react";
+import ProductCard from "./ProductCard";
 
-const ProductsContainer = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  margin-top: 5%;
-`;
-
-export default function ProductList() {
-
-  const [products, setProducts] = useState([]);
+export default function ProductList({products, setProducts}) {
   
-  useEffect(() => getAllProducts().then(data => 
-    setProducts(data)), []);
-
-    let SingleProducts = products?.map(product => (<SingleProduct product={product}></SingleProduct>));
-
     return (
     <div>
-      <ProductsContainer>
-        {SingleProducts}
-        </ProductsContainer>
+      {
+        products 
+        ? products.map((product, i) => (<ProductCard key={i} product={product} products={products} setProducts={setProducts} />))
+        : ''
+      }
     </div>
     )
 }
