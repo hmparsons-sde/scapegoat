@@ -1,11 +1,11 @@
-import { initializeApp } from "firebase/app";
+// import { initializeApp } from "firebase/app";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import firebaseConfig from './helpers/apiKeys';
+// import firebaseConfig from './helpers/apiKeys';
 
-initializeApp(firebaseConfig);
+// initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>
