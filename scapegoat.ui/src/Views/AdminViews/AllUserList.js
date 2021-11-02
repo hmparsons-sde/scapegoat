@@ -19,14 +19,7 @@ const AdminUserHeader = styled.div`
   }
 `;
 
-export default function AllUserList({
-  firstName,
-  lastName,
-  id,
-  createdAt,
-  customerTier,
-  userType
-}) {
+export default function AllUserList() {
 
   const [users, setUsers] = useState([]);
 
@@ -40,14 +33,7 @@ export default function AllUserList({
         <AdminUserHeader>
         <h1>All Users</h1>
         </AdminUserHeader>
-        <UserInfoForm
-            firstName={firstName}
-            lastName={lastName}
-            id={id}
-            createdAt={createdAt}
-            customerTier={customerTier}
-            userType={userType}
-        />
+        <UserInfoForm/>
         <AllUsersContainer>
             {SingleSeller}
         </AllUsersContainer>

@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import {createNewUser, updateUsers} from '../../../helpers/data/userData';
+import {createNewUser} from '../../../helpers/data/userData';
 
-export default function UserInfoForm({firstName, lastName, id, customerTier, userType, createdAt}) {
+export default function UserInfoForm() {
   const [user, setUser] = useState({
-    firstName: firstName,
-    lastName: lastName,
-    id: id,
-    createdAt: createdAt,
-    userType: userType,
-    customerTier: customerTier
+    firstName: '',
+    lastName: '',
+    userType: '',
+    customerTier: ''
   });
   
   const handleInputChange = (e) => {
@@ -24,43 +22,39 @@ export default function UserInfoForm({firstName, lastName, id, customerTier, use
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (id) {
-      updateUsers(user).then(setUser);
-    } else {
-      createNewUser(user).then(setUser);
-      history.push(`/users`);
-    }
+    createNewUser(user).then(setUser);
+    history.push(`/users`);
   };
 
   return (
     <div>
       <form>
         <input
-          name='first name'
+          name='firstName'
           type='text'
           placeholder='First Name'
-          value={firstName}
+          value={user.firstName}
           onChange={handleInputChange}
         ></input>
         <input
-          name='last name'
+          name='lastName'
           type='text'
           placeholder='Last Name'
-          value={lastName}
+          value={user.lastName}
           onChange={handleInputChange}
         ></input>
         <input
-          name='user type'
-          type='number'
+          name='userType'
+          type='text'
           placeholder='User Type'
-          value={userType}
+          value={user.userType}
           onChange={handleInputChange}
         ></input>
         <input
-          name='customer tier'
-          type='number'
+          name='customerTier'
+          type='text'
           placeholder='Customer Tier'
-          value={customerTier}
+          value={user.customerTier}
           onChange={handleInputChange}
         ></input>
         <button
@@ -72,11 +66,11 @@ export default function UserInfoForm({firstName, lastName, id, customerTier, use
   );
 }
 
-UserInfoForm.propTypes = {
-  firstName: PropTypes.string,
-  lastName: PropTypes.string,
-  id: PropTypes.any,
-  createdAt: PropTypes.any,
-  customerTier: PropTypes.any,
-  userType: PropTypes.any
-}
+// UserInfoForm.propTypes = {
+//   firstName: PropTypes.string,
+//   lastName: PropTypes.string,
+//   id: PropTypes.any,
+//   createdAt: PropTypes.any,
+//   customerTier: PropTypes.any,
+//   userType: PropTypes.any
+// }
