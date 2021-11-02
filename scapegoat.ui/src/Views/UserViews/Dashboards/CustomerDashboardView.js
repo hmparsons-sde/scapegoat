@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router";
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getSingleUser} from '../../../helpers/data/userData';
@@ -59,6 +60,10 @@ const UserCategoryCard = styled.div`
     margin-top: 20px;
     border-radius: 50%;
   }
+
+  h2 {
+    cursor: pointer;
+  }
 `;
 
 export default function CustomerDashboardView() {
@@ -68,6 +73,18 @@ export default function CustomerDashboardView() {
   useEffect(() => {
     getSingleUser(id).then(data => setUser(data));
   }, [id]);
+
+  const history = useHistory();
+  const handleCartClick = () => {
+    history.push(`users/cart`);
+  };
+  const handleOrderHistoryClick = () => {
+    history.push(`orders`);
+  };
+  const handlePaymentTypeClick = () => {
+    history.push(`PaymentType`);
+  };
+
   return (
     <div>
       <SingleUser user={user}>
@@ -80,15 +97,15 @@ export default function CustomerDashboardView() {
       <UserCategories>
       <UserCategoryCard class="card">
         <img src={orderhistory} alt='order history'></img>
-        <h2 class="card-body">Order History</h2>
+        <h2 class="card-body" onClick={() => handleOrderHistoryClick()}>Order History</h2>
       </UserCategoryCard>
       <UserCategoryCard class="card">
         <img src={paymenttype} alt='payment type'></img>
-        <h2 class="card-body">Payment Types</h2>
+        <h2 class="card-body" onClick={() => handlePaymentTypeClick()}>Payment Types</h2>
       </UserCategoryCard>
       <UserCategoryCard class="card">
       <img src={cartimage} alt='cart'></img>
-        <h2 className="card-body">View Cart</h2>
+        <h2 className="card-body" onClick={() => handleCartClick()}>View Cart</h2>
       </UserCategoryCard>
       </UserCategories>
     </div>

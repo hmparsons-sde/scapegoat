@@ -41,6 +41,7 @@ const ViewSellerButton = styled.div`
   font-size: 14px;
   margin-bottom: 25px;
   margin-top: 10px;
+  cursor: pointer;
 `;
 
 export default function SellerCard({user}) {
