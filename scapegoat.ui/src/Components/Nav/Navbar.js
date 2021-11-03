@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { signInUser } from '../../helpers/auth';
 
 const StyledNav = styled.div`
   ul {
@@ -60,6 +61,7 @@ export default function NavBar() {
         <li><a className='nav-link' href='/search'>
           Search
         </a></li>
+        <button onClick={signInUser}></button>
         </ul>
       </StyledNav>
   )
