@@ -19,7 +19,6 @@ axios.interceptors.request.use((request) => {
 const signInUser = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
 
-  //sign in and then check for a new user to post to our api
   firebase.auth().signInWithPopup(provider).then((user) => {
     if (user.additionalUserInfo?.isNewUser){
       const userInfo = {

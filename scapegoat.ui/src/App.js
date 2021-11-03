@@ -19,8 +19,8 @@ function App() {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authed) => {
-      if (user) {
-        user.getIdToken()
+      if (authed) {
+        authed.getIdToken()
         .then((token) => sessionStorage.setItem('token', token));
         // get each thing
         setUser(user);
@@ -33,12 +33,14 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <NavBar setProducts={setProducts} setUsers={setUsers}/>
+        <NavBar setProducts={setProducts} setUsers={setUsers} setUser={setUser}/>
         <Routes
           products={products}
           setProducts={setProducts}
           users={users}
           setUsers={setUsers}
+          user={user}
+          setUser={setUser}
         />
         <Footer></Footer>
       </Router>
