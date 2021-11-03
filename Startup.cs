@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using scapegoat.DataAccess;
 using System.Text.Json.Serialization;
+using Microsoft.IdentityModel.Tokens;
 
 namespace scapegoat
 {
@@ -40,12 +41,25 @@ namespace scapegoat
                         var enumConverter = new JsonStringEnumConverter();
                         opts.JsonSerializerOptions.Converters.Add(enumConverter);
                     });
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                           .AddJwtBearer(options =>
+                           {
+                               options.IncludeErrorDetails = true;
+                               options.Authority = "https://securetoken.google.com/scapegoat-72a37";
+                               options.TokenValidationParameters = new TokenValidationParameters
+                               {
+                                   ValidateLifetime = true,
+                                   ValidateAudience = true,
+                                   ValidateIssuer = true,
+                                   ValidAudience = "scapegoat-72a37",
+                                   ValidIssuer = "https://securetoken.google.com/scapegoat-72a37"
+                               };
+                           });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "scapegoat", Version = "v1" });
             });
         }
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -60,6 +74,8 @@ namespace scapegoat
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

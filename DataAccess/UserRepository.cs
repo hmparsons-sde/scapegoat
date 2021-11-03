@@ -19,6 +19,7 @@ namespace scapegoat.DataAccess
         }
         internal IEnumerable<User> GetAll()
         {
+            //var uid = FirebaseUid();
             using var db = new SqlConnection(_connectionString);
             var users = db.Query<User>(@"select * from Users");
             return users;

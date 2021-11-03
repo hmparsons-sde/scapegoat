@@ -2,32 +2,35 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import axios from 'axios';
 
-// modifies outgoing request - adds header
+// create something that modifies a request as it goes out, 
+// adding a header to it with the token
 axios.interceptors.request.use((request) => {
-  const token = sessionStorage.getItem('token');
-  
-  if (token != null) {
-      request.headers.Authorization = `Bearer ${token}`;
-  }
+    const token = sessionStorage.getItem('token');
 
-  return request;
-}, (err) => {
-  return Promise.reject(err);
-});
+    if (token != null) {
+        request.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return request;
+  }, (err) => {
+    return Promise.reject(err);
+  });
 
 const signInUser = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
+
+  //sign in and then check for a new user to post to our api
   firebase.auth().signInWithPopup(provider).then((user) => {
     if (user.additionalUserInfo?.isNewUser){
       const userInfo = {
-        display_name: user.user?.displayName,
+        display_Name: user.user?.displayName,
         image_Url: user.user?.photoURL,
         firebase_Uid: user.user?.uid,
         email: user.user?.email,
       }
 
-      //POST Method to add to api & db
-      // axios.post(`${firebaseConfig.databaseUrl}`, userObj);
+      //add the user to your api and database
+
       window.location.href = '/';
     }
   });
