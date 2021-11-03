@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
-import 'react-responsive-modal/styles.css';
-import { Modal } from 'react-responsive-modal';
+// import 'react-responsive-modal/styles.css';
+// import { Modal } from 'react-responsive-modal';
 import { getAllUsers } from "../../helpers/data/userData";
 import SellerCard from "../../Components/Users/Sellers/SellerCard";
 import UserInfoForm from "../../Components/Forms/UserForms/UserInfoForm";
@@ -88,7 +88,7 @@ export default function AllUserList() {
         </div>
         </UserFormButton>
         <UserFormModal>
-        <Modal
+        {/* <Modal
           id="userInfoFormModal"
           open={open}
           onClose={onCloseModal}
@@ -100,7 +100,7 @@ export default function AllUserList() {
           }}
         >
           <UserInfoForm/>
-        </Modal>
+        </Modal> */}
         </UserFormModal>
         <AllUsersContainer>
           {SingleSeller}
