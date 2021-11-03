@@ -30,7 +30,15 @@ const StyledNav = styled.div`
   li a.active {
     color: white;
     background-color: #04AA6D;
-  }`;
+  }
+  
+  img {
+    height: 25px;
+    width: 30px;
+    right: 0;
+  }
+
+  `;
 
 export default function NavBar() {
 
@@ -48,6 +56,9 @@ export default function NavBar() {
         </a></li>
         <li><a className='nav-link' href='/users'>
           Users
+        </a></li>
+        <li><a className='nav-link' href='/search'>
+          Search
         </a></li>
         </ul>
       </StyledNav>
