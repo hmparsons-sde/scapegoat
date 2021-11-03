@@ -76,7 +76,7 @@ export default function CustomerDashboardView() {
 
   const history = useHistory();
   const handleCartClick = () => {
-    history.push(`users/cart`);
+    history.push(`${user.id}/cart`);
   };
   const handleOrderHistoryClick = () => {
     history.push(`orders`);

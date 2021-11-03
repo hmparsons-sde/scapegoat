@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getSingleUserOrder } from '../../helpers/data/orderData';
 import OrderInfo from '../../Components/Orders/OrderInfo';
 
-export default function Orders() {
+export default function Orders({ user }) {
   const [userOrder, setUserOrder] = useState([]);
   const [updateSwitch, setUpdateSwitch] = useState(false);
 
@@ -12,6 +12,7 @@ export default function Orders() {
   },[updateSwitch])
   
 console.warn(userOrder);
+console.warn(user);
 
 
   return (

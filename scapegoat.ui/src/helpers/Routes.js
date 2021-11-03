@@ -8,22 +8,22 @@ import AllUserList from '../Views/AdminViews/AllUserList';
 import CustomerDashboardView from '../Views/UserViews/Dashboards/CustomerDashboardView';
 import CartView from '../Views/CartViews/CartView';
 import OrderView from '../Views/OrderViews/OrderView';
-import MerchantView from '../Views/UserViews/MerchantView';
 import SearchResults from '../Views/SearchViews/SearchResults';
+import MerchantDashboardView from '../Views/UserViews/Dashboards/MerchantDashboardView';
 
-export default function Routes({products, setProducts, users, setUsers}) {
+export default function Routes({products, setProducts, users, setUsers, user}) {
   return (
     <div>
       <Switch>
         <Route exact path='/' component={Home} />
         <Route exact path='/products' component={() => <Products />} />
         <Route exact path='/products/:id' component={SingleProductView}/>
-        <Route exact path='/orders' component={Orders}/>
+        <Route exact path='/orders' component={() => <Orders user={user} /> }/>
         <Route exact path='/users' component={() => <AllUserList users={users} setUsers={setUsers}/>} />
         <Route exact path='/users/:id' component={() => <CustomerDashboardView users={users} setUsers={setUsers}/>} />
         <Route exact path='/users/:id/cart' component={CartView}/>
         <Route exact path='/users/:id/order' component={OrderView}/>
-        <Route exact path='/merchants' component={MerchantView}/>
+        <Route exact path='/merchants' component={MerchantDashboardView}/>
         <Route exact path='/search' component={SearchResults}/>
         <PrivateRoute/>
      </Switch>

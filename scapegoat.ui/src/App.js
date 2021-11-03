@@ -23,7 +23,7 @@ function App() {
         authed.getIdToken()
         .then((token) => sessionStorage.setItem('token', token));
         // get each thing
-        setUser(user);
+        setUser(authed);
       } else {
         setUser(false);
       }
