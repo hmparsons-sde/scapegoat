@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import { Button } from "reactstrap";
+import styled from "styled-components";
 import { deleteProduct, getSingleProduct } from "../../helpers/data/productData";
 import ProductForm from "./ProductForm";
+
+const ProductCardStyle = styled.div`
+  width: 300px;
+  height: auto;
+  margin: 15px;
+  border-style: solid;
+  box-shadow: 50px;
+`;
 
 export default function ProductCard({
   productId, 
@@ -32,10 +41,11 @@ export default function ProductCard({
   };
 
   return (
-    <div>
+    <ProductCardStyle>
       Product Type: {productType} <br/>
       Description: {description} <br/>
-        <Button onClick={() => handleButton('single')}>Info</Button>
+        <Button  color="primary"
+    outline onClick={() => handleButton('single')}>Info</Button>
         <Button onClick={() => handleButton('update')}>Update</Button>
         <Button onClick={() => handleButton('delete')}>Delete</Button>
       {
@@ -54,6 +64,6 @@ export default function ProductCard({
           />
         : ''
       }
-    </div>
+    </ProductCardStyle>
   )
 }
