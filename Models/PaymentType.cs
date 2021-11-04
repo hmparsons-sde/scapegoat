@@ -8,7 +8,6 @@ namespace scapegoat.Models
     public class PaymentType
     {
         public Guid Id { get; set; }
-
         public PaymentMethod PaymentMethod { get; set; }
         public string AccountNumber { get; set; }
         public Guid UserId { get; set; }
