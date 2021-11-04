@@ -3,9 +3,36 @@ body {
   font-family: 'Raleway', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #FDF1E9;
+  color: #4B4F3F;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+  background-color: #FDF1E9;
+  color: #4B4F3F;
+}
+
+.customOverlay {
+  background: rgba(255, 218, 203, 0.6) !important;
+}
+.customModal {
+  background-color: #FDF1E9;
+  width: 30%;
+}
+
+#userInfoFormModal {
+  border-radius: 50px;
+}
+
+input[type="text"],
+textarea,
+select {
+  height: 28px;
+  width: 90%;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #cb997e;
+  border-radius: 4px;
 }

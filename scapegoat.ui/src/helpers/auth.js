@@ -2,8 +2,6 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import axios from 'axios';
 
-// create something that modifies a request as it goes out, 
-// adding a header to it with the token
 axios.interceptors.request.use((request) => {
     const token = sessionStorage.getItem('token');
 
@@ -29,7 +27,7 @@ const signInUser = () => {
       }
 
       //add the user to your api and database
-
+      console.log(userInfo);
       window.location.href = '/';
     }
   });

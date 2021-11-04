@@ -36,9 +36,9 @@ namespace scapegoat.DataAccess
         {
             using var db = new SqlConnection(_connectionString);
 
-            var sql = @"insert into Users(UserType,CustomerTier,FirstName,LastName)
+            var sql = @"insert into Users(UserType,CustomerTier,FirstName,LastName,AddressLine1,AddressLine2,PostalCode,CityName,State,Country)
                         output inserted.Id
-                        values (@UserType,@CustomerTier,@FirstName,@LastName)";
+                        values (@UserType,@CustomerTier,@FirstName,@LastName,@AddressLine1,@AddressLine2,@PostalCode,@CityName,@State,@Country)";
 
             var id = db.ExecuteScalar<Guid>(sql, newUser);
             newUser.Id = id;

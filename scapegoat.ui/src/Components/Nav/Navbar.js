@@ -3,13 +3,16 @@ import styled from 'styled-components';
 import { signInUser } from '../../helpers/auth';
 
 const StyledNav = styled.div`
+  background-color: #ffe8d6;
+  color: #4B4F3F;
   ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     border: 1px solid #e7e7e7;
-    background-color: #f3f3f3;
+    background-color: #ffe8d6;
+    color: #4B4F3F;
   }
 
   li {
@@ -18,19 +21,19 @@ const StyledNav = styled.div`
 
   li a {
     display: block;
-    color: #666;
+    color: #4B4F3F;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
   }
 
   li a:hover:not(.active) {
-    background-color: #ddd;
+    background-color: #ffe8d6;
   }
 
   li a.active {
-    color: white;
-    background-color: #04AA6D;
+    color: #FDF1E9;
+    background-color: #4B4F3F;
   }
   
   img {

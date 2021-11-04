@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router";
 import styled from 'styled-components';
-import { getAllUsers, hardDeleteUser } from "../../../helpers/data/userData";
+import { getAllUsers, softDeleteUser } from "../../../helpers/data/userData";
 
 const SellerIDCard = styled.div`
   width: 300px;
@@ -47,14 +47,13 @@ const ViewSellerButton = styled.div`
 export default function SellerCard({user, setUsers}) {
   const history = useHistory();
 
-  const handleClick = () => {
-    history.push(`users/${user.id}`);
-  };
-
-  const handleDelete = (type) => {
+  const handleClick = (type) => {
     switch (type) {
-      case 'delete':
-        hardDeleteUser(user.id).then(() => getAllUsers()).then(response => setUsers(response))
+      case 'view':
+      history.push(`users/${user.id}`);
+      break;
+      case 'remove':
+        softDeleteUser(user.id, user).then(() => getAllUsers()).then(response => setUsers(response))
         break;
       default: console.warn(user);
     }
@@ -64,9 +63,9 @@ export default function SellerCard({user, setUsers}) {
   <SellerIDCard>
     <div>
     <img src='' alt='profile'></img> <br/> 
-    <button className='btn-md' color="danger" onClick={() => handleDelete('delete')}>Delete User</button>
+    <button className='btn-md' color="danger" onClick={() => handleClick('remove')}>Remove User</button>
     <hr/>
-      <ViewSellerButton className='btn-md mr-1 ml-5 p-2' color="danger" onClick={() => handleClick()}>{user.firstName} {user.lastName}</ViewSellerButton>
+      <ViewSellerButton className='btn-md mr-1 ml-5 p-2' color="danger" onClick={() => handleClick('view')}>{user.firstName} {user.lastName}</ViewSellerButton>
     </div>
     </SellerIDCard>
   )

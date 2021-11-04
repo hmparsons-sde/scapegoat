@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap');
 .App {
   text-align: center;
+  background-color: #FDF1E9;
+  color: #4B4F3F;
 }
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -36,4 +38,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */

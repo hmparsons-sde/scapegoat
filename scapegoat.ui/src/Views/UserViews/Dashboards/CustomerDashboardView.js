@@ -18,7 +18,7 @@ const SingleUser = styled.div`
   width: 100%;
   margin: 50px;
 
-  h1, h3 {
+  h1, h3, h4 {
     font-weight: 300;
     line-height: 1.2;
   }
@@ -90,20 +90,21 @@ export default function CustomerDashboardView() {
       <SingleUser user={user}>
         <img src='' alt='profile'></img>
         <h1 tag="h1" className='mt-1'>{user.firstName} {user.lastName}</h1>
-        <h3>User Type: {user.userType}</h3>
-        <h3>Customer Tier: {user.customerTier}</h3>
-        <h3>Created: {user.createdAt}</h3>
+        <h4>User Type: {user.userType}</h4>
+        <h4>Customer Tier: {user.customerTier}</h4>
+        <h4>Created: {user.createdAt}</h4>
+        <h4>{user.addressLine1}, {user.addressLine2}, {user.cityName}, {user.state}, {user.country}</h4>
       </SingleUser>
       <UserCategories>
-      <UserCategoryCard class="card">
+      <UserCategoryCard className="card">
         <img src={orderhistory} alt='order history'></img>
-        <h2 class="card-body" onClick={() => handleOrderHistoryClick()}>Order History</h2>
+        <h2 className="card-body" onClick={() => handleOrderHistoryClick()}>Order History</h2>
       </UserCategoryCard>
-      <UserCategoryCard class="card">
+      <UserCategoryCard className="card">
         <img src={paymenttype} alt='payment type'></img>
-        <h2 class="card-body" onClick={() => handlePaymentTypeClick()}>Payment Types</h2>
+        <h2 className="card-body" onClick={() => handlePaymentTypeClick()}>Payment Types</h2>
       </UserCategoryCard>
-      <UserCategoryCard class="card">
+      <UserCategoryCard className="card">
       <img src={cartimage} alt='cart'></img>
         <h2 className="card-body" onClick={() => handleCartClick()}>View Cart</h2>
       </UserCategoryCard>

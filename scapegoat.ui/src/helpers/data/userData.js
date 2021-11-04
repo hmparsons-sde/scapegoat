@@ -19,8 +19,8 @@ const createNewUser = (user) => new Promise((resolve, reject) => {
   .catch(error => reject(error));
 });
 
-const updateUsers = (user) => new Promise((resolve, reject) => {
-  axios.patch(`${config.baseUrl}/api/users/${user.id}`, user)
+const softDeleteUser = (id, user) => new Promise((resolve, reject) => {
+  axios.put(`${config.baseUrl}/api/users/${id}`, user)
   .then(response => resolve(response.data))
   .catch(error => reject(error));
 });
@@ -30,26 +30,83 @@ const hardDeleteUser = (id) => new Promise((resolve, reject) => {
   .then(response => resolve(response))
   .catch(error => reject(error));
 })
-// const getShopOrderHistory = (id) => new Promise((resolve, reject) => {
-//   axios.get(`${config.baseUrl}/api/ShopOrderHistory/${id}`).then((response) => {
-//     resolve(response.data);
-//   }).catch((error) => reject(error));
-// });
-
-// const getPurchaseHistory = (id) => new Promise((resolve, reject) => {
-//   axios.get(`${config.baseUrl}/api/PurchaseHistory/${id}`).then((response) => {
-//     resolve(response.data);
-//   }).catch((error) => reject(error));
-// });
-
-// const getFilteredUsers = (searchInput) => new Promise((resolve, reject) => {
-//   getAllUsers().then((response) => {
-//       const filteredUsers = response.data.filter((user) => user.firstName.toLowerCase().includes(searchInput) || user.lastName.toLowerCase().includes(searchInput));
-//       resolve(filteredUsers);
-//     })
-//     .catch((error) => reject(error));
-// });
 
 export {
-  getSingleUser, createNewUser, getAllUsers, updateUsers, hardDeleteUser
-};;
+  getSingleUser, createNewUser, getAllUsers, softDeleteUser, hardDeleteUser
+};
+
+// import React, { useState} from 'react';
+// import { useHistory } from 'react-router-dom';
+// import {createNewUser} from '../../../helpers/data/userData';
+
+// export default function UserInfoForm({editUser ={}}) {
+//   const [user, setUser] = useState({
+//     firstName: editUser.firstName || '',
+//     lastName: editUser.lastName || '',
+//     userType: editUser.userType || '',
+//     customerTier: editUser.customerTier || ''
+//   });
+  
+//   const handleInputChange = (e) => {
+//     setUser((prevState) => ({
+//       ...prevState,
+//       [e.target.name]: e.target.value
+//     }));
+//   };
+
+//   const history = useHistory();
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     // if (editUser) {
+//     //   updateUsers(editUser.id, user);
+//     // } else {
+//       createNewUser(user).then(setUser);
+//     // }
+
+//     history.push(`/users`);
+//   };
+
+//   return (
+//     <div>
+//       <form autoComplete='off'>
+//         <input
+//           name='firstName'
+//           type='text'
+//           placeholder='First Name'
+//           value={editUser.firstName || user.firstName}
+//           onChange={handleInputChange}
+//         ></input>
+//         <br/>
+//         <input
+//           name='lastName'
+//           type='text'
+//           placeholder='Last Name'
+//           value={editUser.lastName || user.lastName}
+//           onChange={handleInputChange}
+//         ></input>
+//         <br/>
+//         <input
+//           name='userType'
+//           type='text'
+//           placeholder='User Type'
+//           value={editUser.userType || user.userType}
+//           onChange={handleInputChange}
+//         ></input>
+//         <br/>
+//         <input
+//           name='customerTier'
+//           type='text'
+//           placeholder='Customer Tier'
+//           value={editUser.customerTier || user.customerTier}
+//           onChange={handleInputChange}
+//         ></input>
+//         <br/>
+//         <button
+//           type='submit'
+//           onClick={handleSubmit}
+//         >Submit</button>
+//       </form>
+//     </div>
+//   );
+// }

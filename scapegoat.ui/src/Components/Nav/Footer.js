@@ -9,8 +9,9 @@ const FooterElement = styled.div`
   bottom: 0;
   width: 100%;
   margin-top: 25%;
-  color: grey;
-
+  background-color: #FDF1E9;
+  color: #4B4F3F;
+  
   h4 {
     font-weight: 200;
     line-height: 1.2;
