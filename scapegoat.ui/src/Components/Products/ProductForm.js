@@ -13,7 +13,6 @@ const ProductForm = ({
     setProducts,
     update,
     setUpdate,
-    addProduct,
     setAddProduct
 }) => {
     const [updatedProduct, setUpdatedProduct] = useState({
@@ -42,7 +41,7 @@ const ProductForm = ({
         } else {
             createProduct(updatedProduct)
                 .then(r => setProducts(r));
-            setAddProduct(!addProduct);
+            setAddProduct(false);
         }
     }
     return (

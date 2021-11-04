@@ -1,16 +1,8 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 import { Button } from "reactstrap";
-import styled from "styled-components";
-import { deleteProduct, getSingleProduct } from "../../helpers/data/productData";
+import { deleteProduct } from "../../helpers/data/productData";
 import ProductForm from "./ProductForm";
-
-const ProductCardStyle = styled.div`
-  width: 300px;
-  height: auto;
-  margin: 15px;
-  border-style: solid;
-  box-shadow: 50px;
-`;
 
 export default function ProductCard({
   productId, 
@@ -23,6 +15,7 @@ export default function ProductCard({
   setProducts
 }) {
   const [update, setUpdate] = useState(false);
+  const history = useHistory();
 
   const handleButton = (p) => {
     switch (p) {
@@ -33,7 +26,7 @@ export default function ProductCard({
         setUpdate(!update)
       break;
       case 'single':
-        getSingleProduct(productId).then(r => console.warn(r));
+        history.push(`/products/${productId}`)
       break;
       default:
       break;
@@ -41,13 +34,17 @@ export default function ProductCard({
   };
 
   return (
-    <ProductCardStyle>
-      Product Type: {productType} <br/>
-      Description: {description} <br/>
-        <Button  color="primary"
-    outline onClick={() => handleButton('single')}>Info</Button>
+    <div className='product-card'>
+      <h4>{description}</h4>
+      <div className='product-info'>
+        <h8>{productType}</h8>
+        <h8>Price: {price}</h8>
+        <h8>Size: {size}</h8>
+        <h8>{createdAt}</h8>
+        <Button onClick={() => handleButton('single')}>Info</Button>
         <Button onClick={() => handleButton('update')}>Update</Button>
         <Button onClick={() => handleButton('delete')}>Delete</Button>
+        </div>
       {
         update
         ? <ProductForm 
@@ -64,6 +61,6 @@ export default function ProductCard({
           />
         : ''
       }
-    </ProductCardStyle>
+    </div>
   )
 }
