@@ -3,11 +3,10 @@ import { Button, Form, FormGroup, Input, Label } from "reactstrap"
 import { createNewPayment, updatePayment } from '../../helpers/data/paymentData';
 
 const PaymentForm = ({  
-    paymentId, 
+    id, 
     paymentMethod, 
     accountNumber, 
     userId, 
-    user,
     setPayments,
     update,
     setUpdate,
@@ -15,11 +14,10 @@ const PaymentForm = ({
     setAddPayment
 }) => {
     const [updatedPayment, setUpdatedPayment] = useState({
-        PaymentId: paymentId,
-        PaymentType: paymentMethod,
+        id: id,
+        PaymentMethod: paymentMethod,
         AccountNumber: accountNumber,
-        MerchantId: userId,
-        User: user,
+        userId: userId,
     });
 
     const handleInputChange = (e) => {
@@ -31,25 +29,21 @@ const PaymentForm = ({
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        if (paymentId) {
-            updatePayment(updatedPayment.PaymentId, updatedPayment)
+        if (id) {
+            updatePayment(updatedPayment.id, updatedPayment)
                 .then(r => setPayments(r));
             setUpdate(!update);
-        } else {
-          createNewPayment(updatedPayment)
-                .then(r => setPayments(r));
-            setAddPayment(!addPayment);
-        }
+        } 
     }
     return (
         <Form onSubmit={handleUpdate}>
             <FormGroup> 
-                <Label htmlFor='description'>Description: </Label>
+                <Label htmlFor='id'>Id: </Label>
                 <Input 
                     type='text'
-                    id='description' 
-                    defaultValue={accountNumber} 
-                    name='description'
+                    id='id' 
+                    defaultValue={id} 
+                    name='id'
                     onChange={handleInputChange}
                 >
                 </Input>
@@ -62,21 +56,23 @@ const PaymentForm = ({
                     onChange={handleInputChange}
                 >
                 </Input>
-                <Label htmlFor='paymentMethod'>User Id : </Label>
+
+                <Label htmlFor='accountNumber'>Account Number : </Label>
+                <Input 
+                    type='text'
+                    id='accountNumber' 
+                    defaultValue={accountNumber} 
+                    name='accountNumber'
+                    onChange={handleInputChange}
+                >
+                </Input>
+
+                <Label htmlFor='userId'>User Id : </Label>
                 <Input 
                     type='text'
                     id='userId' 
                     defaultValue={userId} 
                     name='userId'
-                    onChange={handleInputChange}
-                >
-                </Input>
-                <Label htmlFor='paymentMethod'>User : </Label>
-                <Input 
-                    type='text'
-                    id='user' 
-                    defaultValue={user} 
-                    name='user'
                     onChange={handleInputChange}
                 >
                 </Input>
