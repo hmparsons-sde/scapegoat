@@ -79,7 +79,7 @@ export default function CustomerDashboardView() {
     history.push(`${user.id}/cart`);
   };
   const handleOrderHistoryClick = () => {
-    history.push(`orders`);
+    history.push(`${user.id}/order`);
   };
   const handlePaymentTypeClick = () => {
     history.push(`PaymentType`);

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { getSingleUserOrder } from '../../helpers/data/orderData';
 import OrderInfo from '../../Components/Orders/OrderInfo';
+import UpdateOrder from '../../Components/Orders/UpdateOrder';
+
 
 export default function Orders({ user }) {
   const [userOrder, setUserOrder] = useState([]);
@@ -10,10 +12,6 @@ export default function Orders({ user }) {
     getSingleUserOrder('145beb4f-54a0-41de-8de8-1e6adb3a38f3')
     .then(setUserOrder);
   },[updateSwitch])
-  
-console.warn(userOrder);
-console.warn(user);
-
 
   return (
     <div>
@@ -22,6 +20,7 @@ console.warn(user);
       <h3>Cart Items</h3>
       <OrderInfo order={userOrder} setUpdateSwitch={setUpdateSwitch}/>
        <h3>Total:$ {userOrder?.totalCost}</h3>
+       <UpdateOrder setUpdateSwitch={setUpdateSwitch} {...userOrder}/>
     </div>
   )
 }

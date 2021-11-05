@@ -28,7 +28,7 @@ namespace scapegoat.Controllers
         [AllowAnonymous]
         public IActionResult GetAllUsers()
         {
-            var fbUserId = User.FindFirst(claim => claim.Type == "user_id").Value;
+            //var fbUserId = User.FindFirst(claim => claim.Type == "user_id").Value;
             return Ok(_repo.GetAll());
         }
 
