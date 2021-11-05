@@ -10,8 +10,10 @@ import CartView from '../Views/CartViews/CartView';
 import OrderView from '../Views/OrderViews/OrderView';
 import SearchResults from '../Views/SearchViews/SearchResults';
 import MerchantDashboardView from '../Views/UserViews/Dashboards/MerchantDashboardView';
+import SinglePaymentView from '../Views/PaymentView/SinglePaymentView';
+import Payments from '../Views/PaymentView/Payments';
 
-export default function Routes({products, setProducts, users, setUsers, user}) {
+export default function Routes({user, products, setProducts, users, setUsers, payments, setPayments}) {
   return (
     <div>
       <Switch>
@@ -25,6 +27,8 @@ export default function Routes({products, setProducts, users, setUsers, user}) {
         <Route exact path='/users/:id/order' component={OrderView}/>
         <Route exact path='/merchants' component={MerchantDashboardView}/>
         <Route exact path='/search' component={SearchResults}/>
+        <Route exact path='/payments' component={Payments}/>
+        <Route exact path='/payments/:id' component={SinglePaymentView} />
         <PrivateRoute/>
      </Switch>
     </div>
