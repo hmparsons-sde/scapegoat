@@ -1,9 +1,15 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import axios from 'axios';
+import { createNewUser } from './data/userData';
 
-// create something that modifies a request as it goes out, 
-// adding a header to it with the token
+const getFirebaseKey = () => firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    return user.uid;
+  }
+  return console.warn('no user logged in.');
+});
+
 axios.interceptors.request.use((request) => {
     const token = sessionStorage.getItem('token');
 
@@ -29,7 +35,7 @@ const signInUser = () => {
       }
 
       //add the user to your api and database
-
+      createNewUser(userInfo);
       window.location.href = '/';
     }
   });
@@ -37,6 +43,7 @@ const signInUser = () => {
 
 const signOutUser = () => new Promise((resolve, reject) => {
   firebase.auth().signOut().then(resolve).catch(reject);
+  window.location.href = '/';
 });
 
-export { signInUser, signOutUser };
+export { getFirebaseKey, signInUser, signOutUser };

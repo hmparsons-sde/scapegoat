@@ -10,6 +10,7 @@ namespace scapegoat.Models
     public class User
     {
         public Guid Id { get; set; }
+        public string FirebaseKey { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime CreatedAt { get; set; }
@@ -19,16 +20,22 @@ namespace scapegoat.Models
 
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public CustomerTier CustomerTier { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string PostalCode { get; set; }
+        public string CityName { get; set; }
+        public string State { get; set; }
+        public string Country { get; set; }
     }
 
     public enum UserType
     {
-        [EnumMember(Value = "Buyer")]
-        Buyer,
-        [EnumMember(Value = "Seller")]
-        Seller,
-        [EnumMember(Value = "Removed User")]
-        DeletedUser
+        [EnumMember(Value = "Customer")]
+        Customer,
+        [EnumMember(Value = "Merchant")]
+        Merchant,
+        [EnumMember(Value = "Removed")]
+        Removed
     }
 
     public enum CustomerTier
@@ -36,12 +43,12 @@ namespace scapegoat.Models
         [EnumMember(Value = "Individual")]
         Individual,
         [EnumMember(Value = "Small Business")]
-        SmallBusiness,
+        Small,
         [EnumMember(Value = "Mid-sized Business")]
-        MediumBusiness,
+        Medium,
         [EnumMember(Value = "Enterprise")]
         Enterprise,
-        [EnumMember(Value = "Removed User")]
-        DeletedUser
+        [EnumMember(Value = "Removed")]
+        Removed
     }
 }
