@@ -7,7 +7,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from './helpers/Routes';
 import NavBar from './Components/Nav/Navbar';
 import Footer from './Components/Nav/Footer';
-import { getAllUsers } from './helpers/data/userData';
+// import { getAllUsers } from './helpers/data/userData';
 
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
 
-  useEffect(() => getAllUsers().then(setUsers), []);
+  // useEffect(() => getAllUsers().then(setUsers), []);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authed) => {
@@ -23,6 +23,7 @@ function App() {
         authed.getIdToken()
         .then((token) => sessionStorage.setItem('token', token));
         setUser(authed);
+        console.log(authed);
       } else {
         setUser(false);
       }

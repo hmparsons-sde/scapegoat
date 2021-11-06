@@ -45,8 +45,7 @@ const StyledNav = styled.div`
   `;
 
 export default function NavBar() {
-
-  return (
+   return (
       <StyledNav>
         <ul>
           <li><a className='nav-link' href='/'>
@@ -64,7 +63,7 @@ export default function NavBar() {
         <li><a className='nav-link' href='/search'>
           Search
         </a></li>
-        <button onClick={signInUser}></button>
+        <li onClick={signInUser}>Sign In</li>
         </ul>
       </StyledNav>
   )
