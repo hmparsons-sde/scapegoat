@@ -14,7 +14,7 @@ export default function DashRouter() {
 
   console.warn(user);
   
-  const sellerStatus = user.userType === "Seller";
+  const sellerStatus = user.userType === "Merchant";
   return (
     <div>
       {sellerStatus 
