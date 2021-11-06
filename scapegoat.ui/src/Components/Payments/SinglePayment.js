@@ -15,7 +15,13 @@ export default function SinglePayment(payment) {
     <SinglePaymentCard>
       <div>
         <h4 tag="h4" className='mt-1'>
+          Payment Id: {payment.payment.id} 
+        </h4><br/>
+        <h4 tag="h4" className='mt-1'>
           Payment Method: {payment.payment.paymentMethod} 
+        </h4><br/>
+        <h4 tag="h4" className='mt-1'>
+          Account Number: {payment.payment.accountNumber} 
         </h4><br/>
         <h5>User ID: {payment.payment.userId}
         </h5> <br/>

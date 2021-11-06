@@ -15,7 +15,15 @@ export default function SingleProductView() {
 
   return (
     <div>
-      <ProductCard product={product} />
+      <ProductCard 
+        productId={product.productId}
+        productType={product.productType}
+        description={product.description}
+        merchantId={product.merchantId}
+        price={product.price}
+        size={product.size}
+        createdAt={product.createdAt}
+      />
     </div>
   );
 }

@@ -78,7 +78,22 @@ namespace scapegoat.DataAccess
             return updatedPayment;
         }
 
-        internal void Remove(Guid id)
+        internal PaymentType SoftRemovePayment(Guid id, PaymentType paymentType)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sql = @"UPDATE PaymentType
+                        SET
+                        PaymentMethod = 5,
+                        AccountNumber = @AccountNumber
+                        WHERE Id = @Id";
+            paymentType.Id = id;
+            var SoftRemovePayment = db.QueryFirstOrDefault(sql, paymentType);
+
+            return SoftRemovePayment;
+        }
+
+        internal void HardRemove(Guid id)
         {
             using var db = new SqlConnection(_connectionString);
             var sql = @"Delete 
