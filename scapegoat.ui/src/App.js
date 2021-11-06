@@ -22,12 +22,12 @@ function App() {
       if (authed) {
         authed.getIdToken()
         .then((token) => sessionStorage.setItem('token', token));
-        setUser(user);
+        setUser(authed);
       } else {
         setUser(false);
       }
     });
-  }, [user]);
+  }, []);
 
   return (
     <div className="App">
