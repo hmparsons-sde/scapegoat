@@ -11,7 +11,7 @@ const Products = () => {
     useEffect(() => getAllProducts().then(data => setProducts(data)), [setProducts]);
   
     return (
-      <div className='view'>
+      <div>
         <nav className='product-header'>
           <h1>Products</h1>
           <div className='product-header-filter'>
@@ -32,7 +32,7 @@ const Products = () => {
              />
             : ''
           }
-          <div className='products-container'>
+        <div className='products-container p-2'>
           {
             products.length > 0 && addProduct === false
             ? products.map((prod, i) => (

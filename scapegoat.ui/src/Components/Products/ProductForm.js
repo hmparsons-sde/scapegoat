@@ -45,56 +45,58 @@ const ProductForm = ({
         }
     }
     return (
-        <Form onSubmit={handleUpdate}>
-            <FormGroup> 
-                <Label htmlFor='description'>Description: </Label>
-                <Input 
-                    type='text'
-                    id='description' 
-                    defaultValue={description} 
-                    name='description'
-                    onChange={handleInputChange}
-                >
-                </Input>
-                <Label htmlFor='productType'>Product Type : </Label>
-                <Input 
-                    type='number' 
-                    id='productType'
-                    defaultValue={productType} 
-                    name='productType'
-                    onChange={handleInputChange}
-                >
-                </Input>
-                <Label htmlFor='productType'>Merchant Id : </Label>
-                <Input 
-                    type='text'
-                    id='merchantId' 
-                    defaultValue={merchantId} 
-                    name='merchantId'
-                    onChange={handleInputChange}
-                >
-                </Input>
-                <Label htmlFor='productType'>Price : </Label>
-                <Input 
-                    type='text'
-                    id='price' 
-                    defaultValue={price} 
-                    name='price'
-                    onChange={handleInputChange}
-                >
-                </Input>
-                <Label htmlFor='productType'>Size : </Label>
-                <Input 
-                    type='text'
-                    id='size' 
-                    defaultValue={size} 
-                    name='size'
-                    onChange={handleInputChange}
-                >
-                </Input>
-            </FormGroup>
-            <Button type='submit'>Submit</Button>
-        </Form>
+        <div className='p-4'>
+            <Form onSubmit={handleUpdate}>
+                <FormGroup> 
+                    <Label htmlFor='description'>Description</Label>
+                    <Input 
+                        type='text'
+                        id='description' 
+                        defaultValue={description} 
+                        name='description'
+                        onChange={handleInputChange}
+                    >
+                    </Input>
+                    <Label htmlFor='productType'>Product Type</Label>
+                    <Input 
+                        type='number' 
+                        id='productType'
+                        defaultValue={productType} 
+                        name='productType'
+                        onChange={handleInputChange}
+                    >
+                    </Input>
+                    <Label htmlFor='productType'>Merchant Id</Label>
+                    <Input 
+                        type='text'
+                        id='merchantId' 
+                        defaultValue={merchantId} 
+                        name='merchantId'
+                        onChange={handleInputChange}
+                    >
+                    </Input>
+                    <Label htmlFor='productType'>Price</Label>
+                    <Input 
+                        type='text'
+                        id='price' 
+                        defaultValue={price} 
+                        name='price'
+                        onChange={handleInputChange}
+                    >
+                    </Input>
+                    <Label htmlFor='productType'>Size</Label>
+                    <Input 
+                        type='text'
+                        id='size' 
+                        defaultValue={size} 
+                        name='size'
+                        onChange={handleInputChange}
+                    >
+                    </Input>
+                </FormGroup>
+                <Button className='mt-2' type='submit'>Submit</Button>
+            </Form>
+        </div>
     );
 }
 

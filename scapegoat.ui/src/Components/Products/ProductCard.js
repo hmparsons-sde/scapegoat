@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-import { Button } from "reactstrap";
+import { Button, ButtonGroup, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
 import { deleteProduct } from "../../helpers/data/productData";
 import ProductForm from "./ProductForm";
 
@@ -34,17 +34,20 @@ export default function ProductCard({
   };
 
   return (
-    <div className='product-card'>
-      <h4>{description}</h4>
-      <div className='product-info'>
-        <h8>{productType}</h8>
-        <h8>Price: {price}</h8>
-        <h8>Size: {size}</h8>
-        <h8>{createdAt}</h8>
-        <Button onClick={() => handleButton('single')}>Info</Button>
-        <Button onClick={() => handleButton('update')}>Update</Button>
-        <Button onClick={() => handleButton('delete')}>Delete</Button>
-        </div>
+    <CardBody>
+      <CardTitle tag='h5'>{description}</CardTitle>
+      <CardSubtitle tag='h6' className='mb-2 d-flex flex-column'>
+        <CardText>{productType}</CardText>
+        <CardText>Price: {price}</CardText>
+        <CardText>Size: {size}</CardText>
+        <CardText>{createdAt}</CardText>
+      </CardSubtitle>
+      <ButtonGroup>
+        <Button outline onClick={() => handleButton('single')}>Info</Button>
+        <Button outline onClick={() => handleButton('update')}>Update</Button>
+        <Button outline onClick={() => handleButton('delete')}>X</Button>
+        <Button outline>Add To Cart</Button>
+      </ButtonGroup>
       {
         update
         ? <ProductForm 
@@ -61,6 +64,6 @@ export default function ProductCard({
           />
         : ''
       }
-    </div>
+    </CardBody>
   )
 }
