@@ -6,11 +6,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using scapegoat.DataAccess;
 using scapegoat.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace scapegoat.Controllers
 {
     [Route("api/Users")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         UserRepository _repo;
@@ -22,8 +25,10 @@ namespace scapegoat.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult GetAllUsers()
         {
+            //var fbUserId = User.FindFirst(claim => claim.Type == "user_id").Value;
             return Ok(_repo.GetAll());
         }
 

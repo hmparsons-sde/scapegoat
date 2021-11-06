@@ -1,9 +1,11 @@
-import firebase from 'firebase/compat/app';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import firebaseConfig from './helpers/apiKeys';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
 firebase.initializeApp(firebaseConfig);
 

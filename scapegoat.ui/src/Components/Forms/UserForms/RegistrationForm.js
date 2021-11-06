@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import { createNewUser } from '../../helpers/data/userData';
+import { createNewUser } from '../../../helpers/data/userData';
 
 export default function UserForm ({firstName, lastName})
 {

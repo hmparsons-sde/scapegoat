@@ -1,12 +1,13 @@
 .product-header {
     display: flex;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 20px;
+    justify-content: space-between;
+    padding-left: 60px;
+    padding-right: 30px;
+    padding-top: 30px;
 }
 
-.product-header h1 {
-    flex-grow: 1;
+.product-form {
+    justify-content: flex-start;
 }
 
 .product-header-filter {
@@ -20,6 +21,7 @@
 
 .products-container {
     display: flex;
+    justify-items: center;
     flex-wrap: wrap;
     margin-top: 2rem;
 }

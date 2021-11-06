@@ -45,7 +45,7 @@ const ProductForm = ({
         }
     }
     return (
-        <Form onSubmit={handleUpdate}>
+        <Form onSubmit={handleUpdate} className='product-form'>
             <FormGroup> 
                 <Label htmlFor='description'>Description</Label>
                 <Input 

@@ -13,12 +13,12 @@ const Products = () => {
     return (
       <div>
         <nav className='product-header'>
-          <h1>Products</h1>
+          <h1>All Products</h1>
           <div className='product-header-filter'>
             <div className='filter-buttons'>
               {
                 addProduct
-                ? <Button outline onClick={() => setAddProduct(!addProduct)}>Cancel</Button>
+                ? <Button onClick={() => setAddProduct(!addProduct)}>Cancel</Button>
                 : <Button outline onClick={() => setAddProduct(!addProduct)}>Add Product</Button>
               }
             </div>
