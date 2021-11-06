@@ -13,6 +13,7 @@ background-color: black;
 color: white;
 cursor: pointer;
 margin: 1rem;
+border-radius: 25px;
 `;
 
 const CartInput = styled.input`

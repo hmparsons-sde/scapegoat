@@ -24,11 +24,9 @@ namespace scapegoat.DataAccess
             var sqlString = @"select *
                                 from orders o
                                 join users u
-                                on o.UserId = u.Id
-                                join paymentType pt
-                                on pt.Id = o.PaymentId";
+                                on o.UserId = u.Id";
 
-            var orders = db.Query<OrderJoin, User, PaymentType, OrderJoin>(sqlString, Map, splitOn: "id");
+            var orders = db.Query<OrderJoin, User, OrderJoin>(sqlString, Map, splitOn: "id");
 
             var itemsQuery = @"select * from OrderItems";
 
@@ -75,11 +73,9 @@ namespace scapegoat.DataAccess
                                 from orders o
                                 join users u
                                 on o.UserId = u.Id
-                                join paymentType pt
-                                on pt.Id = o.PaymentId
                                 where o.id = @Id";
 
-            var order = db.Query<OrderJoin, User, PaymentType, OrderJoin>(sqlString, Map, new { id }, splitOn: "id");
+            var order = db.Query<OrderJoin, User, OrderJoin>(sqlString, Map, new { id }, splitOn: "id");
 
             var firstOrder = order.FirstOrDefault();
 
@@ -134,11 +130,9 @@ namespace scapegoat.DataAccess
                                 from orders o
                                 join users u
                                 on o.UserId = u.Id
-                                join paymentType pt
-                                on pt.Id = o.PaymentId
                                 where o.userId = @userId";
 
-            var orders = db.Query<OrderJoin, User, PaymentType, OrderJoin>(sqlString, Map, new { UserId = userId }, splitOn: "id");
+            var orders = db.Query<OrderJoin, User, OrderJoin>(sqlString, Map, new { UserId = userId }, splitOn: "id");
 
             foreach (var order in orders)
             {
@@ -193,11 +187,9 @@ namespace scapegoat.DataAccess
                                 from orders o
                                 join users u
                                 on o.UserId = u.Id
-                                join paymentType pt
-                                on pt.Id = o.PaymentId
                                 where o.userId = @userId";
 
-            var orders = db.Query<OrderJoin, User, PaymentType, OrderJoin>(sqlString, Map, new { UserId = userId }, splitOn: "id");
+            var orders = db.Query<OrderJoin, User, OrderJoin>(sqlString, Map, new { UserId = userId }, splitOn: "id");
 
             foreach (var order in orders)
             {
@@ -248,9 +240,9 @@ namespace scapegoat.DataAccess
         {
             using var db = new SqlConnection(_connectionString);
 
-            var sql = @"insert into Orders(UserId, Status, CreatedAt, TotalCost, PaymentId)
+            var sql = @"insert into Orders(UserId, Status, CreatedAt, TotalCost)
                                     output inserted.Id
-                                    values(@UserId, @Status, @CreatedAt, @TotalCost, @PaymentId)";
+                                    values(@UserId, @Status, @CreatedAt)";
 
 
             var id = db.ExecuteScalar<Guid>(sql, newOrder);
@@ -266,7 +258,6 @@ namespace scapegoat.DataAccess
                                         Status = @Status,
                                         CreatedAt = @CreatedAt,
                                         TotalCost = @TotalCost,
-                                        PaymentId = @PaymentId
                                      output inserted.*
                                      Where id = @id";
 
@@ -279,10 +270,9 @@ namespace scapegoat.DataAccess
         //TODO: update all methods to get any needed data off other tables
         //TODO: add delete method
 
-        OrderJoin Map(OrderJoin order, User user, PaymentType paymentType)
+        OrderJoin Map(OrderJoin order, User user)
         {
             order.User = user;
-            order.Payment = paymentType;
             return order;
         }
 
