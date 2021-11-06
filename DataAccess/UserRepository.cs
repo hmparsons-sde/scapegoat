@@ -36,9 +36,9 @@ namespace scapegoat.DataAccess
         {
             using var db = new SqlConnection(_connectionString);
 
-            var sql = @"insert into Users(UserType,CustomerTier,FirstName,LastName,AddressLine1,AddressLine2,PostalCode,CityName,State,Country)
+            var sql = @"insert into Users(UserType,CustomerTier,FirstName,LastName,AddressLine1,AddressLine2,PostalCode,CityName,State,Country,FirebaseKey)
                         output inserted.Id
-                        values (@UserType,@CustomerTier,@FirstName,@LastName,@AddressLine1,@AddressLine2,@PostalCode,@CityName,@State,@Country)";
+                        values (@UserType,@CustomerTier,@FirstName,@LastName,@AddressLine1,@AddressLine2,@PostalCode,@CityName,@State,@Country,@FirebaseKey)";
 
             var id = db.ExecuteScalar<Guid>(sql, newUser);
             newUser.Id = id;
@@ -60,7 +60,22 @@ namespace scapegoat.DataAccess
 
             return softRemovedUser;
         }
+        public void UpdateUser(User user)
+        {
+            using var db = new SqlConnection(_connectionString);
 
+            var sql = @"UPDATE Users
+                        SET
+                        AddressLine1 = @AddressLine1,
+                        AddressLine2 = @AddressLine2,
+                        PostalCode = @PostalCode,
+                        CityName = @CityName,
+                        State = @State,
+                        Country = @Country
+                        WHERE Id = @Id";
+
+            db.Execute(sql, user);
+        }
         internal void HardDeleteUser(Guid Id)
         {
             using var db = new SqlConnection(_connectionString);

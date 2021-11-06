@@ -4,11 +4,10 @@ import styled from 'styled-components';
 const FooterElement = styled.div`
   text-align: center;
   padding: 10px;
-  position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
-  margin-top: 25%;
+  margin-top: 40%;
   background-color: #FDF1E9;
   color: #4B4F3F;
   

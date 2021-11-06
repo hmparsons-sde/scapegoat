@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import orderhistory from '../../../assets/orderhistory.jpg';
 import paymenttype from '../../../assets/paymenttype.jpg';
 import cartimage from '../../../assets/cartimage.jpg';
+import moment from 'moment';
 
 const SingleUser = styled.div`
   background-size:auto, 100% 100%;
@@ -85,14 +86,17 @@ export default function CustomerDashboardView() {
     history.push(`PaymentType`);
   };
 
+  const date = moment.utc(user.createdAt).format();
+  const local = moment.utc(date).local().format("dddd, MMMM Do YYYY, h:mm:ss a");
+
   return (
     <div>
       <SingleUser user={user}>
         <img src='' alt='profile'></img>
         <h1 tag="h1" className='mt-1'>{user.firstName} {user.lastName}</h1>
-        <h4>User Type: {user.userType}</h4>
-        <h4>Customer Tier: {user.customerTier}</h4>
-        <h4>Created: {user.createdAt}</h4>
+        <h4>Type: {user.userType}</h4>
+        <h4>Tier: {user.customerTier}</h4>
+        <h4>Created: {local}</h4>
         <h4>{user.addressLine1}, {user.addressLine2}, {user.cityName}, {user.state}, {user.country}</h4>
       </SingleUser>
       <UserCategories>

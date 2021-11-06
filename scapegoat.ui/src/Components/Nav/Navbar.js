@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { signInUser } from '../../helpers/auth';
+// import { signInUser } from '../../helpers/auth';
+import Auth from '../../Views/UserViews/Auth';
 
 const StyledNav = styled.div`
   background-color: #ffe8d6;
@@ -45,8 +46,7 @@ const StyledNav = styled.div`
   `;
 
 export default function NavBar() {
-
-  return (
+   return (
       <StyledNav>
         <ul>
           <li><a className='nav-link' href='/'>
@@ -64,7 +64,7 @@ export default function NavBar() {
         <li><a className='nav-link' href='/search'>
           Search
         </a></li>
-        <button onClick={signInUser}></button>
+          <Auth/>
         </ul>
       </StyledNav>
   )

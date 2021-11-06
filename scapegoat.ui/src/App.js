@@ -1,6 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/App.css';
 import React, { useState, useEffect } from 'react';
+import '../src/styles/App.css';
+
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
@@ -21,6 +23,7 @@ function App() {
         authed.getIdToken()
         .then((token) => sessionStorage.setItem('token', token));
         setUser(authed);
+        console.log(authed);
       } else {
         setUser(false);
       }
