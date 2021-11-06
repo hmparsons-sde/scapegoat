@@ -14,7 +14,7 @@ namespace scapegoat.Controllers
     [Route("api/Users")]
     [ApiController]
     [Authorize]
-    public class UserController : ControllerBase
+    public class UserController : FirebaseBaseController
     {
         UserRepository _repo;
         OrdersRepository _oRepo;
@@ -28,7 +28,6 @@ namespace scapegoat.Controllers
         [AllowAnonymous]
         public IActionResult GetAllUsers()
         {
-            //var fbUserId = User.FindFirst(claim => claim.Type == "user_id").Value;
             return Ok(_repo.GetAll());
         }
 
@@ -48,11 +47,6 @@ namespace scapegoat.Controllers
         [HttpPost]
         public IActionResult AddUserToDB(User newUser)
         {
-            if (string.IsNullOrEmpty(newUser.FirstName) || string.IsNullOrEmpty(newUser.LastName))
-            {
-                return BadRequest("First and last name are required fields");
-            }
-
             _repo.AddUser(newUser);
 
             return Created($"/api/Users/{newUser.Id}", newUser);
@@ -72,6 +66,14 @@ namespace scapegoat.Controllers
 
             return Ok(updatedUser);
 
+        }
+
+        [HttpPatch]
+        public IActionResult UpdateUser(User user)
+        {
+            _repo.UpdateUser(user);
+
+            return NoContent();
         }
 
         [HttpDelete("{Id}")]

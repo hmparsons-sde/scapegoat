@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
-// import 'react-responsive-modal/styles.css';
-// import { Modal } from 'react-responsive-modal';
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
 import { getAllUsers } from "../../helpers/data/userData";
-import SellerCard from "../../Components/Users/Sellers/SellerCard";
+import CustomerCard from "../../Components/Users/Customers/CustomerCard";
 import UserInfoForm from "../../Components/Forms/UserForms/UserInfoForm";
 
 const AllUsersContainer = styled.div`
@@ -22,47 +22,31 @@ const AdminUserHeader = styled.div`
 `;
 
 const UserFormButton = styled.div`
-.button_slide {
-  color: black;
-  border: 2px solid #e7e7e7;
-  border-radius: 0px;
-  padding: 18px 36px;
-  display: inline-block;
-  font-size: 14px;
-  letter-spacing: 1px;
-  cursor: pointer;
-  box-shadow: inset 0 0 0 0 #e7e7e7;
-  -webkit-transition: ease-out 0.4s;
-  -moz-transition: ease-out 0.4s;
-  transition: ease-out 0.4s;
-}
-.slide_down:hover {
-  box-shadow: inset 0 100px 0 0 #e7e7e7;
-}
-`;
-
-const UserFormModal = styled.div`
-.customOverlay {
-  background: rgba(36, 123, 160, 0.7) !important;
-}
-.customModal {
-  background: $bgcolor;
-  max-width: 400px;
-  width: 100%;
-}
-
-#userInfoFormModal {
-  border-radius: 25px;
-}
+  .button_slide {
+    color: black;
+    border: 2px solid #e7e7e7;
+    border-radius: 0px;
+    padding: 18px 36px;
+    display: inline-block;
+    font-size: 14px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 0 #e7e7e7;
+    -webkit-transition: ease-out 0.4s;
+    -moz-transition: ease-out 0.4s;
+    transition: ease-out 0.4s;
+  }
+  .slide_down:hover {
+    box-shadow: inset 0 100px 0 0 #e7e7e7;
+  }
+  align-content: center;
+  margin-top: 10px;
 `;
 
 export default function AllUserList() {
 
   const [users, setUsers] = useState([]);
-  // const [showButton, setShowButton] = useState(false);
-  // const handleClick = () => {
-  //   setShowButton((prevState) => !prevState);
-  // };
+
   const [open, setOpen] = useState(false);
 
   const onOpenModal = () => setOpen(true);
@@ -75,7 +59,7 @@ export default function AllUserList() {
   useEffect(() => getAllUsers().then(data => 
     setUsers(data)), []);
 
-    let SingleSeller = users?.map(user => (<SellerCard user={user} setUsers={setUsers}></SellerCard>));
+    let SingleSeller = users?.map(user => (<CustomerCard user={user} setUsers={setUsers}></CustomerCard>));
 
     return (
       <div>
@@ -87,8 +71,7 @@ export default function AllUserList() {
           Add New User
         </div>
         </UserFormButton>
-        <UserFormModal>
-        {/* <Modal
+        <Modal
           id="userInfoFormModal"
           open={open}
           onClose={onCloseModal}
@@ -100,20 +83,10 @@ export default function AllUserList() {
           }}
         >
           <UserInfoForm/>
-        </Modal> */}
-        </UserFormModal>
+        </Modal>
         <AllUsersContainer>
           {SingleSeller}
         </AllUsersContainer>
       </div>
    );
 }
-
-// AllUserList.propTypes = {
-//   firstName: PropTypes.string,
-//   lastName: PropTypes.string,
-//   id: PropTypes.any,
-//   createdAt: PropTypes.any,
-//   customerTier: PropTypes.any,
-//   userType: PropTypes.any
-// }
