@@ -16,8 +16,8 @@ namespace scapegoat.Models
     public enum ProductType
     {
         Single,
-        SmallHerd,
-        LargeHerd,
+        Small,
+        Large,
         Bloodthirsty
     }
 }

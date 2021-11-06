@@ -1,35 +1,61 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 // import PropTypes from 'prop-types';
-import { getPaymentByUser } from '../../helpers/data/paymentData';
-import PaymentInfo from '../../Components/Payments/PaymentInfo';
-import styled from 'styled-components';
+import { getAllPayments } from '../../helpers/data/paymentData';
+// import styled from 'styled-components';
+import { Button } from 'reactstrap';
+import PaymentCard from '../../Components/Payments/PaymentCard';
+import PaymentForm from '../../Components/Payments/PaymentForm';
 
-const SinglePayment = styled.div`
-  width: 300px;
-  height: auto;
-  margin: 15px;
-  border-style: solid;
-  box-shadow: 50px;
-`;
+// const SinglePayment = styled.div`
+//   width: 300px;
+//   height: auto;
+//   margin: 15px;
+//   border-style: solid;
+//   box-shadow: 50px;
+// `;
+// const PaymentContainer = styled.div`
+//   display: flex;
+//   flex-flow: row wrap;
+//   justify-content: center;
+//   margin-top: 5%;
+// `;
 
+const Payments = () => {
+    const [payments, setPayments] = useState([]);
+    const [addPayment, setAddPayment] = useState(false);
+  
+    useEffect(() => getAllPayments().then(data => setPayments(data)), [setPayments]);
 
-export default function Payments() {
-    const [userPayment, setUserPayment] = useState([]);
-    const { userId } = useParams();
-
-    useEffect(() => {
-        getPaymentByUser(userId).then(data => setUserPayment(data));
-    }, [userId])
-
-    console.warn(userPayment);
+    console.warn(payments);
 
     return (
-        <div><SinglePayment userPayment = {userPayment}>
-            <h1>All Payments</h1>
-            {userPayment.map(paymentObject => (
-                <PaymentInfo key={paymentObject.userId} {...paymentObject} />
-            ))}
-        </SinglePayment></div>
+      <div>
+        <Button onClick={() => setAddPayment(!addPayment)}>Add</Button>
+        {
+          addPayment
+          ? <PaymentForm
+            addPayment={addPayment}
+            setAddPayment={setAddPayment} 
+            setPayments={setPayments}
+            />
+          : ''
+        }
+        {
+          payments.length > 0
+          ? payments.map((paymentObject, i) => (
+            <PaymentCard 
+              key={i} 
+              id={paymentObject.id}
+              paymentMethod={paymentObject.paymentMethod}
+              accountNumber={paymentObject.accountNumber}
+              userId={paymentObject.userId}
+              setPayments={setPayments} 
+            />))
+          : <h1>No Payments</h1>
+        }
+    </div>  
     )
 }
+
+export default Payments;

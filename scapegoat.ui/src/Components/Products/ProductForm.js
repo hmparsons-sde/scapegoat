@@ -13,7 +13,6 @@ const ProductForm = ({
     setProducts,
     update,
     setUpdate,
-    addProduct,
     setAddProduct
 }) => {
     const [updatedProduct, setUpdatedProduct] = useState({
@@ -42,13 +41,13 @@ const ProductForm = ({
         } else {
             createProduct(updatedProduct)
                 .then(r => setProducts(r));
-            setAddProduct(!addProduct);
+            setAddProduct(false);
         }
     }
     return (
-        <Form onSubmit={handleUpdate}>
+        <Form onSubmit={handleUpdate} className='product-form'>
             <FormGroup> 
-                <Label htmlFor='description'>Description: </Label>
+                <Label htmlFor='description'>Description</Label>
                 <Input 
                     type='text'
                     id='description' 
@@ -57,7 +56,7 @@ const ProductForm = ({
                     onChange={handleInputChange}
                 >
                 </Input>
-                <Label htmlFor='productType'>Product Type : </Label>
+                <Label htmlFor='productType'>Product Type</Label>
                 <Input 
                     type='number' 
                     id='productType'
@@ -66,7 +65,7 @@ const ProductForm = ({
                     onChange={handleInputChange}
                 >
                 </Input>
-                <Label htmlFor='productType'>Merchant Id : </Label>
+                <Label htmlFor='productType'>Merchant Id</Label>
                 <Input 
                     type='text'
                     id='merchantId' 
@@ -75,7 +74,7 @@ const ProductForm = ({
                     onChange={handleInputChange}
                 >
                 </Input>
-                <Label htmlFor='productType'>Price : </Label>
+                <Label htmlFor='productType'>Price</Label>
                 <Input 
                     type='text'
                     id='price' 
@@ -84,7 +83,7 @@ const ProductForm = ({
                     onChange={handleInputChange}
                 >
                 </Input>
-                <Label htmlFor='productType'>Size : </Label>
+                <Label htmlFor='productType'>Size</Label>
                 <Input 
                     type='text'
                     id='size' 
@@ -94,7 +93,7 @@ const ProductForm = ({
                 >
                 </Input>
             </FormGroup>
-            <Button type='submit'>Submit</Button>
+            <Button className='mt-2' type='submit'>Submit</Button>
         </Form>
     );
 }

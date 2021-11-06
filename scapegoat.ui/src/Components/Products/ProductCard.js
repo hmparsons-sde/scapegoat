@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-import { Button } from "reactstrap";
-import { deleteProduct, getSingleProduct } from "../../helpers/data/productData";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router";
+import { Button, ButtonGroup, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
+import { deleteProduct } from "../../helpers/data/productData";
 import ProductForm from "./ProductForm";
+import { AiOutlineShoppingCart, AiOutlineDelete, AiOutlineInfoCircle, AiOutlineEdit } from 'react-icons/ai'
 
 export default function ProductCard({
   productId, 
@@ -14,6 +16,12 @@ export default function ProductCard({
   setProducts
 }) {
   const [update, setUpdate] = useState(false);
+  const [date, setDate] = useState('');
+  const history = useHistory();
+
+  useEffect(() => {
+    setDate(createdAt);
+  }, [createdAt]);
 
   const handleButton = (p) => {
     switch (p) {
@@ -24,7 +32,7 @@ export default function ProductCard({
         setUpdate(!update)
       break;
       case 'single':
-        getSingleProduct(productId).then(r => console.warn(r));
+        history.push(`/products/${productId}`)
       break;
       default:
       break;
@@ -32,12 +40,20 @@ export default function ProductCard({
   };
 
   return (
-    <div>
-      Product Type: {productType} <br/>
-      Description: {description} <br/>
-        <Button onClick={() => handleButton('single')}>Info</Button>
-        <Button onClick={() => handleButton('update')}>Update</Button>
-        <Button onClick={() => handleButton('delete')}>Delete</Button>
+    <CardBody>
+      <CardTitle tag='h5'>{description}</CardTitle>
+      <CardSubtitle tag='h6' className='mb-2 d-flex flex-column'>
+        <CardText>{productType}</CardText>
+        <CardText>Price: {price}</CardText>
+        <CardText>Size: {size}</CardText>
+        <CardText>Added on {date}</CardText>
+      </CardSubtitle>
+      <ButtonGroup>
+        <Button outline onClick={() => handleButton('single')}><AiOutlineInfoCircle /></Button>
+        <Button outline onClick={() => handleButton('update')}><AiOutlineEdit /></Button>
+        <Button outline onClick={() => handleButton('delete')}><AiOutlineDelete /></Button>
+        <Button outline onClick={() => console.warn(date)}><AiOutlineShoppingCart /></Button>
+      </ButtonGroup>
       {
         update
         ? <ProductForm 
@@ -54,6 +70,6 @@ export default function ProductCard({
           />
         : ''
       }
-    </div>
+    </CardBody>
   )
 }
