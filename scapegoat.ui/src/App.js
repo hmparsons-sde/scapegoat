@@ -28,7 +28,7 @@ function App() {
         setUser(false);
       }
     });
-  }, []);
+  }, [user]);
 
   return (
     <div className="App">
