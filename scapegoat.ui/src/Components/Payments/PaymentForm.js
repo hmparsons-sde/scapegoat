@@ -33,7 +33,11 @@ const PaymentForm = ({
             updatePayment(updatedPayment.id, updatedPayment)
                 .then(r => setPayments(r));
             setUpdate(!update);
-        } 
+        } else {
+            createNewPayment(updatedPayment)
+                .then(r => setPayments(r));
+            setAddPayment(!addPayment);
+        }
     }
     return (
         <Form onSubmit={handleUpdate}>

@@ -29,9 +29,9 @@ export default function PaymentCard({
       case 'update':
         setUpdate(!update)
       break;
-      case 'single':
-        getSinglePayment(id).then(r => console.warn(r));
-      break;
+      // case 'single':
+      //   getSinglePayment(id).then(r => console.warn(r));
+      // break;
       default:
       break;
     }
@@ -44,6 +44,7 @@ export default function PaymentCard({
       PaymentMethod: {paymentMethod} <br/>
       AccountNumber: {accountNumber} <br/>
       User: {userId} <br/>
+        {/* <Button onClick={() => handleButton('single')}>Info</Button> */}
         <Button onClick={() => handleButton('update')}>Update</Button>
         <Button onClick={() => handleButton('delete')}>Delete</Button>
       {

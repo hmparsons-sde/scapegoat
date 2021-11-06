@@ -73,10 +73,24 @@ namespace scapegoat.Controllers
 
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult DeletePayment(Guid id)
+        [HttpPut("/softDelete{id}")]
+        public IActionResult SoftDeletePayment(Guid id, PaymentType paymentType)
         {
-            _repo.Remove(id);
+            var paymentToUpdate = _repo.GetPaymentById(id);
+            if (paymentToUpdate == null)
+            {
+                return NotFound($"Could not find payment with the id {id} for updating");
+            }
+
+            var updatedPayment = _repo.SoftRemovePayment(id, paymentType);
+
+            return Ok(updatedPayment);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult HardDeletePayment(Guid id)
+        {
+            _repo.HardRemove(id);
 
             return Ok();
         }
