@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useHistory } from "react-router";
-import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { getSingleUser} from '../../../helpers/data/userData';
 import styled from 'styled-components';
 import orderhistory from '../../../assets/orderhistory.jpg';
 import paymenttype from '../../../assets/paymenttype.jpg';
@@ -67,20 +65,15 @@ const UserCategoryCard = styled.div`
   }
 `;
 
-export default function CustomerDashboardView() {
-  const [user, setUser] = useState({});
-  const { id } = useParams();
+export default function CustomerDashboardView({user}) {
 
-  useEffect(() => {
-    getSingleUser(id).then(data => setUser(data));
-  }, [id]);
 
   const history = useHistory();
   const handleCartClick = () => {
-    history.push(`users/cart`);
+    history.push(`${user.id}/cart`);
   };
   const handleOrderHistoryClick = () => {
-    history.push(`orders`);
+    history.push(`${user.id}/order`);
   };
   const handlePaymentTypeClick = () => {
     history.push(`PaymentType`);
