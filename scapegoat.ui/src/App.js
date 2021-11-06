@@ -1,5 +1,8 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/App.css';
 import React, { useState, useEffect } from 'react';
 import '../src/styles/App.css';
+
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
@@ -7,7 +10,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from './helpers/Routes';
 import NavBar from './Components/Nav/Navbar';
 import Footer from './Components/Nav/Footer';
-// import { getAllUsers } from './helpers/data/userData';
+
 
 
 function App() {
@@ -15,7 +18,6 @@ function App() {
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
 
-  // useEffect(() => getAllUsers().then(setUsers), []);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authed) => {

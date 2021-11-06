@@ -82,7 +82,7 @@ export default function AllUserList() {
             modal: 'customModal',
           }}
         >
-          <UserInfoForm onSubmit={onCloseModal}/>
+          <UserInfoForm/>
         </Modal>
         <AllUsersContainer>
           {SingleSeller}

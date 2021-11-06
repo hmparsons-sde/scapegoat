@@ -1,0 +1,28 @@
+.product-header {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 60px;
+    padding-right: 30px;
+    padding-top: 30px;
+}
+
+.product-form {
+    justify-content: flex-start;
+}
+
+.product-header-filter {
+    display: flex;  
+}
+
+.filter-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.products-container {
+    display: flex;
+    justify-items: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
