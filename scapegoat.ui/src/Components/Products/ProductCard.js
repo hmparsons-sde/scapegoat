@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Button, ButtonGroup, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
 import { deleteProduct } from "../../helpers/data/productData";
 import ProductForm from "./ProductForm";
+import { AiOutlineShoppingCart, AiOutlineDelete, AiOutlineInfoCircle, AiOutlineEdit } from 'react-icons/ai'
 
 export default function ProductCard({
   productId, 
@@ -15,7 +16,12 @@ export default function ProductCard({
   setProducts
 }) {
   const [update, setUpdate] = useState(false);
+  const [date, setDate] = useState('');
   const history = useHistory();
+
+  useEffect(() => {
+    setDate(createdAt);
+  }, [createdAt]);
 
   const handleButton = (p) => {
     switch (p) {
@@ -40,13 +46,13 @@ export default function ProductCard({
         <CardText>{productType}</CardText>
         <CardText>Price: {price}</CardText>
         <CardText>Size: {size}</CardText>
-        <CardText>{createdAt}</CardText>
+        <CardText>Added on {date}</CardText>
       </CardSubtitle>
       <ButtonGroup>
-        <Button outline onClick={() => handleButton('single')}>Info</Button>
-        <Button outline onClick={() => handleButton('update')}>Update</Button>
-        <Button outline onClick={() => handleButton('delete')}>X</Button>
-        <Button outline>Add To Cart</Button>
+        <Button outline onClick={() => handleButton('single')}><AiOutlineInfoCircle /></Button>
+        <Button outline onClick={() => handleButton('update')}><AiOutlineEdit /></Button>
+        <Button outline onClick={() => handleButton('delete')}><AiOutlineDelete /></Button>
+        <Button outline onClick={() => console.warn(date)}><AiOutlineShoppingCart /></Button>
       </ButtonGroup>
       {
         update

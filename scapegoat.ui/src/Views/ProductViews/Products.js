@@ -26,10 +26,12 @@ const Products = () => {
         </nav>
           {
             addProduct
-            ? <ProductForm
-                setAddProduct={setAddProduct}
-                setProducts={setProducts}
-             />
+            ? <div className='p-4'>
+                <ProductForm
+                  setAddProduct={setAddProduct}
+                  setProducts={setProducts}
+                />
+             </div>
             : ''
           }
         <div className='products-container p-2'>
