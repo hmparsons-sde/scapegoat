@@ -29,12 +29,12 @@ namespace scapegoat.Models
 
     public enum UserType
     {
-        [EnumMember(Value = "Buyer")]
-        Buyer,
-        [EnumMember(Value = "Seller")]
-        Seller,
-        [EnumMember(Value = "Removed User")]
-        DeletedUser
+        [EnumMember(Value = "Customer")]
+        Customer,
+        [EnumMember(Value = "Merchant")]
+        Merchant,
+        [EnumMember(Value = "Removed")]
+        Removed
     }
 
     public enum CustomerTier
@@ -42,12 +42,12 @@ namespace scapegoat.Models
         [EnumMember(Value = "Individual")]
         Individual,
         [EnumMember(Value = "Small Business")]
-        SmallBusiness,
+        Small,
         [EnumMember(Value = "Mid-sized Business")]
-        MediumBusiness,
+        Medium,
         [EnumMember(Value = "Enterprise")]
         Enterprise,
-        [EnumMember(Value = "Removed User")]
-        DeletedUser
+        [EnumMember(Value = "Removed")]
+        Removed
     }
 }

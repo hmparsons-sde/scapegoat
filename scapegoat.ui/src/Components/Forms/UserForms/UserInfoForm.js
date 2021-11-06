@@ -61,6 +61,7 @@ export default function UserInfoForm() {
           placeholder='First Name'
           value={user.firstName}
           onChange={handleInputChange}
+          required
         ></input>
         <br/>
         <input
@@ -98,7 +99,7 @@ export default function UserInfoForm() {
         <input
           name='addressLine2'
           type='text'
-          placeholder='Suite or Apartment'
+          placeholder='Suite or Apartment (Optional)'
           value={user.addressLine2}
           onChange={handleInputChange}
         ></input>

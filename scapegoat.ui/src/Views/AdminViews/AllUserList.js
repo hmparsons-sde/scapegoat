@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { getAllUsers } from "../../helpers/data/userData";
-import SellerCard from "../../Components/Users/Sellers/SellerCard";
+import CustomerCard from "../../Components/Users/Customers/CustomerCard";
 import UserInfoForm from "../../Components/Forms/UserForms/UserInfoForm";
 
 const AllUsersContainer = styled.div`
@@ -59,7 +59,7 @@ export default function AllUserList() {
   useEffect(() => getAllUsers().then(data => 
     setUsers(data)), []);
 
-    let SingleSeller = users?.map(user => (<SellerCard user={user} setUsers={setUsers}></SellerCard>));
+    let SingleSeller = users?.map(user => (<CustomerCard user={user} setUsers={setUsers}></CustomerCard>));
 
     return (
       <div>
@@ -71,7 +71,6 @@ export default function AllUserList() {
           Add New User
         </div>
         </UserFormButton>
-        {/* <UserFormModal> */}
         <Modal
           id="userInfoFormModal"
           open={open}
@@ -83,9 +82,8 @@ export default function AllUserList() {
             modal: 'customModal',
           }}
         >
-          <UserInfoForm/>
+          <UserInfoForm onSubmit={onCloseModal}/>
         </Modal>
-        {/* </UserFormModal> */}
         <AllUsersContainer>
           {SingleSeller}
         </AllUsersContainer>
