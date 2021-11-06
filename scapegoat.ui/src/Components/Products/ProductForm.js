@@ -58,7 +58,7 @@ const ProductForm = ({
                 </Input>
                 <Label htmlFor='productType'>Product Type</Label>
                 <Input 
-                    type='number' 
+                    type='text' 
                     id='productType'
                     defaultValue={productType} 
                     name='productType'
@@ -74,7 +74,7 @@ const ProductForm = ({
                     onChange={handleInputChange}
                 >
                 </Input>
-                <Label htmlFor='productType'>Price</Label>
+                <Label htmlFor='price'>Price</Label>
                 <Input 
                     type='text'
                     id='price' 
@@ -83,7 +83,7 @@ const ProductForm = ({
                     onChange={handleInputChange}
                 >
                 </Input>
-                <Label htmlFor='productType'>Size</Label>
+                <Label htmlFor='size'>Size</Label>
                 <Input 
                     type='text'
                     id='size' 

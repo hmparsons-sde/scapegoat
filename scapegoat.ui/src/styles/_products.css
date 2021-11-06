@@ -6,10 +6,6 @@
     padding-top: 30px;
 }
 
-.product-form {
-    justify-content: flex-start;
-}
-
 .product-header-filter {
     display: flex;  
 }
