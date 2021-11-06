@@ -29,7 +29,7 @@ export default class Auth extends Component {
       { !user ? <button className='nav-link btn btnLogin' onClick={(e) => signInUser(e)}>Login</button>
         : <>
       <div className='row'>
-          <p>Hi, {user?.displayName}!</p>
+          <p>{user?.displayName}!</p>
          <ul
           className='nav-link btn btnSecondary'
           onClick={(e) => signOutUser(e)}
