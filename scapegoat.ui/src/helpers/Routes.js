@@ -25,7 +25,7 @@ export default function Routes({products, setProducts, users, setUsers, payments
         <Route exact path='/users/:id/cart' component={CartView}/>
         <Route exact path='/users/:id/order' component={OrderView}/>
         <Route exact path='/search' component={SearchResults}/>
-        <Route exact path='/payments' component={Payments}/>
+        <Route exact path='/payments' component={() => <Payments />} />
         <Route exact path='/payments/:id' component={SinglePaymentView} />
         <PrivateRoute/>
      </Switch>

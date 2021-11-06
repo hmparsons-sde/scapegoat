@@ -71,7 +71,6 @@ export default function AllUserList() {
           Add New User
         </div>
         </UserFormButton>
-        {/* <UserFormModal> */}
         <Modal
           id="userInfoFormModal"
           open={open}
@@ -85,7 +84,6 @@ export default function AllUserList() {
         >
           <UserInfoForm/>
         </Modal>
-        {/* </UserFormModal> */}
         <AllUsersContainer>
           {SingleSeller}
         </AllUsersContainer>
