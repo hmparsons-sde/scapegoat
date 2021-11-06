@@ -17,10 +17,7 @@ border-radius: 25px;
 
 export default function FulfillOrders({ orders }) {
 const myItems = orders.lineItems;
-const getTotal = (number, price) => {
-  return number * price
-}
-console.warn(orders)
+const userInfo = orders.user;
   return (
     <OrderDiv>
       {orders
@@ -32,11 +29,14 @@ console.warn(orders)
             <p>Description: {item.product[0].description}</p>
             <p>Price: {item.product[0].price}</p>
             <p>Quantity: {item.quantity}</p>
-            <p>total:{getTotal(item.quantity, item.product[0].price)}</p>
           </>
       ))
       }
-      <h4>gross total: </h4>
+      <h4>gross total:$ {orders.totalCost} </h4>
+      <h4>order status: {orders.status}</h4>
+      <h3>Customer Information</h3>
+      <p>Customer Id: {userInfo.id}</p>
+      <p>Name: {userInfo.firstName} {userInfo.lastName}</p>
       </OrderCard>
       : null
       }
