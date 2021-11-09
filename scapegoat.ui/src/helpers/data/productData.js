@@ -37,5 +37,11 @@ const createProduct = (product) => new Promise((resolve, reject) => {
       .catch(error => reject(error));
 });
 
+const getProductsByType = (type) => new Promise((resolve, reject) => {
+  axios.get(`${config.baseUrl}/api/Products/ProductTypes/${type}`)
+    .then(response => console.warn(response.data))
+    .catch(error => reject(error));
+})
 
-export { getAllProducts, getSingleProduct, deleteProduct, updateProduct, createProduct };
+
+export { getAllProducts, getSingleProduct, deleteProduct, updateProduct, createProduct, getProductsByType };

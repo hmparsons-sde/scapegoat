@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Button } from 'reactstrap';
 import ProductCard from '../../Components/Products/ProductCard';
 import ProductForm from '../../Components/Products/ProductForm';
-import { getAllProducts } from '../../helpers/data/productData';
+import { getAllProducts, getProductsByType } from '../../helpers/data/productData';
 
 const Products = () => {
     const [products, setProducts] = useState([]);
     const [addProduct, setAddProduct] = useState(false);
   
-    useEffect(() => getAllProducts().then(data => setProducts(data)), [setProducts]);
+    useEffect(() => { 
+      getAllProducts().then(data => setProducts(data));
+      getProductsByType('SmallHerd');
+    }, [setProducts]);
   
     return (
       <div>

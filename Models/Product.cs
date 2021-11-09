@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace scapegoat.Models
 {
@@ -15,9 +16,13 @@ namespace scapegoat.Models
 
     public enum ProductType
     {
+        [EnumMember(Value = "Single Goat")]
         Single,
-        Small,
-        Large,
-        Bloodthirsty
+        [EnumMember(Value = "Small Herd")]
+        SmallHerd,
+        [EnumMember(Value = "Medium Herd")]
+        MediumHerd,
+        [EnumMember(Value = "Large Herd")]
+        LargeHerd
     }
 }
