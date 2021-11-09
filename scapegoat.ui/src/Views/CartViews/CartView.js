@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
-import { getSingleUserOrder } from '../../helpers/data/orderData';
+import { getPendingOrderInfo } from '../../helpers/data/orderData';
 import OrderInfo from '../../Components/Orders/OrderInfo';
 import { useHistory, useParams } from 'react-router';
 import UpdateOrder from '../../Components/Orders/UpdateOrder';
@@ -22,15 +22,15 @@ export default function CartView() {
   const history = useHistory();
 
   useEffect(() => {
-    getSingleUserOrder(id)
+    getPendingOrderInfo(id)
     .then(setUserOrder);
   },[updateSwitch, id])
-  
-const orderStatus = userOrder.status === 'completed';
+
+  console.warn(userOrder);
 
   return (
     <>
-    {orderStatus
+    {userOrder.length === 0
     ? <div>
         <h3>You have no open orders</h3>
         <CartButton onClick={() => history.push('/products')}>Back to Products</CartButton>
@@ -41,7 +41,7 @@ const orderStatus = userOrder.status === 'completed';
     <h3>Cart Items</h3>
     <OrderInfo order={userOrder} setUpdateSwitch={setUpdateSwitch}/>
      <h3>Total:$ {userOrder?.totalCost}</h3>
-    <UpdateOrder setUpdateSwitch={setUpdateSwitch} {...userOrder}/>
+    <UpdateOrder setUpdateSwitch={setUpdateSwitch} id={userOrder.id}/>
   </div>
     }
     </>

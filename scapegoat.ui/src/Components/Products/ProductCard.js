@@ -4,6 +4,7 @@ import { Button, ButtonGroup, CardBody, CardSubtitle, CardText, CardTitle } from
 import { deleteProduct } from "../../helpers/data/productData";
 import ProductForm from "./ProductForm";
 import { AiOutlineShoppingCart, AiOutlineDelete, AiOutlineInfoCircle, AiOutlineEdit } from 'react-icons/ai'
+import { checkOrderStatus, createOrder, createOrderItem } from "../../helpers/data/orderData";
 
 export default function ProductCard({
   productId, 
@@ -18,6 +19,8 @@ export default function ProductCard({
   const [update, setUpdate] = useState(false);
   const [date, setDate] = useState('');
   const history = useHistory();
+  // const [orderObj, setOrderObj] = useState({});
+  // const [newOrder, setNewOrder] = useState({});
 
   useEffect(() => {
     setDate(createdAt);
@@ -34,6 +37,31 @@ export default function ProductCard({
       case 'single':
         history.push(`/products/${productId}`)
       break;
+      case 'cart':
+        checkOrderStatus('0999c62f-0951-49fd-bc38-df8df6d4d244').then(resp => {
+          if (resp.length === 0) {
+            createOrder({
+              userId: '0999c62f-0951-49fd-bc38-df8df6d4d244',
+              status: 'pending',
+            }).then(() => {
+              checkOrderStatus('0999c62f-0951-49fd-bc38-df8df6d4d244').then(resp2 => {
+                createOrderItem({
+                  orderId: resp2[0].id,
+                  productId: productId,
+                  quantity: 1
+                }).then(console.warn('success creating order item'));
+              })
+            })
+          }
+          if (resp.length > 0) {
+            createOrderItem({
+              orderId: resp[0].id,
+              productId: productId,
+              quantity: 1
+            }).then(console.warn('success on already existing order'));
+      } 
+        });
+        break;
       default:
       break;
     }
@@ -52,7 +80,7 @@ export default function ProductCard({
         <Button outline onClick={() => handleButton('single')}><AiOutlineInfoCircle /></Button>
         <Button outline onClick={() => handleButton('update')}><AiOutlineEdit /></Button>
         <Button outline onClick={() => handleButton('delete')}><AiOutlineDelete /></Button>
-        <Button outline onClick={() => console.warn(date)}><AiOutlineShoppingCart /></Button>
+        <Button outline onClick={() => handleButton('cart')}><AiOutlineShoppingCart /></Button>
       </ButtonGroup>
       {
         update

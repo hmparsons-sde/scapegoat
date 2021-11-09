@@ -72,5 +72,23 @@ namespace scapegoat.Controllers
 
             return Ok();
         }
+
+        [HttpGet("/completedCustomerOrder/{id}")]
+        public IActionResult getCompletedCustomerOrder(Guid userId)
+        {
+            return Ok(_repo.GetCustomerShipped(userId));
+        }
+
+        [HttpGet("/pendingCustomerOrder/{id}")]
+        public IActionResult getPendingCustomerOrder(Guid id)
+        {
+            return Ok(_repo.GetCustomerPending(id));
+        }
+
+        [HttpGet("/openOrder/{id}")]
+        public IActionResult getFullPendingOrder(Guid id)
+        {
+            return Ok(_repo.GetFullPendingOrder(id));
+        }
     }
 }
