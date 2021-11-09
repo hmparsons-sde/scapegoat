@@ -12,6 +12,7 @@ import MerchantDashboardView from '../Views/UserViews/Dashboards/MerchantDashboa
 import SinglePaymentView from '../Views/PaymentView/SinglePaymentView';
 import Payments from '../Views/PaymentView/Payments';
 import DashRouter from '../Views/UserViews/Dashboards/DashRouter';
+import CreditCardForm from '../Components/Payments/CreditCardPayment/CardPaymentForm';
 
 export default function Routes({user, products, setProducts, users, setUsers, payments, setPayments}) {
   return (
@@ -29,6 +30,7 @@ export default function Routes({user, products, setProducts, users, setUsers, pa
         <Route exact path='/search' component={SearchResults}/>
         <Route exact path='/payments' component={() => <Payments />} />
         <Route exact path='/payments/:id' component={SinglePaymentView} />
+        <Route exact path='/cardpayment' component={CreditCardForm} />
         <PrivateRoute/>
      </Switch>
     </div>
