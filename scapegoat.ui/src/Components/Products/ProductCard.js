@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { AiOutlineShoppingCart, AiOutlineDelete, AiOutlineInfoCircle, AiOutlineEdit } from "react-icons/ai";
 import { useHistory } from "react-router";
 import { Button, ButtonGroup, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
 import { deleteProduct } from "../../helpers/data/productData";
 import ProductForm from "./ProductForm";
-import { AiOutlineShoppingCart, AiOutlineDelete, AiOutlineInfoCircle, AiOutlineEdit } from 'react-icons/ai'
 
 export default function ProductCard({
   productId, 

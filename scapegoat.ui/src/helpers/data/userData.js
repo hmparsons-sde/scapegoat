@@ -13,6 +13,13 @@ const getSingleUser = (id) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
+const getUserByFBKey = (firebaseKey) => new Promise((resolve, reject) => {
+  axios.get(`${config.baseUrl}/api/users/${firebaseKey}`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
+
+
 const createNewUser = (user) => new Promise((resolve, reject) => {
   axios.post(`${config.baseUrl}/api/users`, user)
   .then(response => resolve(response.data))
@@ -32,5 +39,5 @@ const hardDeleteUser = (id) => new Promise((resolve, reject) => {
 })
 
 export {
-  getSingleUser, createNewUser, getAllUsers, softDeleteUser, hardDeleteUser
+  getSingleUser, createNewUser, getAllUsers, softDeleteUser, hardDeleteUser, getUserByFBKey
 };

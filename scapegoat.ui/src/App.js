@@ -23,7 +23,6 @@ function App() {
         authed.getIdToken()
         .then((token) => sessionStorage.setItem('token', token));
         setUser(authed);
-        console.log(authed);
       } else {
         setUser(false);
       }
@@ -33,7 +32,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <NavBar setProducts={setProducts} setUsers={setUsers} setUser={setUser}/>
+        <NavBar user={user} setProducts={setProducts} setUsers={setUsers} setUser={setUser}/>
         <Routes
           products={products}
           setProducts={setProducts}

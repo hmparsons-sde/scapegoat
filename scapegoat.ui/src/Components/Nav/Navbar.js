@@ -45,7 +45,8 @@ const StyledNav = styled.div`
 
   `;
 
-export default function NavBar() {
+export default function NavBar({user}) {
+  console.log(user);
    return (
       <StyledNav>
         <ul>
@@ -54,16 +55,23 @@ export default function NavBar() {
           </a></li>
           <li><a className='nav-link' href='/products'>
           Products
-        </a></li>
-        <li><a className='nav-link' href='/orders'>
-          Orders
-        </a></li>
-        <li><a className='nav-link' href='/users'>
-          Users
-        </a></li>
-        <li><a className='nav-link' href='/search'>
-          Search
-        </a></li>
+          </a></li>
+          <li><a className='nav-link' href='/search'>
+            Search
+          </a></li>
+          {user &&
+          <>
+            <li><a className='nav-link' href='/cart'>
+              Cart
+            </a></li>
+            <li><a className='nav-link' href='/payments'>
+              Payments
+            </a></li>
+            <li><a className='nav-link' href='/dashboard'>
+              My Dashboard
+            </a></li>
+          </>
+          }
           <Auth/>
         </ul>
       </StyledNav>

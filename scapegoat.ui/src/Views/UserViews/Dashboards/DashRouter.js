@@ -12,7 +12,7 @@ export default function DashRouter() {
     getSingleUser(id).then(data => setUser(data));
   }, [id]);
 
-  console.warn(user);
+  console.warn(id);
   
   const sellerStatus = user.userType === "Merchant";
   return (
