@@ -39,7 +39,7 @@ const createProduct = (product) => new Promise((resolve, reject) => {
 
 const getProductsByType = (type) => new Promise((resolve, reject) => {
   axios.get(`${config.baseUrl}/api/Products/ProductTypes/${type}`)
-    .then(response => console.warn(response.data))
+    .then(response => resolve(response.data))
     .catch(error => reject(error));
 })
 

@@ -5,18 +5,23 @@ import ProductForm from '../../Components/Products/ProductForm';
 import { getAllProducts, getProductsByType } from '../../helpers/data/productData';
 
 const Products = () => {
+    const [singles, setSingles] = useState([]);
     const [products, setProducts] = useState([]);
+    const [smallHerds, setSmallHerds] = useState([]);
+    const [largeHerds, setLargeHerds] = useState([]);
     const [addProduct, setAddProduct] = useState(false);
   
     useEffect(() => { 
-      getAllProducts().then(data => setProducts(data));
-      getProductsByType('SmallHerd');
-    }, [setProducts]);
+      getAllProducts().then(setProducts);
+      getProductsByType('Single').then(setSingles);
+      getProductsByType('SmallHerd').then(setSmallHerds);
+      getProductsByType('LargeHerd').then(setLargeHerds);
+    }, []);
   
     return (
       <div>
         <nav className='product-header'>
-          <h1>All Products</h1>
+          <h1>Product Catgories</h1>
           <div className='product-header-filter'>
             <div className='filter-buttons'>
               {
@@ -37,10 +42,11 @@ const Products = () => {
              </div>
             : ''
           }
-        <div className='products-container p-2'>
+        <div className='products-container p-2 d-flex flex-column'>
+          <h1>Single Goats</h1>
           {
-            products.length > 0 && addProduct === false
-            ? products.map((prod, i) => (
+            singles.length > 0 && addProduct === false
+            ? singles.map((prod, i) => (
               <ProductCard
                 key={i}
                 productId={prod.productId}
@@ -52,6 +58,38 @@ const Products = () => {
                 createdAt={prod.createdAt}
                 setProducts={setProducts} />))
             : ''
+          }
+          <h1>Small Herds</h1>
+          {
+             smallHerds.length > 0 && addProduct === false
+             ? smallHerds.map((prod, i) => (
+               <ProductCard
+                 key={i}
+                 productId={prod.productId}
+                 productType={prod.productType}
+                 description={prod.description}
+                 merchantId={prod.merchantId}
+                 price={prod.price}
+                 size={prod.size}
+                 createdAt={prod.createdAt}
+                 setProducts={setProducts} />))
+             : ''
+          }
+          <h1>Large Herds</h1>
+          {
+             largeHerds.length > 0 && addProduct === false
+             ? largeHerds.map((prod, i) => (
+               <ProductCard
+                 key={i}
+                 productId={prod.productId}
+                 productType={prod.productType}
+                 description={prod.description}
+                 merchantId={prod.merchantId}
+                 price={prod.price}
+                 size={prod.size}
+                 createdAt={prod.createdAt}
+                 setProducts={setProducts} />))
+             : ''
           }
         </div>
       </div>

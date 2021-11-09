@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, FormGroup, Input, Label } from "reactstrap"
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Form, FormGroup, Input, Label } from "reactstrap"
 import { createProduct, updateProduct } from '../../helpers/data/productData';
 
 const ProductForm = ({  
@@ -15,6 +15,7 @@ const ProductForm = ({
     setUpdate,
     setAddProduct
 }) => {
+    const [dropName, setDropName] = useState('');
     const [updatedProduct, setUpdatedProduct] = useState({
         ProductId: productId,
         ProductType: productType,
@@ -24,11 +25,21 @@ const ProductForm = ({
         Size: size,
         CreatedAt: createdAt
     });
+    const [isOpen, setIsOpen] = useState(false);
+    const toggle = () => setIsOpen(prevState => !prevState);
 
     const handleInputChange = (e) => {
         setUpdatedProduct((prevState) => ({
             ...prevState,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value 
+        }))
+    }
+
+    const handleSelect = (e) => {
+        setDropName(e.target.name);
+        setUpdatedProduct(prevState => ({
+            ...prevState,
+            ProductType: e.target.value
         }))
     }
 
@@ -57,14 +68,30 @@ const ProductForm = ({
                 >
                 </Input>
                 <Label htmlFor='productType'>Product Type</Label>
-                <Input 
-                    type='text' 
-                    id='productType'
-                    defaultValue={productType} 
-                    name='productType'
-                    onChange={handleInputChange}
+                <Dropdown 
+                    isOpen={isOpen} 
+                    toggle={toggle}
+                    name='productId'
                 >
-                </Input>
+                    <DropdownToggle caret>
+                        {
+                            dropName 
+                            ? dropName
+                            : 'Select a Category'
+                        }
+                    </DropdownToggle>
+                    <DropdownMenu>
+                    <DropdownItem name='Single Goat' onClick={e => handleSelect(e)} value='Single'>
+                        Single Goat
+                    </DropdownItem>
+                    <DropdownItem name='Small Herd' onClick={e => handleSelect(e)} value='SmallHerd'>
+                        Small Herd
+                    </DropdownItem>
+                    <DropdownItem  name='Large Herd' onClick={e => handleSelect(e)} value='LargeHerd'>
+                        Large Herd
+                    </DropdownItem>
+                    </DropdownMenu>
+                </Dropdown>
                 <Label htmlFor='productType'>Merchant Id</Label>
                 <Input 
                     type='text'
