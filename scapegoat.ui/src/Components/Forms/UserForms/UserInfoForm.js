@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import {createNewUser} from '../../../helpers/data/userData';
+import {updateUser} from '../../../helpers/data/userData';
 
 const SubmitFormButton = styled.div`
 .button_slide {
@@ -23,33 +23,32 @@ const SubmitFormButton = styled.div`
 }
 `;
 
-export default function UserInfoForm() {
-  const [user, setUser] = useState({
-    firstName: '',
-    lastName: '',
-    userType: '',
-    customerTier: '',
-    addressLine1: '',
-    addressLine2: '',
-    postalCode: '',
-    cityName: '',
-    state: '',
-    country: ''
+export default function UserInfoForm({user}) {
+  const [updatedUser, setUpdatedUser] = useState({
+    firstName: user.firstName,
+    lastName: user.lastName,
+    userType: user.userType,
+    customerTier: user.customerTier,
+    addressLine1: user.addressLine1,
+    addressLine2: user.addressLine2,
+    postalCode: user.postalCode,
+    cityName: user.cityName,
+    state: user.state,
+    country: user.country
   });
   
   const handleInputChange = (e) => {
-    setUser((prevState) => ({
+    setUpdatedUser((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value
     }));
   };
 
-  const history = useHistory();
+  // const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createNewUser(user).then(setUser);
-    history.push(`/users`);
+    updateUser(user.id, user).then(setUpdatedUser)
   };
 
   return (
@@ -59,7 +58,7 @@ export default function UserInfoForm() {
           name='firstName'
           type='text'
           placeholder='First Name'
-          value={user.firstName}
+          value={updatedUser.firstName}
           onChange={handleInputChange}
           required
         ></input>
@@ -68,7 +67,7 @@ export default function UserInfoForm() {
           name='lastName'
           type='text'
           placeholder='Last Name'
-          value={user.lastName}
+          value={updatedUser.lastName}
           onChange={handleInputChange}
         ></input>
         <br/>
@@ -76,7 +75,7 @@ export default function UserInfoForm() {
           name='userType'
           type='text'
           placeholder='User Type'
-          value={user.userType}
+          value={updatedUser.userType}
           onChange={handleInputChange}
         ></input>
         <br/>
@@ -84,7 +83,7 @@ export default function UserInfoForm() {
           name='customerTier'
           type='text'
           placeholder='Customer Tier'
-          value={user.customerTier}
+          value={updatedUser.customerTier}
           onChange={handleInputChange}
         ></input>
         <br/>
@@ -92,7 +91,7 @@ export default function UserInfoForm() {
           name='addressLine1'
           type='text'
           placeholder='Street Address'
-          value={user.addressLine1}
+          value={updatedUser.addressLine1}
           onChange={handleInputChange}
         ></input>
         <br/>
@@ -100,7 +99,7 @@ export default function UserInfoForm() {
           name='addressLine2'
           type='text'
           placeholder='Suite or Apartment (Optional)'
-          value={user.addressLine2}
+          value={updatedUser.addressLine2}
           onChange={handleInputChange}
         ></input>
         <br/>
@@ -108,7 +107,7 @@ export default function UserInfoForm() {
           name='postalCode'
           type='text'
           placeholder='Zip Code'
-          value={user.postalCode}
+          value={updatedUser.postalCode}
           onChange={handleInputChange}
         ></input>
         <br/>
@@ -116,7 +115,7 @@ export default function UserInfoForm() {
           name='cityName'
           type='text'
           placeholder='City'
-          value={user.cityName}
+          value={updatedUser.cityName}
           onChange={handleInputChange}
         ></input>
         <br/>
@@ -124,7 +123,7 @@ export default function UserInfoForm() {
           name='state'
           type='text'
           placeholder='State (USA)'
-          value={user.state}
+          value={updatedUser.state}
           onChange={handleInputChange}
         ></input>
         <br/>
@@ -132,7 +131,7 @@ export default function UserInfoForm() {
           name='country'
           type='text'
           placeholder='Country'
-          value={user.country}
+          value={updatedUser.country}
           onChange={handleInputChange}
         ></input>
         <br/>

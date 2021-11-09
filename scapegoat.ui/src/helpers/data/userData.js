@@ -26,6 +26,12 @@ const createNewUser = (user) => new Promise((resolve, reject) => {
   .catch(error => reject(error));
 });
 
+const updateUser = (id, user) => new Promise((resolve, reject) => {
+  axios.put(`${config.baseUrl}/api/users/${id}`, user)
+  .then(response => resolve(response.data))
+  .catch(error => reject(error));
+});
+
 const softDeleteUser = (id, user) => new Promise((resolve, reject) => {
   axios.put(`${config.baseUrl}/api/users/${id}`, user)
   .then(response => resolve(response.data))
@@ -39,5 +45,5 @@ const hardDeleteUser = (id) => new Promise((resolve, reject) => {
 })
 
 export {
-  getSingleUser, createNewUser, getAllUsers, softDeleteUser, hardDeleteUser, getUserByFBKey
+  getSingleUser, createNewUser, getAllUsers, softDeleteUser, hardDeleteUser, getUserByFBKey, updateUser
 };
