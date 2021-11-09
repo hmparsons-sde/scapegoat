@@ -39,7 +39,7 @@ const ProductForm = ({
         setDropName(e.target.name);
         setUpdatedProduct(prevState => ({
             ...prevState,
-            ProductType: e.target.value
+            productType: e.target.value
         }))
     }
 
@@ -49,10 +49,12 @@ const ProductForm = ({
             updateProduct(updatedProduct.ProductId, updatedProduct)
                 .then(r => setProducts(r));
             setUpdate(!update);
+            console.warn(updatedProduct);
         } else {
             createProduct(updatedProduct)
                 .then(r => setProducts(r));
             setAddProduct(false);
+            console.warn(updatedProduct);
         }
     }
     return (
@@ -71,7 +73,7 @@ const ProductForm = ({
                 <Dropdown 
                     isOpen={isOpen} 
                     toggle={toggle}
-                    name='productId'
+                    defaultValue={productType}
                 >
                     <DropdownToggle caret>
                         {
@@ -92,7 +94,7 @@ const ProductForm = ({
                     </DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
-                <Label htmlFor='productType'>Merchant Id</Label>
+                <Label htmlFor='merchantId'>Merchant Id</Label>
                 <Input 
                     type='text'
                     id='merchantId' 

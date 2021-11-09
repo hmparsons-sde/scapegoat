@@ -2,20 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { Button } from 'reactstrap';
 import ProductCard from '../../Components/Products/ProductCard';
 import ProductForm from '../../Components/Products/ProductForm';
-import { getAllProducts, getProductsByType } from '../../helpers/data/productData';
+import { getAllProducts } from '../../helpers/data/productData';
 
 const Products = () => {
-    const [singles, setSingles] = useState([]);
     const [products, setProducts] = useState([]);
-    const [smallHerds, setSmallHerds] = useState([]);
-    const [largeHerds, setLargeHerds] = useState([]);
     const [addProduct, setAddProduct] = useState(false);
   
     useEffect(() => { 
-      getAllProducts().then(setProducts);
-      getProductsByType('Single').then(setSingles);
-      getProductsByType('SmallHerd').then(setSmallHerds);
-      getProductsByType('LargeHerd').then(setLargeHerds);
+      getAllProducts().then((response) => {
+        setProducts(response);
+        console.warn(response);
+      });
     }, []);
   
     return (
@@ -45,8 +42,8 @@ const Products = () => {
         <div className='products-container p-2 d-flex flex-column'>
           <h1>Single Goats</h1>
           {
-            singles.length > 0 && addProduct === false
-            ? singles.map((prod, i) => (
+            products.length > 0 && addProduct === false
+            ? products.filter(goat => goat.productType === 'Single').map((prod, i) => (
               <ProductCard
                 key={i}
                 productId={prod.productId}
@@ -61,8 +58,8 @@ const Products = () => {
           }
           <h1>Small Herds</h1>
           {
-             smallHerds.length > 0 && addProduct === false
-             ? smallHerds.map((prod, i) => (
+             products.length > 0 && addProduct === false
+             ? products.filter(goat => goat.productType === 'SmallHerd').map((prod, i) => (
                <ProductCard
                  key={i}
                  productId={prod.productId}
@@ -77,8 +74,8 @@ const Products = () => {
           }
           <h1>Large Herds</h1>
           {
-             largeHerds.length > 0 && addProduct === false
-             ? largeHerds.map((prod, i) => (
+             products.length > 0 && addProduct === false
+             ?  products.filter(goat => goat.productType === 'LargeHerd').map((prod, i) => (
                <ProductCard
                  key={i}
                  productId={prod.productId}
