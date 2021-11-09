@@ -19,6 +19,7 @@ height: 2rem;
 background-color: black;
 color: white;
 cursor: pointer;
+border-radius: 25px;
 `;
 
 export default function OrderInfo({ setUpdateSwitch, order }) {

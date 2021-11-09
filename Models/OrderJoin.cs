@@ -12,7 +12,7 @@ namespace scapegoat.Models
         public string Status { get; set; }
         public DateTime CreatedAt { get; set; }
         public decimal TotalCost { get; set; }
-        public PaymentType Payment { get; set; }
+        public Guid? PaymentId { get; set; }
 
         public IEnumerable<OrderItemJoin> LineItems { get; set; }
     }

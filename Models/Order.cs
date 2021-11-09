@@ -12,6 +12,6 @@ namespace scapegoat.Models
         public string Status { get; set; }
         public DateTime CreatedAt { get; set; }
         public decimal TotalCost { get; set; }
-        public Guid PaymentId { get; set; }
+        public Guid? PaymentId { get; set; }
     }
 }
