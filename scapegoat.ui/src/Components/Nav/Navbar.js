@@ -71,7 +71,9 @@ export default function NavBar({user}) {
             </a></li>
           </>
           }
+          <li>
           <Auth/>
+          </li>
         </ul>
       </StyledNav>
   )

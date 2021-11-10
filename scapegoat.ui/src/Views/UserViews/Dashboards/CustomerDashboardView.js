@@ -8,6 +8,7 @@ import orderhistory from '../../../assets/orderhistory.jpg';
 import paymenttype from '../../../assets/paymenttype.jpg';
 import cartimage from '../../../assets/cartimage.jpg';
 import moment from 'moment';
+import {AiOutlineCloseCircle} from 'react-icons/ai';
 import UserInfoForm from '../../../Components/Forms/UserForms/UserInfoForm';
 export default function CustomerDashboardView({user, photoURL}) {
   const [open, setOpen] = useState(false);
@@ -16,7 +17,7 @@ export default function CustomerDashboardView({user, photoURL}) {
   const onCloseModal = () => setOpen(false);
 
   const closeIcon = (
-    <p>X</p>
+    <AiOutlineCloseCircle/>
   );
 
   const history = useHistory();
@@ -31,7 +32,7 @@ export default function CustomerDashboardView({user, photoURL}) {
   };
 
   const date = moment.utc(user.createdAt).format();
-  const local = moment.utc(date).local().format("dddd, MMMM Do YYYY, h:mm:ss a");
+  const local = moment.utc(date).local().format("dddd, MMMM Do YYYY, h:mm a");
 
   return (
     <div>

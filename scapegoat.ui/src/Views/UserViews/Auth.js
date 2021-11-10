@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import firebase from 'firebase/compat/app';
+import styled from 'styled-components';
+import {AiOutlineLogin, AiOutlineLogout} from 'react-icons/ai';
 import { signInUser, signOutUser } from '../../helpers/auth';
+// import { Button } from 'reactstrap';
 export default class Auth extends Component {
   state = {
     user: null,
@@ -26,17 +29,23 @@ export default class Auth extends Component {
 
     return (
       <div>
-      { !user ? <button className='nav-link btn btnLogin' onClick={(e) => signInUser(e)}>Login</button>
+        <StyledAuth>
+      { !user ? <p className='nav-link' onClick={(e) => signInUser(e)}><AiOutlineLogin/></p>
         : <div>
-         <button
-          className='nav-link btn btnSecondary'
+         <p
+          className='nav-link'
           onClick={(e) => signOutUser(e)}
         >
-          Logout
-          </button>
+          <AiOutlineLogout/>
+          </p>
       </div>
       }
+      </StyledAuth>
       </div>
     );
   }
 }
+const StyledAuth = styled.div`
+cursor: pointer;
+margin-left: 8px;
+`;

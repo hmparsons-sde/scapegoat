@@ -44,6 +44,18 @@ const hardDeleteUser = (id) => new Promise((resolve, reject) => {
   .catch(error => reject(error));
 })
 
+const getUserByType = (userType) => new Promise((resolve, reject) => {
+  axios.get(`${config.baseUrl}/api/users/types/${userType}`)
+    .then(response => resolve(response.data))
+    .catch(error => reject(error));
+})
+
+const getUserByTier = (customerTier) => new Promise((resolve, reject) => {
+  axios.get(`${config.baseUrl}/api/users/tiers/${customerTier}`)
+    .then(response => resolve(response.data))
+    .catch(error => reject(error));
+})
+
 export {
-  getSingleUser, createNewUser, getAllUsers, softDeleteUser, hardDeleteUser, getUserByFBKey, updateUser
+  getSingleUser, createNewUser, getAllUsers, softDeleteUser, hardDeleteUser, getUserByFBKey, updateUser, getUserByType, getUserByTier
 };
