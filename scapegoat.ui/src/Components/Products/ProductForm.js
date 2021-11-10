@@ -17,13 +17,13 @@ const ProductForm = ({
 }) => {
     const [dropName, setDropName] = useState('');
     const [updatedProduct, setUpdatedProduct] = useState({
-        ProductId: productId,
-        ProductType: productType,
-        Description: description,
-        MerchantId: merchantId,
-        Price: price,
-        Size: size,
-        CreatedAt: createdAt
+        productId: productId,
+        productType: productType,
+        description: description,
+        merchantId: merchantId,
+        price: price,
+        size: size,
+        createdAt: createdAt
     });
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(prevState => !prevState);
@@ -46,13 +46,15 @@ const ProductForm = ({
     const handleUpdate = (e) => {
         e.preventDefault();
         if (productId) {
-            updateProduct(updatedProduct.ProductId, updatedProduct)
+            updateProduct(updatedProduct.productId, updatedProduct)
                 .then(r => setProducts(r));
             setUpdate(!update);
+            console.warn(updatedProduct);
         } else {
             createProduct(updatedProduct)
                 .then(r => setProducts(r));
             setAddProduct(false);
+            console.warn(updatedProduct);
         }
     }
     return (

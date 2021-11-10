@@ -19,7 +19,7 @@ namespace scapegoat.Models
         [EnumMember(Value = "Single Goat")]
         Single,
         [EnumMember(Value = "Small Herd")]
-        SmallHerd,
+        SmallHerd,  
         [EnumMember(Value = "Large Herd")]
         LargeHerd
     }
