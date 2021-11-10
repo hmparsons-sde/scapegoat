@@ -49,18 +49,16 @@ const ProductForm = ({
             updateProduct(updatedProduct.ProductId, updatedProduct)
                 .then(r => setProducts(r));
             setUpdate(!update);
-            console.warn(updatedProduct);
         } else {
             createProduct(updatedProduct)
                 .then(r => setProducts(r));
             setAddProduct(false);
-            console.warn(updatedProduct);
         }
     }
     return (
         <Form onSubmit={handleUpdate} className='product-form'>
             <FormGroup> 
-                <Label htmlFor='description'>Description</Label>
+                <Label htmlFor='description' tag='h4'>Description</Label>
                 <Input 
                     type='text'
                     id='description' 
@@ -69,7 +67,7 @@ const ProductForm = ({
                     onChange={handleInputChange}
                 >
                 </Input>
-                <Label htmlFor='productType'>Product Type</Label>
+                <Label htmlFor='productType' tag='h4'>Product Type</Label>
                 <Dropdown 
                     isOpen={isOpen} 
                     toggle={toggle}
@@ -94,7 +92,7 @@ const ProductForm = ({
                     </DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
-                <Label htmlFor='merchantId'>Merchant Id</Label>
+                <Label htmlFor='merchantId' tag='h4'>Merchant Id</Label>
                 <Input 
                     type='text'
                     id='merchantId' 
@@ -103,7 +101,7 @@ const ProductForm = ({
                     onChange={handleInputChange}
                 >
                 </Input>
-                <Label htmlFor='price'>Price</Label>
+                <Label htmlFor='price' tag='h4'>Price</Label>
                 <Input 
                     type='text'
                     id='price' 
@@ -112,7 +110,7 @@ const ProductForm = ({
                     onChange={handleInputChange}
                 >
                 </Input>
-                <Label htmlFor='size'>Size</Label>
+                <Label htmlFor='size' tag='h4'>Size</Label>
                 <Input 
                     type='text'
                     id='size' 

@@ -5,11 +5,13 @@ import ProductCard from '../../Components/Products/ProductCard';
 
 export default function SingleProductView() {
   const [product, setProduct] = useState({});
+  const [date, setDate] = useState('');
   const { id } = useParams();
 
   useEffect(() => {
     getSingleProduct(id).then(data => {
       setProduct(data);
+      setDate(data.createdAt.split('T'));
     });
   }, [id]);
 
@@ -22,7 +24,7 @@ export default function SingleProductView() {
         merchantId={product.merchantId}
         price={product.price}
         size={product.size}
-        createdAt={product.createdAt}
+        createdAt={date[0]}
       />
     </div>
   );

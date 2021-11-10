@@ -11,7 +11,6 @@ const Products = () => {
     useEffect(() => { 
       getAllProducts().then((response) => {
         setProducts(response);
-        console.warn(response);
       });
     }, []);
   
@@ -37,28 +36,30 @@ const Products = () => {
                   setProducts={setProducts}
                 />
              </div>
-            : ''
-          }
-        <div className='products-container p-2 d-flex flex-column'>
-          <h1>Single Goats</h1>
+      
+      : <div className='products-container p-2 d-flex flex-column justify-content-start'>
+          <h2 className='product-title'>Single Goats</h2>
+          <div className='product-category-container'>
+            {
+              products.length > 0 && addProduct === false
+              ? products.filter(goat => goat.productType === 'Single').map((prod, i) => (
+                <ProductCard
+                  key={i}
+                  productId={prod.productId}
+                  productType={prod.productType}
+                  description={prod.description}
+                  merchantId={prod.merchantId}
+                  price={prod.price}
+                  size={prod.size}
+                  createdAt={prod.createdAt.split('T')[0]}
+                  setProducts={setProducts} />))
+              : ''
+            }
+          </div>
+          <h2 className='product-title'>Small Herds</h2>
+          <div className='product-category-container'>
           {
-            products.length > 0 && addProduct === false
-            ? products.filter(goat => goat.productType === 'Single').map((prod, i) => (
-              <ProductCard
-                key={i}
-                productId={prod.productId}
-                productType={prod.productType}
-                description={prod.description}
-                merchantId={prod.merchantId}
-                price={prod.price}
-                size={prod.size}
-                createdAt={prod.createdAt}
-                setProducts={setProducts} />))
-            : ''
-          }
-          <h1>Small Herds</h1>
-          {
-             products.length > 0 && addProduct === false
+             products > 0 && addProduct === false
              ? products.filter(goat => goat.productType === 'SmallHerd').map((prod, i) => (
                <ProductCard
                  key={i}
@@ -68,11 +69,13 @@ const Products = () => {
                  merchantId={prod.merchantId}
                  price={prod.price}
                  size={prod.size}
-                 createdAt={prod.createdAt}
+                 createdAt={prod.createdAt.split('T')[0]}
                  setProducts={setProducts} />))
              : ''
           }
-          <h1>Large Herds</h1>
+          </div>
+          <h2 className='product-title'>Large Herds</h2>
+          <div className='product-category-container'>
           {
              products.length > 0 && addProduct === false
              ?  products.filter(goat => goat.productType === 'LargeHerd').map((prod, i) => (
@@ -84,11 +87,13 @@ const Products = () => {
                  merchantId={prod.merchantId}
                  price={prod.price}
                  size={prod.size}
-                 createdAt={prod.createdAt}
+                 createdAt={prod.createdAt.split('T')[0]}
                  setProducts={setProducts} />))
              : ''
           }
+          </div>
         </div>
+        }
       </div>
     )
 };
