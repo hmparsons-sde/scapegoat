@@ -310,11 +310,15 @@ namespace scapegoat.DataAccess
         {
             using var db = new SqlConnection(_connectionString);
 
-            var sqlString = @"select *
-                                from orders o
-                                join users u
+            var sqlString = @"select p.ProductId as Id, p.MerchantId, oi.ProductId as Id, oi.OrderId, o.*, u.*
+                                from Products p
+                                join OrderItems oi
+                                on p.ProductId = oi.ProductId
+                                join Orders o
+                                on oi.OrderId = o.Id
+                                join Users u 
                                 on o.UserId = u.Id
-                                where o.userId = @userId";
+                                where p.MerchantId = @UserId";
 
             var orders = db.Query<OrderJoin, User, OrderJoin>(sqlString, Map, new { UserId = userId }, splitOn: "id");
 
@@ -333,11 +337,11 @@ namespace scapegoat.DataAccess
                 foreach (var item in thisOrderItems)
                 {
                     var thisProductTotalCost = 0m;
-                    var productQuery = @"select * from Products where ProductId = @ProductId";
+                    var productQuery = @"select * from Products where ProductId = @ProductId AND MerchantId = @UserId";
 
                     var thisItemId = item.ProductId;
 
-                    var itemProduct = db.Query<Product>(productQuery, new { ProductId = thisItemId });
+                    var itemProduct = db.Query<Product>(productQuery, new { ProductId = thisItemId, UserId = userId });
 
                     item.Product = itemProduct;
 

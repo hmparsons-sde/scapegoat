@@ -9,7 +9,7 @@ export default function MerchantDashboardView({user}) {
     getMerchantOrders(user?.id).then(setMerchantOrders);
   }, [user?.id]);
 
-
+console.warn(merchantOrders);
   
   return (
     <div>
