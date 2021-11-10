@@ -57,6 +57,12 @@ const getPendingOrderInfo = (userId) => new Promise((resolve, reject) => {
   .then(error => reject(error));
 }); 
 
+const getCompletedOrders = (userId) => new Promise((resolve, reject) => {
+  axios.get(`${config.baseUrl}/completedCustomerOrder/${userId}`)
+  .then(response => resolve(response.data))
+  .then(error => reject(error));
+}); 
+
 // order join data
 
 const getAllOrderItems = () => new Promise((resolve, reject) => {
@@ -105,6 +111,7 @@ export {
   deleteOrder,
   checkOrderStatus,
   getPendingOrderInfo,
+  getCompletedOrders,
   getAllOrderItems,
   getOrderItemsById,
   getOrderItemsByOrderId,

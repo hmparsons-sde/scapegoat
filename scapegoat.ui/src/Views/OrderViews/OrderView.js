@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
-import { getSingleUserOrder } from '../../helpers/data/orderData';
+import { getCompletedOrders } from '../../helpers/data/orderData';
 import { useHistory, useParams } from 'react-router';
 
 
@@ -20,31 +20,42 @@ width: 30rem;
 margin: auto;
 padding: 10px;
 margin-bottom: 1rem;
+text-align: left;
+padding: 20px;
+margin: 10px;
+`;
+
+const FlexyDiv = styled.div`
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: center;
 `;
 
 export default function OrderView() {
-  const [userOrder, setUserOrder] = useState([]);
+  const [userOrders, setUserOrders] = useState([]);
   const { id } = useParams();
   const history = useHistory();
 
   useEffect(() => {
-    getSingleUserOrder(id)
-    .then(setUserOrder);
+    getCompletedOrders(id)
+    .then(setUserOrders);
   },[id])
   
-const orderStatus = userOrder.status !== 'completed';
 
   return (
     <>
     <div>
     <h1>Order History</h1>
     </div>
-    {orderStatus
+    {!userOrders
     ? <div>
         <h3>You have no recent orders</h3>
         <CartButton onClick={() => history.push('/products')}>Back to Products</CartButton>
       </div>
-    : <CartContainer>
+    : <FlexyDiv>
+    {userOrders.map((userOrder) => (
+      <CartContainer>
     <h3>Order Number: {userOrder?.id}</h3>
     <p>Order Status: {userOrder?.status}</p>
     <h3>Cart Items</h3>
@@ -63,6 +74,9 @@ const orderStatus = userOrder.status !== 'completed';
      <h3>Total:$ {userOrder?.totalCost}</h3>
      <p>Order placed: {userOrder?.createdAt}</p>
   </CartContainer>
+    ))
+      }
+    </FlexyDiv>
     }
     </>
   )

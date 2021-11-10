@@ -74,9 +74,9 @@ namespace scapegoat.Controllers
         }
 
         [HttpGet("/completedCustomerOrder/{id}")]
-        public IActionResult getCompletedCustomerOrder(Guid userId)
+        public IActionResult getCompletedCustomerOrder(Guid id)
         {
-            return Ok(_repo.GetCustomerShipped(userId));
+            return Ok(_repo.GetCustomerShipped(id));
         }
 
         [HttpGet("/pendingCustomerOrder/{id}")]

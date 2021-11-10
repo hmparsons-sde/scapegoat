@@ -3,7 +3,6 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from '../Views/HomeView';
 import Products from '../Views/ProductViews/Products';
 import SingleProductView from '../Views/ProductViews/SingleProductView';
-import Orders from '../Views/OrderViews/Orders';
 import AllUserList from '../Views/AdminViews/AllUserList';
 import CartView from '../Views/CartViews/CartView';
 import OrderView from '../Views/OrderViews/OrderView';
@@ -20,7 +19,6 @@ export default function Routes({user, products, setProducts, users, setUsers, pa
         <Route exact path='/' component={Home} />
         <Route exact path='/products' component={() => <Products />} />
         <Route exact path='/products/:id' component={SingleProductView}/>
-        <Route exact path='/orders' component={() => <Orders user={user} /> }/>
         <Route exact path='/users' component={() => <AllUserList users={users} setUsers={setUsers}/>} />
         <Route exact path='/users/:id' component={() => <DashRouter users={users} setUsers={setUsers}/>} />
         <Route exact path='/users/:id/cart' component={CartView}/>

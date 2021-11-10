@@ -135,9 +135,61 @@ namespace scapegoat.DataAccess
             return pendingOrders;
         }
 
-        internal object GetCustomerShipped(Guid userId)
+        internal IEnumerable<OrderJoin> GetCustomerShipped(Guid userId)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(_connectionString);
+
+            var sqlString = @"select *
+                                from orders o
+                                join users u
+                                on o.UserId = u.Id
+                                where o.userId = @userId AND o.status = 'completed'";
+
+            var orders = db.Query<OrderJoin, User, OrderJoin>(sqlString, Map, new { UserId = userId }, splitOn: "id");
+
+            foreach (var order in orders)
+            {
+                var itemsQuery = @"select * from OrderItems where OrderId = @Id";
+
+                var lineItems = db.Query<OrderItemJoin>(itemsQuery, order);
+
+                order.LineItems = lineItems;
+
+                var thisOrderItems = order.LineItems;
+
+                var runningTotal = 0m;
+
+                foreach (var item in thisOrderItems)
+                {
+                    var thisProductTotalCost = 0m;
+                    var productQuery = @"select * from Products where ProductId = @ProductId";
+
+                    var thisItemId = item.ProductId;
+
+                    var itemProduct = db.Query<Product>(productQuery, new { ProductId = thisItemId });
+
+                    item.Product = itemProduct;
+
+                    var thisProduct = item.Product;
+
+                    foreach (var prod in thisProduct)
+                    {
+                        thisProductTotalCost = prod.Price * item.Quantity;
+                    }
+
+                    runningTotal += thisProductTotalCost;
+                }
+
+                order.TotalCost = runningTotal;
+                var updateTotal = @"update Orders Set
+                                        TotalCost = @TotalCost
+                                     output inserted.*
+                                     Where id = @id";
+
+                var updatedOrder = db.QuerySingleOrDefault<OrderJoin>(updateTotal, order);
+            }
+
+            return orders;
         }
 
         internal OrderJoin GetByUserId(Guid userId)

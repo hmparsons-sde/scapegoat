@@ -55,9 +55,6 @@ export default function NavBar() {
           <li><a className='nav-link' href='/products'>
           Products
         </a></li>
-        <li><a className='nav-link' href='/orders'>
-          Orders
-        </a></li>
         <li><a className='nav-link' href='/users'>
           Users
         </a></li>
