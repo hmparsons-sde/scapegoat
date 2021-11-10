@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import FulfillOrders from '../../../Components/Orders/FulfillOrders';
+import MerchantMetrics from '../../../Components/Orders/MerchantMetrics';
 import { getMerchantOrders } from '../../../helpers/data/orderData';
 
 export default function MerchantDashboardView({user}) {
@@ -25,6 +26,7 @@ console.warn(merchantOrders);
       )) 
       : null
       }
+      <MerchantMetrics merchantOrders={merchantOrders} />
     </div>
   )
 }
