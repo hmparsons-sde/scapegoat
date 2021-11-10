@@ -14,7 +14,7 @@ const getSingleUser = (id) => new Promise((resolve, reject) => {
 });
 
 const getUserByFBKey = (firebaseKey) => new Promise((resolve, reject) => {
-  axios.get(`${config.baseUrl}/api/users/${firebaseKey}`).then((response) => {
+  axios.get(`${config.baseUrl}/api/users/authedUsers/${firebaseKey}`).then((response) => {
     resolve(response.data);
   }).catch((error) => reject(error));
 });

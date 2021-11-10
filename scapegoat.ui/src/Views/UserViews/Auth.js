@@ -25,19 +25,18 @@ export default class Auth extends Component {
     const { user } = this.state;
 
     return (
-      <>
+      <div>
       { !user ? <button className='nav-link btn btnLogin' onClick={(e) => signInUser(e)}>Login</button>
-        : <>
-          <p>Bahhh, {user?.displayName}!</p>
+        : <div>
          <button
           className='nav-link btn btnSecondary'
           onClick={(e) => signOutUser(e)}
         >
           Logout
           </button>
-      </>
+      </div>
       }
-      </>
+      </div>
     );
   }
 }

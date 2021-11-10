@@ -9,7 +9,7 @@ import paymenttype from '../../../assets/paymenttype.jpg';
 import cartimage from '../../../assets/cartimage.jpg';
 import moment from 'moment';
 import UserInfoForm from '../../../Components/Forms/UserForms/UserInfoForm';
-export default function CustomerDashboardView({user}) {
+export default function CustomerDashboardView({user, photoURL}) {
   const [open, setOpen] = useState(false);
 
   const onOpenModal = () => setOpen(true);
@@ -21,13 +21,13 @@ export default function CustomerDashboardView({user}) {
 
   const history = useHistory();
   const handleCartClick = () => {
-    history.push(`${user.id}/cart`);
+    history.push(`cart`);
   };
   const handleOrderHistoryClick = () => {
-    history.push(`${user.id}/order`);
+    history.push(`orders`);
   };
   const handlePaymentTypeClick = () => {
-    history.push(`PaymentType`);
+    history.push(`payments`);
   };
 
   const date = moment.utc(user.createdAt).format();
@@ -36,7 +36,7 @@ export default function CustomerDashboardView({user}) {
   return (
     <div>
       <SingleUser user={user}>
-        <img src='' alt='profile'></img>
+        <img src={photoURL} alt='profile'></img>
         <EditUserFormButton onClick={onOpenModal}>
           <div className="button_slide slide_down">
               Update Profile
@@ -99,12 +99,11 @@ const SingleUser = styled.div`
   }
 
   img {
-    position: relative;
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+    margin-top: 20px;
     border-radius: 50%;
-    height: 90px;
-    width: 90px;
-    padding: 0;
-    margin: 0;
     border: 15px solid transparent;
   }
 `;

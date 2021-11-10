@@ -27,8 +27,8 @@ export default function Routes({user, products, setProducts, users, setUsers, pa
         <Route exact path='/pleaseLogin' component={PleaseLogin}/>
       {/* User Views */}
         <PrivateRoute exact path='/orders' user={user} component={() => <Orders user={user} /> }/>
-        <PrivateRoute exact path='/dashboard' user={user} component={() => <AllUserList users={users} setUsers={setUsers}/>} />
-        <PrivateRoute exact path='/users/:id' user={user} component={() => <DashRouter users={users} setUsers={setUsers}/>} />
+        <PrivateRoute exact path='/users' user={user} component={() => <AllUserList users={users} setUsers={setUsers}/>} />
+        <PrivateRoute exact path='/dashboard' user={user} component={() => <DashRouter firebaseUser={user}/>} />
         <PrivateRoute exact path='/cart' user={user} component={CartView}/>
         <PrivateRoute exact path='/users/:id/order' user={user} component={OrderView}/>
         <PrivateRoute exact path='/payments' user={user} component={() => <Payments />} />

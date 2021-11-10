@@ -46,7 +46,6 @@ const StyledNav = styled.div`
   `;
 
 export default function NavBar({user}) {
-  console.log(user);
    return (
       <StyledNav>
         <ul>
