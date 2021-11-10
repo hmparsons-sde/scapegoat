@@ -11,7 +11,6 @@ const Products = () => {
     useEffect(() => { 
       getAllProducts().then((response) => {
         setProducts(response);
-        console.warn(response);
       });
     }, []);
   

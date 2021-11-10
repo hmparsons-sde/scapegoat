@@ -7,6 +7,7 @@ export default function SingleProductView() {
   const [product, setProduct] = useState({});
   const [date, setDate] = useState('');
   const { id } = useParams();
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     getSingleProduct(id).then(data => {
@@ -25,6 +26,8 @@ export default function SingleProductView() {
         price={product.price}
         size={product.size}
         createdAt={date[0]}
+        products={products}
+        setProducts={setProducts}
       />
     </div>
   );
