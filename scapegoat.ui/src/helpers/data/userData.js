@@ -27,8 +27,8 @@ const createNewUser = (user) => new Promise((resolve, reject) => {
 });
 
 const updateUser = (id, user) => new Promise((resolve, reject) => {
-  axios.put(`${config.baseUrl}/api/users/${id}`, user)
-  .then(response => resolve(response.data))
+  axios.put(`${config.baseUrl}/api/users/UpdateUserInfo/${id}`, user)
+  .then(response => resolve(response))
   .catch(error => reject(error));
 });
 

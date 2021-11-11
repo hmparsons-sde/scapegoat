@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import {updateUser} from '../../../helpers/data/userData';
+import {getSingleUser, updateUser} from '../../../helpers/data/userData';
 
 const SubmitFormButton = styled.div`
 .button_slide {
@@ -23,7 +23,7 @@ const SubmitFormButton = styled.div`
 }
 `;
 
-export default function UserInfoForm({user}) {
+export default function UserInfoForm({user, onCloseModal, setUser}) {
   const [updatedUser, setUpdatedUser] = useState({
     firstName: user.firstName,
     lastName: user.lastName,
@@ -34,7 +34,8 @@ export default function UserInfoForm({user}) {
     postalCode: user.postalCode,
     cityName: user.cityName,
     state: user.state,
-    country: user.country
+    country: user.country,
+    firebaseyKey: user.firebaseyKey,
   });
   
   const handleInputChange = (e) => {
@@ -44,11 +45,9 @@ export default function UserInfoForm({user}) {
     }));
   };
 
-  // const history = useHistory();
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateUser(user.id, user).then(setUpdatedUser)
+    updateUser(user.id, updatedUser).then(() => getSingleUser(user.id).then((response) => setUser(response))).then(() => onCloseModal());
   };
 
   return (
@@ -71,21 +70,29 @@ export default function UserInfoForm({user}) {
           onChange={handleInputChange}
         ></input>
         <br/>
-        <input
+        <select
+          as ='select'
           name='userType'
-          type='text'
           placeholder='User Type'
-          value={updatedUser.userType}
+          value={user.userType}
           onChange={handleInputChange}
-        ></input>
+        >
+              <option value="Customer">Customer</option>
+              <option value="Merchant">Merchant</option>
+        </select>
         <br/>
-        <input
+        <select 
+          as ='select'
           name='customerTier'
-          type='text'
           placeholder='Customer Tier'
-          value={updatedUser.customerTier}
+          value={user.customerTier}
           onChange={handleInputChange}
-        ></input>
+        >
+              <option value="Individual">Individual</option>
+              <option value="Small">Small Business</option>
+              <option value="Medium">Mid-sized Business</option>	
+              <option value="Enterprise">Enterprise</option>
+        </select>
         <br/>
         <input
           name='addressLine1'
@@ -119,13 +126,65 @@ export default function UserInfoForm({user}) {
           onChange={handleInputChange}
         ></input>
         <br/>
-        <input
-          name='state'
-          type='text'
-          placeholder='State (USA)'
-          value={updatedUser.state}
-          onChange={handleInputChange}
-        ></input>
+          <select
+            as='select'
+            name='state'
+            placeholder='State (USA)'
+            value={user.state}
+            onChange={handleInputChange}
+          >
+              <option value="AL">AL</option>
+              <option value="AK">AK</option>
+              <option value="AR">AR</option>	
+              <option value="AZ">AZ</option>
+              <option value="CA">CA</option>
+              <option value="CO">CO</option>
+              <option value="CT">CT</option>
+              <option value="DC">DC</option>
+              <option value="DE">DE</option>
+              <option value="FL">FL</option>
+              <option value="GA">GA</option>
+              <option value="HI">HI</option>
+              <option value="IA">IA</option>	
+              <option value="ID">ID</option>
+              <option value="IL">IL</option>
+              <option value="IN">IN</option>
+              <option value="KS">KS</option>
+              <option value="KY">KY</option>
+              <option value="LA">LA</option>
+              <option value="MA">MA</option>
+              <option value="MD">MD</option>
+              <option value="ME">ME</option>
+              <option value="MI">MI</option>
+              <option value="MN">MN</option>
+              <option value="MO">MO</option>	
+              <option value="MS">MS</option>
+              <option value="MT">MT</option>
+              <option value="NC">NC</option>	
+              <option value="NE">NE</option>
+              <option value="NH">NH</option>
+              <option value="NJ">NJ</option>
+              <option value="NM">NM</option>			
+              <option value="NV">NV</option>
+              <option value="NY">NY</option>
+              <option value="ND">ND</option>
+              <option value="OH">OH</option>
+              <option value="OK">OK</option>
+              <option value="OR">OR</option>
+              <option value="PA">PA</option>
+              <option value="RI">RI</option>
+              <option value="SC">SC</option>
+              <option value="SD">SD</option>
+              <option value="TN">TN</option>
+              <option value="TX">TX</option>
+              <option value="UT">UT</option>
+              <option value="VT">VT</option>
+              <option value="VA">VA</option>
+              <option value="WA">WA</option>
+              <option value="WI">WI</option>	
+              <option value="WV">WV</option>
+              <option value="WY">WY</option>
+          </select>
         <br/>
         <input
           name='country'

@@ -17,7 +17,7 @@ export default function DashRouter({firebaseUser}) {
     <div>
       {sellerStatus 
       ? <MerchantDashboardView user={user} />
-      : <CustomerDashboardView user={user} photoURL={firebaseUser.photoURL} />
+      : <CustomerDashboardView user={user} setUser={setUser} photoURL={firebaseUser.photoURL} />
     }
     </div>
   )

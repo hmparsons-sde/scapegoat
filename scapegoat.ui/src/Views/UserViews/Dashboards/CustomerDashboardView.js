@@ -10,7 +10,7 @@ import cartimage from '../../../assets/cartimage.jpg';
 import moment from 'moment';
 import {AiOutlineCloseCircle} from 'react-icons/ai';
 import UserInfoForm from '../../../Components/Forms/UserForms/UserInfoForm';
-export default function CustomerDashboardView({user, photoURL}) {
+export default function CustomerDashboardView({user, photoURL, setUser}) {
   const [open, setOpen] = useState(false);
 
   const onOpenModal = () => setOpen(true);
@@ -54,7 +54,7 @@ export default function CustomerDashboardView({user, photoURL}) {
             modal: 'customModal',
           }}
         >
-          <UserInfoForm user={user}/>
+          <UserInfoForm user={user} onCloseModal={onCloseModal} setUser={setUser}/>
         </Modal>
         <h1 tag="h1" className='mt-1'>{user.firstName} {user.lastName}</h1>
         <h4>Type: {user.userType}</h4>

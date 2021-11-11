@@ -72,21 +72,29 @@ export default function RegistrationForm() {
           onChange={handleInputChange}
         ></input>
         <br/>
-        <input
+        <select
+          as ='select'
           name='userType'
-          type='text'
           placeholder='User Type'
           value={user.userType}
           onChange={handleInputChange}
-        ></input>
+        >
+              <option value="Customer">Customer</option>
+              <option value="Merchant">Merchant</option>
+        </select>
         <br/>
-        <input
+        <select 
+          as ='select'
           name='customerTier'
-          type='text'
           placeholder='Customer Tier'
           value={user.customerTier}
           onChange={handleInputChange}
-        ></input>
+        >
+              <option value="Individual">Individual</option>
+              <option value="Small">Small Business</option>
+              <option value="Medium">Mid-sized Business</option>	
+              <option value="Enterprise">Enterprise</option>
+        </select>
         <br/>
         <input
           name='addressLine1'
