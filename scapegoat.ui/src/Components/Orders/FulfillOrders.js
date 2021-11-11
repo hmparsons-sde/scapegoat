@@ -27,9 +27,9 @@ const userInfo = orders.user;
           <>
           {item.product.length > 0
           ? <>
-          <p>Product Id: {item.product.productId}</p>
-          <p>Description: {item.product.description}</p>
-          <p>Price: {item.product.price}</p>
+          <p>Product Id: {item.product[0].productId}</p>
+          <p>Description: {item.product[0].description}</p>
+          <p>Price:$ {item.product[0].price}</p>
           <p>Quantity: {item.quantity}</p>
           </>
           : null

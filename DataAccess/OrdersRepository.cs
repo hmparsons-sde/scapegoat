@@ -122,6 +122,71 @@ namespace scapegoat.DataAccess
             return firstOrder;
         }
 
+        internal IEnumerable<OrderJoin> GetMonthlyOrders(Guid userId)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sqlString = @"select p.ProductId as Id, p.MerchantId, oi.ProductId as Id, oi.OrderId, o.*, u.*
+                                from Products p
+                                join OrderItems oi
+                                on p.ProductId = oi.ProductId
+                                join Orders o
+                                on oi.OrderId = o.Id
+                                join Users u 
+                                on o.UserId = u.Id
+                                where p.MerchantId = @UserId
+                                and year(o.CreatedAt)=@CurrentYear AND month(o.CreatedAt)=@CurrentMonth";
+
+            var currentMonth = DateTime.Now.Month;
+            var currentYear = DateTime.Now.Year;
+
+            var orders = db.Query<OrderJoin, User, OrderJoin>(sqlString, Map, new { UserId = userId, CurrentYear = currentYear, CurrentMonth = currentMonth }, splitOn: "id") ;
+
+            foreach (var order in orders)
+            {
+                var itemsQuery = @"select * from OrderItems where OrderId = @Id";
+
+                var lineItems = db.Query<OrderItemJoin>(itemsQuery, order);
+
+                order.LineItems = lineItems;
+
+                var thisOrderItems = order.LineItems;
+
+                var runningTotal = 0m;
+
+                foreach (var item in thisOrderItems)
+                {
+                    var thisProductTotalCost = 0m;
+                    var productQuery = @"select * from Products where ProductId = @ProductId AND MerchantId = @UserId";
+
+                    var thisItemId = item.ProductId;
+
+                    var itemProduct = db.Query<Product>(productQuery, new { ProductId = thisItemId, UserId = userId });
+
+                    item.Product = itemProduct;
+
+                    var thisProduct = item.Product;
+
+                    foreach (var prod in thisProduct)
+                    {
+                        thisProductTotalCost = prod.Price * item.Quantity;
+                    }
+
+                    runningTotal += thisProductTotalCost;
+                }
+
+                order.TotalCost = runningTotal;
+                var updateTotal = @"update Orders Set
+                                        TotalCost = @TotalCost
+                                     output inserted.*
+                                     Where id = @id";
+
+                var updatedOrder = db.QuerySingleOrDefault<OrderJoin>(updateTotal, order);
+            }
+
+            return orders;
+        }
+
         internal IEnumerable<Order> GetCustomerPending(Guid userId)
         {
             using var db = new SqlConnection(_connectionString);

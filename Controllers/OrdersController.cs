@@ -90,5 +90,11 @@ namespace scapegoat.Controllers
         {
             return Ok(_repo.GetFullPendingOrder(id));
         }
+
+        [HttpGet("/thisMonth/{id}")]
+        public IActionResult getThisMonthsOrders(Guid id)
+        {
+            return Ok(_repo.GetMonthlyOrders(id));
+        }
     }
 }

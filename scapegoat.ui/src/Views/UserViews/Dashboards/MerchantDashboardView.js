@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import FulfillOrders from '../../../Components/Orders/FulfillOrders';
 import MerchantMetrics from '../../../Components/Orders/MerchantMetrics';
-import { getMerchantOrders } from '../../../helpers/data/orderData';
+import { getMerchantOrders, getMonthlyOrders } from '../../../helpers/data/orderData';
 
 export default function MerchantDashboardView({user}) {
   const [merchantOrders, setMerchantOrders] = useState([]);
+  const [thisMonthOrders, setThisMonthOrders] = useState([]);
 
   useEffect(() => {
     getMerchantOrders(user?.id).then(setMerchantOrders);
+    getMonthlyOrders(user?.id).then(setThisMonthOrders)
   }, [user?.id]);
-
-console.warn(merchantOrders);
   
   return (
     <div>
@@ -26,7 +26,7 @@ console.warn(merchantOrders);
       )) 
       : null
       }
-      <MerchantMetrics merchantOrders={merchantOrders} />
+      <MerchantMetrics merchantOrders={merchantOrders} monthlyOrders={thisMonthOrders} />
     </div>
   )
 }
