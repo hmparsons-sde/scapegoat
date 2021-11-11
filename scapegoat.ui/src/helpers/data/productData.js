@@ -43,5 +43,30 @@ const getProductsByType = (type) => new Promise((resolve, reject) => {
     .catch(error => reject(error));
 })
 
+const deleteProductByType = (id, category) => new Promise((resolve, reject) => {
+  axios.delete(`${config.baseUrl}/api/Products/${id}`)
+    .then(() => {
+      getProductsByType(category).then(response => resolve(response));
+    })
+    .catch(error => reject(error));
+});
 
-export { getAllProducts, getSingleProduct, deleteProduct, updateProduct, createProduct, getProductsByType };
+const updateProductByType = (id, product, category) => new Promise((resolve, reject) => {
+  axios.put(`${config.baseUrl}/api/Products/${id}`, product)
+  .then(() => {
+    getProductsByType(category).then(response => resolve(response));
+  })
+    .catch(error => reject(error));
+});
+
+
+export { 
+  getAllProducts,
+  getSingleProduct,
+  deleteProduct,
+  updateProduct,
+  createProduct,
+  getProductsByType,
+  deleteProductByType,
+  updateProductByType
+};

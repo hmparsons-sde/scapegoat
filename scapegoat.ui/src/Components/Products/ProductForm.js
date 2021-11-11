@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router';
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Form, FormGroup, Input, Label } from "reactstrap"
-import { createProduct, updateProduct } from '../../helpers/data/productData';
+import { createProduct, updateProduct, updateProductByType } from '../../helpers/data/productData';
 
 const ProductForm = ({  
     productId, 
@@ -13,8 +14,10 @@ const ProductForm = ({
     setProducts,
     update,
     setUpdate,
-    setAddProduct
+    setAddProduct,
+    setCategoryGoats
 }) => {
+    const { category } = useParams();
     const [dropName, setDropName] = useState('');
     const [updatedProduct, setUpdatedProduct] = useState({
         productId: productId,
@@ -45,20 +48,24 @@ const ProductForm = ({
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        if (productId) {
+        if (productId && category) {
+            updateProductByType(updatedProduct.productId, updatedProduct, category)
+                .then(setCategoryGoats)
+            setUpdate(!update);
+        } else if (productId) {
             updateProduct(updatedProduct.productId, updatedProduct)
                 .then(r => setProducts(r));
-            setUpdate(!update);;
+            setUpdate(!update);
         } else {
             createProduct(updatedProduct)
-                .then(r => setProducts(r));
+                .then(setProducts);
             setAddProduct(false);
         }
     }
     return (
         <Form onSubmit={handleUpdate} className='product-form'>
-            <FormGroup> 
-                <Label htmlFor='description' tag='h4'>Description</Label>
+            <FormGroup>
+                <Label htmlFor='description' tag='h5'>Description</Label>
                 <Input 
                     type='text'
                     id='description' 
@@ -66,8 +73,17 @@ const ProductForm = ({
                     name='description'
                     onChange={handleInputChange}
                 >
+                </Input> 
+                <Label htmlFor='merchantId' tag='h5'>Merchant Id</Label>
+                <Input 
+                    type='text'
+                    id='merchantId' 
+                    defaultValue={merchantId} 
+                    name='merchantId'
+                    onChange={handleInputChange}
+                >
                 </Input>
-                <Label htmlFor='productType' tag='h4'>Product Type</Label>
+                <Label htmlFor='productType' tag='h5'>Product Type</Label>
                 <Dropdown 
                     isOpen={isOpen} 
                     toggle={toggle}
@@ -92,35 +108,32 @@ const ProductForm = ({
                     </DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
-                <Label htmlFor='merchantId' tag='h4'>Merchant Id</Label>
-                <Input 
-                    type='text'
-                    id='merchantId' 
-                    defaultValue={merchantId} 
-                    name='merchantId'
-                    onChange={handleInputChange}
-                >
-                </Input>
-                <Label htmlFor='price' tag='h4'>Price</Label>
-                <Input 
-                    type='text'
-                    id='price' 
-                    defaultValue={price} 
-                    name='price'
-                    onChange={handleInputChange}
-                >
-                </Input>
-                <Label htmlFor='size' tag='h4'>Size</Label>
-                <Input 
-                    type='text'
-                    id='size' 
-                    defaultValue={size} 
-                    name='size'
-                    onChange={handleInputChange}
-                >
-                </Input>
+                <div className='d-flex justify-content-center'>
+                    <div className='d-flex flex-column'>
+                        <Label htmlFor='price' tag='h5'>Price</Label>
+                        <Input 
+                            type='text'
+                            id='price' 
+                            defaultValue={price} 
+                            name='price'
+                            onChange={handleInputChange}
+                        >
+                        </Input>
+                    </div>
+                    <div className='d-flex flex-column'>
+                        <Label htmlFor='size' tag='h5'>Quantity</Label>
+                        <Input 
+                            type='text'
+                            id='size' 
+                            defaultValue={size} 
+                            name='size'
+                            onChange={handleInputChange}
+                        >
+                        </Input>
+                    </div>
+                </div>
+                <Button className='mt-2' type='submit'>Submit</Button>
             </FormGroup>
-            <Button className='mt-2' type='submit'>Submit</Button>
         </Form>
     );
 }

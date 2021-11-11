@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import { Button } from 'reactstrap';
 import ProductCard from '../../Components/Products/ProductCard';
 import ProductForm from '../../Components/Products/ProductForm';
 import { getAllProducts } from '../../helpers/data/productData';
 
 const Products = () => {
+    const history = useHistory();
     const [products, setProducts] = useState([]);
     const [addProduct, setAddProduct] = useState(false);
   
@@ -12,12 +14,23 @@ const Products = () => {
       getAllProducts().then((response) => {
         setProducts(response);
       });
-    }, []);
+    }, [products]);
+
+    const handleHistory = (route) => {
+      history.push(route);
+    };
   
     return (
       <div> 
         <nav className='product-header'>
-          <h1>Product Catgories</h1>
+          <h1>
+            {
+              addProduct
+              ? 'Add a Product'
+              : 'Product Catgories'
+            }
+            
+          </h1>
           <div className='product-header-filter'>
             <div className='filter-buttons'>
               {
@@ -30,19 +43,54 @@ const Products = () => {
         </nav>
           {
             addProduct
-            ? <div className='p-4'>
+            ?
                 <ProductForm
                   setAddProduct={setAddProduct}
                   setProducts={setProducts}
                 />
-             </div>
       
-      : <div className='products-container p-2 d-flex flex-column justify-content-start'>
-          <h2 className='product-title'>Single Goats</h2>
+      : <div className='d-flex flex-column'>
+          <div className='category-header'>
+            <h2>
+              Single Goats ({products.filter(goat => goat.productType === 'Single').length})
+            </h2>
+            <div className='filter-buttons'>
+              <Button className='' outline onClick={() => handleHistory('/products/category/Single')}>
+                See All
+              </Button>
+            </div>
+          </div>
           <div className='product-category-container'>
             {
               products.length > 0
-              ? products.filter(goat => goat.productType === 'Single').map((prod, i) => (
+              ? products.filter(goat => goat.productType === 'Single').slice(0, 3).map((prod, i) => (
+                  <ProductCard
+                    key={i}
+                    productId={prod.productId}
+                    productType={prod.productType}
+                    description={prod.description}
+                    merchantId={prod.merchantId}
+                    price={prod.price}
+                    size={prod.size}
+                    createdAt={prod.createdAt.split('T')[0]}
+                    setProducts={setProducts} />))
+              : ''
+            }
+          </div>
+          <div className='category-header'>
+            <h2>
+              Small Herds ({products.filter(goat => goat.productType === 'SmallHerd').length})
+            </h2>
+            <div className='filter-buttons'>
+              <Button outline onClick={() => handleHistory('/products/category/SmallHerd')}>
+                See All
+              </Button>
+            </div>
+          </div>
+          <div className='product-category-container'>
+            {
+              products.length > 0
+              ? products.filter(goat => goat.productType === 'SmallHerd').slice(0, 3).map((prod, i) => (
                 <ProductCard
                   key={i}
                   productId={prod.productId}
@@ -56,41 +104,32 @@ const Products = () => {
               : ''
             }
           </div>
-          <h2 className='product-title'>Small Herds</h2>
-          <div className='product-category-container'>
-          {
-             products.length > 0
-             ? products.filter(goat => goat.productType === 'SmallHerd').map((prod, i) => (
-              <ProductCard
-                key={i}
-                productId={prod.productId}
-                productType={prod.productType}
-                description={prod.description}
-                merchantId={prod.merchantId}
-                price={prod.price}
-                size={prod.size}
-                createdAt={prod.createdAt.split('T')[0]}
-                setProducts={setProducts} />))
-             : ''
-          }
+          <div className='category-header'>
+            <h2>
+              Large Herds ({products.filter(goat => goat.productType === 'LargeHerd').length})
+            </h2>
+            <div className='filter-buttons'>
+              <Button outline onClick={() => handleHistory('/products/category/LargeHerd')}>
+                See All
+              </Button>
+            </div>
           </div>
-          <h2 className='product-title'>Large Herds</h2>
           <div className='product-category-container'>
-          {
-             products.length > 0
-             ?  products.filter(goat => goat.productType === 'LargeHerd').map((prod, i) => (
-               <ProductCard
-                 key={i}
-                 productId={prod.productId}
-                 productType={prod.productType}
-                 description={prod.description}
-                 merchantId={prod.merchantId}
-                 price={prod.price}
-                 size={prod.size}
-                 createdAt={prod.createdAt.split('T')[0]}
-                 setProducts={setProducts} />))
-             : ''
-          }
+            {
+              products.length > 0
+              ?  products.filter(goat => goat.productType === 'LargeHerd').slice(0, 3).map((prod, i) => (
+                <ProductCard
+                    key={i}
+                    productId={prod.productId}
+                    productType={prod.productType}
+                    description={prod.description}
+                    merchantId={prod.merchantId}
+                    price={prod.price}
+                    size={prod.size}
+                    createdAt={prod.createdAt.split('T')[0]}
+                    setProducts={setProducts} />))
+              : ''
+            }
           </div>
         </div>
         }
