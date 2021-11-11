@@ -29,23 +29,6 @@ const SellerIDCard = styled.div`
   }
 `;
 
-// const ViewSellerButton = styled.div`
-//   background-color: #e7e7e7;
-//   color: black;
-//   font-weight: 400;
-//   border: solid;
-//   border-color: #7f7f7f;
-//   border-radius: 10px;
-//   padding: 15px 15px;
-//   text-align: center;
-//   text-decoration: none;
-//   display: inline-block;
-//   font-size: 14px;
-//   margin-bottom: 25px;
-//   margin-top: 10px;
-//   cursor: pointer;
-// `;
-
 export default function CustomerCard({user, setUsers}) {
   const history = useHistory();
 
@@ -84,5 +67,3 @@ export default function CustomerCard({user, setUsers}) {
     </SellerIDCard>
   )
 }
-// eslint-disable-next-line no-lone-blocks
-{/* <ViewSellerButton className='btn-md mr-1 ml-5 p-2' color="danger" onClick={() => handleClick('view')}>{user.firstName} {user.lastName}</ViewSellerButton> */}

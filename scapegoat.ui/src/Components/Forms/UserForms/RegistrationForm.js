@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import {createNewUser} from '../../../helpers/data/userData';
+import {createNewUser, getAllUsers} from '../../../helpers/data/userData';
 
 const SubmitFormButton = styled.div`
 .button_slide {
@@ -23,7 +22,7 @@ const SubmitFormButton = styled.div`
 }
 `;
 
-export default function RegistrationForm() {
+export default function RegistrationForm({onCloseModal, setUsers}) {
   const [user, setUser] = useState({
     firstName: '',
     lastName: '',
@@ -44,12 +43,9 @@ export default function RegistrationForm() {
     }));
   };
 
-  const history = useHistory();
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    createNewUser(user).then(setUser);
-    history.push(`/users`);
+    createNewUser(user).then(() => getAllUsers().then((response) => setUsers(response))).then(() => onCloseModal());
   };
 
   return (

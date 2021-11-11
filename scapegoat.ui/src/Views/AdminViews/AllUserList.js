@@ -82,7 +82,7 @@ export default function AllUserList() {
             modal: 'customModal',
           }}
         >
-          <RegistrationForm/>
+          <RegistrationForm onCloseModal={onCloseModal} setUsers={setUsers}/>
         </Modal>
         <AllUsersContainer>
           {SingleSeller}

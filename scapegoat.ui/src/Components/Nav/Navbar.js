@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-// import { signInUser } from '../../helpers/auth';
 import Auth from '../../Views/UserViews/Auth';
 
 const StyledNav = styled.div`

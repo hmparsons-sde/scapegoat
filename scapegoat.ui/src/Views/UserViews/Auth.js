@@ -3,7 +3,12 @@ import firebase from 'firebase/compat/app';
 import styled from 'styled-components';
 import {AiOutlineLogin, AiOutlineLogout} from 'react-icons/ai';
 import { signInUser, signOutUser } from '../../helpers/auth';
-// import { Button } from 'reactstrap';
+
+const StyledAuth = styled.div`
+  cursor: pointer;
+  margin-left: 8px;
+`;
+
 export default class Auth extends Component {
   state = {
     user: null,
@@ -45,7 +50,3 @@ export default class Auth extends Component {
     );
   }
 }
-const StyledAuth = styled.div`
-cursor: pointer;
-margin-left: 8px;
-`;
