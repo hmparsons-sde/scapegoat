@@ -19,6 +19,11 @@
     flex-direction: column;
 }
 
+.product-form {
+    display: flex;
+    flex-direction: column;
+}
+
 .product-category-container {
     display: flex;
     flex-direction: row;

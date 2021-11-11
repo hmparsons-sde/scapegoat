@@ -15,7 +15,7 @@ const Products = () => {
     }, []);
   
     return (
-      <div>
+      <div> 
         <nav className='product-header'>
           <h1>Product Catgories</h1>
           <div className='product-header-filter'>
@@ -41,7 +41,7 @@ const Products = () => {
           <h2 className='product-title'>Single Goats</h2>
           <div className='product-category-container'>
             {
-              products.length > 0 && addProduct === false
+              products.length > 0
               ? products.filter(goat => goat.productType === 'Single').map((prod, i) => (
                 <ProductCard
                   key={i}
@@ -59,25 +59,25 @@ const Products = () => {
           <h2 className='product-title'>Small Herds</h2>
           <div className='product-category-container'>
           {
-             products > 0 && addProduct === false
+             products.length > 0
              ? products.filter(goat => goat.productType === 'SmallHerd').map((prod, i) => (
-               <ProductCard
-                 key={i}
-                 productId={prod.productId}
-                 productType={prod.productType}
-                 description={prod.description}
-                 merchantId={prod.merchantId}
-                 price={prod.price}
-                 size={prod.size}
-                 createdAt={prod.createdAt.split('T')[0]}
-                 setProducts={setProducts} />))
+              <ProductCard
+                key={i}
+                productId={prod.productId}
+                productType={prod.productType}
+                description={prod.description}
+                merchantId={prod.merchantId}
+                price={prod.price}
+                size={prod.size}
+                createdAt={prod.createdAt.split('T')[0]}
+                setProducts={setProducts} />))
              : ''
           }
           </div>
           <h2 className='product-title'>Large Herds</h2>
           <div className='product-category-container'>
           {
-             products.length > 0 && addProduct === false
+             products.length > 0
              ?  products.filter(goat => goat.productType === 'LargeHerd').map((prod, i) => (
                <ProductCard
                  key={i}

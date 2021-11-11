@@ -48,13 +48,11 @@ const ProductForm = ({
         if (productId) {
             updateProduct(updatedProduct.productId, updatedProduct)
                 .then(r => setProducts(r));
-            setUpdate(!update);
-            console.warn(updatedProduct);
+            setUpdate(!update);;
         } else {
             createProduct(updatedProduct)
                 .then(r => setProducts(r));
             setAddProduct(false);
-            console.warn(updatedProduct);
         }
     }
     return (
