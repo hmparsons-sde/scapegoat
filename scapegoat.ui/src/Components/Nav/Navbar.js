@@ -68,6 +68,9 @@ export default function NavBar({user}) {
             <li><a className='nav-link' href='/dashboard'>
               My Dashboard
             </a></li>
+            <li><a className='nav-link' href='/users'>
+              Admin
+            </a></li>
           </>
           }
           <li>

@@ -33,13 +33,14 @@ export default function RegistrationForm({onCloseModal, setUsers}) {
     postalCode: '',
     cityName: '',
     state: '',
-    country: ''
+    country: '',
+    isAdmin: false
   });
   
   const handleInputChange = (e) => {
     setUser((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.name === 'isAdmin' ? e.target.checked : e.target.value
     }));
   };
 
@@ -91,6 +92,15 @@ export default function RegistrationForm({onCloseModal, setUsers}) {
               <option value="Medium">Mid-sized Business</option>	
               <option value="Enterprise">Enterprise</option>
         </select>
+        <br/>
+          <input
+            name='isAdmin'
+            type='checkbox'
+            checked={user.isAdmin}
+            onChange={handleInputChange}
+          >
+          </input>
+          <label>admin</label>
         <br/>
         <input
           name='addressLine1'
