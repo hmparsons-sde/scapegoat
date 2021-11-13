@@ -28,13 +28,8 @@ const signInUser = () => {
   firebase.auth().signInWithPopup(provider).then((user) => {
     if (user.additionalUserInfo?.isNewUser){
       const userInfo = {
-        display_Name: user.user?.displayName,
-        image_Url: user.user?.photoURL,
-        firebase_Uid: user.user?.uid,
-        email: user.user?.email,
-      }
-
-      //add the user to your api and database
+        FirebaseKey: user.user?.uid,
+       }
       createNewUser(userInfo);
       window.location.href = '/';
     }

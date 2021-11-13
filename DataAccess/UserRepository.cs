@@ -32,13 +32,22 @@ namespace scapegoat.DataAccess
             if (user == null) return null;
             return user;
         }
+
+        public User GetSingleUserByFBKey(string FirebaseKey)
+        {
+            using var db = new SqlConnection(_connectionString);
+            var singleUser = @"Select * from Users where firebaseKey = @FirebaseKey";
+            var user = db.QuerySingleOrDefault<User>(singleUser, new { firebaseKey = FirebaseKey });
+            if (user == null) return null;
+            return user;
+        }
         public void AddUser(User newUser)
         {
             using var db = new SqlConnection(_connectionString);
 
-            var sql = @"insert into Users(UserType,CustomerTier,FirstName,LastName,AddressLine1,AddressLine2,PostalCode,CityName,State,Country,FirebaseKey)
+            var sql = @"insert into Users(UserType,CustomerTier,FirstName,LastName,AddressLine1,AddressLine2,PostalCode,CityName,State,Country,FirebaseKey,IsAdmin)
                         output inserted.Id
-                        values (@UserType,@CustomerTier,@FirstName,@LastName,@AddressLine1,@AddressLine2,@PostalCode,@CityName,@State,@Country,@FirebaseKey)";
+                        values (@UserType,@CustomerTier,@FirstName,@LastName,@AddressLine1,@AddressLine2,@PostalCode,@CityName,@State,@Country,@FirebaseKey,@IsAdmin)";
 
             var id = db.ExecuteScalar<Guid>(sql, newUser);
             newUser.Id = id;
@@ -51,6 +60,8 @@ namespace scapegoat.DataAccess
                         SET
                         UserType = 2,
                         CustomerTier = 4,
+                        IsAdmin = false,
+                        FirebaseKey = @FirebaseKey,
                         FirstName = @FirstName,
                         LastName = @LastName,
                         CreatedAt = @CreatedAt
@@ -60,12 +71,16 @@ namespace scapegoat.DataAccess
 
             return softRemovedUser;
         }
-        public void UpdateUser(User user)
+        internal User UpdateUser(Guid Id, User user)
         {
             using var db = new SqlConnection(_connectionString);
 
             var sql = @"UPDATE Users
                         SET
+                        UserType = @UserType,
+                        CustomerTier = @CustomerTier,
+                        FirstName = @FirstName,
+                        LastName = @LastName,
                         AddressLine1 = @AddressLine1,
                         AddressLine2 = @AddressLine2,
                         PostalCode = @PostalCode,
@@ -74,7 +89,10 @@ namespace scapegoat.DataAccess
                         Country = @Country
                         WHERE Id = @Id";
 
-            db.Execute(sql, user);
+            user.Id = Id;
+            var updatedUser = db.QueryFirstOrDefault(sql, user);
+
+            return updatedUser;
         }
         internal void HardDeleteUser(Guid Id)
         {
@@ -108,6 +126,13 @@ namespace scapegoat.DataAccess
             using var db = new SqlConnection(_connectionString);
             var unSql = db.Query<User>("Select * from Users where FirstName = @FirstName", new { FirstName }).ToList();
             return unSql;
+        }
+
+        internal List<User> GetAdminUsers(bool IsAdmin)
+        {
+            using var db = new SqlConnection(_connectionString);
+            var adminSql = db.Query<User>("Select * from Users where IsAdmin = @IsAdmin", new { IsAdmin }).ToList();
+            return adminSql;
         }
         // Get User order history
         public List<User> GetOrdersByUserId(Guid userId)
