@@ -110,7 +110,7 @@ const ProductForm = ({
                 </Dropdown>
                 <div className='d-flex justify-content-center'>
                     <div className='d-flex flex-column'>
-                        <Label htmlFor='price' tag='h5'>Price</Label>
+                        <div className='d-flex flex-row justify-content-around align-content-center'><h5 htmlFor='price'>Price</h5><h8>(in USD)</h8></div>
                         <Input 
                             type='text'
                             id='price' 

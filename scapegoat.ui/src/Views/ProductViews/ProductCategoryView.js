@@ -26,7 +26,7 @@ export const ProductCategoryView = () => {
     <nav className='product-header'>
         <h1>{pageTitle} ({categoryGoats.length})</h1>
     </nav>
-        <div className='product-category-container p-2 justify-content-start'>
+        <div className='product-category-container p-2 justify-content-center'>
             { 
                 categoryGoats.length > 0
                 ? categoryGoats.map((prod, i) => (

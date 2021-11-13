@@ -42,7 +42,7 @@ export default function ProductCard({
   };
 
   return (
-      <CardBody className='product-card m-2 border border-dark rounded' style={{maxWidth: '18rem'}}>
+      <CardBody className='product-card m-2 border border-dark rounded' style={{maxWidth: '18rem', minWidth: '18rem'}}>
         <CardTitle tag='h4' className='mb-1'>{description}</CardTitle>
         <CardSubtitle tag='h6' className='mb-3 d-flex flex-column' />
           <CardText>${price} per day</CardText>
