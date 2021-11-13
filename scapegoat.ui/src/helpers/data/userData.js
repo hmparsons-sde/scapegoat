@@ -38,7 +38,7 @@ const updateUser = (id, user) => new Promise((resolve, reject) => {
 });
 
 const softDeleteUser = (id, user) => new Promise((resolve, reject) => {
-  axios.put(`${config.baseUrl}/api/users/${id}`, user)
+  axios.put(`${config.baseUrl}/api/users/SoftDeleteUsers/${id}`, user)
   .then(response => resolve(response.data))
   .catch(error => reject(error));
 });

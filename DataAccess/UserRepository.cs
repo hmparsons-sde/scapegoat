@@ -60,7 +60,8 @@ namespace scapegoat.DataAccess
                         SET
                         UserType = 2,
                         CustomerTier = 4,
-                        IsAdmin = False,
+                        IsAdmin = false,
+                        FirebaseKey = @FirebaseKey,
                         FirstName = @FirstName,
                         LastName = @LastName,
                         CreatedAt = @CreatedAt

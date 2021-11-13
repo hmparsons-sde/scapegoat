@@ -26,7 +26,7 @@ namespace scapegoat.Models
         public string CityName { get; set; }
         public string State { get; set; }
         public string Country { get; set; }
-        public bool IsAdmin { get; set; }
+        public bool? IsAdmin { get; set; }
     }
 
     public enum UserType

@@ -34,6 +34,10 @@ const StyledRemoveDelete = styled.div`
   cursor: pointer;
 `;
 
+const StyledRemoveArchive = styled.div`
+  cursor: pointer;
+`;
+
 export default function CustomerCard({user, setUsers}) {
   const history = useHistory();
 
@@ -66,8 +70,10 @@ export default function CustomerCard({user, setUsers}) {
       <hr/>
       <StyledRemoveDelete>
         <p onClick={() => handleClick('delete')}>Delete <AiOutlineDelete /></p>
-        <p onClick={() => handleClick('remove')}>Archive <AiOutlineEyeInvisible /></p>
       </StyledRemoveDelete>
+      <StyledRemoveArchive>
+        <p onClick={() => handleClick('remove')}>Archive <AiOutlineEyeInvisible /></p>
+      </StyledRemoveArchive>
       <hr/>
       <br/>
     </div>
