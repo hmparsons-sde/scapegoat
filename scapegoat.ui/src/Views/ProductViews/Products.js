@@ -4,17 +4,24 @@ import { Button } from 'reactstrap';
 import ProductCard from '../../Components/Products/ProductCard';
 import ProductForm from '../../Components/Products/ProductForm';
 import { getAllProducts } from '../../helpers/data/productData';
+import { getUserByFBKey } from '../../helpers/data/userData';
 
-const Products = () => {
+const Products = ({ firebaseUser }) => {
     const history = useHistory();
     const [products, setProducts] = useState([]);
     const [addProduct, setAddProduct] = useState(false);
+    const [user, setUser] = useState({});
   
     useEffect(() => { 
       getAllProducts().then((response) => {
         setProducts(response);
       });
     }, [products]);
+
+    useEffect(() => {
+      getUserByFBKey(firebaseUser?.uid).then(setUser);
+  
+    },[firebaseUser.uid])
 
     const handleHistory = (route) => {
       history.push(route);
@@ -73,6 +80,7 @@ const Products = () => {
                     price={prod.price}
                     size={prod.size}
                     createdAt={prod.createdAt.split('T')[0]}
+                    user={user}
                     setProducts={setProducts} />))
               : ''
             }
@@ -100,6 +108,7 @@ const Products = () => {
                   price={prod.price}
                   size={prod.size}
                   createdAt={prod.createdAt.split('T')[0]}
+                  user={user}
                   setProducts={setProducts} />))
               : ''
             }
@@ -127,6 +136,7 @@ const Products = () => {
                     price={prod.price}
                     size={prod.size}
                     createdAt={prod.createdAt.split('T')[0]}
+                    user={user}
                     setProducts={setProducts} />))
               : ''
             }

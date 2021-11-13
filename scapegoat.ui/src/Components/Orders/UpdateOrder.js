@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { updateOrder } from '../../helpers/data/orderData';
 
@@ -12,19 +12,11 @@ border-radius: 25px;
 `;
 
 
-export default function UpdateOrder({ setUpdateSwitch, ...orderItem }) {
-  const [orderItemObj, setOrderItemObj] = useState({
-    id: orderItem?.id || '',
-    userId: orderItem?.user?.id || '',
-    status: 'completed',
-    createdAt: orderItem?.createdAt || Date.now,
-    totalCost: orderItem?.totalCost || 0,
-    paymentId: orderItem?.payment?.id || ''
-  });
+export default function UpdateOrder({ setUpdateSwitch, id }) {
 
 
   const handleSubmit = () => {
-    updateOrder(orderItemObj).then(setOrderItemObj).then(setUpdateSwitch);
+    updateOrder({id: id, status: 'completed'}).then(setUpdateSwitch);
   }
 
   return (
