@@ -13,6 +13,7 @@ import Payments from '../Views/PaymentView/Payments';
 import DashRouter from '../Views/UserViews/Dashboards/DashRouter';
 import PleaseLogin from '../Views/UserViews/PleaseLogin';
 import { ProductCategoryView } from '../Views/ProductViews/ProductCategoryView';
+import CreditCardForm from '../Components/Payments/CreditCardPayment/CardPaymentForm';
 
 export default function Routes({user, products, setProducts, users, setUsers, payments, setPayments, isAdmin}) {
 
