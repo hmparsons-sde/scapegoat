@@ -3,7 +3,6 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from '../Views/HomeView';
 import Products from '../Views/ProductViews/Products';
 import SingleProductView from '../Views/ProductViews/SingleProductView';
-import Orders from '../Views/OrderViews/Orders';
 import AllUserList from '../Views/AdminViews/AllUserList';
 import CartView from '../Views/CartViews/CartView';
 import OrderView from '../Views/OrderViews/OrderView';
@@ -23,22 +22,23 @@ export default function Routes({user, products, setProducts, users, setUsers, pa
       <Switch>
       {/* Public Views */}
         <Route exact path='/' component={Home} />
-        <Route exact path='/products' component={() => <Products />} />
-        <Route exact path='/products/:id' component={SingleProductView} />
+        <Route exact path='/products' component={() => <Products firebaseUser={user}/>} />
+        <Route exact path='/products/:id' component={() => <SingleProductView firebaseUser={user} /> } />
         <Route exact path='/products/category/:category' component={ProductCategoryView} />
         <Route exact path='/merchants' component={MerchantDashboardView}/>
         <Route exact path='/search' component={SearchResults}/>
         <Route exact path='/pleaseLogin' component={PleaseLogin}/>
         
       {/* User Views */}
-        <PrivateRoute exact path='/orders' user={user} component={() => <Orders user={user} /> }/>
+        <PrivateRoute exact path='/orders' user={user} component={() => <OrderView firebaseUser={user} /> }/>
         <PrivateRoute exact path='/dashboard' user={user} component={() => <DashRouter firebaseUser={user}/>} />
-        <PrivateRoute exact path='/cart' user={user} component={CartView}/>
+        <PrivateRoute exact path='/cart' user={user} component={() => <CartView firebaseUser={user} /> } />
         <PrivateRoute exact path='/payments' user={user} component={() => <Payments />} />
         <PrivateRoute exact path='/payments/:id' user={user} component={SinglePaymentView} />
+        <PrivateRoute exat path = '/creditcardpayments' user ={user} component={() => <CreditCardForm user={user}/>} />
 
       {/* TO DO: Re-route/remove params */}
-        <PrivateRoute exact path='/users/:id/order' user={user} component={OrderView}/>
+        <PrivateRoute exact path='/users/:id/order' user={user} component={() => <OrderView user={user} /> }/>
 
       {/* Admin Views */}
       {isAdmin? <PrivateRoute exact path='/users' user={user} component={() =>  <AllUserList users={users} setUsers={setUsers}/>} /> : null }

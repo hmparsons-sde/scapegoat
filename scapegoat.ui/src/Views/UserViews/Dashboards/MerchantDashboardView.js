@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import FulfillOrders from '../../../Components/Orders/FulfillOrders';
-import { getMerchantOrders } from '../../../helpers/data/orderData';
+import MerchantMetrics from '../../../Components/Orders/MerchantMetrics';
+import MerchantProductCard from '../../../Components/Products/MerchantProductCard';
+import { getMerchantOrders, getMonthlyOrders } from '../../../helpers/data/orderData';
+import { getMerchantProducts } from '../../../helpers/data/productData';
 
 export default function MerchantDashboardView({user}) {
   const [merchantOrders, setMerchantOrders] = useState([]);
+  const [thisMonthOrders, setThisMonthOrders] = useState([]);
+  const [merchantProducts, setMerchantProducts] = useState([]);
 
   useEffect(() => {
     getMerchantOrders(user?.id).then(setMerchantOrders);
+    getMonthlyOrders(user?.id).then(setThisMonthOrders);
+    getMerchantProducts(user?.id).then(setMerchantProducts);
   }, [user?.id]);
 
-
+  console.warn(merchantProducts);
   
   return (
     <div>
       <h1>merchant dash</h1>
-      {/* <Metrics />
-      <ProductAdmin /> */}
       {
       merchantOrders
       ? merchantOrders.map((order) => (
@@ -24,6 +29,24 @@ export default function MerchantDashboardView({user}) {
         </>
       )) 
       : null
+      }
+      <MerchantMetrics merchantOrders={merchantOrders} monthlyOrders={thisMonthOrders} />
+      <h2>My Products</h2>
+      {merchantProducts
+      ? merchantProducts.map((product) => (
+        //TODO: create my own product card and update form
+        <MerchantProductCard 
+        key={product.productId}
+        productId={product.productId} 
+        productType={product.productType} 
+        description={product.description} 
+        merchantId={product.merchantId} 
+        price={product.price}
+        size={product.size}
+        createdAt={product.createdAt}
+        setProducts={setMerchantProducts}/>
+      ))
+      : <p>You currently have no products.</p>
       }
     </div>
   )
