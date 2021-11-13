@@ -43,7 +43,32 @@ const deleteOrder = (id) => new Promise((resolve, reject) => {
   axios.delete(`${config.baseUrl}/harddeleteorder/${id}`)
   .then(response => resolve(response))
   .catch(error => reject(error));
-})
+});
+
+const checkOrderStatus = (userId) => new Promise((resolve, reject) => {
+  axios.get(`${config.baseUrl}/pendingCustomerOrder/${userId}`)
+  .then(response => resolve(response.data))
+  .then(error => reject(error));
+});
+
+const getPendingOrderInfo = (userId) => new Promise((resolve, reject) => {
+  axios.get(`${config.baseUrl}/openOrder/${userId}`)
+  .then(response => resolve(response.data))
+  .then(error => reject(error));
+}); 
+
+const getCompletedOrders = (userId) => new Promise((resolve, reject) => {
+  axios.get(`${config.baseUrl}/completedCustomerOrder/${userId}`)
+  .then(response => resolve(response.data))
+  .then(error => reject(error));
+}); 
+
+const getMonthlyOrders = (userId) => new Promise((resolve, reject) => {
+  axios.get(`${config.baseUrl}/thisMonth/${userId}`)
+  .then(response => resolve(response.data))
+  .then(error => reject(error));
+}); 
+
 
 // order join data
 
@@ -91,6 +116,10 @@ export {
   createOrder,
   updateOrder,
   deleteOrder,
+  checkOrderStatus,
+  getPendingOrderInfo,
+  getCompletedOrders,
+  getMonthlyOrders,
   getAllOrderItems,
   getOrderItemsById,
   getOrderItemsByOrderId,
