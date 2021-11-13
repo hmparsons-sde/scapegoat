@@ -122,6 +122,141 @@ namespace scapegoat.DataAccess
             return firstOrder;
         }
 
+        internal IEnumerable<OrderJoin> GetMonthlyOrders(Guid userId)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sqlString = @"select p.ProductId as Id, p.MerchantId, oi.ProductId as Id, oi.OrderId, o.*, u.*
+                                from Products p
+                                join OrderItems oi
+                                on p.ProductId = oi.ProductId
+                                join Orders o
+                                on oi.OrderId = o.Id
+                                join Users u 
+                                on o.UserId = u.Id
+                                where p.MerchantId = @UserId
+                                and year(o.CreatedAt)=@CurrentYear AND month(o.CreatedAt)=@CurrentMonth";
+
+            var currentMonth = DateTime.Now.Month;
+            var currentYear = DateTime.Now.Year;
+
+            var orders = db.Query<OrderJoin, User, OrderJoin>(sqlString, Map, new { UserId = userId, CurrentYear = currentYear, CurrentMonth = currentMonth }, splitOn: "id") ;
+
+            foreach (var order in orders)
+            {
+                var itemsQuery = @"select * from OrderItems where OrderId = @Id";
+
+                var lineItems = db.Query<OrderItemJoin>(itemsQuery, order);
+
+                order.LineItems = lineItems;
+
+                var thisOrderItems = order.LineItems;
+
+                var runningTotal = 0m;
+
+                foreach (var item in thisOrderItems)
+                {
+                    var thisProductTotalCost = 0m;
+                    var productQuery = @"select * from Products where ProductId = @ProductId AND MerchantId = @UserId";
+
+                    var thisItemId = item.ProductId;
+
+                    var itemProduct = db.Query<Product>(productQuery, new { ProductId = thisItemId, UserId = userId });
+
+                    item.Product = itemProduct;
+
+                    var thisProduct = item.Product;
+
+                    foreach (var prod in thisProduct)
+                    {
+                        thisProductTotalCost = prod.Price * item.Quantity;
+                    }
+
+                    runningTotal += thisProductTotalCost;
+                }
+
+                order.TotalCost = runningTotal;
+                var updateTotal = @"update Orders Set
+                                        TotalCost = @TotalCost
+                                     output inserted.*
+                                     Where id = @id";
+
+                var updatedOrder = db.QuerySingleOrDefault<OrderJoin>(updateTotal, order);
+            }
+
+            return orders;
+        }
+
+        internal IEnumerable<Order> GetCustomerPending(Guid userId)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sqlString = @"select *
+                                from orders o
+                                where o.userId = @userId AND o.status = 'pending'";
+
+            var pendingOrders = db.Query<Order>(sqlString, new { userId });
+
+            return pendingOrders;
+        }
+
+        internal IEnumerable<OrderJoin> GetCustomerShipped(Guid userId)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sqlString = @"select *
+                                from orders o
+                                join users u
+                                on o.UserId = u.Id
+                                where o.userId = @userId AND o.status = 'completed'";
+
+            var orders = db.Query<OrderJoin, User, OrderJoin>(sqlString, Map, new { UserId = userId }, splitOn: "id");
+
+            foreach (var order in orders)
+            {
+                var itemsQuery = @"select * from OrderItems where OrderId = @Id";
+
+                var lineItems = db.Query<OrderItemJoin>(itemsQuery, order);
+
+                order.LineItems = lineItems;
+
+                var thisOrderItems = order.LineItems;
+
+                var runningTotal = 0m;
+
+                foreach (var item in thisOrderItems)
+                {
+                    var thisProductTotalCost = 0m;
+                    var productQuery = @"select * from Products where ProductId = @ProductId";
+
+                    var thisItemId = item.ProductId;
+
+                    var itemProduct = db.Query<Product>(productQuery, new { ProductId = thisItemId });
+
+                    item.Product = itemProduct;
+
+                    var thisProduct = item.Product;
+
+                    foreach (var prod in thisProduct)
+                    {
+                        thisProductTotalCost = prod.Price * item.Quantity;
+                    }
+
+                    runningTotal += thisProductTotalCost;
+                }
+
+                order.TotalCost = runningTotal;
+                var updateTotal = @"update Orders Set
+                                        TotalCost = @TotalCost
+                                     output inserted.*
+                                     Where id = @id";
+
+                var updatedOrder = db.QuerySingleOrDefault<OrderJoin>(updateTotal, order);
+            }
+
+            return orders;
+        }
+
         internal OrderJoin GetByUserId(Guid userId)
         {
             using var db = new SqlConnection(_connectionString);
@@ -179,7 +314,7 @@ namespace scapegoat.DataAccess
             return orders.FirstOrDefault();
         }
 
-        internal IEnumerable<OrderJoin> GetAllUserCarts(Guid userId)
+        internal OrderJoin GetFullPendingOrder(Guid userId)
         {
             using var db = new SqlConnection(_connectionString);
 
@@ -187,7 +322,7 @@ namespace scapegoat.DataAccess
                                 from orders o
                                 join users u
                                 on o.UserId = u.Id
-                                where o.userId = @userId";
+                                where o.userId = @userId AND o.status = 'pending'";
 
             var orders = db.Query<OrderJoin, User, OrderJoin>(sqlString, Map, new { UserId = userId }, splitOn: "id");
 
@@ -233,6 +368,67 @@ namespace scapegoat.DataAccess
                 var updatedOrder = db.QuerySingleOrDefault<OrderJoin>(updateTotal, order);
             }
 
+            return orders.FirstOrDefault();
+        }
+
+        internal IEnumerable<OrderJoin> GetAllUserCarts(Guid userId)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            var sqlString = @"select p.ProductId as Id, p.MerchantId, oi.ProductId as Id, oi.OrderId, o.*, u.*
+                                from Products p
+                                join OrderItems oi
+                                on p.ProductId = oi.ProductId
+                                join Orders o
+                                on oi.OrderId = o.Id
+                                join Users u 
+                                on o.UserId = u.Id
+                                where p.MerchantId = @UserId";
+
+            var orders = db.Query<OrderJoin, User, OrderJoin>(sqlString, Map, new { UserId = userId }, splitOn: "id");
+
+            foreach (var order in orders)
+            {
+                var itemsQuery = @"select * from OrderItems where OrderId = @Id";
+
+                var lineItems = db.Query<OrderItemJoin>(itemsQuery, order);
+
+                order.LineItems = lineItems;
+
+                var thisOrderItems = order.LineItems;
+
+                var runningTotal = 0m;
+
+                foreach (var item in thisOrderItems)
+                {
+                    var thisProductTotalCost = 0m;
+                    var productQuery = @"select * from Products where ProductId = @ProductId AND MerchantId = @UserId";
+
+                    var thisItemId = item.ProductId;
+
+                    var itemProduct = db.Query<Product>(productQuery, new { ProductId = thisItemId, UserId = userId });
+
+                    item.Product = itemProduct;
+
+                    var thisProduct = item.Product;
+
+                    foreach (var prod in thisProduct)
+                    {
+                        thisProductTotalCost = prod.Price * item.Quantity;
+                    }
+
+                    runningTotal += thisProductTotalCost;
+                }
+
+                order.TotalCost = runningTotal;
+                var updateTotal = @"update Orders Set
+                                        TotalCost = @TotalCost
+                                     output inserted.*
+                                     Where id = @id";
+
+                var updatedOrder = db.QuerySingleOrDefault<OrderJoin>(updateTotal, order);
+            }
+
             return orders;
         }
 
@@ -240,9 +436,9 @@ namespace scapegoat.DataAccess
         {
             using var db = new SqlConnection(_connectionString);
 
-            var sql = @"insert into Orders(UserId, Status, CreatedAt, TotalCost)
+            var sql = @"insert into Orders(UserId, Status)
                                     output inserted.Id
-                                    values(@UserId, @Status, @CreatedAt)";
+                                    values(@UserId, @Status)";
 
 
             var id = db.ExecuteScalar<Guid>(sql, newOrder);
@@ -254,12 +450,10 @@ namespace scapegoat.DataAccess
             using var db = new SqlConnection(_connectionString);
 
             var sql = @"update Orders Set
-                                        UserId = @UserId, 
-                                        Status = @Status,
-                                        CreatedAt = @CreatedAt,
-                                        TotalCost = @TotalCost,
+                                     Status = @Status
                                      output inserted.*
                                      Where id = @id";
+
 
             order.Id = id;
             var updatedOrder = db.QuerySingleOrDefault<Order>(sql, order);

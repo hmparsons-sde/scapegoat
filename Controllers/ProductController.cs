@@ -77,5 +77,11 @@ namespace scapegoat.Controllers
 
             return Ok(updatedProduct);
         }
+
+        [HttpGet("/merchantProducts/{id}")]
+        public IActionResult GetMerchantProducts(Guid id)
+        {
+            return Ok(_repo.GetProductsByMerchantId(id));
+        }
     }
 }

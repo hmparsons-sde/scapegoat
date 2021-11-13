@@ -13,6 +13,12 @@ const getSingleProduct = (id) => new Promise((resolve, reject) => {
     .catch(error => reject(error));
 });
 
+const getMerchantProducts = (id) => new Promise((resolve, reject) => {
+  axios.get(`${config.baseUrl}/merchantProducts/${id}`)
+    .then(response => resolve(response.data))
+    .catch(error => reject(error));
+});
+
 const deleteProduct = (id) => new Promise((resolve, reject) => {
   axios.delete(`${config.baseUrl}/api/Products/${id}`)
     .then(() => {
@@ -68,5 +74,6 @@ export {
   createProduct,
   getProductsByType,
   deleteProductByType,
-  updateProductByType
+  updateProductByType,
+  getMerchantProducts
 };
