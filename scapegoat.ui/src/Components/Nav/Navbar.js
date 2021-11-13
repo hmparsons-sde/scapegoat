@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-// import { signInUser } from '../../helpers/auth';
 import Auth from '../../Views/UserViews/Auth';
 
 const StyledNav = styled.div`
@@ -45,24 +44,41 @@ const StyledNav = styled.div`
 
   `;
 
-export default function NavBar() {
-   return (
-      <StyledNav>
-        <ul>
-          <li><a className='nav-link' href='/'>
-          <b>scapegoat*</b>
-          </a></li>
-          <li><a className='nav-link' href='/products'>
-          Product Catgories
-        </a></li>
-        <li><a className='nav-link' href='/users'>
-          Users
-        </a></li>
-        <li><a className='nav-link' href='/search'>
-          Search
-        </a></li>
-          <Auth/>
-        </ul>
-      </StyledNav>
-  )
+export default function NavBar({ user, isAdmin }) {
+    return (
+        <StyledNav>
+            <ul>
+                <li><a className='nav-link' href='/'>
+                    <b>scapegoat*</b>
+                </a></li>
+                <li><a className='nav-link' href='/products'>
+                    Product Categories
+                </a></li>
+                <li><a className='nav-link' href='/search'>
+                    Search
+                </a></li>
+                {user &&
+                    <>
+                        <li><a className='nav-link' href='/cart'>
+                            Cart
+                        </a></li>
+                        <li><a className='nav-link' href='/payments'>
+                            Payments
+                        </a></li>
+                        <li><a className='nav-link' href='/dashboard'>
+                            My Dashboard
+                        </a></li>
+                    </>
+                }
+                {isAdmin &&
+                    <li><a className='nav-link' href='/users'>
+                        Admin
+                    </a></li>
+                }
+                <li>
+                    <Auth />
+                </li>
+            </ul>
+        </StyledNav>
+    )
 };
