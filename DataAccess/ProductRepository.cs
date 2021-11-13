@@ -33,6 +33,13 @@ namespace scapegoat
             return product;
         }
 
+        internal List<Product> GetProductsByType(ProductType productType)
+        {
+            using var db = new SqlConnection(_connectionString);
+            var productArray = db.Query<Product>(@"SELECT * from Products WHERE ProductType = @productType", new { productType });
+            return (List<Product>)productArray;
+        }
+
         internal void AddProduct(Product product)
         {
             using var db = new SqlConnection(_connectionString);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using scapegoat.Models;
 
@@ -32,6 +33,12 @@ namespace scapegoat.Controllers
             }
 
             return Ok(product);
+        }
+
+        [HttpGet("ProductTypes/{productType}")]
+        public List<Product> GetProductsByType(ProductType productType)
+        {
+            return _repo.GetProductsByType(productType);
         }
 
         [HttpPost]
