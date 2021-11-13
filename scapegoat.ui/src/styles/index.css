@@ -36,6 +36,12 @@ textarea {
   border-radius: 4px;
 }
 
+.home-image {
+  width: 70%;
+  height: auto;
+}
+
+
 select {
   height: 38px;
   width: 90%;

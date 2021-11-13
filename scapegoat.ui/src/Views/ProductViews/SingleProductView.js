@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Button } from 'reactstrap';
 import { getSingleProduct} from '../../helpers/data/productData';
-import ProductCard from '../../Components/Products/ProductCard';
 import { getUserByFBKey } from '../../helpers/data/userData';
 
 export default function SingleProductView({ firebaseUser }) {
@@ -25,16 +25,11 @@ export default function SingleProductView({ firebaseUser }) {
 
   return (
     <div>
-      <ProductCard 
-        productId={singleProduct.productId}
-        productType={singleProduct.productType}
-        description={singleProduct.description}
-        merchantId={singleProduct.merchantId}
-        price={singleProduct.price}
-        size={singleProduct.size}
-        createdAt={date[0]}
-        user={user}
-      />
+      <h1>{singleProduct.description}</h1>
+      <h2>{singleProduct.price} per day</h2>
+      <h2>Quantity: {singleProduct.size}</h2>
+      <h2>Created on {date[0]}</h2>
+      <Button onClick={() =>  console.warn('added to cart')}>Add to Cart</Button>
     </div>
   );
 }
