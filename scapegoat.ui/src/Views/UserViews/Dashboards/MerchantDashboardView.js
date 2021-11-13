@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import FulfillOrders from '../../../Components/Orders/FulfillOrders';
 import MerchantMetrics from '../../../Components/Orders/MerchantMetrics';
-import ProductCard from '../../../Components/Products/ProductCard';
+import MerchantProductCard from '../../../Components/Products/MerchantProductCard';
 import { getMerchantOrders, getMonthlyOrders } from '../../../helpers/data/orderData';
 import { getMerchantProducts } from '../../../helpers/data/productData';
 
@@ -35,7 +35,7 @@ export default function MerchantDashboardView({user}) {
       {merchantProducts
       ? merchantProducts.map((product) => (
         //TODO: create my own product card and update form
-        <ProductCard 
+        <MerchantProductCard 
         key={product.productId}
         productId={product.productId} 
         productType={product.productType} 
