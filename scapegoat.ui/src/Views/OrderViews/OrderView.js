@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { getCompletedOrders } from '../../helpers/data/orderData';
-import { useHistory, useParams } from 'react-router';
+import { useHistory } from 'react-router';
+import { getUserByFBKey } from '../../helpers/data/userData';
 
 
 const CartButton = styled.button`
@@ -32,15 +33,18 @@ flex-wrap: wrap;
 justify-content: center;
 `;
 
-export default function OrderView() {
+export default function OrderView({ firebaseUser }) {
   const [userOrders, setUserOrders] = useState([]);
-  const { id } = useParams();
   const history = useHistory();
 
   useEffect(() => {
-    getCompletedOrders(id)
+    getUserByFBKey(firebaseUser.uid).then((resp) => {
+      console.warn(resp);
+      getCompletedOrders(resp.id)
     .then(setUserOrders);
-  },[id])
+    })
+    
+  },[firebaseUser.uid])
   
 
   return (

@@ -16,10 +16,13 @@ export default function ProductCard({
   createdAt,
   setProducts, 
   setCategoryGoats, 
+  user
 }) {
   const [update, setUpdate] = useState(false);
   const history = useHistory();
   const { category } = useParams();
+
+console.warn(user);
 
   const handleButton = (p) => {
     switch (p) {
@@ -38,13 +41,14 @@ export default function ProductCard({
         history.push(`/products/${productId}`)
       break;
       case 'cart':
-        checkOrderStatus('0999c62f-0951-49fd-bc38-df8df6d4d244').then(resp => {
+        checkOrderStatus(user.id).then(resp => {
+          console.warn(user.id);
           if (resp.length === 0) {
             createOrder({
-              userId: '0999c62f-0951-49fd-bc38-df8df6d4d244',
+              userId: user.id,
               status: 'pending',
             }).then(() => {
-              checkOrderStatus('0999c62f-0951-49fd-bc38-df8df6d4d244').then(resp2 => {
+              checkOrderStatus(user.id).then(resp2 => {
                 createOrderItem({
                   orderId: resp2[0].id,
                   productId: productId,
@@ -78,7 +82,7 @@ export default function ProductCard({
           <Button outline onClick={() => handleButton('single')}><AiOutlineInfoCircle /></Button>
           <Button outline onClick={() => handleButton('update')}><AiOutlineEdit /></Button>
           <Button outline onClick={() => handleButton('delete')}><AiOutlineDelete /></Button>
-          <Button outline onClick={() => console.warn(category)}><AiOutlineShoppingCart /></Button>
+          <Button outline onClick={() => handleButton('cart')}><AiOutlineShoppingCart /></Button>
         </ButtonGroup>
         {
           update
