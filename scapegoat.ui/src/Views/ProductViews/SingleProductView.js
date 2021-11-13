@@ -4,25 +4,27 @@ import { getSingleProduct} from '../../helpers/data/productData';
 import ProductCard from '../../Components/Products/ProductCard';
 
 export default function SingleProductView() {
-  const [product, setProduct] = useState({});
+  const [singleProduct, setSingleProduct] = useState({});
+  const [date, setDate] = useState('');
   const { id } = useParams();
 
   useEffect(() => {
     getSingleProduct(id).then(data => {
-      setProduct(data);
+      setSingleProduct(data);
+      setDate(data.createdAt.split('T'));
     });
   }, [id]);
 
   return (
     <div>
       <ProductCard 
-        productId={product.productId}
-        productType={product.productType}
-        description={product.description}
-        merchantId={product.merchantId}
-        price={product.price}
-        size={product.size}
-        createdAt={product.createdAt}
+        productId={singleProduct.productId}
+        productType={singleProduct.productType}
+        description={singleProduct.description}
+        merchantId={singleProduct.merchantId}
+        price={singleProduct.price}
+        size={singleProduct.size}
+        createdAt={date[0]}
       />
     </div>
   );

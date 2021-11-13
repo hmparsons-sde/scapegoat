@@ -1,12 +1,15 @@
 import React from "react";
 import { useHistory } from "react-router";
 import styled from 'styled-components';
+import moment from 'moment';
 import { getAllUsers, hardDeleteUser, softDeleteUser } from "../../../helpers/data/userData";
+import { AiOutlineDelete, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const SellerIDCard = styled.div`
-  width: 300px;
+  width: 33%;
   height: auto;
   margin: 15px;
+  padding: 10px;
   border-style: solid;
   box-shadow: 50px;
   border-radius: 25px;
@@ -27,20 +30,11 @@ const SellerIDCard = styled.div`
   }
 `;
 
-const ViewSellerButton = styled.div`
-  background-color: #e7e7e7;
-  color: black;
-  font-weight: 400;
-  border: solid;
-  border-color: #7f7f7f;
-  border-radius: 10px;
-  padding: 15px 15px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  margin-bottom: 25px;
-  margin-top: 10px;
+const StyledRemoveDelete = styled.div`
+  cursor: pointer;
+`;
+
+const StyledRemoveArchive = styled.div`
   cursor: pointer;
 `;
 
@@ -62,15 +56,26 @@ export default function CustomerCard({user, setUsers}) {
     }
   };
 
+  const date = moment.utc(user.createdAt).format();
+  const local = moment.utc(date).local().format("dddd, MMMM Do YYYY, h:mm a");
+
   return (
   <SellerIDCard>
     <div>
-    <br/>
-    <hr/>
-    <button className='btn-md' color="danger" onClick={() => handleClick('delete')}>Delete User</button>
-    <button className='btn-md' color="danger" onClick={() => handleClick('remove')}>Remove User</button>
-    <hr/>
-      <ViewSellerButton className='btn-md mr-1 ml-5 p-2' color="danger" onClick={() => handleClick('view')}>{user.firstName} {user.lastName}</ViewSellerButton>
+        <p>{user.firstName} {user.lastName}</p>
+        <p>Type: {user.userType}</p>
+        <p>Tier: {user.customerTier}</p>
+        <p>Created: {local}</p>
+        <p>{user.addressLine1}, {user.addressLine2}, {user.cityName}, {user.state}, {user.country}</p>
+      <hr/>
+      <StyledRemoveDelete>
+        <p onClick={() => handleClick('delete')}>Delete <AiOutlineDelete /></p>
+      </StyledRemoveDelete>
+      <StyledRemoveArchive>
+        <p onClick={() => handleClick('remove')}>Archive <AiOutlineEyeInvisible /></p>
+      </StyledRemoveArchive>
+      <hr/>
+      <br/>
     </div>
     </SellerIDCard>
   )

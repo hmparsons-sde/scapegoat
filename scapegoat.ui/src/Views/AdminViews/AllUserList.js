@@ -4,7 +4,7 @@ import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { getAllUsers } from "../../helpers/data/userData";
 import CustomerCard from "../../Components/Users/Customers/CustomerCard";
-import UserInfoForm from "../../Components/Forms/UserForms/UserInfoForm";
+import RegistrationForm from "../../Components/Forms/UserForms/RegistrationForm";
 
 const AllUsersContainer = styled.div`
   display: flex;
@@ -82,7 +82,7 @@ export default function AllUserList() {
             modal: 'customModal',
           }}
         >
-          <UserInfoForm/>
+          <RegistrationForm onCloseModal={onCloseModal} setUsers={setUsers}/>
         </Modal>
         <AllUsersContainer>
           {SingleSeller}

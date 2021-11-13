@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import React, { useState } from "react";
+import { useHistory, useParams } from "react-router";
 import { Button, ButtonGroup, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
-import { deleteProduct } from "../../helpers/data/productData";
+import { deleteProduct, deleteProductByType } from "../../helpers/data/productData";
 import ProductForm from "./ProductForm";
 import { AiOutlineShoppingCart, AiOutlineDelete, AiOutlineInfoCircle, AiOutlineEdit } from 'react-icons/ai'
 
@@ -13,20 +13,22 @@ export default function ProductCard({
   price,
   size,
   createdAt,
-  setProducts
+  setProducts, 
+  setCategoryGoats, 
 }) {
   const [update, setUpdate] = useState(false);
-  const [date, setDate] = useState('');
   const history = useHistory();
-
-  useEffect(() => {
-    setDate(createdAt);
-  }, [createdAt]);
+  const { category } = useParams();
 
   const handleButton = (p) => {
     switch (p) {
       case 'delete': 
-        deleteProduct(productId).then(r => setProducts(r));
+        if (category) {
+          deleteProductByType(productId, category)
+            .then(setCategoryGoats);
+        } else {
+          deleteProduct(productId).then(r => setProducts(r));
+        }
       break;
       case 'update':
         setUpdate(!update)
@@ -40,36 +42,35 @@ export default function ProductCard({
   };
 
   return (
-    <CardBody>
-      <CardTitle tag='h5'>{description}</CardTitle>
-      <CardSubtitle tag='h6' className='mb-2 d-flex flex-column'>
-        <CardText>{productType}</CardText>
-        <CardText>Price: {price}</CardText>
-        <CardText>Size: {size}</CardText>
-        <CardText>Added on {date}</CardText>
-      </CardSubtitle>
-      <ButtonGroup>
-        <Button outline onClick={() => handleButton('single')}><AiOutlineInfoCircle /></Button>
-        <Button outline onClick={() => handleButton('update')}><AiOutlineEdit /></Button>
-        <Button outline onClick={() => handleButton('delete')}><AiOutlineDelete /></Button>
-        <Button outline onClick={() => console.warn(date)}><AiOutlineShoppingCart /></Button>
-      </ButtonGroup>
-      {
-        update
-        ? <ProductForm 
-            productId={productId}
-            productType={productType}
-            description={description}
-            merchantId={merchantId}
-            price={price}
-            size={size}
-            createdAt={createdAt}
-            setProducts={setProducts}
-            update={update}
-            setUpdate={setUpdate}
-          />
-        : ''
-      }
-    </CardBody>
+      <CardBody className='product-card m-2 border border-dark rounded' style={{maxWidth: '18rem'}}>
+        <CardTitle tag='h4' className='mb-1'>{description}</CardTitle>
+        <CardSubtitle tag='h6' className='mb-3 d-flex flex-column' />
+          <CardText>${price} per day</CardText>
+          <CardText>Quantity: {size}</CardText>
+          <CardText>Added on {createdAt}</CardText>
+        <ButtonGroup>
+          <Button outline onClick={() => handleButton('single')}><AiOutlineInfoCircle /></Button>
+          <Button outline onClick={() => handleButton('update')}><AiOutlineEdit /></Button>
+          <Button outline onClick={() => handleButton('delete')}><AiOutlineDelete /></Button>
+          <Button outline onClick={() => console.warn(category)}><AiOutlineShoppingCart /></Button>
+        </ButtonGroup>
+        {
+          update
+          ? <ProductForm 
+              productId={productId}
+              productType={productType}
+              description={description}
+              merchantId={merchantId}
+              price={price}
+              size={size}
+              createdAt={createdAt}
+              setProducts={setProducts}
+              setCategoryGoats={setCategoryGoats}
+              update={update}
+              setUpdate={setUpdate}
+            />
+          : ''
+        }
+      </CardBody>
   )
 }
