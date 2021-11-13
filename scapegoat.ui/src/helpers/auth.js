@@ -33,8 +33,6 @@ const signInUser = () => {
         firebase_Uid: user.user?.uid,
         email: user.user?.email,
       }
-
-      //add the user to your api and database
       createNewUser(userInfo);
       window.location.href = '/';
     }

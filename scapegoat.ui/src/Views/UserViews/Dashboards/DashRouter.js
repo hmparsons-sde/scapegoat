@@ -1,25 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router';
-import { getSingleUser } from '../../../helpers/data/userData';
+import React, {useEffect, useState} from 'react'
+import { getUserByFBKey } from '../../../helpers/data/userData';
 import CustomerDashboardView from './CustomerDashboardView';
 import MerchantDashboardView from './MerchantDashboardView';
 
-export default function DashRouter() {
+export default function DashRouter({firebaseUser}) {
   const [user, setUser] = useState({});
-  const { id } = useParams();
 
   useEffect(() => {
-    getSingleUser(id).then(data => setUser(data));
-  }, [id]);
-
-  console.warn(user);
+    if (firebaseUser.uid) {
+      getUserByFBKey(firebaseUser.uid).then((response) => setUser(response));
+    }
+  }, [firebaseUser]);
   
   const sellerStatus = user.userType === "Merchant";
   return (
     <div>
       {sellerStatus 
       ? <MerchantDashboardView user={user} />
-      : <CustomerDashboardView user={user} />
+      : <CustomerDashboardView user={user} setUser={setUser} photoURL={firebaseUser.photoURL} />
     }
     </div>
   )
