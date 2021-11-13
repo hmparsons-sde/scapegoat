@@ -36,3 +36,10 @@ select {
   border: 1px solid #cb997e;
   border-radius: 4px;
 }
+
+.home-image {
+  width: 70%;
+  height: auto;
+}
+
+
