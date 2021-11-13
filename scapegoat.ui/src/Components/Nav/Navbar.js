@@ -44,7 +44,7 @@ const StyledNav = styled.div`
 
   `;
 
-export default function NavBar({user}) {
+export default function NavBar({user, isAdmin}) {
    return (
       <StyledNav>
         <ul>
@@ -68,10 +68,12 @@ export default function NavBar({user}) {
             <li><a className='nav-link' href='/dashboard'>
               My Dashboard
             </a></li>
+          </>
+          }
+          {isAdmin &&
             <li><a className='nav-link' href='/users'>
               Admin
             </a></li>
-          </>
           }
           <li>
           <Auth/>

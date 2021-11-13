@@ -10,12 +10,18 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from './helpers/Routes';
 import NavBar from './Components/Nav/Navbar';
 import Footer from './Components/Nav/Footer';
+import { getUserByFBKey } from './helpers/data/userData';
 
 
 function App() {
   const [products, setProducts] = useState([]);
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
+  const [isAdmin, setIsAdmin] = useState(false)
+
+  useEffect(() => {
+    getUserByFBKey(user.uid).then(resp => setIsAdmin(resp.isAdmin))
+  }, [user.uid])
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authed) => {
@@ -32,7 +38,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <NavBar user={user} setProducts={setProducts} setUsers={setUsers} setUser={setUser}/>
+        <NavBar user={user} setProducts={setProducts} setUsers={setUsers} setUser={setUser} isAdmin={isAdmin}/>
         <Routes
           products={products}
           setProducts={setProducts}
@@ -40,6 +46,7 @@ function App() {
           setUsers={setUsers}
           user={user}
           setUser={setUser}
+          isAdmin={isAdmin}
         />
         <Footer></Footer>
       </Router>

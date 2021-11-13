@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import styled from 'styled-components';
 import moment from 'moment';
 import { getAllUsers, hardDeleteUser, softDeleteUser } from "../../../helpers/data/userData";
+import { AiOutlineDelete, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const SellerIDCard = styled.div`
   width: 33%;
@@ -27,6 +28,10 @@ const SellerIDCard = styled.div`
   hr {
     width: 50%;
   }
+`;
+
+const StyledRemoveDelete = styled.div`
+  cursor: pointer;
 `;
 
 export default function CustomerCard({user, setUsers}) {
@@ -59,8 +64,10 @@ export default function CustomerCard({user, setUsers}) {
         <p>Created: {local}</p>
         <p>{user.addressLine1}, {user.addressLine2}, {user.cityName}, {user.state}, {user.country}</p>
       <hr/>
-        <button onClick={() => handleClick('delete')}>Delete User</button>
-        <button onClick={() => handleClick('remove')}>Remove User</button>
+      <StyledRemoveDelete>
+        <p onClick={() => handleClick('delete')}>Delete <AiOutlineDelete /></p>
+        <p onClick={() => handleClick('remove')}>Archive <AiOutlineEyeInvisible /></p>
+      </StyledRemoveDelete>
       <hr/>
       <br/>
     </div>

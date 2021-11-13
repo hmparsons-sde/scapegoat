@@ -14,7 +14,8 @@ import Payments from '../Views/PaymentView/Payments';
 import DashRouter from '../Views/UserViews/Dashboards/DashRouter';
 import PleaseLogin from '../Views/UserViews/PleaseLogin';
 
-export default function Routes({user, products, setProducts, users, setUsers, payments, setPayments}) {
+export default function Routes({user, products, setProducts, users, setUsers, payments, setPayments, isAdmin}) {
+
   return (
     <div>
       <Switch>
@@ -28,7 +29,6 @@ export default function Routes({user, products, setProducts, users, setUsers, pa
         
       {/* User Views */}
         <PrivateRoute exact path='/orders' user={user} component={() => <Orders user={user} /> }/>
-        <PrivateRoute exact path='/users' user={user} component={() => <AllUserList users={users} setUsers={setUsers}/>} />
         <PrivateRoute exact path='/dashboard' user={user} component={() => <DashRouter firebaseUser={user}/>} />
         <PrivateRoute exact path='/cart' user={user} component={CartView}/>
         <PrivateRoute exact path='/payments' user={user} component={() => <Payments />} />
@@ -38,6 +38,7 @@ export default function Routes({user, products, setProducts, users, setUsers, pa
         <PrivateRoute exact path='/users/:id/order' user={user} component={OrderView}/>
 
       {/* Admin Views */}
+      {isAdmin? <PrivateRoute exact path='/users' user={user} component={() =>  <AllUserList users={users} setUsers={setUsers}/>} /> : null }
      </Switch>
     </div>
   )

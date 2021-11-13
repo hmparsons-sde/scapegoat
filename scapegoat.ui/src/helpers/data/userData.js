@@ -19,6 +19,11 @@ const getUserByFBKey = (firebaseKey) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
+const getAdminUsers = () => new Promise((resolve, reject) => {
+  axios.get(`${config.baseUrl}/api/Users/AdminUsers?IsAdmin=true`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
 
 const createNewUser = (user) => new Promise((resolve, reject) => {
   axios.post(`${config.baseUrl}/api/users`, user)
@@ -57,5 +62,5 @@ const getUserByTier = (customerTier) => new Promise((resolve, reject) => {
 })
 
 export {
-  getSingleUser, createNewUser, getAllUsers, softDeleteUser, hardDeleteUser, getUserByFBKey, updateUser, getUserByType, getUserByTier
+  getSingleUser, createNewUser, getAllUsers, softDeleteUser, hardDeleteUser, getUserByFBKey, updateUser, getUserByType, getUserByTier, getAdminUsers
 };
