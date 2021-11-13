@@ -53,7 +53,7 @@ export default function NavBar() {
           <b>scapegoat*</b>
           </a></li>
           <li><a className='nav-link' href='/products'>
-          Products
+          Product Catgories
         </a></li>
         <li><a className='nav-link' href='/orders'>
           Orders
