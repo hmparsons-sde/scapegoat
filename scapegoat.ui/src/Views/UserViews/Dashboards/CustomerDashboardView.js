@@ -8,9 +8,10 @@ import orderhistory from '../../../assets/orderhistory.jpg';
 import paymenttype from '../../../assets/paymenttype.jpg';
 import cartimage from '../../../assets/cartimage.jpg';
 import moment from 'moment';
-import {AiOutlineCloseCircle} from 'react-icons/ai';
+import {AiOutlineCloseCircle, AiOutlineEyeInvisible} from 'react-icons/ai';
 import UserInfoForm from '../../../Components/Forms/UserForms/UserInfoForm';
-export default function CustomerDashboardView({user, photoURL, setUser}) {
+import { getSingleUser, softDeleteUser } from '../../../helpers/data/userData';
+export default function CustomerDashboardView({user, photoURL, setUser, firebaseUser}) {
   const [open, setOpen] = useState(false);
 
   const onOpenModal = () => setOpen(true);
@@ -30,6 +31,9 @@ export default function CustomerDashboardView({user, photoURL, setUser}) {
   const handlePaymentTypeClick = () => {
     history.push(`payments`);
   };
+  const handleDeactivate = () => {
+      softDeleteUser(user.id, user).then(() => getSingleUser(user.id)).then(response => setUser(response))
+  }
 
   const date = moment.utc(user.createdAt).format();
   const local = moment.utc(date).local().format("dddd, MMMM Do YYYY, h:mm a");
@@ -76,6 +80,14 @@ export default function CustomerDashboardView({user, photoURL, setUser}) {
         <h2 className="card-body" onClick={() => handleCartClick()}>View Cart</h2>
       </UserCategoryCard>
       </UserCategories>
+    <br/>
+    <br/>
+    <br/>
+    <div>
+      <StyledRemoveArchive>
+        <p onClick={() => handleDeactivate()}>Deactivate Account <AiOutlineEyeInvisible /></p>
+      </StyledRemoveArchive>
+    </div>
     </div>
   );
 }
@@ -162,4 +174,7 @@ const EditUserFormButton = styled.div`
   }
   align-content: center;
   margin-top: 10px;
+`;
+const StyledRemoveArchive = styled.div`
+  cursor: pointer;
 `;
