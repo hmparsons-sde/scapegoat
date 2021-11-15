@@ -114,6 +114,7 @@ const UserCategories = styled.div`
   flex-flow: row wrap;
   justify-content: center;
   margin-bottom: 25%;
+  background-color: #FDF1E9;
 
   h2, h3, h4, h5 {
     font-weight: 300;
@@ -127,6 +128,7 @@ const UserCategoryCard = styled.div`
   margin: 15px;
   border: 15px solid transparent;
   box-shadow: 50px;
+  background-color: #FDF1E9;
 
   img {
     object-fit: cover;
