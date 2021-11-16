@@ -32,6 +32,7 @@ namespace scapegoat.Controllers
         }
 
         [HttpGet("{Id}")]
+        [AllowAnonymous]
         public IActionResult GetUserById(Guid Id)
         {
             var user = _repo.GetSingleUserById(Id);
@@ -44,7 +45,22 @@ namespace scapegoat.Controllers
             return Ok(user);
         }
 
+        [HttpGet("authedUsers/{FirebaseKey}")]
+        [AllowAnonymous]
+        public IActionResult GetUserByFBKey(string FirebaseKey)
+        {
+            var user = _repo.GetSingleUserByFBKey(FirebaseKey);
+
+            if (user == null)
+            {
+                return NotFound($"No user with the id {FirebaseKey} was found.");
+            }
+
+            return Ok(user);
+        }
+
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult AddUserToDB(User newUser)
         {
             _repo.AddUser(newUser);
@@ -52,7 +68,8 @@ namespace scapegoat.Controllers
             return Created($"/api/Users/{newUser.Id}", newUser);
         }
 
-        [HttpPut("{Id}")]
+        [HttpPut("SoftDeleteUsers/{Id}")]
+        [AllowAnonymous]
         public IActionResult SoftDeleteUser(Guid Id, User user)
         {
             var userToUpdate = _repo.GetSingleUserById(Id);
@@ -68,15 +85,24 @@ namespace scapegoat.Controllers
 
         }
 
-        [HttpPatch]
-        public IActionResult UpdateUser(User user)
+        [HttpPut("UpdateUserInfo/{Id}")]
+        [AllowAnonymous]
+        public IActionResult UpdateUser(Guid Id, User user)
         {
-            _repo.UpdateUser(user);
+            var userToEdit = _repo.GetSingleUserById(Id);
 
-            return NoContent();
+            if (userToEdit == null)
+            {
+                return NotFound($"Could not find user with the id {Id} for updating");
+            }
+
+            var editedUser = _repo.UpdateUser(Id, user);
+
+            return Ok(editedUser);
         }
 
         [HttpDelete("{Id}")]
+        [AllowAnonymous]
         public IActionResult HardDelete(Guid Id)
         {
             _repo.HardDeleteUser(Id);
@@ -85,25 +111,36 @@ namespace scapegoat.Controllers
         }
 
         [HttpGet("types/{userType}")]
+        [AllowAnonymous]
         public List<User> GetUserByType(UserType userType)
         {
             return _repo.GetUserByTypeFromDB(userType);
         }
 
         [HttpGet("tiers/{customerTier}")]
+        [AllowAnonymous]
         public List<User> GetUserByTier(CustomerTier customerTier)
         {
             return _repo.GetUserByTierFromDB(customerTier);
         }
         [HttpGet("search/{FirstName}")]
+        [AllowAnonymous]
         public List<User> GetUserByFirstName(string FirstName)
         {
             return _repo.GetUserByNameFromDB(FirstName);
         }
         [HttpGet("orderhistory/{Id}")]
+        [AllowAnonymous]
         public List<User> GetUserOrderHistory(Guid userId)
         {
             return _repo.GetOrdersByUserId(userId);
+        }
+
+        [HttpGet("AdminUsers")]
+        [AllowAnonymous]
+        public List<User> GetUserByAdminStatus(bool IsAdmin)
+        {
+            return _repo.GetAdminUsers(IsAdmin);
         }
     }
 }

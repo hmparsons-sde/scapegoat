@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "reactstrap";
-import { deletePayment, getSinglePayment } from "../../helpers/data/paymentData";
+import { deletePayment } from "../../helpers/data/paymentData";
 import PaymentForm from "./PaymentForm";
 import styled from 'styled-components';
 
