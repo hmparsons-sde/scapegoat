@@ -23,7 +23,7 @@ export default function SearchBar() {
      return (
       <SearchBarElement>
         <form>
-          <input type='text' name='text' className='search-input' autoComplete='off'/>
+          <input type='text' name='text' placeholder='Search for Goats...' className='search-input' autoComplete='off'/>
         </form>
       </SearchBarElement>
      );

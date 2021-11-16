@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import { Button } from 'reactstrap';
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import ProductCard from '../../Components/Products/ProductCard';
 import ProductForm from '../../Components/Products/ProductForm';
+import SearchBar from '../../Components/Search/SearchBar';
 import { getAllProducts } from '../../helpers/data/productData';
 import { getUserByFBKey } from '../../helpers/data/userData';
 
@@ -11,6 +12,7 @@ const Products = ({ firebaseUser }) => {
     const [products, setProducts] = useState([]);
     const [addProduct, setAddProduct] = useState(false);
     const [user, setUser] = useState({});
+    const [search, setSearch] = useState(false);
   
     useEffect(() => { 
       getAllProducts().then((response) => {
@@ -36,10 +38,22 @@ const Products = ({ firebaseUser }) => {
               ? 'Add a Product'
               : 'Product Catgories'
             }
-            
           </h1>
           <div className='product-header-filter'>
             <div className='filter-buttons'>
+              <Button outline onClick={() => setSearch(!search)}>Search</Button>
+              <Modal isOpen={search}>
+                <ModalHeader>
+                  Search for Products
+                </ModalHeader>
+                <ModalBody>
+                  <SearchBar />
+                </ModalBody>
+                <ModalFooter>
+                  <Button onClick={() => setSearch(false)}>Search</Button>
+                  <Button onClick={() => setSearch(false)}>Cancel</Button>
+                </ModalFooter>
+              </Modal>
               {
                 addProduct
                 ? <Button onClick={() => setAddProduct(!addProduct)}>Cancel</Button>
