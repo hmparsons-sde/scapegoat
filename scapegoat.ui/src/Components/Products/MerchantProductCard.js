@@ -6,7 +6,7 @@ import ProductForm from "./ProductForm";
 import { AiOutlineShoppingCart, AiOutlineDelete, AiOutlineInfoCircle, AiOutlineEdit } from 'react-icons/ai'
 import { checkOrderStatus, createOrder, createOrderItem } from "../../helpers/data/orderData";
 
-export default function ProductCard({
+export default function MerchantProductCard({
   productId, 
   productType, 
   description, 
@@ -16,13 +16,10 @@ export default function ProductCard({
   createdAt,
   setProducts, 
   setCategoryGoats, 
-  user
 }) {
   const [update, setUpdate] = useState(false);
   const history = useHistory();
   const { category } = useParams();
-
-console.warn(user);
 
   const handleButton = (p) => {
     switch (p) {
@@ -41,14 +38,13 @@ console.warn(user);
         history.push(`/products/${productId}`)
       break;
       case 'cart':
-        checkOrderStatus(user.id).then(resp => {
-          console.warn(user.id);
+        checkOrderStatus('0999c62f-0951-49fd-bc38-df8df6d4d244').then(resp => {
           if (resp.length === 0) {
             createOrder({
-              userId: user.id,
+              userId: '0999c62f-0951-49fd-bc38-df8df6d4d244',
               status: 'pending',
             }).then(() => {
-              checkOrderStatus(user.id).then(resp2 => {
+              checkOrderStatus('0999c62f-0951-49fd-bc38-df8df6d4d244').then(resp2 => {
                 createOrderItem({
                   orderId: resp2[0].id,
                   productId: productId,
@@ -72,7 +68,7 @@ console.warn(user);
   };
 
   return (
-      <CardBody className='product-card m-2 border border-dark rounded' style={{maxWidth: '18rem', minWidth: '18rem'}}>
+      <CardBody className='product-card m-2 border border-dark rounded' style={{maxWidth: '18rem'}}>
         <CardTitle tag='h4' className='mb-1'>{description}</CardTitle>
         <CardSubtitle tag='h6' className='mb-3 d-flex flex-column' />
           <CardText>${price} per day</CardText>
@@ -82,7 +78,7 @@ console.warn(user);
           <Button outline onClick={() => handleButton('single')}><AiOutlineInfoCircle /></Button>
           <Button outline onClick={() => handleButton('update')}><AiOutlineEdit /></Button>
           <Button outline onClick={() => handleButton('delete')}><AiOutlineDelete /></Button>
-          <Button outline onClick={() => handleButton('cart')}><AiOutlineShoppingCart /></Button>
+          <Button outline onClick={() => console.warn(category)}><AiOutlineShoppingCart /></Button>
         </ButtonGroup>
         {
           update

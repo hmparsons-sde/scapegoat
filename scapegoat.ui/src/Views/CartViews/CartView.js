@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
-import { getSingleUserOrder } from '../../helpers/data/orderData';
+import { getPendingOrderInfo } from '../../helpers/data/orderData';
 import OrderInfo from '../../Components/Orders/OrderInfo';
-import { useHistory, useParams } from 'react-router';
+import { useHistory } from 'react-router';
 import UpdateOrder from '../../Components/Orders/UpdateOrder';
+import { getUserByFBKey } from '../../helpers/data/userData';
 
 const CartButton = styled.button`
 width: 15rem;
@@ -15,22 +16,23 @@ border-radius: 25px;
 `;
 
 
-export default function CartView() {
+export default function CartView({ firebaseUser }) {
   const [userOrder, setUserOrder] = useState([]);
   const [updateSwitch, setUpdateSwitch] = useState(false);
-  const { id } = useParams();
   const history = useHistory();
 
   useEffect(() => {
-    getSingleUserOrder(id)
-    .then(setUserOrder);
-  },[updateSwitch, id])
-  
-const orderStatus = userOrder.status === 'completed';
+    getUserByFBKey(firebaseUser.uid).then((resp) => {
+      getPendingOrderInfo(resp.id)
+      .then(setUserOrder);
+    })
+  },[updateSwitch, firebaseUser.uid])
+
+  console.warn(userOrder);
 
   return (
     <>
-    {orderStatus
+    {userOrder.length === 0
     ? <div>
         <h3>You have no open orders</h3>
         <CartButton onClick={() => history.push('/products')}>Back to Products</CartButton>
@@ -41,7 +43,7 @@ const orderStatus = userOrder.status === 'completed';
     <h3>Cart Items</h3>
     <OrderInfo order={userOrder} setUpdateSwitch={setUpdateSwitch}/>
      <h3>Total:$ {userOrder?.totalCost}</h3>
-    <UpdateOrder setUpdateSwitch={setUpdateSwitch} {...userOrder}/>
+    <UpdateOrder setUpdateSwitch={setUpdateSwitch} id={userOrder.id}/>
   </div>
     }
     </>

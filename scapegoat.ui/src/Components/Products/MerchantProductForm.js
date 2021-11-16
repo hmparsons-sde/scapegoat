@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Form, FormGroup, Input, Label } from "reactstrap"
 import { createProduct, updateProduct, updateProductByType } from '../../helpers/data/productData';
 
-const ProductForm = ({  
+const MerchantProductForm = ({  
     productId, 
     productType, 
     description, 
@@ -110,7 +110,7 @@ const ProductForm = ({
                 </Dropdown>
                 <div className='d-flex justify-content-center'>
                     <div className='d-flex flex-column'>
-                        <div className='d-flex flex-row justify-content-around align-content-center'><h5 htmlFor='price'>Price</h5><h8>(in USD)</h8></div>
+                        <Label htmlFor='price' tag='h5'>Price</Label>
                         <Input 
                             type='text'
                             id='price' 
@@ -138,4 +138,4 @@ const ProductForm = ({
     );
 }
 
-export default ProductForm;
+export default MerchantProductForm;

@@ -82,6 +82,15 @@ namespace scapegoat
             return updatedProduct;
         }
 
+        internal IEnumerable<Product> GetProductsByMerchantId(Guid id)
+        {
+            using var db = new SqlConnection(_connectionString);
+            var singleProduct = @"SELECT * FROM Products WHERE MerchantId = @Id";
+            var product = db.Query<Product>(singleProduct, new { id = id });
+            if (product == null) return null;
+            return product;
+        }
+
         Product MapFromReader(SqlDataReader reader)
         {
             var product = new Product();

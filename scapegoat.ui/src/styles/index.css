@@ -27,9 +27,23 @@ code {
 }
 
 input[type="text"],
-textarea,
-select {
+textarea {
   height: 28px;
+  width: 90%;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #cb997e;
+  border-radius: 4px;
+}
+
+.home-image {
+  width: 70%;
+  height: auto;
+}
+
+
+select {
+  height: 38px;
   width: 90%;
   padding: 10px;
   margin: 10px;
