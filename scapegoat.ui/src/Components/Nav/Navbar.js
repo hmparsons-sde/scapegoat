@@ -17,6 +17,8 @@ const StyledNav = styled.div`
 
   li {
     float: left;
+    font-weight: 300;
+    line-height: 1.2;
   }
 
   li a {
@@ -41,7 +43,10 @@ const StyledNav = styled.div`
     width: 30px;
     right: 0;
   }
-
+  h1, h2, h3, h4, h5, p {
+    font-weight: 300;
+    line-height: 1.2;
+  }
   `;
 
 export default function NavBar({ user, isAdmin }) {

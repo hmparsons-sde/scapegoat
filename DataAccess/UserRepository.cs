@@ -60,17 +60,21 @@ namespace scapegoat.DataAccess
                         SET
                         UserType = 2,
                         CustomerTier = 4,
-                        IsAdmin = false,
-                        FirebaseKey = @FirebaseKey,
                         FirstName = @FirstName,
                         LastName = @LastName,
-                        CreatedAt = @CreatedAt
+                        AddressLine1 = @AddressLine1,
+                        AddressLine2 = @AddressLine2,
+                        PostalCode = @PostalCode,
+                        CityName = @CityName,
+                        State = @State,
+                        Country = @Country
                         WHERE Id = @Id";
             user.Id = Id;
             var softRemovedUser = db.QueryFirstOrDefault(sql, user);
 
             return softRemovedUser;
         }
+
         internal User UpdateUser(Guid Id, User user)
         {
             using var db = new SqlConnection(_connectionString);

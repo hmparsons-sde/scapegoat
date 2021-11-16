@@ -10,7 +10,11 @@ const AllUsersContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  margin-top: 5%;
+  margin-top: 10%;
+  h1, h2, h3, h4, h5, p {
+    font-weight: 300;
+    line-height: 1.2;
+  }
 `;
 
 const AdminUserHeader = styled.div`
@@ -18,6 +22,7 @@ const AdminUserHeader = styled.div`
     font-weight: 400;
     line-height: 1.2;
     margin-top: 5%;
+    margin-bottom: 3%;
   }
 `;
 
