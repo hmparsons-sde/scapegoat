@@ -22,6 +22,7 @@ const AdminUserHeader = styled.div`
     font-weight: 400;
     line-height: 1.2;
     margin-top: 5%;
+    margin-bottom: 3%;
   }
 `;
 

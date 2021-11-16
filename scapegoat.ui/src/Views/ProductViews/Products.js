@@ -199,9 +199,6 @@ h1, h2, h3, h4, h5, p {
   font-weight: 300;
   line-height: 1.2;
 }
-display: flex;
-flex-flow: row wrap;
-justify-content: center;
 margin-bottom: 25%;
 background-color: #FDF1E9;
 `;
