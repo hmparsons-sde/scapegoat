@@ -1,3 +1,6 @@
+html {
+  background-color: #FDF1E9;
+}
 body {
   margin: 0;
   font-family: 'Raleway', sans-serif;
@@ -20,18 +23,20 @@ code {
 .customModal {
   background-color: #FDF1E9;
   width: 30%;
+  padding: 15%;
 }
 
 #userInfoFormModal {
   border-radius: 50px;
+  padding: 15%;
 }
 
 input[type="text"],
 textarea {
-  height: 28px;
+  height: 30px;
   width: 90%;
   padding: 10px;
-  margin: 10px;
+  margin: 8px;
   border: 1px solid #cb997e;
   border-radius: 4px;
 }
@@ -43,10 +48,13 @@ textarea {
 
 
 select {
-  height: 38px;
+  height: 30px;
   width: 90%;
-  padding: 10px;
-  margin: 10px;
   border: 1px solid #cb997e;
   border-radius: 4px;
+  align-self: center;
+  color: #4B4F3F;
+  margin-left: 18px;
+  justify-content: center;
+  padding-left: 6px;
 }

@@ -9,7 +9,7 @@ const SellerIDCard = styled.div`
   width: 33%;
   height: auto;
   margin: 15px;
-  padding: 10px;
+  padding: 20px;
   border-style: solid;
   box-shadow: 50px;
   border-radius: 25px;
@@ -26,7 +26,7 @@ const SellerIDCard = styled.div`
   }
 
   hr {
-    width: 50%;
+    width: 90%;
   }
 `;
 

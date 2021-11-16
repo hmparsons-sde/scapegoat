@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router'
+import styled from 'styled-components';
 import { useState } from 'react/cjs/react.development';
 import ProductCard from '../../Components/Products/ProductCard';
 import { getProductsByType } from '../../helpers/data/productData';
@@ -24,8 +25,11 @@ export const ProductCategoryView = () => {
     return (
     <>
     <nav className='product-header'>
+        <ProductCategoryHeader>
         <h1>{pageTitle} ({categoryGoats.length})</h1>
+        </ProductCategoryHeader>
     </nav>
+    <SingleProductCategoryContainer>
         <div className='product-category-container p-2 justify-content-center'>
             { 
                 categoryGoats.length > 0
@@ -43,6 +47,23 @@ export const ProductCategoryView = () => {
                 : ''
             }
         </div>
+    </SingleProductCategoryContainer>
     </>
     )
 }
+const ProductCategoryHeader = styled.div`
+h1 {
+  font-weight: 400;
+  line-height: 1.2;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+`;
+const SingleProductCategoryContainer = styled.div`
+h1, h2, h3, h4, h5, p {
+  font-weight: 300;
+  line-height: 1.2;
+}
+margin-bottom: 25%;
+background-color: #FDF1E9;
+`;
