@@ -8,9 +8,10 @@ import orderhistory from '../../../assets/orderhistory.jpg';
 import paymenttype from '../../../assets/paymenttype.jpg';
 import cartimage from '../../../assets/cartimage.jpg';
 import moment from 'moment';
-import {AiOutlineCloseCircle} from 'react-icons/ai';
+import {AiOutlineCloseCircle, AiOutlineEyeInvisible} from 'react-icons/ai';
 import UserInfoForm from '../../../Components/Forms/UserForms/UserInfoForm';
-export default function CustomerDashboardView({user, photoURL, setUser}) {
+import { getSingleUser, softDeleteUser } from '../../../helpers/data/userData';
+export default function CustomerDashboardView({user, photoURL, setUser, firebaseUser}) {
   const [open, setOpen] = useState(false);
 
   const onOpenModal = () => setOpen(true);
@@ -30,6 +31,9 @@ export default function CustomerDashboardView({user, photoURL, setUser}) {
   const handlePaymentTypeClick = () => {
     history.push(`payments`);
   };
+  const handleDeactivate = () => {
+      softDeleteUser(user.id, user).then(() => getSingleUser(user.id)).then(response => setUser(response))
+  }
 
   const date = moment.utc(user.createdAt).format();
   const local = moment.utc(date).local().format("dddd, MMMM Do YYYY, h:mm a");
@@ -56,7 +60,7 @@ export default function CustomerDashboardView({user, photoURL, setUser}) {
         >
           <UserInfoForm user={user} onCloseModal={onCloseModal} setUser={setUser}/>
         </Modal>
-        <h1 tag="h1" className='mt-1'>{user.firstName} {user.lastName}</h1>
+        <h2 tag="h1" className='mt-1'>{user.firstName} {user.lastName}</h2>
         <h4>Type: {user.userType}</h4>
         <h4>Tier: {user.customerTier}</h4>
         <h4>Created: {local}</h4>
@@ -76,6 +80,14 @@ export default function CustomerDashboardView({user, photoURL, setUser}) {
         <h2 className="card-body" onClick={() => handleCartClick()}>View Cart</h2>
       </UserCategoryCard>
       </UserCategories>
+    <br/>
+    <br/>
+    <br/>
+    <div>
+      <StyledRemoveArchive>
+        <p onClick={() => handleDeactivate()}>Deactivate Account <AiOutlineEyeInvisible /></p>
+      </StyledRemoveArchive>
+    </div>
     </div>
   );
 }
@@ -94,7 +106,7 @@ const SingleUser = styled.div`
   width: 100%;
   margin: 50px;
 
-  h1, h3, h4 {
+  h1, h2, h3, h4 {
     font-weight: 300;
     line-height: 1.2;
   }
@@ -114,6 +126,7 @@ const UserCategories = styled.div`
   flex-flow: row wrap;
   justify-content: center;
   margin-bottom: 25%;
+  background-color: #FDF1E9;
 
   h2, h3, h4, h5 {
     font-weight: 300;
@@ -127,6 +140,7 @@ const UserCategoryCard = styled.div`
   margin: 15px;
   border: 15px solid transparent;
   box-shadow: 50px;
+  background-color: #FDF1E9;
 
   img {
     object-fit: cover;
@@ -160,4 +174,8 @@ const EditUserFormButton = styled.div`
   }
   align-content: center;
   margin-top: 10px;
+  margin-bottom: 15px;
+`;
+const StyledRemoveArchive = styled.div`
+  cursor: pointer;
 `;
