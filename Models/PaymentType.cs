@@ -15,8 +15,7 @@ namespace scapegoat.Models
         public PaymentMethod PaymentMethod { get; set; }
         public string AccountNumber { get; set; }
         public Guid UserId { get; set; }
-        public CreditCard CreditCard { get; set; }
-    }
+           }
 
     public enum PaymentMethod
     {
