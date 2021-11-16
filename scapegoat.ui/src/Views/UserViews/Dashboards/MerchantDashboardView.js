@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
+import Modal from 'react-responsive-modal';
 import styled from 'styled-components';
+import UserInfoForm from '../../../Components/Forms/UserForms/UserInfoForm';
 import FulfillOrders from '../../../Components/Orders/FulfillOrders';
 import MerchantMetrics from '../../../Components/Orders/MerchantMetrics';
 import MerchantProductCard from '../../../Components/Products/MerchantProductCard';
@@ -54,22 +57,50 @@ h1, h3, h4 {
 }
 }`;
 
-export default function MerchantDashboardView({user}) {
+export default function MerchantDashboardView({ user, setUser }) {
   const [merchantOrders, setMerchantOrders] = useState([]);
   const [thisMonthOrders, setThisMonthOrders] = useState([]);
   const [merchantProducts, setMerchantProducts] = useState([]);
   const [updateSwitch, setUpdateSwitch] = useState(false);
   const [addProduct, setAddProduct] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const onOpenModal = () => setOpen(true);
+  const onCloseModal = () => setOpen(false);
+
+  const closeIcon = (
+    <AiOutlineCloseCircle/>
+  );
+
 
   useEffect(() => {
     getMerchantOrders(user?.id).then(setMerchantOrders);
     getMonthlyOrders(user?.id).then(setThisMonthOrders);
     getMerchantProducts(user?.id).then(setMerchantProducts);
   }, [updateSwitch, user?.id]);
-  
+
   return (
     <PageWrapper>
       <h1>merchant dash</h1>
+      <FormButton onClick={onOpenModal}>
+          <div className="button_slide slide_down">
+              Update Profile
+          </div>
+        </FormButton>
+        <Modal
+          id="userInfoFormModal"
+          open={open}
+          onClose={onCloseModal}
+          center
+          closeIcon={closeIcon}
+          classNames={{
+            overlay: 'customOverlay',
+            modal: 'customModal',
+          }}
+        >
+          <UserInfoForm user={user} onCloseModal={onCloseModal} setUser={setUser}/>
+        </Modal>
+      <h3>{user?.firstName} {user?.lastName}</h3>
       {
       merchantOrders
       ? <div>

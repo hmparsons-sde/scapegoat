@@ -11,6 +11,7 @@ const OrderCard = styled.div`
 width: 25rem;
 border: black 1px solid;
 border-radius: 25px;
+padding: 10px;
 `;
 
 
