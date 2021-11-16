@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { Button } from 'reactstrap';
+import styled from 'styled-components';
 import ProductCard from '../../Components/Products/ProductCard';
 import ProductForm from '../../Components/Products/ProductForm';
 import { getAllProducts } from '../../helpers/data/productData';
@@ -29,21 +30,28 @@ const Products = ({ firebaseUser }) => {
   
     return (
       <div> 
+        <ProductCategoryContainer>
         <nav className='product-header'>
+          <ProductHeader>
           <h1>
             {
               addProduct
               ? 'Add a Product'
-              : 'Product Catgories'
+              : 'Product Categories'
             }
             
           </h1>
+          </ProductHeader>
           <div className='product-header-filter'>
             <div className='filter-buttons'>
               {
                 addProduct
                 ? <Button onClick={() => setAddProduct(!addProduct)}>Cancel</Button>
-                : <Button outline onClick={() => setAddProduct(!addProduct)}>Add Product</Button>
+                : <AddProductButton outline onClick={() => setAddProduct(!addProduct)}>
+                  <div className="button_slide slide_down">
+                  Add Product
+                  </div>
+                  </AddProductButton>
               }
             </div>
           </div>
@@ -62,9 +70,11 @@ const Products = ({ firebaseUser }) => {
               Single Goats ({products.filter(goat => goat.productType === 'Single').length})
             </h2>
             <div className='filter-buttons'>
-              <Button className='' outline onClick={() => handleHistory('/products/category/Single')}>
+              <AddProductButton className='' outline onClick={() => handleHistory('/products/category/Single')}>
+              <div className="button_slide slide_down">
                 See All
-              </Button>
+                </div>
+              </AddProductButton>
             </div>
           </div>
           <div className='product-category-container'>
@@ -90,9 +100,11 @@ const Products = ({ firebaseUser }) => {
               Small Herds ({products.filter(goat => goat.productType === 'SmallHerd').length})
             </h2>
             <div className='filter-buttons'>
-              <Button outline onClick={() => handleHistory('/products/category/SmallHerd')}>
+              <AddProductButton outline onClick={() => handleHistory('/products/category/SmallHerd')}>
+              <div className="button_slide slide_down">
                 See All
-              </Button>
+              </div>
+              </AddProductButton>
             </div>
           </div>
           <div className='product-category-container'>
@@ -118,9 +130,11 @@ const Products = ({ firebaseUser }) => {
               Large Herds ({products.filter(goat => goat.productType === 'LargeHerd').length})
             </h2>
             <div className='filter-buttons'>
-              <Button outline onClick={() => handleHistory('/products/category/LargeHerd')}>
+              <AddProductButton outline onClick={() => handleHistory('/products/category/LargeHerd')}>
+              <div className="button_slide slide_down">
                 See All
-              </Button>
+              </div>
+              </AddProductButton>
             </div>
           </div>
           <div className='product-category-container'>
@@ -143,8 +157,51 @@ const Products = ({ firebaseUser }) => {
           </div>
         </div>
         }
+        </ProductCategoryContainer>
       </div>
     )
 };
 
 export default Products;
+
+const AddProductButton = styled.div`
+.button_slide {
+  color: black;
+  border: 2px solid #e7e7e7;
+  border-radius: 0px;
+  padding: 18px 36px;
+  display: inline-block;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 0 #e7e7e7;
+  -webkit-transition: ease-out 0.4s;
+  -moz-transition: ease-out 0.4s;
+  transition: ease-out 0.4s;
+}
+.slide_down:hover {
+  box-shadow: inset 0 100px 0 0 #e7e7e7;
+}
+align-content: center;
+margin-top: 10px;
+margin-bottom: 15px;
+`;
+const ProductHeader = styled.div`
+h1 {
+  font-weight: 400;
+  line-height: 1.2;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+`;
+const ProductCategoryContainer = styled.div`
+h1, h2, h3, h4, h5, p {
+  font-weight: 300;
+  line-height: 1.2;
+}
+display: flex;
+flex-flow: row wrap;
+justify-content: center;
+margin-bottom: 25%;
+background-color: #FDF1E9;
+`;

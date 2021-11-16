@@ -60,7 +60,7 @@ export default function CustomerDashboardView({user, photoURL, setUser, firebase
         >
           <UserInfoForm user={user} onCloseModal={onCloseModal} setUser={setUser}/>
         </Modal>
-        <h1 tag="h1" className='mt-1'>{user.firstName} {user.lastName}</h1>
+        <h2 tag="h1" className='mt-1'>{user.firstName} {user.lastName}</h2>
         <h4>Type: {user.userType}</h4>
         <h4>Tier: {user.customerTier}</h4>
         <h4>Created: {local}</h4>
@@ -106,7 +106,7 @@ const SingleUser = styled.div`
   width: 100%;
   margin: 50px;
 
-  h1, h3, h4 {
+  h1, h2, h3, h4 {
     font-weight: 300;
     line-height: 1.2;
   }
@@ -174,6 +174,7 @@ const EditUserFormButton = styled.div`
   }
   align-content: center;
   margin-top: 10px;
+  margin-bottom: 15px;
 `;
 const StyledRemoveArchive = styled.div`
   cursor: pointer;
