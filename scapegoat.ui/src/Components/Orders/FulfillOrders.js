@@ -19,6 +19,7 @@ export default function FulfillOrders({ orders }) {
 const myItems = orders.lineItems;
 const userInfo = orders.user;
   return (
+    <div>
     <OrderDiv>
       {orders
       ? <OrderCard>
@@ -46,5 +47,6 @@ const userInfo = orders.user;
       : null
       }
     </OrderDiv>
+    </div>
   )
 }
