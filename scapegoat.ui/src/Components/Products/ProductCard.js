@@ -24,8 +24,6 @@ export default function ProductCard({
   const history = useHistory();
   const { category } = useParams();
 
-console.warn(user);
-
   const handleButton = (p) => {
     switch (p) {
       case 'delete': 
