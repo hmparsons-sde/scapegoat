@@ -11,6 +11,7 @@ const OrderCard = styled.div`
 width: 25rem;
 border:  2px solid #e7e7e7;
 border-radius: 25px;
+padding: 10px;
 `;
 const ProductFulfillImage = styled.div`
 img {
@@ -29,6 +30,7 @@ export default function FulfillOrders({ orders }) {
 const myItems = orders.lineItems;
 const userInfo = orders.user;
   return (
+    <div>
     <OrderDiv>
       {orders
       ? <OrderCard>
@@ -59,5 +61,6 @@ const userInfo = orders.user;
       : null
       }
     </OrderDiv>
+    </div>
   )
 }

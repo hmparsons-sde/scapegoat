@@ -5,6 +5,7 @@ import { Button, ButtonGroup, CardBody, CardSubtitle, CardText, CardTitle } from
 import { deleteProduct, deleteProductByType } from "../../helpers/data/productData";
 import ProductForm from "./ProductForm";
 import { AiOutlineShoppingCart, AiOutlineDelete, AiOutlineInfoCircle, AiOutlineEdit } from 'react-icons/ai'
+import { checkOrderStatus, createOrder, createOrderItem } from "../../helpers/data/orderData";
 
 export default function ProductCard({
   productId, 
@@ -17,6 +18,7 @@ export default function ProductCard({
   createdAt,
   setProducts, 
   setCategoryGoats, 
+  user
 }) {
   const [update, setUpdate] = useState(false);
   const history = useHistory();
@@ -38,6 +40,32 @@ export default function ProductCard({
       case 'single':
         history.push(`/products/${productId}`)
       break;
+      case 'cart':
+        checkOrderStatus(user.id).then(resp => {
+          console.warn(user.id);
+          if (resp.length === 0) {
+            createOrder({
+              userId: user.id,
+              status: 'pending',
+            }).then(() => {
+              checkOrderStatus(user.id).then(resp2 => {
+                createOrderItem({
+                  orderId: resp2[0].id,
+                  productId: productId,
+                  quantity: 1
+                }).then(console.warn('success creating order item'));
+              })
+            })
+          }
+          if (resp.length > 0) {
+            createOrderItem({
+              orderId: resp[0].id,
+              productId: productId,
+              quantity: 1
+            }).then(console.warn('success on already existing order'));
+      } 
+        });
+        break;
       default:
       break;
     }
@@ -57,7 +85,7 @@ export default function ProductCard({
           <Button outline onClick={() => handleButton('single')}><AiOutlineInfoCircle /></Button>
           <Button outline onClick={() => handleButton('update')}><AiOutlineEdit /></Button>
           <Button outline onClick={() => handleButton('delete')}><AiOutlineDelete /></Button>
-          <Button outline onClick={() => console.warn(category)}><AiOutlineShoppingCart /></Button>
+          <Button outline onClick={() => handleButton('cart')}><AiOutlineShoppingCart /></Button>
         </ButtonGroup>
         {
           update
