@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {getSingleUser, updateUser} from '../../../helpers/data/userData';
 
 const SubmitFormButton = styled.div`
+align-content: center;
 .button_slide {
   color: black;
   border: 2px solid #e7e7e7;
@@ -82,6 +83,7 @@ export default function UserInfoForm({user, onCloseModal, setUser}) {
         <br/>
         <select 
           as ='select'
+          className='mt-2'
           name='customerTier'
           placeholder='Customer Tier'
           value={user.customerTier}
