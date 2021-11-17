@@ -15,6 +15,7 @@ namespace scapegoat.Models
         public decimal Price { get; set; }
         public string Size { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public string ProductImage { get; set; }
     }
 
     public enum ProductType
@@ -22,7 +23,7 @@ namespace scapegoat.Models
         [EnumMember(Value = "Single Goat")]
         Single,
         [EnumMember(Value = "Small Herd")]
-        SmallHerd,  
+        SmallHerd,
         [EnumMember(Value = "Large Herd")]
         LargeHerd
     }
