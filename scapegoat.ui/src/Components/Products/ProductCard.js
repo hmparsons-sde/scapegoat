@@ -44,14 +44,10 @@ export default function ProductCard({
   };
 
   return (
-<<<<<<< HEAD
-      <CardBody className='product-card m-2 border border-dark rounded'>
-=======
       <CardBody className='product-card m-2 border border-secondary rounded' style={{maxWidth: '18rem', minWidth: '18rem'}}>
         <ProductCardImage>
         <img src={productImage} alt={description}></img>
         </ProductCardImage>
->>>>>>> development
         <CardTitle tag='h4' className='mb-1'>{description}</CardTitle>
         <CardSubtitle tag='h6' className='mb-3 d-flex flex-column' />
           <CardText>${price} per day</CardText>
