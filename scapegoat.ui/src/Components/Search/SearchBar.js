@@ -9,7 +9,7 @@ const SearchBarElement = styled.div`
     margin-top: 25px;
     padding: 12px;
     font-size: 15px;
-    border: solid;
+    border: 2px solid #e7e7e7;
     background-color: #f3f3f3;
     align-content: center;
     width: 50%;

@@ -10,6 +10,7 @@ const ProductForm = ({
     merchantId, 
     price,
     size,
+    productImage,
     createdAt,
     setProducts,
     update,
@@ -26,6 +27,7 @@ const ProductForm = ({
         merchantId: merchantId,
         price: price,
         size: size,
+        productImage: productImage,
         createdAt: createdAt
     });
     const [isOpen, setIsOpen] = useState(false);
@@ -130,6 +132,17 @@ const ProductForm = ({
                             onChange={handleInputChange}
                         >
                         </Input>
+                        <div className='d-flex flex-column'>
+                        <Label htmlFor='productImage' tag='h5'>Image URL</Label>
+                        <Input 
+                            type='text'
+                            id='productImage' 
+                            defaultValue={productImage} 
+                            name='productImage'
+                            onChange={handleInputChange}
+                        >
+                        </Input>
+                    </div>
                     </div>
                 </div>
                 <Button className='mt-2' type='submit'>Submit</Button>

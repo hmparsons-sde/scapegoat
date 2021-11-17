@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory, useParams } from "react-router";
+import styled from 'styled-components';
 import { Button, ButtonGroup, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
 import { deleteProduct, deleteProductByType } from "../../helpers/data/productData";
 import ProductForm from "./ProductForm";
@@ -12,6 +13,7 @@ export default function ProductCard({
   merchantId, 
   price,
   size,
+  productImage,
   createdAt,
   setProducts, 
   setCategoryGoats, 
@@ -42,7 +44,14 @@ export default function ProductCard({
   };
 
   return (
+<<<<<<< HEAD
       <CardBody className='product-card m-2 border border-dark rounded'>
+=======
+      <CardBody className='product-card m-2 border border-secondary rounded' style={{maxWidth: '18rem', minWidth: '18rem'}}>
+        <ProductCardImage>
+        <img src={productImage} alt={description}></img>
+        </ProductCardImage>
+>>>>>>> development
         <CardTitle tag='h4' className='mb-1'>{description}</CardTitle>
         <CardSubtitle tag='h6' className='mb-3 d-flex flex-column' />
           <CardText>${price} per day</CardText>
@@ -63,6 +72,7 @@ export default function ProductCard({
               merchantId={merchantId}
               price={price}
               size={size}
+              productImage={productImage}
               createdAt={createdAt}
               setProducts={setProducts}
               setCategoryGoats={setCategoryGoats}
@@ -74,3 +84,15 @@ export default function ProductCard({
       </CardBody>
   )
 }
+
+const ProductCardImage = styled.div`
+img {
+  object-fit: cover;
+  width: 250px;
+  height: 250px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border-radius: 5%;
+  padding: 3%;
+}
+`;
