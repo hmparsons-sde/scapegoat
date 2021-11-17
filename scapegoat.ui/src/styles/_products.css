@@ -15,7 +15,8 @@
 }
 
 .product-card {
-    width: 18rem;
+    max-width: 18rem;
+    min-width: 18rem;
 }
 
 .product-header-filter {
@@ -24,7 +25,6 @@
 
 .filter-buttons {
     display: flex;
-    flex-direction: column;
 }
 
 .product-form {

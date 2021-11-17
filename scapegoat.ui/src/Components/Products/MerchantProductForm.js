@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router';
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Form, FormGroup, Input, Label } from "reactstrap"
-import { createProduct, updateProduct, updateProductByType } from '../../helpers/data/productData';
+import { createMerchantProduct, updateMerchantProduct } from '../../helpers/data/productData';
 
 const MerchantProductForm = ({  
     productId, 
@@ -10,14 +9,13 @@ const MerchantProductForm = ({
     merchantId, 
     price,
     size,
+    productImage,
     createdAt,
-    setProducts,
     update,
     setUpdate,
-    setAddProduct,
-    setCategoryGoats
+    setUpdateSwitch,
+    setAddProduct
 }) => {
-    const { category } = useParams();
     const [dropName, setDropName] = useState('');
     const [updatedProduct, setUpdatedProduct] = useState({
         productId: productId,
@@ -26,6 +24,7 @@ const MerchantProductForm = ({
         merchantId: merchantId,
         price: price,
         size: size,
+        productImage: productImage,
         createdAt: createdAt
     });
     const [isOpen, setIsOpen] = useState(false);
@@ -48,18 +47,14 @@ const MerchantProductForm = ({
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        if (productId && category) {
-            updateProductByType(updatedProduct.productId, updatedProduct, category)
-                .then(setCategoryGoats)
-            setUpdate(!update);
-        } else if (productId) {
-            updateProduct(updatedProduct.productId, updatedProduct)
-                .then(r => setProducts(r));
+          if (productId) {
+            updateMerchantProduct(updatedProduct.productId, updatedProduct)
+                .then(setUpdateSwitch);
             setUpdate(!update);
         } else {
-            createProduct(updatedProduct)
-                .then(setProducts);
-            setAddProduct(false);
+            createMerchantProduct(updatedProduct)
+                .then(setUpdateSwitch)
+                .then(setAddProduct(false));
         }
     }
     return (
@@ -127,6 +122,17 @@ const MerchantProductForm = ({
                             id='size' 
                             defaultValue={size} 
                             name='size'
+                            onChange={handleInputChange}
+                        >
+                        </Input>
+                    </div>
+                    <div className='d-flex flex-column'>
+                        <Label htmlFor='productImage' tag='h5'>Image URL</Label>
+                        <Input 
+                            type='text'
+                            id='productImage' 
+                            defaultValue={productImage} 
+                            name='productImage'
                             onChange={handleInputChange}
                         >
                         </Input>

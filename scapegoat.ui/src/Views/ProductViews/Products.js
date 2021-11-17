@@ -17,7 +17,8 @@ const Products = ({ firebaseUser }) => {
       getAllProducts().then((response) => {
         setProducts(response);
       });
-    }, [products]);
+    }, [products.length]);
+
 
     useEffect(() => {
       getUserByFBKey(firebaseUser?.uid).then(setUser);
@@ -39,7 +40,6 @@ const Products = ({ firebaseUser }) => {
               ? 'Add a Product'
               : 'Product Categories'
             }
-            
           </h1>
           </ProductHeader>
           <div className='product-header-filter'>
@@ -49,7 +49,7 @@ const Products = ({ firebaseUser }) => {
                 ? <Button onClick={() => setAddProduct(!addProduct)}>Cancel</Button>
                 : <AddProductButton outline onClick={() => setAddProduct(!addProduct)}>
                   <div className="button_slide slide_down">
-                  Add Product
+                    Add Product
                   </div>
                   </AddProductButton>
               }
@@ -89,6 +89,7 @@ const Products = ({ firebaseUser }) => {
                     merchantId={prod.merchantId}
                     price={prod.price}
                     size={prod.size}
+                    productImage={prod.productImage}
                     createdAt={prod.createdAt.split('T')[0]}
                     user={user}
                     setProducts={setProducts} />))
@@ -119,6 +120,7 @@ const Products = ({ firebaseUser }) => {
                   merchantId={prod.merchantId}
                   price={prod.price}
                   size={prod.size}
+                  productImage={prod.productImage}
                   createdAt={prod.createdAt.split('T')[0]}
                   user={user}
                   setProducts={setProducts} />))
@@ -149,6 +151,7 @@ const Products = ({ firebaseUser }) => {
                     merchantId={prod.merchantId}
                     price={prod.price}
                     size={prod.size}
+                    productImage={prod.productImage}
                     createdAt={prod.createdAt.split('T')[0]}
                     user={user}
                     setProducts={setProducts} />))

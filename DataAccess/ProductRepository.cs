@@ -28,7 +28,7 @@ namespace scapegoat
         {
             using var db = new SqlConnection(_connectionString);
             var singleProduct = @"SELECT * FROM Products WHERE ProductId = @Id";
-            var product = db.QuerySingleOrDefault<Product>(singleProduct, new { id = Id});
+            var product = db.QuerySingleOrDefault<Product>(singleProduct, new { id = Id });
             if (product == null) return null;
             return product;
         }
@@ -43,9 +43,9 @@ namespace scapegoat
         internal void AddProduct(Product product)
         {
             using var db = new SqlConnection(_connectionString);
-            var sql = @"INSERT INTO Products(ProductType, Description, MerchantId, Price, Size, CreatedAt)
+            var sql = @"INSERT INTO Products(ProductType, Description, MerchantId, Price, Size, CreatedAt, ProductImage)
                         output inserted.ProductId
-                        values (@ProductType, @Description, @MerchantId, @Price, @Size, @CreatedAt)";
+                        values (@ProductType, @Description, @MerchantId, @Price, @Size, @CreatedAt, @ProductImage)";
 
             var id = db.ExecuteScalar<Guid>(sql, product);
             product.ProductId = id;
@@ -71,7 +71,8 @@ namespace scapegoat
                         MerchantId = @MerchantId,
                         Price = @Price,
                         Size = @Size,
-                        CreatedAt = @CreatedAt
+                        CreatedAt = @CreatedAt,
+                        ProductImage = @ProductImage
                         OUTPUT INSERTED.*
                         WHERE ProductId = @ProductId";
 
@@ -80,6 +81,17 @@ namespace scapegoat
             var updatedProduct = db.QuerySingleOrDefault<Product>(sql, product);
 
             return updatedProduct;
+        }
+
+        internal object GetProductsByName(string name)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            string likeString = "%" + name + "%";
+            var productName = @"SELECT * FROM Products p WHERE p.Description LIKE @likeString";
+            var productReturn = db.Query<Product>(productName, new { likeString = likeString});
+            if (productReturn == null) return null;
+            return productReturn;
         }
 
         internal IEnumerable<Product> GetProductsByMerchantId(Guid id)
@@ -99,6 +111,7 @@ namespace scapegoat
             product.MerchantId = reader.GetGuid(0);
             product.Price = (decimal)reader["Price"];
             product.Size = reader["Size"].ToString();
+            product.ProductImage = reader["ProductImage"].ToString();
             product.CreatedAt = (DateTime)reader["CreatedAt"];
 
             return product;

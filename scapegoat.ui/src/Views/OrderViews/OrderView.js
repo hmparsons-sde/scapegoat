@@ -15,7 +15,7 @@ border-radius: 25px;
 `;
 
 const CartContainer = styled.div`
-border: solid 1px black;
+border: 2px solid #e7e7e7;
 border-radius: 25px;
 width: 30rem;
 margin: auto;

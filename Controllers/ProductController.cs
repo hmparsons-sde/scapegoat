@@ -83,5 +83,11 @@ namespace scapegoat.Controllers
         {
             return Ok(_repo.GetProductsByMerchantId(id));
         }
+
+        [HttpGet("ProductName/{name}")]
+        public IActionResult GetProductByName(String name)
+        {
+            return Ok(_repo.GetProductsByName(name));
+        }
     }
 }
