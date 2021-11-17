@@ -14,6 +14,7 @@ import DashRouter from '../Views/UserViews/Dashboards/DashRouter';
 import PleaseLogin from '../Views/UserViews/PleaseLogin';
 import { ProductCategoryView } from '../Views/ProductViews/ProductCategoryView';
 import CreditCardForm from '../Components/Payments/CreditCardPayment/CardPaymentForm';
+import BusinessDetails from '../Components/Payments/BankPayment/BankInfoForm';
 
 export default function Routes({user, products, setProducts, users, setUsers, payments, setPayments, isAdmin}) {
 
@@ -28,6 +29,7 @@ export default function Routes({user, products, setProducts, users, setUsers, pa
         <Route exact path='/merchants' component={MerchantDashboardView}/>
         <Route exact path='/search' component={SearchResults}/>
         <Route exact path='/pleaseLogin' component={PleaseLogin}/>
+        <Route exact path='/bankInfo' component={BusinessDetails}/>
         
       {/* User Views */}
         <PrivateRoute exact path='/orders' user={user} component={() => <OrderView firebaseUser={user} /> }/>
