@@ -4,7 +4,6 @@ import { Button } from 'reactstrap';
 import styled from 'styled-components';
 import ProductCard from '../../Components/Products/ProductCard';
 import ProductForm from '../../Components/Products/ProductForm';
-import SearchBar from '../../Components/Search/SearchBar';
 import { getAllProducts } from '../../helpers/data/productData';
 import { getUserByFBKey } from '../../helpers/data/userData';
 
@@ -13,7 +12,6 @@ const Products = ({ firebaseUser }) => {
     const [products, setProducts] = useState([]);
     const [addProduct, setAddProduct] = useState(false);
     const [user, setUser] = useState({});
-    const [search, setSearch] = useState(false);
   
     useEffect(() => { 
       getAllProducts().then((response) => {
@@ -45,20 +43,14 @@ const Products = ({ firebaseUser }) => {
           </ProductHeader>
           <div className='product-header-filter'>
             <div className='filter-buttons'>
-              <Button outline onClick={() => setSearch(!search)}>Search</Button>
               {
                 addProduct
                 ? <Button onClick={() => setAddProduct(!addProduct)}>Cancel</Button>
                 : <AddProductButton outline onClick={() => setAddProduct(!addProduct)}>
                   <div className="button_slide slide_down">
-                  Add Product
+                    Add Product
                   </div>
                   </AddProductButton>
-              }
-              {
-                search
-                ? <SearchBar products={products} search={search} setSearch={setSearch} />
-                : ''
               }
             </div>
           </div>

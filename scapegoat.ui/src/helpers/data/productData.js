@@ -65,6 +65,12 @@ const updateProductByType = (id, product, category) => new Promise((resolve, rej
     .catch(error => reject(error));
 });
 
+const getProductsByName = (name) => new Promise((resolve, reject) => {
+  axios.get(`${config.baseUrl}/api/Products/ProductName/${name}`)
+    .then(response => resolve(response.data))
+    .catch(error => reject(error));
+});
+
 
 export { 
   getAllProducts,
@@ -75,5 +81,6 @@ export {
   getProductsByType,
   deleteProductByType,
   updateProductByType,
-  getMerchantProducts
+  getMerchantProducts,
+  getProductsByName
 };

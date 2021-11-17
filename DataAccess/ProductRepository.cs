@@ -82,6 +82,17 @@ namespace scapegoat
             return updatedProduct;
         }
 
+        internal object GetProductsByName(string name)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            string likeString = "%" + name + "%";
+            var productName = @"SELECT * FROM Products p WHERE p.Description LIKE @likeString";
+            var productReturn = db.Query<Product>(productName, new { likeString = likeString});
+            if (productReturn == null) return null;
+            return productReturn;
+        }
+
         internal IEnumerable<Product> GetProductsByMerchantId(Guid id)
         {
             using var db = new SqlConnection(_connectionString);
