@@ -11,9 +11,9 @@ h1 {
 
 export default function SearchResults() {
   return (
-<div>
-  <SearchHeader><h1>What would you like to find?</h1></SearchHeader>
-    <SearchBar></SearchBar>
-  </div>
+    <div>
+      <SearchHeader><h1>What would you like to find?</h1></SearchHeader>
+      <SearchBar />
+    </div>
   );
 }
