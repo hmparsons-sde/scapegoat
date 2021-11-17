@@ -1,11 +1,23 @@
 import React, { useState } from "react";
 import { useHistory, useParams } from "react-router";
+import styled from 'styled-components'
 import { Button, ButtonGroup, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
 import { deleteProduct, deleteProductByType } from "../../helpers/data/productData";
 import ProductForm from "./ProductForm";
 import { AiOutlineShoppingCart, AiOutlineDelete, AiOutlineInfoCircle, AiOutlineEdit } from 'react-icons/ai'
 import { checkOrderStatus, createOrder, createOrderItem } from "../../helpers/data/orderData";
 
+const MerchantProductImage = styled.div`
+img {
+  object-fit: cover;
+  width: 250px;
+  height: 250px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 5%;
+  padding: 3%;
+}
+`;
 export default function MerchantProductCard({
   productId, 
   productType, 
@@ -13,6 +25,7 @@ export default function MerchantProductCard({
   merchantId, 
   price,
   size,
+  productImage,
   createdAt,
   setProducts, 
   setCategoryGoats, 
@@ -68,7 +81,10 @@ export default function MerchantProductCard({
   };
 
   return (
-      <CardBody className='product-card m-2 border border-dark rounded' style={{maxWidth: '18rem'}}>
+      <CardBody className='product-card m-2 border border-secondary rounded' style={{maxWidth: '18rem'}}>
+        <MerchantProductImage>
+        <img src={productImage} alt={description}></img>
+        </MerchantProductImage>
         <CardTitle tag='h4' className='mb-1'>{description}</CardTitle>
         <CardSubtitle tag='h6' className='mb-3 d-flex flex-column' />
           <CardText>${price} per day</CardText>
@@ -90,6 +106,7 @@ export default function MerchantProductCard({
               price={price}
               size={size}
               createdAt={createdAt}
+              productImage={productImage}
               setProducts={setProducts}
               setCategoryGoats={setCategoryGoats}
               update={update}

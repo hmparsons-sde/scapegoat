@@ -10,6 +10,7 @@ const MerchantProductForm = ({
     merchantId, 
     price,
     size,
+    productImage,
     createdAt,
     setProducts,
     update,
@@ -26,6 +27,7 @@ const MerchantProductForm = ({
         merchantId: merchantId,
         price: price,
         size: size,
+        productImage: productImage,
         createdAt: createdAt
     });
     const [isOpen, setIsOpen] = useState(false);
@@ -127,6 +129,17 @@ const MerchantProductForm = ({
                             id='size' 
                             defaultValue={size} 
                             name='size'
+                            onChange={handleInputChange}
+                        >
+                        </Input>
+                    </div>
+                    <div className='d-flex flex-column'>
+                        <Label htmlFor='productImage' tag='h5'>Image URL</Label>
+                        <Input 
+                            type='text'
+                            id='productImage' 
+                            defaultValue={productImage} 
+                            name='productImage'
                             onChange={handleInputChange}
                         >
                         </Input>
