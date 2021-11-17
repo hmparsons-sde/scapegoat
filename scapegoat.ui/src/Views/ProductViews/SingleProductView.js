@@ -30,6 +30,7 @@ export default function SingleProductView({ firebaseUser }) {
     <div>
       <SingleProductHeader><h1>{singleProduct.description}</h1></SingleProductHeader>
       <SingleProductContainer>
+        <img src={singleProduct.productImage} alt={singleProduct.description}></img>
         <h4>{singleProduct.price} per day</h4>
         <h4>Quantity: {singleProduct.size}</h4>
         <h4>Created on {local}</h4>

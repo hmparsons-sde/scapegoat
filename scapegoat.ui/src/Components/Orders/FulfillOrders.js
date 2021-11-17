@@ -27,6 +27,7 @@ const userInfo = orders.user;
           <>
           {item.product.length > 0
           ? <>
+          <img src={item.productImage} alt={item.description}></img>
           <p>Product Id: {item.product[0].productId}</p>
           <p>Description: {item.product[0].description}</p>
           <p>Price:$ {item.product[0].price}</p>

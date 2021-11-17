@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory, useParams } from "react-router";
-import { Button, ButtonGroup, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
+import { Button, ButtonGroup, CardBody, CardImg, CardSubtitle, CardText, CardTitle } from "reactstrap";
 import { deleteProduct, deleteProductByType } from "../../helpers/data/productData";
 import ProductForm from "./ProductForm";
 import { AiOutlineShoppingCart, AiOutlineDelete, AiOutlineInfoCircle, AiOutlineEdit } from 'react-icons/ai'
@@ -13,6 +13,7 @@ export default function MerchantProductCard({
   merchantId, 
   price,
   size,
+  productImage,
   createdAt,
   setProducts, 
   setCategoryGoats, 
@@ -69,6 +70,7 @@ export default function MerchantProductCard({
 
   return (
       <CardBody className='product-card m-2 border border-dark rounded' style={{maxWidth: '18rem'}}>
+        <CardImg width='75%' src={productImage} alt={description}></CardImg>
         <CardTitle tag='h4' className='mb-1'>{description}</CardTitle>
         <CardSubtitle tag='h6' className='mb-3 d-flex flex-column' />
           <CardText>${price} per day</CardText>
@@ -90,6 +92,7 @@ export default function MerchantProductCard({
               price={price}
               size={size}
               createdAt={createdAt}
+              productImage={productImage}
               setProducts={setProducts}
               setCategoryGoats={setCategoryGoats}
               update={update}

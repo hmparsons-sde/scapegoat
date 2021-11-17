@@ -53,6 +53,7 @@ export default function Home() {
             merchantId={prod.merchantId}
             price={prod.price}
             size={prod.size}
+            productImage={prod.productImage}
             createdAt={prod.createdAt.split('T')[0]}
           />))
         : ''

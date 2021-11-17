@@ -11,6 +11,7 @@ export default function CartProducts({ item }) {
 
   return (
     <div>
+      <img src={orderProducts.productImage} alt={orderProducts.description}></img>
       <h4>Product description: {orderProducts.description}</h4>
       <p>Price:$ {orderProducts.price}</p>
     </div>
