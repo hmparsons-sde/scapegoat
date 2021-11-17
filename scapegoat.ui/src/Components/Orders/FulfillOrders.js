@@ -9,11 +9,21 @@ width: 90%;
 `;
 const OrderCard = styled.div`
 width: 25rem;
-border: black 1px solid;
+border:  2px solid #e7e7e7;
 border-radius: 25px;
 padding: 10px;
 `;
-
+const ProductFulfillImage = styled.div`
+img {
+  object-fit: cover;
+  width: 250px;
+  height: 250px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 5%;
+  padding: 3%;
+}
+`;
 
 
 export default function FulfillOrders({ orders }) {
@@ -29,6 +39,9 @@ const userInfo = orders.user;
           <>
           {item.product.length > 0
           ? <>
+          <ProductFulfillImage>
+          <img src={item.productImage} alt={item.description}></img>
+          </ProductFulfillImage>
           <p>Product Id: {item.product[0].productId}</p>
           <p>Description: {item.product[0].description}</p>
           <p>Price:$ {item.product[0].price}</p>

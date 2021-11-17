@@ -90,6 +90,7 @@ const Products = ({ firebaseUser }) => {
                     merchantId={prod.merchantId}
                     price={prod.price}
                     size={prod.size}
+                    productImage={prod.productImage}
                     createdAt={prod.createdAt.split('T')[0]}
                     user={user}
                     setProducts={setProducts} />))
@@ -120,6 +121,7 @@ const Products = ({ firebaseUser }) => {
                   merchantId={prod.merchantId}
                   price={prod.price}
                   size={prod.size}
+                  productImage={prod.productImage}
                   createdAt={prod.createdAt.split('T')[0]}
                   user={user}
                   setProducts={setProducts} />))
@@ -150,6 +152,7 @@ const Products = ({ firebaseUser }) => {
                     merchantId={prod.merchantId}
                     price={prod.price}
                     size={prod.size}
+                    productImage={prod.productImage}
                     createdAt={prod.createdAt.split('T')[0]}
                     user={user}
                     setProducts={setProducts} />))

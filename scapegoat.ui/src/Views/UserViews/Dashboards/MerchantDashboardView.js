@@ -153,6 +153,7 @@ export default function MerchantDashboardView({ user, setUser }) {
         merchantId={product.merchantId} 
         price={product.price}
         size={product.size}
+        productImage={product.productImage}
         createdAt={product.createdAt}
         setUpdateSwitch={setUpdateSwitch}
         setMerchantProducts={setMerchantProducts}/>
