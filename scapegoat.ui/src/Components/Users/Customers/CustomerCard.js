@@ -10,10 +10,9 @@ const SellerIDCard = styled.div`
   height: auto;
   margin: 15px;
   padding: 20px;
-  border-style: solid;
+  border: 2px solid #e7e7e7;
   box-shadow: 50px;
   border-radius: 25px;
-  border-color: #7f7f7f;
   font-weight: 400;
 
   img {

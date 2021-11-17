@@ -8,7 +8,7 @@ const SinglePaymentCard = styled.div`
   width: 300px;
   height: auto;
   margin: 15px;
-  border-style: solid;
+  border: 2px solid #e7e7e7;
   box-shadow: 50px;
 `;
 

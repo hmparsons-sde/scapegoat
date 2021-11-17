@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory, useParams } from "react-router";
-import { Button, ButtonGroup, CardBody, CardImg, CardSubtitle, CardText, CardTitle } from "reactstrap";
+import styled from 'styled-components';
+import { Button, ButtonGroup, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
 import { deleteProduct, deleteProductByType } from "../../helpers/data/productData";
 import ProductForm from "./ProductForm";
 import { AiOutlineShoppingCart, AiOutlineDelete, AiOutlineInfoCircle, AiOutlineEdit } from 'react-icons/ai'
@@ -73,8 +74,10 @@ console.warn(user);
   };
 
   return (
-      <CardBody className='product-card m-2 border border-dark rounded' style={{maxWidth: '18rem', minWidth: '18rem'}}>
-        <CardImg width="75%" src={productImage} alt={description}></CardImg>
+      <CardBody className='product-card m-2 border border-secondary rounded' style={{maxWidth: '18rem', minWidth: '18rem'}}>
+        <ProductCardImage>
+        <img src={productImage} alt={description}></img>
+        </ProductCardImage>
         <CardTitle tag='h4' className='mb-1'>{description}</CardTitle>
         <CardSubtitle tag='h6' className='mb-3 d-flex flex-column' />
           <CardText>${price} per day</CardText>
@@ -107,3 +110,15 @@ console.warn(user);
       </CardBody>
   )
 }
+
+const ProductCardImage = styled.div`
+img {
+  object-fit: cover;
+  width: 250px;
+  height: 250px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border-radius: 5%;
+  padding: 3%;
+}
+`;

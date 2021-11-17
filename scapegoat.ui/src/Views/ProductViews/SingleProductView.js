@@ -30,7 +30,9 @@ export default function SingleProductView({ firebaseUser }) {
     <div>
       <SingleProductHeader><h1>{singleProduct.description}</h1></SingleProductHeader>
       <SingleProductContainer>
+        <SingleProductImage>
         <img src={singleProduct.productImage} alt={singleProduct.description}></img>
+        </SingleProductImage>
         <h4>{singleProduct.price} per day</h4>
         <h4>Quantity: {singleProduct.size}</h4>
         <h4>Created on {local}</h4>
@@ -48,7 +50,6 @@ h1 {
   font-weight: 400;
   line-height: 1.2;
   margin-top: 5%;
-  margin-bottom: 5%;
 }
 `;
 const SingleProductContainer = styled.div`
@@ -78,6 +79,17 @@ const AddProductToCartButton = styled.div`
   box-shadow: inset 0 100px 0 0 #e7e7e7;
 }
 align-content: center;
-margin-top: 15px;
+margin-top: 25px;
 margin-bottom: 15px;
+`;
+const SingleProductImage = styled.div`
+img {
+  object-fit: cover;
+  width: 450px;
+  height: 450px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 5%;
+  padding: 3%;
+}
 `;
