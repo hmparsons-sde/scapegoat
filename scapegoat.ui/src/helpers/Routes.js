@@ -14,6 +14,7 @@ import DashRouter from '../Views/UserViews/Dashboards/DashRouter';
 import PleaseLogin from '../Views/UserViews/PleaseLogin';
 import { ProductCategoryView } from '../Views/ProductViews/ProductCategoryView';
 import CreditCardForm from '../Components/Payments/CreditCardPayment/CardPaymentForm';
+import MerchantProducts from '../Views/ProductViews/MerchantProducts';
 
 export default function Routes({user, products, setProducts, users, setUsers, payments, setPayments, isAdmin}) {
 
@@ -27,6 +28,7 @@ export default function Routes({user, products, setProducts, users, setUsers, pa
         <Route exact path='/products/category/:category' component={ProductCategoryView} />
         <Route exact path='/merchants' component={MerchantDashboardView}/>
         <Route exact path='/search' component={SearchResults}/>
+        <Route exact path ='/merchantStore/:id' component={MerchantProducts}/>
         <Route exact path='/pleaseLogin' component={PleaseLogin}/>
         
       {/* User Views */}

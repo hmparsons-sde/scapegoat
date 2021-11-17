@@ -17,7 +17,8 @@ const Products = ({ firebaseUser }) => {
       getAllProducts().then((response) => {
         setProducts(response);
       });
-    }, [products]);
+    }, [products.length]);
+
 
     useEffect(() => {
       getUserByFBKey(firebaseUser?.uid).then(setUser);
