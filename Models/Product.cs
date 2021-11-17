@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace scapegoat.Models
 {
     public class Product
     {
         public Guid ProductId { get; set; }
+
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public ProductType ProductType { get; set; }
         public string Description { get; set; }
         public Guid MerchantId { get; set; }
