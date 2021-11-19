@@ -136,6 +136,12 @@ namespace scapegoat.Controllers
             return _repo.GetOrdersByUserId(userId);
         }
 
+        [HttpGet("search/results/{name}")]
+        public List<User> SearchUserByName(string name)
+        {
+            return _repo.SearchUsersByName(name);
+        }
+
         [HttpGet("AdminUsers")]
         [AllowAnonymous]
         public List<User> GetUserByAdminStatus(bool IsAdmin)

@@ -138,6 +138,18 @@ namespace scapegoat.DataAccess
             var adminSql = db.Query<User>("Select * from Users where IsAdmin = @IsAdmin", new { IsAdmin }).ToList();
             return adminSql;
         }
+
+        // Search Users By Name
+        internal List<User> SearchUsersByName(string name)
+        {
+            using var db = new SqlConnection(_connectionString);
+            string likeString = "%" + name + "%";
+            var searchUserSql = db.Query<User>("SELECT * FROM Users u WHERE u.FirstName LIKE @likeString OR u.LastName LIKE @likeString", new { name = name }).ToList();
+            if (searchUserSql == null) return null;
+            return searchUserSql;
+        }
+
+
         // Get User order history
         public List<User> GetOrdersByUserId(Guid userId)
         {
