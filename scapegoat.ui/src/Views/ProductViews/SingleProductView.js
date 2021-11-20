@@ -72,14 +72,17 @@ export default function SingleProductView({ firebaseUser }) {
         <SingleProductImage>
         <img src={singleProduct.productImage} alt={singleProduct.description}></img>
         </SingleProductImage>
-        <h4>{singleProduct.price} per day</h4>
+        <h4>${singleProduct.price} per day</h4>
         <h4>Quantity: {singleProduct.size}</h4>
         <h4>Created on {local}</h4>
-        <AddProductToCartButton onClick={() => handleButton('cart')}>
-          <div className="button_slide slide_down">
-            Add to Cart
-          </div>
-        </AddProductToCartButton>
+        { !!user?.id
+        ? <AddProductToCartButton onClick={() => handleButton('cart')}>
+        <div className="button_slide slide_down">
+          Add to Cart
+        </div>
+      </AddProductToCartButton>
+        : null
+        }
         <AddProductToCartButton onClick={() => handleButton('merch')}>
           <div className="button_slide slide_down">
             See More Products

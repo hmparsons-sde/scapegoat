@@ -24,6 +24,7 @@ export default function ProductCard({
   const history = useHistory();
   const { category } = useParams();
 
+
   const handleButton = (p) => {
     switch (p) {
       case 'delete': 
@@ -83,9 +84,15 @@ export default function ProductCard({
           <CardText>Added on {createdAt}</CardText>
         <ButtonGroup>
           <Button outline onClick={() => handleButton('single')}><AiOutlineInfoCircle /></Button>
+          {!!user?.id 
+          ? 
+          <div>
           <Button outline onClick={() => handleButton('update')}><AiOutlineEdit /></Button>
           <Button outline onClick={() => handleButton('delete')}><AiOutlineDelete /></Button>
           <Button outline onClick={() => handleButton('cart')}><AiOutlineShoppingCart /></Button>
+          </div>
+          : null
+          }
         </ButtonGroup>
         {
           update
