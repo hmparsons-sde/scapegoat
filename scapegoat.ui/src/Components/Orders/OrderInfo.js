@@ -7,10 +7,13 @@ import UpdateCartItem from './UpdateCartItem';
 const CartContainer = styled.div`
 border: 2px solid #e7e7e7;
 border-radius: 25px;
-width: 30rem;
-margin: auto;
+margin-left: 5rem;
+margin-right: 8rem;
 padding: 10px;
 margin-bottom: 1rem;
+display: flex;
+flex-direction: row;
+width: 40rem;
 `;
 
 const CartButton = styled.button`
@@ -21,6 +24,14 @@ color: white;
 cursor: pointer;
 border-radius: 25px;
 `;
+
+const ButtonDiv = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin-left: 1rem;
+`
 
 export default function OrderInfo({ setUpdateSwitch, order }) {
 
@@ -36,8 +47,10 @@ export default function OrderInfo({ setUpdateSwitch, order }) {
       ? cartItems?.map(item => (
         <CartContainer>
         <CartProducts item={item}/>
-        <CartButton onClick={() => handleClick(item.id)}>Delete Item</CartButton> 
+        <ButtonDiv>
         <UpdateCartItem setUpdateSwitch={setUpdateSwitch} {...item}/>
+        <CartButton onClick={() => handleClick(item.id)}>Delete Item</CartButton> 
+        </ButtonDiv>
         </CartContainer>
       ))
       : <p>no items in cart</p>

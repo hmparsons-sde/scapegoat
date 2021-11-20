@@ -37,6 +37,20 @@ h1 {
 }
 `;
 
+const FlexyDiv = styled.div`
+display: flex;
+flex-direction: row;
+margin-top: 5rem;
+margin: auto;
+`;
+
+const TotalDiv = styled.div`
+background-color: #ffe8d6;
+border: 2px solid #e7e7e7;
+padding: 1rem;
+border-radius: 25px
+`
+
 export default function CartView({ firebaseUser }) {
   const [userOrder, setUserOrder] = useState([]);
   const [updateSwitch, setUpdateSwitch] = useState(false);
@@ -46,10 +60,8 @@ export default function CartView({ firebaseUser }) {
     getUserByFBKey(firebaseUser.uid).then((resp) => {
       getPendingOrderInfo(resp.id)
       .then(setUserOrder);
-    })
+    });
   },[updateSwitch, firebaseUser.uid])
-
-  console.warn(userOrder);
 
   return (
     <>
@@ -66,12 +78,23 @@ export default function CartView({ firebaseUser }) {
         <h4>You have no open orders.</h4>
       </div>
     :     <div>
-    <h2>{userOrder?.user?.firstName} {userOrder?.user?.lastName}'s cart</h2>
-    <p>Order Status: {userOrder?.status}</p>
-    <h3>Cart Items</h3>
+    <FlexyDiv>
     <OrderInfo order={userOrder} setUpdateSwitch={setUpdateSwitch}/>
-     <h3>Total:$ {userOrder?.totalCost}</h3>
+    <TotalDiv>
+      {
+      userOrder?.user?.addressLine1
+      ? <div>
+        <p>{userOrder?.user?.firstName} {userOrder?.user?.lastName}</p>
+        <p>{userOrder?.user?.addressLine1}</p>
+        <p>{userOrder?.user?.cityName}, {userOrder?.user?.state} {userOrder?.user?.postalCode}</p>
+        <p>Order Status: {userOrder?.status}</p>
+      </div>
+      : null
+    }
+     <h3>Total: ${userOrder?.totalCost}</h3>
     <UpdateOrder setUpdateSwitch={setUpdateSwitch} id={userOrder.id}/>
+    </TotalDiv>
+    </FlexyDiv>
   </div>
     }
     </>
