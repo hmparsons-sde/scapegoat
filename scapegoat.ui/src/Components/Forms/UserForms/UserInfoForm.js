@@ -71,7 +71,7 @@ export default function UserInfoForm({user, onCloseModal, setUser}) {
         ></input>
         <br/>
         <select
-          as ='select'
+          as='select'
           name='userType'
           placeholder='User Type'
           value={user.userType}
@@ -83,7 +83,7 @@ export default function UserInfoForm({user, onCloseModal, setUser}) {
         <br/>
         <select 
           as ='select'
-          className='mt-2'
+          className='mt-2 mb-2'
           name='customerTier'
           placeholder='Customer Tier'
           value={user.customerTier}
@@ -130,6 +130,8 @@ export default function UserInfoForm({user, onCloseModal, setUser}) {
           <select
             as='select'
             name='state'
+            className='mb-2'
+            center
             placeholder='State (USA)'
             value={user.state}
             onChange={handleInputChange}
