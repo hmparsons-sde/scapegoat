@@ -12,6 +12,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using scapegoat.DataAccess;
 using System.Text.Json.Serialization;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace scapegoat
 {
