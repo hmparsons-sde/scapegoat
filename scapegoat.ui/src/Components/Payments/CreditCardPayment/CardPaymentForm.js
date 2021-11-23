@@ -1,10 +1,11 @@
 import React from "react";
 import useForm from "./UseForm";
-import { Button, Form, Alert, Row, Col } from "react-bootstrap";
+import { Form, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./_creditcardform.css";
 import Cards from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
+import { Link } from "react-router-dom";
 
 
 const CreditCardForm = () => {
@@ -85,24 +86,9 @@ const CreditCardForm = () => {
                 </Form.Group>
               </Col>
             </Row>
-            <Button
-              size={"block"}
-              data-testid="validateButton"
-              id="validateButton"
-              type="submit"
-            >
-              Submit
-            </Button>
+            <Link to="/payments" className="btn btn-secondary">Submit</Link>
           </Form>
           </div>
-          <Alert
-            id="alertMessage"
-            data-testid="alertMessage"
-            variant={errors.variant}
-            show={errors.show}
-          >
-            {errors.message}
-          </Alert>{" "}
         </div>
       </div>
     </div>

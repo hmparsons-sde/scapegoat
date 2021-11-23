@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 // import { useParams } from 'react-router-dom';
 // import PropTypes from 'prop-types';
-import { getAllPayments } from '../../helpers/data/paymentData';
+import { getAllPayments, getPaymentByUser } from '../../helpers/data/paymentData';
+// import { useHistory } from 'react-router';
 import styled from 'styled-components';
 // import { Button } from 'reactstrap';
 import PaymentCard from '../../Components/Payments/PaymentCard';
 import PaymentForm from '../../Components/Payments/PaymentForm';
+import { getUserByFBKey } from '../../helpers/data/userData';
+import { useParams } from 'react-router';
 
 // const SinglePayment = styled.div`
 //   width: 300px;
@@ -51,13 +54,42 @@ margin-top: 10px;
 margin-bottom: 15px;
 `;
 
-const Payments = () => {
+const Payments = ({ firebaseUser }) => {
     const [payments, setPayments] = useState([]);
     const [addPayment, setAddPayment] = useState(false);
-  
-    useEffect(() => getAllPayments().then(data => setPayments(data)), [setPayments]);
+    // const { userId } = useParams();
+    // const [user, setUser] = useState({});
 
-    console.warn(payments);
+    // useEffect(() => { 
+    //   getPaymentByUser(userId).then((response) => {
+    //     setPayments(response);
+    //   });
+    // }, [userId]);
+
+    // useEffect(() => {
+    //   getUserByFBKey(firebaseUser.uid).then(setUser);
+  
+    // },[firebaseUser.uid])
+
+    
+  useEffect(() => {
+    getUserByFBKey(firebaseUser.uid).then((resp) => {
+      console.warn(resp)
+      getPaymentByUser(resp.id)
+      .then(setPayments);
+    })
+  },[firebaseUser.uid])
+
+    // const handleHistory = (route) => {
+    //   history.push(route);
+    // };
+
+    // useEffect(() => { 
+    //   getPaymentByUser(userId).then(setPayments);
+    //   getSingleUser(userId).then(setPayments);
+    //   }, [userId]);
+
+    // console.warn(user);
 
     return (
       <div>

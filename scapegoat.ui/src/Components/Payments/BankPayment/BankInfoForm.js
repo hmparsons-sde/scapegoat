@@ -4,7 +4,8 @@ import FormControl from '@material-ui/core/FormControl';
 import './BankForm.css';
 import useStyles from '../BankPayment/BankForm';
 import PropTypes from 'prop-types';
-import { Button, CardBody, Label } from "reactstrap";
+import { CardBody, Label } from "reactstrap";
+import { Link } from 'react-router-dom';
 
 
 export default function BusinessDetails(props) {
@@ -71,7 +72,7 @@ export default function BusinessDetails(props) {
           margin="normal"
         />
       </FormControl>
-      <Button className='mt-2' type='submit'>Submit</Button>
+      <Link to="/payments" className="btn btn-secondary">Submit</Link>
       </CardBody>
     </React.Fragment>
     </div>
