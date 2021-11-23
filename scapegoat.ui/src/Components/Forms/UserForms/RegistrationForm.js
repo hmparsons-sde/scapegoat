@@ -83,6 +83,7 @@ export default function RegistrationForm({onCloseModal, setUsers}) {
         <select 
           as ='select'
           name='customerTier'
+          className='mt-2 mb-2'
           placeholder='Customer Tier'
           value={user.customerTier}
           onChange={handleInputChange}
@@ -137,6 +138,8 @@ export default function RegistrationForm({onCloseModal, setUsers}) {
           <select
             as='select'
             name='state'
+            className='mb-2'
+            center
             placeholder='State (USA)'
             value={user.state}
             onChange={handleInputChange}
