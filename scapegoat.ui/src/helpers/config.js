@@ -1,4 +1,4 @@
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  "baseUrl": "https://scapegoat.azurewebsites.net/"
-};
+  "baseUrl": "https://localhost:44395"
+  };
