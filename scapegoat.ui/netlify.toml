@@ -1,5 +1,5 @@
 [build]
   base = "scapegoat.ui/"
-  command = "npm run build"
+  command = "CI= npm run build"
   functions = "functions"
   publish = "build/"
