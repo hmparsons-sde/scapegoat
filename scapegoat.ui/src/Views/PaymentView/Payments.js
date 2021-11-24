@@ -59,21 +59,20 @@ const Payments = ({ firebaseUser }) => {
     const [addPayment, setAddPayment] = useState(false);
     const [user, setUser] = useState({});
     const { userId } = useParams();
-
-    useEffect(() => getAllPayments().then(data => setPayments(data)), [setPayments]);
+    console.warn(firebaseUser)
+    // useEffect(() => getAllPayments().then(data => setPayments(data)), [setPayments]);
 
     // useEffect(() => { 
     //   getPaymentByUser(userId).then((response) => {
     //     setPayments(response);});
     // }, [userId]);
     
-  // useEffect(() => {
-  //   getUserByFBKey(firebaseUser.uid).then((resp) => {
-  //     console.warn(resp)
-  //     getPaymentByUser(resp.id)
-  //     .then(setPayments);
-  //   })
-  // },[firebaseUser.uid])
+  useEffect(() => {
+    getUserByFBKey(firebaseUser.uid).then((resp) => {
+      getPaymentByUser(resp.id)
+      .then(setPayments);
+    })
+  },[firebaseUser.uid])
 
     return (
       <div>
