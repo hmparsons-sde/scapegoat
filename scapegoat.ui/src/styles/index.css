@@ -33,10 +33,12 @@ code {
 
 input[type="text"],
 textarea {
-  height: 30px;
+  height: 36px;
   width: 90%;
   padding: 10px;
-  margin: 8px;
+  margin-bottom: 3%;
+  margin-top: 1%;
+  padding: 3%;
   border: 1px solid #cb997e;
   border-radius: 4px;
 }
@@ -48,13 +50,12 @@ textarea {
 
 
 select {
-  height: 30px;
+  height: 40px;
   width: 90%;
   border: 1px solid #cb997e;
   border-radius: 4px;
   align-self: center;
   color: #4B4F3F;
-  margin-left: 18px;
-  justify-content: center;
-  padding-left: 6px;
+  margin-bottom: 3%;
+  padding: 1%;
 }

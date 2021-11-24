@@ -3,7 +3,7 @@
 ## Overview
 This is the Simulated Work Environment project for Nashville Software School, Cohort E14. The objective of this project is to ship a full-stack e-commerce application using SCRUM project management methodology, test-driven development, and timely command of the technology curriculum.
 
-Our customers are individuals, smalls businesses, and enterprise orgs who desire a sustainable, artisanal land management experience. Users rent goats for the purposes of sustainable lawn care.
+Our customers are individuals, smalls businesses, and enterprise orgs who desire a sustainable, artisanal land management experience. Users rent goats for the purposes of sustainable lawn care. We also offer companionship goats, for those need a headbutt.
 
 ## Deployed project
 (Coming soon)
@@ -23,15 +23,15 @@ https://github.com/hmparsons-sde/scapegoat/projects/1
 
 ## User Stories
 
-- As an unregistered user, I am able to register for the site as a seller or as a customer.
+- As an unregistered user, I am able to register for the site as a merchant or as a customer.
 - As a registered user, I am able to login with authentication handled by Firebase token validation.
 - As an authenticated user, I can view the site's home page, which features the 20 most recently added products.
-- As an authenticated user, I can search for sellers and products by searchbar using text input.
-- As an authenticated user, I can view the following: product categories, all products sold by a single seller, details of individual products, my user profile, and my shopping cart.
+- As an authenticated user, I can search for merchants and products by searchbar using text input.
+- As an authenticated user, I can view the following: product categories, all products sold by a single merchant, details of individual products, my user profile, and my shopping cart.
 - As an authenticated customer, I can view my completed orders, order history, and the product details within each order.
 - As an authenticated customer, I can add products to and delete products from my cart.
-- As an authenticated customer, I can place orders and choose different payment types for completing tUser purchase.
-- As an authenticated seller, I can view all orders tUser contain my products, all of my past sales, and my seller dashboard.
+- As an authenticated customer, I can place orders and choose different payment types for completing that purchase.
+- As an authenticated seller, I can view all orders that contain my products, all of my past sales, and my merchant dashboard.
 
 ## Technologies Used
 - C#
