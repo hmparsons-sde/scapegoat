@@ -70,12 +70,12 @@ export default function OrderView({ firebaseUser }) {
       {item?.product.map((prod) => (
         <div>
         <p>description: {prod.description}</p>
-        <p>price:$ {prod.price}</p>
+        <p>price: ${prod.price}</p>
         </div>
       ))}
       </div>
     ))}
-     <h3>Total:$ {userOrder?.totalCost}</h3>
+     <h3>Total: ${userOrder?.totalCost}</h3>
      <p>Order placed: {userOrder?.createdAt}</p>
   </CartContainer>
     ))
