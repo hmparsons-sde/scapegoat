@@ -7,7 +7,7 @@ import styled from 'styled-components';
 // import { Button } from 'reactstrap';
 import PaymentCard from '../../Components/Payments/PaymentCard';
 import PaymentForm from '../../Components/Payments/PaymentForm';
-import { getUserByFBKey } from '../../helpers/data/userData';
+import { getSingleUser, getUserByFBKey } from '../../helpers/data/userData';
 import { useParams } from 'react-router';
 
 // const SinglePayment = styled.div`
@@ -57,8 +57,8 @@ margin-bottom: 15px;
 const Payments = ({ firebaseUser }) => {
     const [payments, setPayments] = useState([]);
     const [addPayment, setAddPayment] = useState(false);
-    // const { userId } = useParams();
-    // const [user, setUser] = useState({});
+    const [user, setUser] = useState({});
+    const { userId } = useParams();
 
     useEffect(() => getAllPayments().then(data => setPayments(data)), [setPayments]);
 
@@ -66,10 +66,6 @@ const Payments = ({ firebaseUser }) => {
     //   getPaymentByUser(userId).then((response) => {
     //     setPayments(response);});
     // }, [userId]);
-
-    // useEffect(() => {
-    //   getUserByFBKey(firebaseUser.uid).then(setUser);
-      // },[firebaseUser.uid])
     
   // useEffect(() => {
   //   getUserByFBKey(firebaseUser.uid).then((resp) => {
