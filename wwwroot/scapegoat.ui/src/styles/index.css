@@ -1,0 +1,61 @@
+html {
+  background-color: #FDF1E9;
+}
+body {
+  margin: 0;
+  font-family: 'Raleway', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #FDF1E9;
+  color: #4B4F3F;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+  background-color: #FDF1E9;
+  color: #4B4F3F;
+}
+
+.customOverlay {
+  background: rgba(255, 218, 203, 0.6) !important;
+}
+.customModal {
+  background-color: #FDF1E9;
+  width: 30%;
+  padding: 15%;
+}
+
+#userInfoFormModal {
+  border-radius: 50px;
+  padding: 15%;
+}
+
+input[type="text"],
+textarea {
+  height: 36px;
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 3%;
+  margin-top: 1%;
+  padding: 3%;
+  border: 1px solid #cb997e;
+  border-radius: 4px;
+}
+
+.home-image {
+  width: 70%;
+  height: auto;
+}
+
+
+select {
+  height: 40px;
+  width: 90%;
+  border: 1px solid #cb997e;
+  border-radius: 4px;
+  align-self: center;
+  color: #4B4F3F;
+  margin-bottom: 3%;
+  padding: 1%;
+}
