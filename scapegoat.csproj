@@ -5,271 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\scapegoat.ui\.env" />
-    <Content Remove="wwwroot\scapegoat.ui\.gitignore" />
-    <Content Remove="wwwroot\scapegoat.ui\build\favicon.ico" />
-    <Content Remove="wwwroot\scapegoat.ui\build\index.html" />
-    <Content Remove="wwwroot\scapegoat.ui\build\logo192.png" />
-    <Content Remove="wwwroot\scapegoat.ui\build\logo512.png" />
-    <Content Remove="wwwroot\scapegoat.ui\build\robots.txt" />
-    <Content Remove="wwwroot\scapegoat.ui\build\static\css\2.4a67e983.chunk.css" />
-    <Content Remove="wwwroot\scapegoat.ui\build\static\css\2.4a67e983.chunk.css.map" />
-    <Content Remove="wwwroot\scapegoat.ui\build\static\css\main.35954668.chunk.css" />
-    <Content Remove="wwwroot\scapegoat.ui\build\static\css\main.35954668.chunk.css.map" />
-    <Content Remove="wwwroot\scapegoat.ui\build\static\js\2.e0e2018d.chunk.js" />
-    <Content Remove="wwwroot\scapegoat.ui\build\static\js\2.e0e2018d.chunk.js.LICENSE.txt" />
-    <Content Remove="wwwroot\scapegoat.ui\build\static\js\2.e0e2018d.chunk.js.map" />
-    <Content Remove="wwwroot\scapegoat.ui\build\static\js\main.68a05bf8.chunk.js" />
-    <Content Remove="wwwroot\scapegoat.ui\build\static\js\main.68a05bf8.chunk.js.map" />
-    <Content Remove="wwwroot\scapegoat.ui\build\static\js\runtime-main.97127dad.js" />
-    <Content Remove="wwwroot\scapegoat.ui\build\static\js\runtime-main.97127dad.js.map" />
-    <Content Remove="wwwroot\scapegoat.ui\build\static\media\cartimage.d4309266.jpg" />
-    <Content Remove="wwwroot\scapegoat.ui\build\static\media\orderhistory.c76b7089.jpg" />
-    <Content Remove="wwwroot\scapegoat.ui\build\static\media\scapegoatbanner2.c1264f0a.png" />
-    <Content Remove="wwwroot\scapegoat.ui\public\favicon.ico" />
-    <Content Remove="wwwroot\scapegoat.ui\public\index.html" />
-    <Content Remove="wwwroot\scapegoat.ui\public\logo192.png" />
-    <Content Remove="wwwroot\scapegoat.ui\public\logo512.png" />
-    <Content Remove="wwwroot\scapegoat.ui\public\robots.txt" />
-    <Content Remove="wwwroot\scapegoat.ui\src\App.css" />
-    <Content Remove="wwwroot\scapegoat.ui\src\App.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\assets\cartimage.jpg" />
-    <Content Remove="wwwroot\scapegoat.ui\src\assets\orderhistory.jpg" />
-    <Content Remove="wwwroot\scapegoat.ui\src\assets\paymenttype.jpg" />
-    <Content Remove="wwwroot\scapegoat.ui\src\assets\scapegoatbanner2.png" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Forms\UserForms\RegistrationForm.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Forms\UserForms\UserInfoForm.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Nav\Footer.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Nav\Navbar.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Orders\CartProducts.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Orders\FulfillOrders.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Orders\MerchantMetrics.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Orders\OrderInfo.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Orders\UpdateCartItem.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Orders\UpdateOrder.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Payments\CreditCardPayment\CardPaymentForm.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Payments\CreditCardPayment\UseForm.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Payments\CreditCardPayment\validatInfo.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Payments\CreditCardPayment\_creditcardform.css" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Payments\PaymentCard.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Payments\PaymentForm.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Payments\PaymentInfo.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Payments\PaymentList.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Payments\SinglePayment.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Products\MerchantProductCard.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Products\MerchantProductForm.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Products\ProductCard.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Products\ProductForm.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Search\SearchBar.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Components\Users\Customers\CustomerCard.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\helpers\apiKeys.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\helpers\auth.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\helpers\config.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\helpers\data\orderData.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\helpers\data\paymentData.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\helpers\data\productData.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\helpers\data\userData.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\helpers\Routes.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\index.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\styles\index.css" />
-    <Content Remove="wwwroot\scapegoat.ui\src\styles\palette.scss" />
-    <Content Remove="wwwroot\scapegoat.ui\src\styles\_products.css" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Views\AdminViews\AllUserList.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Views\CartViews\CartView.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Views\HomeView.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Views\OrderViews\OrderView.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Views\PaymentView\Payments.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Views\PaymentView\SinglePaymentView.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Views\ProductViews\MerchantProducts.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Views\ProductViews\ProductCategoryView.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Views\ProductViews\Products.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Views\ProductViews\SingleProductView.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Views\SearchViews\SearchResults.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Views\UserViews\Auth.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Views\UserViews\Dashboards\CustomerDashboardView.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Views\UserViews\Dashboards\DashRouter.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Views\UserViews\Dashboards\MerchantDashboardView.js" />
-    <Content Remove="wwwroot\scapegoat.ui\src\Views\UserViews\PleaseLogin.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\build\asset-manifest.json" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\build\favicon.ico" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\build\index.html" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\build\logo192.png" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\build\logo512.png" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\build\manifest.json" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\build\robots.txt" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\build\static\css\2.4a67e983.chunk.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\build\static\css\2.4a67e983.chunk.css.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\build\static\css\main.35954668.chunk.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\build\static\css\main.35954668.chunk.css.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\build\static\js\2.e0e2018d.chunk.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\build\static\js\2.e0e2018d.chunk.js.LICENSE.txt" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\build\static\js\2.e0e2018d.chunk.js.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\build\static\js\main.68a05bf8.chunk.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\build\static\js\main.68a05bf8.chunk.js.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\build\static\js\runtime-main.97127dad.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\build\static\js\runtime-main.97127dad.js.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\build\static\media\cartimage.d4309266.jpg" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\build\static\media\orderhistory.c76b7089.jpg" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\build\static\media\scapegoatbanner2.c1264f0a.png" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\public\favicon.ico" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\public\index.html" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\public\logo192.png" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\public\logo512.png" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\public\manifest.json" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\public\robots.txt" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\App.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\App.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\assets\cartimage.jpg" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\assets\orderhistory.jpg" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\assets\paymenttype.jpg" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\assets\scapegoatbanner2.png" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Forms\UserForms\RegistrationForm.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Forms\UserForms\UserInfoForm.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Nav\Footer.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Nav\Navbar.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Orders\CartProducts.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Orders\FulfillOrders.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Orders\MerchantMetrics.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Orders\OrderInfo.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Orders\UpdateCartItem.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Orders\UpdateOrder.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Payments\CreditCardPayment\CardPaymentForm.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Payments\CreditCardPayment\UseForm.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Payments\CreditCardPayment\validatInfo.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Payments\CreditCardPayment\_creditcardform.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Payments\PaymentCard.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Payments\PaymentForm.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Payments\PaymentInfo.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Payments\PaymentList.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Payments\SinglePayment.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Products\MerchantProductCard.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Products\MerchantProductForm.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Products\ProductCard.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Products\ProductForm.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Search\SearchBar.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Components\Users\Customers\CustomerCard.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\helpers\apiKeys.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\helpers\auth.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\helpers\config.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\helpers\data\orderData.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\helpers\data\paymentData.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\helpers\data\productData.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\helpers\data\userData.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\helpers\Routes.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\index.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\styles\index.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\styles\palette.scss" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\styles\_products.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Views\AdminViews\AllUserList.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Views\CartViews\CartView.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Views\HomeView.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Views\OrderViews\OrderView.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Views\PaymentView\Payments.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Views\PaymentView\SinglePaymentView.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Views\ProductViews\MerchantProducts.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Views\ProductViews\ProductCategoryView.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Views\ProductViews\Products.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Views\ProductViews\SingleProductView.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Views\SearchViews\SearchResults.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Views\UserViews\Auth.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Views\UserViews\Dashboards\CustomerDashboardView.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Views\UserViews\Dashboards\DashRouter.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Views\UserViews\Dashboards\MerchantDashboardView.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\scapegoat.ui\src\Views\UserViews\PleaseLogin.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\scapegoat.ui\.env" />
-    <None Include="wwwroot\scapegoat.ui\.gitignore" />
-    <None Include="wwwroot\scapegoat.ui\build\favicon.ico" />
-    <None Include="wwwroot\scapegoat.ui\build\index.html" />
-    <None Include="wwwroot\scapegoat.ui\build\logo192.png" />
-    <None Include="wwwroot\scapegoat.ui\build\logo512.png" />
-    <None Include="wwwroot\scapegoat.ui\build\robots.txt" />
-    <None Include="wwwroot\scapegoat.ui\build\static\css\2.4a67e983.chunk.css" />
-    <None Include="wwwroot\scapegoat.ui\build\static\css\2.4a67e983.chunk.css.map" />
-    <None Include="wwwroot\scapegoat.ui\build\static\css\main.35954668.chunk.css" />
-    <None Include="wwwroot\scapegoat.ui\build\static\css\main.35954668.chunk.css.map" />
-    <None Include="wwwroot\scapegoat.ui\build\static\js\2.e0e2018d.chunk.js" />
-    <None Include="wwwroot\scapegoat.ui\build\static\js\2.e0e2018d.chunk.js.LICENSE.txt" />
-    <None Include="wwwroot\scapegoat.ui\build\static\js\2.e0e2018d.chunk.js.map" />
-    <None Include="wwwroot\scapegoat.ui\build\static\js\main.68a05bf8.chunk.js" />
-    <None Include="wwwroot\scapegoat.ui\build\static\js\main.68a05bf8.chunk.js.map" />
-    <None Include="wwwroot\scapegoat.ui\build\static\js\runtime-main.97127dad.js" />
-    <None Include="wwwroot\scapegoat.ui\build\static\js\runtime-main.97127dad.js.map" />
-    <None Include="wwwroot\scapegoat.ui\build\static\media\cartimage.d4309266.jpg" />
-    <None Include="wwwroot\scapegoat.ui\build\static\media\orderhistory.c76b7089.jpg" />
-    <None Include="wwwroot\scapegoat.ui\build\static\media\scapegoatbanner2.c1264f0a.png" />
-    <None Include="wwwroot\scapegoat.ui\public\favicon.ico" />
-    <None Include="wwwroot\scapegoat.ui\public\index.html" />
-    <None Include="wwwroot\scapegoat.ui\public\logo192.png" />
-    <None Include="wwwroot\scapegoat.ui\public\logo512.png" />
-    <None Include="wwwroot\scapegoat.ui\public\robots.txt" />
-    <None Include="wwwroot\scapegoat.ui\src\App.css" />
-    <None Include="wwwroot\scapegoat.ui\src\App.js" />
-    <None Include="wwwroot\scapegoat.ui\src\assets\cartimage.jpg" />
-    <None Include="wwwroot\scapegoat.ui\src\assets\orderhistory.jpg" />
-    <None Include="wwwroot\scapegoat.ui\src\assets\paymenttype.jpg" />
-    <None Include="wwwroot\scapegoat.ui\src\assets\scapegoatbanner2.png" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Forms\UserForms\RegistrationForm.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Forms\UserForms\UserInfoForm.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Nav\Footer.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Nav\Navbar.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Orders\CartProducts.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Orders\FulfillOrders.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Orders\MerchantMetrics.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Orders\OrderInfo.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Orders\UpdateCartItem.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Orders\UpdateOrder.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Payments\CreditCardPayment\CardPaymentForm.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Payments\CreditCardPayment\UseForm.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Payments\CreditCardPayment\validatInfo.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Payments\CreditCardPayment\_creditcardform.css" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Payments\PaymentCard.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Payments\PaymentForm.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Payments\PaymentInfo.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Payments\PaymentList.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Payments\SinglePayment.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Products\MerchantProductCard.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Products\MerchantProductForm.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Products\ProductCard.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Products\ProductForm.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Search\SearchBar.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Components\Users\Customers\CustomerCard.js" />
-    <None Include="wwwroot\scapegoat.ui\src\helpers\apiKeys.js" />
-    <None Include="wwwroot\scapegoat.ui\src\helpers\auth.js" />
-    <None Include="wwwroot\scapegoat.ui\src\helpers\config.js" />
-    <None Include="wwwroot\scapegoat.ui\src\helpers\data\orderData.js" />
-    <None Include="wwwroot\scapegoat.ui\src\helpers\data\paymentData.js" />
-    <None Include="wwwroot\scapegoat.ui\src\helpers\data\productData.js" />
-    <None Include="wwwroot\scapegoat.ui\src\helpers\data\userData.js" />
-    <None Include="wwwroot\scapegoat.ui\src\helpers\Routes.js" />
-    <None Include="wwwroot\scapegoat.ui\src\index.js" />
-    <None Include="wwwroot\scapegoat.ui\src\styles\index.css" />
-    <None Include="wwwroot\scapegoat.ui\src\styles\palette.scss" />
-    <None Include="wwwroot\scapegoat.ui\src\styles\_products.css" />
-    <None Include="wwwroot\scapegoat.ui\src\Views\AdminViews\AllUserList.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Views\CartViews\CartView.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Views\HomeView.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Views\OrderViews\OrderView.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Views\PaymentView\Payments.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Views\PaymentView\SinglePaymentView.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Views\ProductViews\MerchantProducts.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Views\ProductViews\ProductCategoryView.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Views\ProductViews\Products.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Views\ProductViews\SingleProductView.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Views\SearchViews\SearchResults.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Views\UserViews\Auth.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Views\UserViews\Dashboards\CustomerDashboardView.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Views\UserViews\Dashboards\DashRouter.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Views\UserViews\Dashboards\MerchantDashboardView.js" />
-    <None Include="wwwroot\scapegoat.ui\src\Views\UserViews\PleaseLogin.js" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.90" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.11" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="3.0.1" />
@@ -283,30 +18,31 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="wwwroot\scapegoat.ui\build\asset-manifest.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\scapegoat.ui\build\manifest.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\scapegoat.ui\libman.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\scapegoat.ui\package-lock.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\scapegoat.ui\package.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\scapegoat.ui\public\manifest.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Include="wwwroot\favicon.ico" />
+    <None Include="wwwroot\index.html" />
+    <None Include="wwwroot\logo192.png" />
+    <None Include="wwwroot\logo512.png" />
+    <None Include="wwwroot\robots.txt" />
+    <None Include="wwwroot\static\css\2.4a67e983.chunk.css" />
+    <None Include="wwwroot\static\css\2.4a67e983.chunk.css.map" />
+    <None Include="wwwroot\static\css\main.35954668.chunk.css" />
+    <None Include="wwwroot\static\css\main.35954668.chunk.css.map" />
+    <None Include="wwwroot\static\js\2.e0e2018d.chunk.js" />
+    <None Include="wwwroot\static\js\2.e0e2018d.chunk.js.LICENSE.txt" />
+    <None Include="wwwroot\static\js\2.e0e2018d.chunk.js.map" />
+    <None Include="wwwroot\static\js\main.68a05bf8.chunk.js" />
+    <None Include="wwwroot\static\js\main.68a05bf8.chunk.js.map" />
+    <None Include="wwwroot\static\js\main.b4167ffe.chunk.js" />
+    <None Include="wwwroot\static\js\main.b4167ffe.chunk.js.map" />
+    <None Include="wwwroot\static\js\runtime-main.97127dad.js" />
+    <None Include="wwwroot\static\js\runtime-main.97127dad.js.map" />
+    <None Include="wwwroot\static\media\cartimage.d4309266.jpg" />
+    <None Include="wwwroot\static\media\orderhistory.c76b7089.jpg" />
+    <None Include="wwwroot\static\media\scapegoatbanner2.c1264f0a.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="scapegoat.ui\build\" />
   </ItemGroup>
 
 </Project>
