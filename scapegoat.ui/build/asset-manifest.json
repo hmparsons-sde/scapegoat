@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.35954668.chunk.css",
+    "main.js": "/static/js/main.68a05bf8.chunk.js",
+    "main.js.map": "/static/js/main.68a05bf8.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.97127dad.js",
+    "runtime-main.js.map": "/static/js/runtime-main.97127dad.js.map",
+    "static/css/2.4a67e983.chunk.css": "/static/css/2.4a67e983.chunk.css",
+    "static/js/2.e0e2018d.chunk.js": "/static/js/2.e0e2018d.chunk.js",
+    "static/js/2.e0e2018d.chunk.js.map": "/static/js/2.e0e2018d.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.4a67e983.chunk.css.map": "/static/css/2.4a67e983.chunk.css.map",
+    "static/css/main.35954668.chunk.css.map": "/static/css/main.35954668.chunk.css.map",
+    "static/js/2.e0e2018d.chunk.js.LICENSE.txt": "/static/js/2.e0e2018d.chunk.js.LICENSE.txt",
+    "static/media/cartimage.d4309266.jpg": "/static/media/cartimage.d4309266.jpg",
+    "static/media/orderhistory.c76b7089.jpg": "/static/media/orderhistory.c76b7089.jpg",
+    "static/media/scapegoatbanner2.c1264f0a.png": "/static/media/scapegoatbanner2.c1264f0a.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.97127dad.js",
+    "static/css/2.4a67e983.chunk.css",
+    "static/js/2.e0e2018d.chunk.js",
+    "static/css/main.35954668.chunk.css",
+    "static/js/main.68a05bf8.chunk.js"
+  ]
+}
