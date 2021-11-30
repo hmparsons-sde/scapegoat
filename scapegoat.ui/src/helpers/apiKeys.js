@@ -1,12 +1,12 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyBmsWjy6xc8fwQrBuMVeaD8T5Cj8RsMaWE",
-  authDomain: "scapegoat-72a37.firebaseapp.com",
-  databaseURL: "https://scapegoat-72a37-default-rtdb.firebaseio.com",
-  projectId: "scapegoat-72a37",
-  storageBucket: "scapegoat-72a37.appspot.com",
-  messagingSenderId: "328793188417",
-  appId: "1:328793188417:web:1bbcb7dc5f7193573d3ec0",
-  measurementId: "G-JZQRWY5LEJ"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
 export default firebaseConfig;
