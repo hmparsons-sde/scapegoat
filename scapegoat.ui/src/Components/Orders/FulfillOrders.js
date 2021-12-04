@@ -29,6 +29,7 @@ img {
 export default function FulfillOrders({ orders }) {
 const myItems = orders.lineItems;
 const userInfo = orders.user;
+
   return (
     <div>
     <OrderDiv>
@@ -40,11 +41,11 @@ const userInfo = orders.user;
           {item.product.length > 0
           ? <>
           <ProductFulfillImage>
-          <img src={item.productImage} alt={item.description}></img>
+          <img src={item.product[0].productImage} alt={item.product[0].description}></img>
           </ProductFulfillImage>
           <p>Product Id: {item.product[0].productId}</p>
           <p>Description: {item.product[0].description}</p>
-          <p>Price:$ {item.product[0].price}</p>
+          <p>Price: ${item.product[0].price}</p>
           <p>Quantity: {item.quantity}</p>
           </>
           : null
@@ -52,7 +53,7 @@ const userInfo = orders.user;
           </>
       ))
       }
-      <h4>gross total:$ {orders.totalCost} </h4>
+      <h4>gross total: ${orders.totalCost} </h4>
       <h4>order status: {orders.status}</h4>
       <h3>Customer Information</h3>
       <p>Customer Id: {userInfo.id}</p>
