@@ -5,6 +5,7 @@ import { Button, ButtonGroup, CardBody, CardSubtitle, CardText, CardTitle } from
 import { deleteMerchantProduct } from "../../helpers/data/productData";
 import { AiOutlineDelete, AiOutlineInfoCircle, AiOutlineEdit } from 'react-icons/ai';
 import MerchantProductForm from "./MerchantProductForm";
+import moment from "moment";
 
 const MerchantProductImage = styled.div`
 img {
@@ -48,6 +49,9 @@ export default function MerchantProductCard({
     }
   };
 
+  const date = moment.utc(createdAt).format();
+  const local = moment.utc(date).local().format("dddd, MMMM Do YYYY, h:mm a");
+
   return (
       <CardBody className='product-card m-2 border border-secondary rounded' style={{maxWidth: '18rem'}}>
         <MerchantProductImage>
@@ -57,7 +61,7 @@ export default function MerchantProductCard({
         <CardSubtitle tag='h6' className='mb-3 d-flex flex-column' />
           <CardText>${price} per day</CardText>
           <CardText>Quantity: {size}</CardText>
-          <CardText>Added on {createdAt}</CardText>
+          <CardText>Added on {local}</CardText>
         <ButtonGroup>
           <Button outline onClick={() => handleButton('single')}><AiOutlineInfoCircle /></Button>
           <Button outline onClick={() => handleButton('update')}><AiOutlineEdit /></Button>
