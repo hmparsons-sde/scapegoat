@@ -38,7 +38,7 @@ namespace scapegoat.DataAccess
         {
             using var db = new SqlConnection(_connectionString);
 
-            var sqlString = @"SELECT PaymentType.*, Users.* 
+            var sqlString = @"SELECT PaymentType.*, Users.Id, Users.firstName 
                     FROM
                         PaymentType AS PaymentType
                     INNER JOIN Users as Users

@@ -15,6 +15,7 @@ import PleaseLogin from '../Views/UserViews/PleaseLogin';
 import { ProductCategoryView } from '../Views/ProductViews/ProductCategoryView';
 import CreditCardForm from '../Components/Payments/CreditCardPayment/CardPaymentForm';
 import MerchantProducts from '../Views/ProductViews/MerchantProducts';
+import BusinessDetails from '../Components/Payments/BankPayment/BankInfoForm';
 
 export default function Routes({user, products, setProducts, users, setUsers, payments, setPayments, isAdmin}) {
 
@@ -30,14 +31,15 @@ export default function Routes({user, products, setProducts, users, setUsers, pa
         <Route exact path='/search' component={SearchResults}/>
         <Route exact path ='/merchantStore/:id' component={MerchantProducts}/>
         <Route exact path='/pleaseLogin' component={PleaseLogin}/>
+        <Route exact path='/bankInfo' component={BusinessDetails}/>
         
       {/* User Views */}
         <PrivateRoute exact path='/orders' user={user} component={() => <OrderView firebaseUser={user} /> }/>
         <PrivateRoute exact path='/dashboard' user={user} component={() => <DashRouter firebaseUser={user}/>} />
         <PrivateRoute exact path='/cart' user={user} component={() => <CartView firebaseUser={user} /> } />
-        <PrivateRoute exact path='/payments' user={user} component={() => <Payments />} />
-        <PrivateRoute exact path='/payments/:id' user={user} component={SinglePaymentView} />
-        <PrivateRoute exat path = '/creditcardpayments' user ={user} component={() => <CreditCardForm user={user}/>} />
+        <PrivateRoute exact path='/payments' user={user} component={() => <Payments firebaseUser={user} />} />
+        <PrivateRoute exact path='/payments/:id' user={user} component={SinglePaymentView} firebaseUser={user} />
+        <PrivateRoute exat path = '/creditcardpayments' user ={user} component={() => <CreditCardForm user={user} firebaseUser={user}/>} />
 
       {/* TO DO: Re-route/remove params */}
         <PrivateRoute exact path='/users/:id/order' user={user} component={() => <OrderView user={user} /> }/>

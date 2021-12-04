@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useHistory, Link } from 'react-router-dom';
 import { Button, Form, FormGroup, Input, Label } from "reactstrap"
 import { createNewPayment, updatePayment } from '../../helpers/data/paymentData';
+import MagicButton from './PaymentButton';
 
 const PaymentForm = ({  
     id, 
@@ -13,13 +15,14 @@ const PaymentForm = ({
     addPayment,
     setAddPayment
 }) => {
+ 
     const [updatedPayment, setUpdatedPayment] = useState({
         id: id,
         PaymentMethod: paymentMethod,
         AccountNumber: accountNumber,
         userId: userId,
     });
-
+    const history = useHistory()
     const handleInputChange = (e) => {
       setUpdatedPayment((prevState) => ({
             ...prevState,
@@ -31,7 +34,24 @@ const PaymentForm = ({
         e.preventDefault();
         if (id) {
             updatePayment(updatedPayment.id, updatedPayment)
-                .then(r => setPayments(r));
+                .then(r => setPayments(r)).then(() => {
+                    console.warn(updatedPayment)
+                    if (updatedPayment.PaymentMethod === 'BankAccount') {
+                      history.push("/bankInfo")
+                      }
+                    else if (updatedPayment.PaymentMethod === 'DebitCard') {
+                       history.push("/creditcardpayments")
+                       }
+                    else if (updatedPayment.PaymentMethod === 'DebitCard') {
+                        history.push("/creditcardpayments")
+                        }
+                    else if (updatedPayment.PaymentMethod === 'PayPal') {
+                        history.push("/creditcardpayments")
+                        }
+                     else{
+                       history.push("/payments") 
+                     }
+                   });
             setUpdate(!update);
         } else {
             createNewPayment(updatedPayment)
@@ -39,6 +59,9 @@ const PaymentForm = ({
             setAddPayment(!addPayment);
         }
     }
+    
+
+
     return (
         <Form onSubmit={handleUpdate}>
             <FormGroup> 
@@ -84,6 +107,9 @@ const PaymentForm = ({
             <Button type='submit'>Submit</Button>
         </Form>
     );
+
 }
+
+
 
 export default PaymentForm;

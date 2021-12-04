@@ -34,7 +34,7 @@ namespace scapegoat
             services.AddTransient<ProductRepository>();
             services.AddTransient<PaymentTypeRepository>();
             services.AddTransient<UserRepository>();
-
+           
             services.AddControllers()
                     .AddJsonOptions(opts =>
                     {
