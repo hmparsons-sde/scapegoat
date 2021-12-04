@@ -6,6 +6,7 @@ import { deleteProduct, deleteProductByType } from "../../helpers/data/productDa
 import ProductForm from "./ProductForm";
 import { AiOutlineShoppingCart, AiOutlineDelete, AiOutlineInfoCircle, AiOutlineEdit } from 'react-icons/ai'
 import { checkOrderStatus, createOrder, createOrderItem } from "../../helpers/data/orderData";
+import moment from "moment";
 
 export default function ProductCard({
   productId, 
@@ -24,6 +25,8 @@ export default function ProductCard({
   const history = useHistory();
   const { category } = useParams();
 
+  const date = moment.utc(createdAt).format();
+  const local = moment.utc(date).local().format("dddd, MMMM Do YYYY, h:mm a");
 
   const handleButton = (p) => {
     switch (p) {
@@ -81,7 +84,7 @@ export default function ProductCard({
         <CardSubtitle tag='h6' className='mb-3 d-flex flex-column' />
           <CardText>${price} per day</CardText>
           <CardText>Quantity: {size}</CardText>
-          <CardText>Added on {createdAt}</CardText>
+          <CardText>Added on {local}</CardText>
         <ButtonGroup>
           <Button outline onClick={() => handleButton('single')}><AiOutlineInfoCircle /></Button>
           {!!user?.id 

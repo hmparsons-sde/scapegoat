@@ -55,6 +55,7 @@ export default function MerchantProducts() {
           price={prod.price}
           size={prod.size}
           createdAt={prod.createdAt}
+          productImage={prod.productImage}
           />
           ))
         }

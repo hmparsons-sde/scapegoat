@@ -59,7 +59,7 @@ const MerchantProductForm = ({
     }
     return (
         <Form onSubmit={handleUpdate} className='product-form'>
-            <FormGroup>
+            <FormGroup size='sm'>
                 <Label htmlFor='description' tag='h5'>Description</Label>
                 <Input 
                     type='text'
